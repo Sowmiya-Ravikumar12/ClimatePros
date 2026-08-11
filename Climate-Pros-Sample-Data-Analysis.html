@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Climate Pros Sample Data Analysis</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #fbfaf7; color: #2b2b2b; }
+
+.hero { background: #ffffff; padding: 36px 20px; text-align: center; border-bottom: 3px solid #8a5a2b; }
+.hero h1 { font-size: 2em; color: #8a5a2b; margin-bottom: 8px; }
+.hero p { color: #6b6b6b; font-size: 1em; }
+.hero .subtitle { color: #3f6b4f; font-size: 0.92em; margin-top: 8px; }
+
+.tabs {
+    display: flex; justify-content: center; gap: 4px; background: #f1ede4;
+    padding: 12px 10px; flex-wrap: wrap; position: sticky; top: 0; z-index: 100;
+    border-bottom: 2px solid #e4e0d8;
+}
+.tab {
+    padding: 10px 16px; background: #ffffff; color: #6b6b6b; border: 1px solid #e4e0d8;
+    border-radius: 6px; cursor: pointer; font-size: 0.85em; transition: all 0.3s;
+}
+.tab:hover { background: #f1ede4; color: #2b2b2b; }
+.tab.active { background: #8a5a2b; color: #fff; font-weight: bold; border-color: #8a5a2b; }
+
+.content { max-width: 1100px; margin: 0 auto; padding: 30px 20px; }
+.section { display: none; }
+.section.active { display: block; }
+
+h2 { color: #8a5a2b; font-size: 1.5em; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid #e4e0d8; }
+h3 { color: #3f6b4f; font-size: 1.15em; margin: 28px 0 12px; padding-bottom:6px; border-bottom: 1px solid #eee; }
+h4 { color: #1f6fa8; font-size: 1em; margin: 16px 0 8px; }
+p { color: #3a3a3a; font-size: 0.94em; line-height: 1.6; margin-bottom: 10px; }
+
+.pill { padding:3px 10px; border-radius:20px; font-size:0.75em; font-weight:bold; }
+.pill-done { background:#eef5ee; color:#3f6b4f; border:1px solid #7fa88a; }
+.pill-todo { background:#f1ede4; color:#6b6b6b; border:1px solid #e4e0d8; }
+
+.callout { border-radius: 10px; padding: 18px; margin: 15px 0; }
+.callout-critical { background: #fdecea; border: 2px solid #c0504d; }
+.callout-critical .callout-title { color: #a13d3a; }
+.callout-info { background: #e8f2fa; border: 2px solid #4a90c2; }
+.callout-info .callout-title { color: #1f6fa8; }
+.callout-money { background: #eef5ee; border: 2px solid #7fa88a; }
+.callout-money .callout-title { color: #3f6b4f; }
+.callout-warn { background: #fff3e0; border: 2px solid #e0a458; }
+.callout-warn .callout-title { color: #a0650a; }
+.callout-mismatch { background: #fbeee6; border: 2px solid #c76b2c; }
+.callout-mismatch .callout-title { color: #a04d1a; }
+.callout-title { font-weight: bold; margin-bottom: 8px; font-size: 1.05em; }
+.callout-body { color: #3a3a3a; font-size: 0.92em; line-height: 1.6; }
+
+.calc-box {
+    background: #2b2b2b; border: 1px solid #444; border-radius: 8px; padding: 16px;
+    margin: 12px 0; font-family: 'Consolas','Courier New',monospace; font-size: 0.86em; line-height: 1.7;
+    overflow-x: auto; white-space: pre-wrap; color: #e9e6df;
+}
+.calc-label { color: #a8a8a8; }
+.calc-value { color: #7fd9a0; font-weight: bold; }
+.calc-source { color: #ff9a5c; font-size: 0.85em; }
+.calc-result { color: #ffcc66; font-weight: bold; font-size: 1.02em; }
+.calc-formula { color: #6fd6ff; }
+
+.step-flow { display: flex; gap: 0; flex-direction: column; margin: 15px 0; }
+.step-item { display: flex; gap: 16px; align-items: flex-start; }
+.step-badge {
+    background: #8a5a2b; color: #fff; min-width: 38px; height: 38px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;
+}
+.step-body { background: #ffffff; padding: 14px 18px; border-radius: 8px; border: 1px solid #e4e0d8; border-left: 3px solid #8a5a2b; flex: 1; }
+.step-connector { width: 3px; height: 16px; background: #e4e0d8; margin-left: 17px; }
+.step-title { color: #232323; font-weight: 600; }
+.step-sheet { color: #8a5a2b; font-size: 0.85em; margin-top: 2px; }
+.step-desc { color: #555; font-size: 0.9em; margin-top: 6px; }
+
+.data-table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.87em; background:#fff; }
+.data-table th { background: #f1ede4; color: #8a5a2b; padding: 10px 12px; text-align: left; border-bottom: 2px solid #8a5a2b; }
+.data-table td { padding: 8px 12px; border-bottom: 1px solid #e4e0d8; color:#333; vertical-align: top; }
+.data-table tr:hover { background: #f8f6f0; }
+.data-table.mismatch th { background:#fbeee6; color:#a04d1a; border-bottom-color:#c76b2c; }
+
+.tag { padding: 2px 8px; border-radius: 3px; font-size: 0.76em; font-weight: bold; white-space:nowrap; }
+.tag-scope { background: #2244aa; color: #fff; }
+.tag-formula { background: #b8541e; color: #fff; }
+.tag-manual { background: #8a2c2c; color: #fff; }
+.tag-tab { background: #6633aa; color: #fff; }
+.tag-mismatch { background: #c76b2c; color: #fff; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 15px 0; }
+@media (max-width: 800px) { .grid-2 { grid-template-columns: 1fr; } }
+.info-box { background: #ffffff; border: 1px solid #e4e0d8; border-radius: 10px; padding: 16px; }
+.info-box h4 { margin-top: 0; }
+
+.pricing-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed #e4e0d8; gap:10px;}
+.pricing-row:last-child { border-bottom: none; }
+.pricing-label { color: #333; flex:1; }
+.pricing-source { color: #8a5a2b; font-size: 0.8em; }
+.pricing-amount { color: #3f6b4f; font-weight: bold; white-space:nowrap; }
+.pricing-total { display: flex; justify-content: space-between; padding: 12px 0; border-top: 2px solid #7fa88a; margin-top: 8px; font-size: 1.1em; }
+.pricing-total .pricing-amount { color: #a0650a; }
+
+.doc-excerpt {
+    background:#fdfaf3; color:#2b2b2b; border:1px solid #d8cfa8; border-radius:6px;
+    padding:18px 22px; margin:14px 0; font-family:Georgia,'Times New Roman',serif; font-size:0.92em;
+    line-height:1.7; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.doc-excerpt .doc-heading { font-weight:bold; text-align:center; margin-bottom:10px; color:#111; }
+.doc-excerpt ul { margin:6px 0 6px 20px; }
+.doc-excerpt .doc-page-tag { display:block; text-align:right; font-size:0.75em; color:#8a7a4a; font-style:italic; margin-bottom:6px; }
+
+.quote-box {
+    background:#f1ede4; border-left:4px solid #8a5a2b; padding:14px 18px; margin:12px 0;
+    font-style:italic; color:#333; font-size:0.93em; line-height:1.6; border-radius:0 8px 8px 0;
+}
+
+.daylog { background:#ffffff; border:1px solid #e4e0d8; border-radius:10px; padding:16px 20px; margin: 15px 0; }
+.daylog h4 { color:#3f6b4f; margin-top:0; }
+.daylog ul { margin-left: 20px; color:#333; font-size:0.92em; line-height:1.8; }
+
+.toc { background:#ffffff; border:1px solid #e4e0d8; border-radius:10px; padding:16px 22px; margin: 6px 0 24px; }
+.toc ol { columns: 2; column-gap: 2rem; margin-left: 18px; font-size: 0.9em; }
+.toc li { margin-bottom: 6px; }
+.toc a { color:#3f6b4f; text-decoration:none; }
+.toc a:hover { text-decoration:underline; }
+@media (max-width: 700px) { .toc ol { columns: 1; } }
+
+.footer { text-align: center; padding: 30px; color: #8a8a8a; font-size: 0.8em; border-top: 1px solid #e4e0d8; margin-top: 40px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Climate Pros Sample Data Analysis</h1>
+</div>
+
+<div class="tabs">
+  <div class="tab" onclick="showTab('pricing-ref')">Pricing Logic Reference</div>
+  <div class="tab active" onclick="showTab('f57')">Folder: HEB 57 - Corpus Christi</div>
+  <div class="tab" onclick="showTab('f1')">Folder: Walmart 0392-1005</div>
+  <div class="tab" onclick="showTab('f10')">Folder: United Market #502</div>
+</div>
+
+<div class="content">
+
+<!-- ================= SHARED PRICING LOGIC REFERENCE ================= -->
+<div class="section" id="pricing-ref">
+  <h2>Pricing Logic Reference</h2>
+  <div class="callout callout-info">
+    <div class="callout-title">Why this tab exists</div>
+    <div class="callout-body">Every project uses the same workbook template, so the calculation mechanics repeat. This tab holds them once. Folder tabs link back here and only call out exceptions.</div>
+  </div>
+
+  <div class="toc">
+    <ol>
+      <li><a href="#pr-glossary">Terms used</a></li>
+      <li><a href="#pr-chain">The formula chain, step by step</a></li>
+      <li><a href="#pr-variations">Known variations across folders so far</a></li>
+      <li><a href="#pr-boilerplate">Standard boilerplate (Exclusions, BidCalc authority)</a></li>
+    </ol>
+  </div>
+
+  <h3 id="pr-glossary">Terms used</h3>
+  <table class="data-table">
+    <tr><th>Term</th><th>Meaning</th></tr>
+    <tr><td>MD / SD Case</td><td>Multi-Deck / Single-Deck -- standard open refrigerated case (several shelves / one shelf), no doors.</td></tr>
+    <tr><td>8' / 12'</td><td>The two standard modular section lengths refrigerated cases are manufactured in.</td></tr>
+    <tr><td>Evaporator coil</td><td>The internal cold-side coil inside a case or walk-in box.</td></tr>
+    <tr><td>RC / GC</td><td>Refrigeration Contractor (Climate Pros) / General Contractor.</td></tr>
+    <tr><td>ST / OT / DT</td><td>Straight Time / Overtime / Doubletime -- three pay buckets for the same labor hour.</td></tr>
+    <tr><td>Burden</td><td>The extra cost on top of a worker's base wage covering payroll tax, workers' comp, insurance, benefits -- not profit. Texas burden = 2.0x, so a $34/hr Journeyman really costs $68/hr. Lives in the LABOR RATES tab, varies by region.</td></tr>
+    <tr><td>Labor Blend</td><td>Fixed % split of total project hours across 5 worker roles (Foreman/Startup/Journeyman/Apprentice/Tradesman) -- a staffing policy input, not derived from drawings.</td></tr>
+    <tr><td>Margin</td><td>Calculated as % of <em>sell price</em>, not cost: Sell = Cost &divide; (1&minus;margin%), NOT Cost x (1+margin%). Varies by category and by project -- see section below.</td></tr>
+    <tr><td>XLOOKUP</td><td>Excel function used everywhere in this workbook: search a list, return the matching value from another column.</td></tr>
+    <tr><td>Region / Local code</td><td>Short code (e.g. "TX") selecting the correct row in the LABOR RATES wage table.</td></tr>
+    <tr><td>"REFERENCE ONLY" blocks</td><td>Some SUMMARY-tab sections are labeled "Do NOT Adjust" -- they mirror a calculation for sanity-checking but never drive the final bid.</td></tr>
+    <tr><td>BidCalc</td><td>"Bid Calculator" -- the one tab that is the actual final answer. Every other tab feeds into it; it sums Labor + Materials + Rentals + Subcontractors + Contingency + Warranty + Tax into one Total Bid number. <strong>Always the authoritative tab</strong>, never a REFERENCE ONLY mirror.</td></tr>
+    <tr><td>HFG</td><td>Hanging materials, Fittings and Welding Gas -- a PIPE 2.0 cost factor for pipe support/brazing consumables.</td></tr>
+    <tr><td>Responsibility Matrix (RM)</td><td>A table assigning each equipment/task to a responsible party (RC, BASC, GC, OEM) -- who furnishes it, who installs it. Present as a real drawing sheet on some projects (Walmart), absent on others (United Market), in which case the workbook's own boilerplate Exclusions list is the fallback.</td></tr>
+    <tr><td>RD / RE / BASR</td><td>Sheet-series codes seen on drawing sets: RD = Refrigeration Demolition, RE = Refrigeration Electrical, BASR = Building Automation System - Refrigeration (controls).</td></tr>
+    <tr><td>Sublet</td><td>Work subcontracted to another trade (Sheet Metal, Electrical, Plumbing, Carpentry, Sprinklers) instead of Climate Pros' own crew -- has its own rate table on every workbook, used or not.</td></tr>
+    <tr><td>Scheduling Data / Dispatch</td><td>A SUMMARY-tab block estimating crew size and job duration from total labor hours, plus dispatch flags per trade (R/EMS/C/M) -- present on every workbook, whether or not it resolves cleanly.</td></tr>
+  </table>
+
+  <h3 id="pr-chain">The formula chain, step by step (generic -- applies to every folder)</h3>
+  <div class="step-flow">
+    <div class="step-item"><div class="step-badge">1</div><div class="step-body">
+      <div class="step-title">Quantity in, typed by the estimator</div>
+      <div class="step-desc">A count of cases/coils/equipment items, sourced from a drawing schedule or a scope letter, or an aggregate judgment call when neither cleanly states a total.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">2</div><div class="step-body">
+      <div class="step-title">XLOOKUP converts quantity into material $ and labor hours</div>
+      <div class="step-desc">Every category (Display Cases, Evaporators, Equipment) has its own small rate table; the formula is always <code>qty x XLOOKUP(type, rate table)</code>.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">3</div><div class="step-body">
+      <div class="step-title">Hours classified as ST / OT / DT</div>
+      <div class="step-desc">Sometimes automatic, sometimes a manual estimator choice (e.g. a "night work" clause pushing everything into Overtime).</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">4</div><div class="step-body">
+      <div class="step-title">Hours blended across 5 roles, by a per-project %</div>
+      <div class="step-desc">Foreman / Startup / Journeyman / Apprentice / Tradesman -- a staffing-policy input.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">5</div><div class="step-body">
+      <div class="step-title">Each role's rate = base wage x burden, with additive OT/DT loading</div>
+      <div class="step-desc"><div class="calc-box">ST cost-rate = base x (burden+0)
+OT cost-rate = base x (burden+0.5)
+DT cost-rate = base x (burden+1)
+<span class="calc-source">Minneapolis region code "539" is a hardcoded exception: +1/+2 instead of +0.5/+1</span></div></div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">6</div><div class="step-body">
+      <div class="step-title">Cost becomes Sell via reverse-margin</div>
+      <div class="step-desc"><div class="calc-box">Sell = Cost &divide; (1 - margin%)   <span class="calc-source">NOT Cost x (1+margin%)</span></div>
+      <p style="margin-top:8px;"><strong>Naming trap confirmed on HEB 57:</strong> <code>BidCalc</code>'s own "Markup" column shows a different number than <code>SUMMARY</code>'s "Margin %" column for the exact same dollars -- e.g. Margin 25% shows up in BidCalc as Markup 33.3%. Same economics: <code>markup-on-cost = margin/(1-margin)</code>. Not a discrepancy, just two tabs describing the same relationship differently -- don't treat a mismatched-looking percentage as an error without checking which convention that tab uses.</p></div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">7</div><div class="step-body">
+      <div class="step-title">Tax: category is automatic, rate is always manual</div>
+      <div class="step-desc">Tax category comes from an <code>XLOOKUP</code> on State + Construction-Type into the TAX TABLE tab. The tax <em>rate</em> is always typed by hand after the estimator manually Googles it -- a <code>HYPERLINK</code> formula literally opens the search, with a note warning to verify multiple results. This is the one universally manual step in an otherwise formula-driven chain, on every folder checked so far.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">8</div><div class="step-body">
+      <div class="step-title">Everything rolls into BidCalc</div>
+      <div class="step-desc">Labor + Materials + Rentals + Subcontractors + Contingency + Warranty + Tax, each with its own category-specific margin, summed into one Total Bid.</div>
+    </div></div>
+  </div>
+
+  <h3 id="pr-variations">Known variations across folders so far</h3>
+  <p>This table only grows. Every new folder either confirms these mechanics hold, or adds a new row.</p>
+  <table class="data-table">
+    <tr><th>Mechanism</th><th>United Market #502 (TX, Remodel)</th><th>Walmart 0392-1005 (OK, Remodel)</th><th>HEB 57 (TX, New Construction)</th></tr>
+    <tr><td>Workbook cached values</td><td>Resolve cleanly</td><td>Broken (<code>#NAME?</code> throughout)</td><td>Resolve cleanly -- first fully verifiable Total Bid</td></tr>
+    <tr><td>Labor/Materials margin</td><td>25%</td><td>24%</td><td>25% -- matches United Market, not Walmart</td></tr>
+    <tr><td>Region / burden</td><td>"TX", burden 2.0x</td><td>"TX" (same, despite being a different city), burden 2.0x</td><td>"TX" again (division labeled "TX Valley, TX"), burden 2.0x -- 3rd confirmation that Texas has no city-level rate granularity</td></tr>
+    <tr><td>Tax category</td><td>Sales Tax Labor &amp; Mats (Existing Construction)</td><td>Use Tax Mats Only (materials taxed, labor is not)</td><td>Use Tax Mats Only -- <strong>same state as United Market, different category</strong>, because this one is New Construction not Existing/Remodel</td></tr>
+    <tr><td>Tax rate</td><td>8.25%, manual</td><td>9%, manual</td><td>8.25%, manual -- confirms the rate is a per-project manual lookup even when the category and state repeat</td></tr>
+    <tr><td>Cause of "hours mostly/all OT"</td><td>Confirmed -- explicit "all work is night work" scope sentence</td><td>Unconfirmed -- no equivalent sentence found</td><td><strong>N/A -- 100% Straight Time, zero OT/DT</strong>. Three folders, three different OT outcomes.</td></tr>
+    <tr><td>Responsibility Matrix present?</td><td>No -- relies on prose scope letter only</td><td>Yes -- real RM drawing sheet (page 3)</td><td>No dedicated RM document, but responsibility language embedded in R-0.0's notes and the workbook's Exclusions list</td></tr>
+    <tr><td>Sheet-completeness gap</td><td>N/A -- no drawings at all</td><td>Minor (occasional missing cross-referenced sheet)</td><td>Severe -- 5 of 6 addendum-referenced refrigeration sheets missing</td></tr>
+    <tr><td>Display Cases / Evaporators rate tables</td><td>Baseline</td><td>Byte-identical</td><td>Byte-identical -- 3rd confirmation these are fixed template constants</td></tr>
+    <tr><td>Equipment Sales Buyouts tax rate</td><td>Not checked</td><td>8.5% (vs main tax 9%)</td><td>8.5% (vs main tax 8.25%) -- confirms 8.5% may itself be a fixed template default, not project-specific</td></tr>
+  </table>
+
+  <h3 id="pr-boilerplate">Standard boilerplate present on every workbook</h3>
+  <div class="callout callout-warn">
+    <div class="callout-title">A default Exclusions list, independent of any drawing</div>
+    <div class="callout-body">Confirmed on Walmart's SUMMARY tab (row 200): General Contracting, Permits and Fees, Engineering/Drawings, EMS, Seismic work, Local municipality requirements, Roof/floor/wall openings, Trenching/concrete/backfill, Case refurbishing/repair, Case transport/storage/disposal, Plumbing and case condensates, Electrical, Line covers/flashing. Even projects with a real drawing-based Responsibility Matrix still carry this template-level RC/GC boundary as a fallback -- worth re-checking on every future folder.</div>
+  </div>
+  <div class="callout callout-info">
+    <div class="callout-title">BidCalc is always authoritative; SUMMARY's own labor breakdown never is</div>
+    <div class="callout-body">Every workbook checked so far has a "LABOR COST BREAKDOWN (REFERENCE ONLY) -- Do NOT Adjust" block on the SUMMARY tab. It's a sanity-check mirror. <code>BidCalc</code> is the tab that actually produces the number quoted to the customer.</div>
+  </div>
+</div>
+
+<!-- ================= FOLDER: HEB 57 CORPUS CHRISTI ================= -->
+<div class="section active" id="f57">
+  <h2>Folder: HEB 57 -- Corpus Christi 18, TX</h2>
+  <p style="color:#6b6b6b;">26.05.11 -- New Ice Room</p>
+
+  <div class="toc">
+    <ol>
+      <li><a href="#f57-glossary">Terms this folder has</a></li>
+      <li><a href="#f57-uploads">The Uploads (5 files, 6 pages)</a></li>
+      <li><a href="#f57-tab1">Tab 1 -- CP Est Pro 2.0 SUMMARY</a></li>
+      <li><a href="#f57-tab2">Tab 2 -- EQUIPMENT</a></li>
+      <li><a href="#f57-tab3">Tab 3 -- PIPE 2.0</a></li>
+      <li><a href="#f57-tab4">Tab 4 -- PARTS</a></li>
+      <li><a href="#f57-tab5">Tab 5 -- LABOR RATES</a></li>
+      <li><a href="#f57-tab6">Tab 6 -- EQUIPMENT SALES BUYOUTS</a></li>
+      <li><a href="#f57-tab7">Tab 7 -- COPPER_INSULATION_FORM</a></li>
+      <li><a href="#f57-tab8">Tab 8 -- HVAC</a></li>
+      <li><a href="#f57-tab9">Tab 9 -- TAX TABLE</a></li>
+      <li><a href="#f57-tab10">Tab 10 -- BidCalc</a></li>
+      <li><a href="#f57-walkthrough">Full walkthrough: the 6 Ice Makers</a></li>
+      <li><a href="#f57-mismatches">Mismatches: Drawings/Uploads vs. Excel</a></li>
+      <li><a href="#f57-mapping">Mapping table (every traced source)</a></li>
+      <li><a href="#f57-unique">What's unique about this folder</a></li>
+    </ol>
+  </div>
+
+  <h3 id="f57-glossary">Terms this folder has</h3>
+  <p style="color:#6b6b6b;font-style:italic;">Universal terms already covered in the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab. What's new here:</p>
+  <table class="data-table">
+    <tr><th>Term</th><th>Meaning</th></tr>
+    <tr><td>WICP</td><td>Walk-In Control Panel -- provided by H-E-B via the EMS vendor, mounted/powered by the Electrical Contractor, everything else on the panel done by the Refrigeration Contractor.</td></tr>
+    <tr><td>RDM</td><td>The brand of "Data Manager" controller H-E-B standardizes on -- provided by H-E-B, installed by Electrical, control-wiring coordinated by RC with the Data Contractor.</td></tr>
+    <tr><td>EEPR</td><td>Electronic Evaporator Pressure Regulator -- a 24V control valve, wiring by RC.</td></tr>
+    <tr><td>SA / RA / DA / LS / LI / MS / TS / ES</td><td>Sensor/alarm symbol codes on H-E-B refrigeration drawings: Supply Air temp, Return Air temp, Door Alarm, Leak Sensor, Leak Indicator, magnetic roof-hatch (Motion/roof) Sensor, Temperature Sensor, freezer Entrapment Switch. All provided by the EMS vendor, terminated by RC.</td></tr>
+    <tr><td>Plan Modification (addendum)</td><td>H-E-B's name for an addendum letter -- "Plan Modification 18" here, issued by GPM Engineering.</td></tr>
+    <tr><td>Keynote</td><td>A numbered callout on a drawing sheet (e.g. "Keynote #4 on MEPR-1.1") that the price sheet can cite directly by number -- a precise traceability mechanism.</td></tr>
+    <tr><td>R449A</td><td>A refrigerant type priced at $10.25/lb on this job; see <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> for how refrigerant type/price varies by folder.</td></tr>
+  </table>
+
+  <h3 id="f57-uploads">The Uploads</h3>
+  <div class="callout callout-critical">
+    <div class="callout-title">5 of 6 referenced refrigeration sheets are missing</div>
+    <div class="callout-body">The addendum letter ("Plan Modification 18") lists six refrigeration sheets changed: R-0.0, R-1.2, R-2.4, R-5.1, R-5.2, R-5.3, R-5.4. <strong>Only R-0.0 is actually in this Uploads folder.</strong> The ice-maker plan (R-1.2), the schedule (R-2.4), and all four detail sheets are referenced but absent.</div>
+  </div>
+
+  <h4>"Plan Modification 18" addendum letter</h4>
+  <div class="doc-excerpt">
+    <span class="doc-page-tag">04-17-26, GPM Engineering, Corpus Christi TX</span>
+    <div class="doc-heading">HEB Corpus Christi 18 -- Plan Modification 18</div>
+    <p><strong>MEPR Roof Plans:</strong> MEPR-1.0 (Added MEPR Roof Plan Details), MEPR-1.1 (Added new ice maker condensing units)</p>
+    <p><strong>Mechanical / Electrical / Plumbing:</strong> several sheets added/revised for the new room/ceiling layout, new power, new panel schedules, new water/waste lines for sinks and ice machines</p>
+    <p><strong>Refrigeration:</strong> R-0.0 (Added Refrigeration notes/piping schedule and symbols); R-1.2 (Added new Ice Makers as indicated); R-2.4 (Revised Refrigeration Schedule as indicated); R-5.1/5.2/5.3/5.4 (Added Refrigeration Details)</p>
+  </div>
+
+  <h4>R-0.0 Refrigeration Floor Plan Notes</h4>
+  <div class="doc-excerpt">
+    <span class="doc-page-tag">the one refrigeration sheet that made it in</span>
+    <p><strong>Approved Refrigeration Installers:</strong> Alliance Services, Arcticom, Avatt, BT Services, Climate Pros, CoolSys, Deem, Houston North, Hussmann, SpecTemp, RWC.</p>
+    <p><strong>General Notes (selected):</strong> "Walk-in Control Panels will be provided by H-E-B via EMS vendor and installed... by Electrical Contractor... All other work to the panel is the responsibility of the Refrigeration Contractor." / "All wiring for SA RA DA LS LI from sensor to respective walk-in control panel by Refrigeration Contractor unless otherwise noted... Refer to the Walk-In-Control Panel Schedules on <strong>R-3.0</strong>" (also not in this Uploads folder) / "The Data Contractor to provide and install all CAT6 cable... Refrigeration Contractor to make all terminations at case and walk-in controllers."</p>
+    <p>PE stamp: <strong>R.S. Pitzer, Texas #65986</strong>.</p>
+  </div>
+
+  <h4>D-1.0, MEPR-1.0, MEPR-1.1</h4>
+  <p>D-1.0 is the whole-store fixture demolition plan (architect Keith R. Smith); grepped for "Ice Room" and found only the title-block revision tag, no body content specific to this scope. MEPR-1.0 is generic rooftop equipment tie-down/curb engineering standard details, with one real scope sentence buried in it: <em>"Refrigeration Contractor is responsible for tiedown of refrigeration racks, refrigeration condensers, and refrigeration single condensing units."</em> MEPR-1.1 extracts as note-category headers only (graphic-heavy body) and references onward sheets MEPR-1.2/1.3, also missing -- but this sheet matters a lot despite being sparse, because the Price Sheet cites specific keynotes on it (see Tab 10).</p>
+
+  <h3 id="f57-tab1">Tab 1 -- CP Est Pro 2.0 SUMMARY</h3>
+  <p>Corpus Christi, Texas. Scope "New Ice Room." <strong>NEW</strong> construction (not Remodel). Labor division "TX Valley, TX."</p>
+
+  <h4>1.1 Display Cases &amp; Evaporators</h4>
+  <p>Both entirely zero -- no display cases or coils in an ice-room-only scope. The rate-lookup tables to the right are still present and unchanged (MD Cases $104/$130, 7hrs pipefitter; Commercial coils $30/12hrs, etc.) -- confirming these are fixed template constants, not project data; see <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a>.</p>
+
+  <h4>1.2 Non-Itemized Equipment Room &amp; RTU Breakdown</h4>
+  <p>A hand-curated list of one-off items, each its own row -- this is where most of this job's actual scope lives, since there are no display cases or coils to price.</p>
+  <table class="data-table">
+    <tr><th>Item</th><th>Material</th><th>Labor (hrs)</th><th>Source</th></tr>
+    <tr><td>Equipment Sheet Totals</td><td>$1,260</td><td>105</td><td><span class="tag tag-formula">=EQUIPMENT!G43/H43</span></td></tr>
+    <tr><td>Receive, Set &amp; Install New Ice Makers/Baggers (6) -- Provided by HEB</td><td>$0</td><td>30</td><td><span class="tag tag-scope">Scope</span> Addendum's "R-1.2: Added new Ice Makers" (sheet missing, but the count survives via BidCalc's scope text)</td></tr>
+    <tr><td>Provide &amp; Install Roof Curbs (<strong>Note #4 on MEPR-1.1</strong>)</td><td>$3,500</td><td>8</td><td><span class="tag tag-scope">Scope</span> Direct keynote citation on an Upload we have</td></tr>
+    <tr><td>Equipment Tags &amp; Pipe Labels</td><td>$550</td><td>2</td><td></td></tr>
+    <tr><td>Exterior Metal Jacketing</td><td>$2,500</td><td>16</td><td></td></tr>
+    <tr><td><strong>TOTALS</strong></td><td><strong>$8,494.47</strong></td><td><strong>161</strong></td><td></td></tr>
+  </table>
+
+  <h4>1.3 IN-HOUSE GC and SUBLET CONTRACTORS</h4>
+  <p>Fixed rate table for subcontracted trades, separate from Climate Pros' own crew: Sheet Metal $100/$150, Electrical $95/$150, Plumbing $100/$150, Carpentry $68/$150, G.C. $100/$150, Sprinklers + 9x "Other" all $100/$150 -- see <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a>. All zero hours; no subcontracted trades on this job.</p>
+
+  <h4>1.4 Refrigerant table</h4>
+  <p>A price-per-lb lookup by refrigerant type; the estimator enters lbs charged, the sheet prices it.</p>
+  <table class="data-table">
+    <tr><th>Type</th><th>Lbs charged</th></tr>
+    <tr><td>R407F</td><td><span class="tag tag-mismatch">-121.8</span> -- a negative figure, likely a removed/existing-system credit, unconfirmed</td></tr>
+    <tr><td><strong>R449A</strong></td><td><strong>300</strong> @ $10.25/lb = <strong>$3,075</strong></td></tr>
+    <tr><td>R22, R507/404A, R448A, R513A, R744 CO2</td><td>0</td></tr>
+  </table>
+
+  <h4>1.5 Scheduling Data</h4>
+  <p>Estimates crew size and job duration from total labor hours -- not a cost figure, a planning one.</p>
+  <table class="data-table">
+    <tr><th>Field</th><th>Value</th></tr>
+    <tr><td># of Fitters</td><td><span class="tag tag-manual">2</span></td></tr>
+    <tr><td>Duration</td><td><strong>3.35 weeks</strong> -- a fully resolved formula result, no cached-error artifact in this file copy</td></tr>
+  </table>
+
+  <h4>1.6 Project Labor Cost Data (hours-by-task)</h4>
+  <p>Every labor task on the job in one place, each row pulling its hours/materials from elsewhere on the sheet -- this is the table that feeds the labor blend below.</p>
+  <table class="data-table">
+    <tr><th>Function</th><th>ST</th><th>Materials</th><th>Note</th></tr>
+    <tr><td>Refrigerant</td><td>0</td><td>$3,075</td><td></td></tr>
+    <tr><td>Pipe</td><td>99</td><td>$17,236.73</td><td>matches PIPE 2.0's Install Labor Hours exactly</td></tr>
+    <tr><td>Parts</td><td>0</td><td>$11,021.31</td><td></td></tr>
+    <tr><td>Equipment</td><td>161</td><td>$8,494.47</td><td>= the whole Non-Itemized block, not just the EQUIPMENT tab</td></tr>
+    <tr><td>Pressure Test/Evacuate, Startup, Commissioning</td><td>8 / 20 / 10</td><td>0</td><td></td></tr>
+    <tr><td>Non-Productive/Travel, Fudge Factor</td><td>37.25 / 29.8</td><td>0</td><td></td></tr>
+    <tr><td><strong>TOTALS</strong></td><td><strong>365.05</strong></td><td><strong>$39,827.51</strong></td><td></td></tr>
+  </table>
+  <div class="callout callout-money"><div class="callout-title">Every hour is Straight Time -- zero OT, zero DT</div><div class="callout-body">No night-work clause, no after-hours convention found anywhere in the Uploads. 100% of labor on this job lands as ST.</div></div>
+
+  <h4>1.7 Labor Blend &amp; Rate</h4>
+  <p>30/10/40/20/0% blend, region "TX" -- "TX Valley, TX" division still maps to the flat "TX" LABOR RATES row. Mechanism: see <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a>, step 5.</p>
+  <table class="data-table">
+    <tr><th>Role</th><th>Allocated ST hrs</th><th>Cost $/hr</th><th>Sell $/hr</th></tr>
+    <tr><td>Foreman</td><td>109.515</td><td>$80</td><td>$106.67</td></tr>
+    <tr><td>Startup</td><td>36.505</td><td>$80</td><td>$106.67</td></tr>
+    <tr><td>Journeyman</td><td>146.02</td><td>$68</td><td>$90.67</td></tr>
+    <tr><td>Apprentice</td><td>73.01</td><td>$44</td><td>$58.67</td></tr>
+    <tr><td>Tradesman</td><td>0</td><td>$40</td><td>$53.33</td></tr>
+    <tr><td><strong>Blended</strong></td><td>365.05</td><td><strong>$68</strong></td><td><strong>$90.67</strong></td></tr>
+  </table>
+
+  <h4>1.8 Market Recovery Funds, Rentals, Subsistence</h4>
+  <p>Three separate cost buckets outside labor/materials: an optional labor credit, itemized equipment rentals, and out-of-town crew costs.</p>
+  <table class="data-table">
+    <tr><th>Section</th><th>This job</th></tr>
+    <tr><td>Market Recovery Funds</td><td>Unused (zero)</td></tr>
+    <tr><td>RENTALS</td><td>Crane $5,500 + Scissor lifts $625 = <strong>$6,125 total</strong></td></tr>
+    <tr><td>Out of Town Subsistence</td><td>Formula exists, not materially used</td></tr>
+  </table>
+
+  <h4>1.9 Total Summary</h4>
+  <p>Every cost bucket rolled up with its own category-specific margin, ending in this project's actual bid total.</p>
+  <table class="data-table">
+    <tr><th>Category</th><th>Cost</th><th>Sell</th><th>Margin</th></tr>
+    <tr><td>Labor</td><td>$24,823.40</td><td>$33,097.87</td><td>25%</td></tr>
+    <tr><td>Materials</td><td>$39,827.51</td><td>$53,103.35</td><td>25%</td></tr>
+    <tr><td>Rentals</td><td>$6,125</td><td>$7,656.25</td><td>20%</td></tr>
+    <tr><td>Fixed 1% Warranty</td><td>$1,054.69</td><td>$1,054.69</td><td>--</td></tr>
+    <tr><td>Contingency Factor</td><td>$4,939.87</td><td>$6,174.83</td><td>5%</td></tr>
+    <tr><td>Sales Tax (8.25%, Use Tax Mats Only)</td><td>$4,381.03</td><td>$4,381.03</td><td>--</td></tr>
+    <tr><td><strong>TOTAL</strong></td><td><strong>$81,151.49</strong></td><td><strong>$105,469</strong></td><td>Gross Profit $24,317.51</td></tr>
+  </table>
+  <div class="callout callout-info"><div class="callout-title">Margin profile: 24% labor/materials, 20% rentals/subcontractors, 30% permits/subsistence</div><div class="callout-body">BidCalc's own "Markup" column shows 0.3333 for these same rows, not 0.25 -- same 25%-of-sell margin, expressed as a 33.3%-of-cost markup in a different tab. Same economics, different wording tab to tab. See <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> for how this compares across projects.</div></div>
+
+  <h3 id="f57-tab2">Tab 2 -- EQUIPMENT</h3>
+  <p>The fixed ~40-item equipment/repair checklist -- only 3 rows are non-zero on this job.</p>
+  <table class="data-table">
+    <tr><th>Item</th><th>Qty</th><th>Material</th><th>Labor</th></tr>
+    <tr><td>1/4-10 HP Condensing Units</td><td>6</td><td>$600</td><td>96 hrs</td></tr>
+    <tr><td>Change Rack Main Liquid Drier</td><td>2</td><td>$260</td><td>4 hrs</td></tr>
+    <tr><td>Change Rack Suction Filters</td><td>1</td><td>$400</td><td>5 hrs</td></tr>
+    <tr><td><strong>TOTALS</strong></td><td></td><td><strong>$1,260</strong></td><td><strong>105 hrs</strong></td></tr>
+  </table>
+
+  <h3 id="f57-tab3">Tab 3 -- PIPE 2.0</h3>
+  <p>Install Labor Hours <strong>99</strong>, LF Pipe w/Waste <strong>1,100</strong>, HFG Factor 0.45, HFG Cost <strong>$5,349.33</strong>, Piping Refrigerant 58.2 lbs. Condensate: 0.75" pipe, 120 LF, Type M -- <span class="tag tag-mismatch">no insulation ordered</span> on the condensate line (possibly not needed for an ice room, unconfirmed -- see <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> for how this varies by folder).</p>
+
+  <h3 id="f57-tab4">Tab 4 -- PARTS</h3>
+  <p>The static price-book catalog; real quantities on this job cluster around one set of parts per ice maker, plus roof-piping consumables.</p>
+  <table class="data-table">
+    <tr><th>Item</th><th>Qty</th><th>Note</th></tr>
+    <tr><td>MKC-2 Dual Voltage control, 5/8" solenoid-less coil, 5/8" &amp; 1-3/8" DX ball valves, 1-3/8" magnetic check valve</td><td>6 each</td><td>One set per ice maker -- confirms the 6-unit count independently</td></tr>
+    <tr><td>4.25" PVC Saddle</td><td>30</td><td rowspan="3"><span class="tag tag-scope">Scope</span> "Provide &amp; Install Roof Piping Supports... Liquid Line w/ Cush Clamp &amp; Suction Line w/ Insuguard Saddle"</td></tr>
+    <tr><td>Roof Top Strut Blocks (small)</td><td>15</td></tr>
+    <tr><td>7/8" Cush Clamp</td><td>30</td></tr>
+    <tr><td>Silphos brazing rod</td><td>15</td><td></td></tr>
+  </table>
+
+  <h3 id="f57-tab5">Tab 5 -- LABOR RATES</h3>
+  <p>The same fixed reference table described in <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a>. TX row: $40/$34/$22/$20, burden 2.0x.</p>
+
+  <h3 id="f57-tab6">Tab 6 -- EQUIPMENT SALES BUYOUTS</h3>
+  <p>Unused, but carries its own independent tax rate: <strong>8.5%</strong>, different from the main SUMMARY tax rate (8.25% here) -- see <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> for why Equipment Sales tax is always tracked separately.</p>
+
+  <h3 id="f57-tab7">Tab 7 -- COPPER_INSULATION_FORM</h3>
+  <p>Same purchase-order mechanism described in <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a>, pulling from PIPE 2.0 rounded up to the nearest 20ft.</p>
+
+  <h3 id="f57-tab8">Tab 8 -- HVAC</h3>
+  <p>Every row checked -- entirely zero. No HVAC scope on a refrigeration-only ice room job.</p>
+
+  <h3 id="f57-tab9">Tab 9 -- TAX TABLE</h3>
+  <p>Static, unchanged. Texas + <strong>New Construction</strong> = <strong>"Use Tax Mats Only"</strong> -- this is what feeds <code>SUMMARY!K4</code>'s <code>XLOOKUP</code>.</p>
+
+  <h3 id="f57-tab10">Tab 10 -- BidCalc</h3>
+  <p>Fully resolved -- no <code>#NAME?</code> anywhere in this file. Its Description/Scope cell cites keynotes by number on drawings we have <em>and</em> on one we don't:</p>
+  <div class="quote-box">"Provide &amp; Install Valves Noted on R-1.2 (General Note #1)" -- R-1.2 isn't in the Uploads folder.<br>"Pipe Hoods by GC Noted on MEPR-1.1 (Keynote #6)" -- an explicit RC/GC scope split, naming the General Contractor, inside the pricing scope text itself.</div>
+  <div class="info-box" style="border: 2px solid #e0a458;">
+    <div class="pricing-row"><span class="pricing-label">Construction Material</span><span class="pricing-source">=Materials</span><span class="pricing-amount">$53,103.35</span></div>
+    <div class="pricing-row"><span class="pricing-label">Construction Other (Rentals)</span><span class="pricing-source">20% margin</span><span class="pricing-amount">$7,656.25</span></div>
+    <div class="pricing-row"><span class="pricing-label">Contingency Factor</span><span class="pricing-source">5% margin</span><span class="pricing-amount">$6,174.83</span></div>
+    <div class="pricing-row"><span class="pricing-label">Fixed 1% Warranty</span><span class="pricing-source">--</span><span class="pricing-amount">$1,054.69</span></div>
+    <div class="pricing-row"><span class="pricing-label">Tax</span><span class="pricing-source">8.25%</span><span class="pricing-amount">$4,381.03</span></div>
+    <div class="pricing-total"><span class="pricing-label"><strong>TOTAL BID</strong></span><span class="pricing-amount" style="font-size:1.3em;">$105,468.01</span></div>
+  </div>
+
+  <h3 id="f57-walkthrough">Full walkthrough: the 6 Ice Makers</h3>
+  <div class="callout callout-info"><div class="callout-title">Why this number</div><div class="callout-body">It's the one figure that survives a missing source sheet -- and converges independently across three different tabs.</div></div>
+  <div class="step-flow">
+    <div class="step-item"><div class="step-badge">1</div><div class="step-body">
+      <div class="step-title">The addendum announces new ice makers, on a sheet we don't have</div><div class="step-sheet">MEPR Narrative: "R-1.2: Added new Ice Makers as indicated"</div>
+      <div class="step-desc">R-1.2 itself -- the plan that would show exactly where and how many -- is missing from this Uploads folder.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">2</div><div class="step-body">
+      <div class="step-title">The count survives anyway, via BidCalc's own scope text</div><div class="step-sheet">BidCalc rows 1-2</div>
+      <div class="step-desc">"Receive, Set &amp; Install Ice Makers/Baggers (Provided by HEB)" -- and the actual number, 6, shows up in SUMMARY row 43.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">3</div><div class="step-body">
+      <div class="step-title">EQUIPMENT tab independently confirms 6</div><div class="step-sheet">EQUIPMENT row 11</div>
+      <div class="step-desc"><div class="calc-box">6x 1/4-10 HP Condensing Units = <span class="calc-result">$600 material / 96 hrs labor</span></div></div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">4</div><div class="step-body">
+      <div class="step-title">PARTS tab independently confirms 6 again</div><div class="step-sheet">PARTS rows 51, 53, 94, 97</div>
+      <div class="step-desc">MKC-2 control, solenoid-less coil, and two ball-valve sizes all ordered at qty 6 -- one full set per ice maker, with no shared reference to R-1.2 needed.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">5</div><div class="step-body">
+      <div class="step-title">Rolls into the $8,494.47 Non-Itemized total, then BidCalc</div><div class="step-sheet">SUMMARY row 52 -&gt; BidCalc</div>
+      <div class="step-desc">Part of the fully-resolved <span class="calc-result" style="color:#a0650a;">$105,468.01</span> Total Bid.</div>
+    </div></div>
+  </div>
+  <div class="callout callout-money"><div class="callout-title">Why this is reassuring, not just a gap</div><div class="callout-body">Three independent tabs (Non-Itemized, EQUIPMENT, PARTS) agree on "6" without any of them citing R-1.2 directly -- strong circumstantial evidence the estimator had accurate information despite the missing sheet, even though we can't verify it from the Uploads alone.</div></div>
+
+  <h3 id="f57-mismatches">Mismatches: Drawings/Uploads vs. Excel Findings</h3>
+  <p>Every place I found where the Price Sheet and the Uploads either disagree, or where the Price Sheet contains a number with no traceable source in the Uploads at all.</p>
+  <table class="data-table mismatch">
+    <tr><th>#</th><th>Excel location</th><th>What Excel shows</th><th>What Uploads/Drawings show</th><th>Type of mismatch</th></tr>
+    <tr><td>1</td><td>Addendum vs. Uploads folder</td><td>N/A</td><td>6 refrigeration sheets referenced (R-0.0, R-1.2, R-2.4, R-5.1-5.4); only R-0.0 present</td><td>Severe completeness gap -- 5 of 6 referenced sheets missing</td></tr>
+    <tr><td>2</td><td>BidCalc scope text</td><td>"Valves Noted on R-1.2 (General Note #1)"</td><td>R-1.2 not in Uploads</td><td>Specific citation to a missing source -- the estimator had it, we don't</td></tr>
+    <tr><td>3</td><td>SUMMARY row 77, Refrigerant table</td><td>-121.8 lbs R407F</td><td>No document explains a negative refrigerant quantity</td><td>Unexplained figure -- plausibly a removed-system credit, unconfirmed</td></tr>
+    <tr><td>4</td><td>PIPE 2.0 / COPPER_INSULATION_FORM</td><td>No insulation ordered on the condensate line</td><td>No document states whether this is intentional</td><td>Open item -- cause unconfirmed; see <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> for how this varies across folders</td></tr>
+  </table>
+
+  <h3 id="f57-mapping">Mapping table -- every traced source, in one place</h3>
+  <p>Every Price Sheet number discussed above, gathered into one lookup with its source or mismatch tag:</p>
+  <table class="data-table">
+    <tr><th>Price Sheet location</th><th>Value</th><th>Traced to</th></tr>
+    <tr><td>Non-Itemized: Roof Curbs</td><td>$3,500 / 8 hrs</td><td><span class="tag tag-scope">Scope</span> "Note #4 on MEPR-1.1 Drawing" -- direct keynote citation, sheet present</td></tr>
+    <tr><td>BidCalc scope: Pipe Hoods</td><td>assigned to GC</td><td><span class="tag tag-scope">Scope</span> "Noted on MEPR-1.1 (Keynote #6)" -- sheet present</td></tr>
+    <tr><td>Non-Itemized + EQUIPMENT + PARTS: 6 Ice Makers</td><td>$0 material/30hrs + $600/96hrs + 6x parts</td><td><span class="tag tag-scope">Scope</span> Addendum "R-1.2: Added new Ice Makers" -- sheet itself missing, count survives via BidCalc text and 3-way tab agreement</td></tr>
+    <tr><td>Refrigerant table: R449A</td><td>300 lbs, $3,075</td><td><span class="tag tag-scope">Scope</span> "Provide All Required Refrigerant (R449A)"</td></tr>
+    <tr><td>PARTS: Cush Clamp, PVC Saddle, Strut Blocks</td><td>30/30/15 qty</td><td><span class="tag tag-scope">Scope</span> "Roof Piping Supports... Liquid Line w/ Cush Clamp &amp; Suction Line w/ Insuguard Saddle"</td></tr>
+    <tr><td>SUMMARY row 77, R407F</td><td>-121.8 lbs</td><td><span class="tag tag-mismatch">Mismatch #3</span> -- unexplained</td></tr>
+    <tr><td>PIPE 2.0 condensate insulation</td><td>blank</td><td><span class="tag tag-mismatch">Mismatch #4</span> -- unexplained</td></tr>
+  </table>
+
+  <h3 id="f57-unique">What's unique about this folder</h3>
+  <div class="callout callout-info"><div class="callout-title">New Construction project</div><div class="callout-body">Changes the tax category even within the same state: Texas + New = "Use Tax Mats Only" vs. Texas + Existing = "Sales Tax Labor &amp; Mats."</div></div>
+  <div class="callout callout-warn"><div class="callout-title">Zero Overtime/Doubletime</div><div class="callout-body">100% Straight Time -- no night-work clause, no after-hours convention.</div></div>
+</div>
+
+<!-- ================= FOLDER 10 ================= -->
+<div class="section" id="f10">
+  <h2>Folder: United Market Street #502 -- Lubbock, TX</h2>
+
+  <div class="toc">
+    <ol>
+      <li><a href="#f10-howto">How to read this section</a></li>
+      <li><a href="#f10-glossary">Terms this folder has</a></li>
+      <li><a href="#f10-uploads">The Uploads (source documents)</a></li>
+      <li><a href="#f10-tab1">Tab 1 -- CP Est Pro 2.0 SUMMARY</a></li>
+      <li><a href="#f10-tab2">Tab 2 -- EQUIPMENT</a></li>
+      <li><a href="#f10-tab3">Tab 3 -- PIPE 2.0</a></li>
+      <li><a href="#f10-tab4">Tab 4 -- PARTS</a></li>
+      <li><a href="#f10-tab5">Tab 5 -- LABOR RATES</a></li>
+      <li><a href="#f10-tab6">Tab 6 -- EQUIPMENT SALES BUYOUTS</a></li>
+      <li><a href="#f10-tab7">Tab 7 -- COPPER_INSULATION_FORM</a></li>
+      <li><a href="#f10-tab8">Tab 8 -- HVAC</a></li>
+      <li><a href="#f10-tab9">Tab 9 -- TAX TABLE</a></li>
+      <li><a href="#f10-tab10">Tab 10 -- BidCalc</a></li>
+      <li><a href="#f10-walkthrough">Full walkthrough: the 70 cases</a></li>
+      <li><a href="#f10-mismatches">Mismatches: Drawings/Uploads vs. Excel</a></li>
+      <li><a href="#f10-mapping">Mapping table (every traced source)</a></li>
+    </ol>
+  </div>
+
+  <h3 id="f10-howto">How to read this section</h3>
+  <p>Each numbered tab below follows the same shape: what the section is, the real numbers in it, the formula behind each number (dark code block, exactly as it appears in Excel), and where the input came from. A <span class="tag tag-scope">Scope</span> tag means traced to a specific Upload sentence; <span class="tag tag-manual">Manual</span> means the estimator typed it with no traceable source; <span class="tag tag-mismatch">Mismatch</span> flags a place where Excel and Uploads disagree or don't reconcile. Cell references like <span class="tag-formula" style="background:#eee;color:#333;padding:1px 6px;border-radius:3px;">F21</span> are real coordinates -- open <code>United Market Street #502 Lubbock TX 06.04.26 - Refrg SOW.xlsx</code> (password <code>noZZel</code>) and follow along.</p>
+
+  <h3 id="f10-glossary">Terms this folder has</h3>
+  <p style="color:#6b6b6b;font-style:italic;">Every term this folder introduced turned out to be universal to the workbook template -- see the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab for the full glossary (MD/SD Case, Burden, Labor Blend, Margin, XLOOKUP, Region/Local code, REFERENCE ONLY blocks, HFG, BidCalc, and more). This project's specific values: margin <strong>25%</strong>, region <strong>"TX"</strong>, burden <strong>2.0x</strong>.</p>
+
+  <h3 id="f10-uploads">The Uploads (source documents)</h3>
+  <div class="callout callout-critical">
+    <div class="callout-title">No refrigeration drawing exists in this package</div>
+    <div class="callout-body">No R-series plan, no equipment schedule, no responsibility matrix. Just two prose scope letters and two whole-store FF&amp;E fixture plans with no refrigeration system tags. Every quantity in the Price Sheet was typed by the estimator directly from reading prose.</div>
+  </div>
+  <p>Four documents make up the full Uploads package for this folder:</p>
+  <table class="data-table">
+    <tr><th>File</th><th>What it is</th></tr>
+    <tr><td><code>2802-502-Refrigeration Scope.pdf</code></td><td>Department-by-department case-swap letter (Meat, Dairy, Floral, Bakery, Produce, Frozen Food, Beer &amp; Wine), each bullet naming a refrigeration system ID (A1-A9, B10-B22, C25-27, D29-36, E44-51).</td></tr>
+    <tr><td><code>2802-502 Refrigerant Conversion.pdf</code></td><td>Gas-conversion procedure, R507 &rarr; R448a, split into Base Bid (Racks A, B, C) and Alternate Bid (Racks D, E, F).</td></tr>
+    <tr><td><code>UN 02802 (0502) Remodelplan ...DEMO.pdf</code></td><td>Whole-store FF&amp;E demolition floor plan. Confirms the term "Multi-Deck" (its Comparative Analysis table) but carries no refrigeration system tags.</td></tr>
+    <tr><td><code>UN 02802 (0502) Remodelplan ...PROPOSED.pdf</code></td><td>Companion "proposed" FF&amp;E floor plan -- post-remodel fixture layout, same lack of system tags.</td></tr>
+  </table>
+
+  <h4>Refrigeration Scope letter</h4>
+  <div class="doc-excerpt">
+    <span class="doc-page-tag">page 1</span>
+    <div class="doc-heading">Refrigeration Scope -- Store 2802/502</div>
+    <p><strong>Dining Room</strong></p>
+    <ul><li>Remove 2 Ice machines from Coke Freestyle machines</li><li>Install new (2) ice machines on new coke machines, include water and drain lines</li></ul>
+    <p><strong>Meat Market</strong></p>
+    <ul>
+      <li>Change out 44' of fresh meat cases system B20. One for one swap -- use existing lines, verify riser is 1 3/8" (change if needed), reuse sensor cables/control valve</li>
+      <li>Change out 68' of smoked meat &amp; cheese cases systems B18 &amp; B19 -- B18 abandoned/capped, B19 line sets reused, new 7/8" riser required</li>
+      <li>Change out coffins A6 thru A9, one for one swap, reuse existing lines/sensors/control valve</li>
+      <li>Change case skin on (2) 3 door freezer case -- equipment provided by USM</li>
+      <li>Change out evaporator in meat market freezer A10, meat market cooler B21, meat market holding cooler B22, seafood freezer D30, seafood cooler D43</li>
+    </ul>
+    <p><strong>Dairy</strong> -- 36' rear load cases system C25; 68' cases systems C26 &amp; C27 (C27 abandoned/capped, C26 reused, new 7/8" riser)</p>
+    <p><strong>Floral</strong> -- remote bucket case system E51A (no sensor cable currently -- needs adding)</p>
+  </div>
+  <div class="doc-excerpt">
+    <span class="doc-page-tag">pages 2-3</span>
+    <p><strong>Bakery</strong> -- remove 3 medium temp cases, replace with 2 new cases system D36 (extend branch lines, install new ball valves + new CDS-25 valve at each new case); remove 2-door freezer, replace with new 3-door freezer system D29; change out glass doors on bakery freezer vault (doors provided by USM)</p>
+    <p><strong>Produce</strong> -- 36' deck cases E44; 56' deck cases E47 &amp; E48 (install new ball valves); remove 2 refrigerated produce tables E46 (not replaced); remove 8' case at back of store system E47 (not replaced)</p>
+    <p><strong>Frozen Food</strong> -- 20 doors systems A1/A2; remove 5 back-to-back Kysor cases from systems A3/A4/A5, replace with new Hussman RLN cases (13 doors/side + 2-door end cap each end, new overhead line sets from motor room); same pattern for systems B13/B14/B15; 17 doors system B16; 17 doors system B17</p>
+    <p><strong>Beer &amp; Wine</strong> -- change end cap wine case at end of frozen food (on RTU, reuse lines/controls)</p>
+  </div>
+  <div class="doc-excerpt">
+    <span class="doc-page-tag">page 3-4 -- closing list</span>
+    <p><strong>General items to include in your bid:</strong> line set covers/close-offs, trim install, dispose of removed cases, unloading (forklift), setting/leveling cases, crane service for RTUs, rental equipment, roof penetration repair, refrigerant supply, condensate drains, all piping/insulation/hangers, CPC sensor connections, temperature control/defrost/fan relays, Start Up, name tags on new cases, refrigerant tracking updates.</p>
+    <p style="color:#a13d3a;font-weight:bold;">"All work is night work unless otherwise specified."</p>
+  </div>
+
+  <h4>Refrigerant Conversion letter</h4>
+  <div class="doc-excerpt">
+    <span class="doc-page-tag">pages 1-2</span>
+    <div class="doc-heading">Refrigerant Conversion Scope -- Store 2802-502</div>
+    <p>Base Bid: Conversion of Racks A, B, and C. Alternate Bid: Conversion of Racks D, E, and F. Converting from 507 to 448 gas.</p>
+    <ul>
+      <li>Survey store; determine system/component compatibility with new refrigerant (TXV powerheads, valve superheat adjustment)</li>
+      <li>Remove oil from compressors/oil separator, replace with new POE oil (provided by USM); replace oil filters</li>
+      <li>After 1 week, test oil for mineral-oil % with a refractometer; repeat oil change if above 5% (20% acceptable on 448a conversions)</li>
+      <li>Remove suction filters if present, replace as needed</li>
+      <li>Leak-check all racks/conventional systems including overhead piping</li>
+      <li>Recover refrigerant via approved recovery service (property of USM); remove/replace seals, O-rings, gaskets on high side; rebuild/replace solenoid valves, ball valves, regulators; replace schrader cores; remove/replace liquid line driers, pull vacuum, charge with new refrigerant (provided by USM)</li>
+      <li>Start-up, adjust high/low pressure controls, adjust EMS settings (leak detection + refrigerant type), adjust EPRs and superheats</li>
+      <li>Label systems, update RCP forms, submit Refrigeration/HVAC System Information Form to RFSC; leak-check schedule: day after, 3 days, 2 weeks, then every 4 weeks for 90 days</li>
+      <li>Warranty: 90 days on refrigerant leaks from this conversion</li>
+    </ul>
+  </div>
+
+  <h4>Whole-store FF&amp;E floor plans (DEMO / PROPOSED)</h4>
+  <div class="callout callout-info">
+    <div class="callout-title">Confirmed: not refrigeration drawings</div>
+    <div class="callout-body">Full-store fixture layouts, scale 3/32"=1'-0". Checked both files against every refrigeration system ID named in the scope letter (A1-A9, B10-B22, C25-27, D29-36, E44-51) and found <strong>zero matches</strong>. They do contain a legend (New/Surplus/Relocated/Existing/Removed/Priority 2 Demo) and a "Comparative Analysis" table using the term "Multi-Deck" (Multi-Deck Produce, Dairy, Meat/Deli, Frozen Food) -- confirms the terminology, contributes nothing to the takeoff.</div>
+  </div>
+
+  <h3 id="f10-tab1">Tab 1 -- CP Est Pro 2.0 SUMMARY</h3>
+  <p>The main worksheet. Nearly every other tab either feeds this one or is fed by it.</p>
+
+  <h4>1.1 Header block (rows 3-15)</h4>
+  <p><span class="tag tag-manual">Manual</span> all typed by hand: Project Name, City (Lubbock), State (Texas), Scope text, Drawing Date, New/Remodel flag, Estimator, Labor division, Quote class, Warranty contractor, Change Order Y/N.</p>
+  <div class="calc-box">F13: =IF(F5="", "Enter 'Project State'...", IF(ISERROR(O182), "Pending Total Sell Price...",
+     IF(O182&gt;1000000, "Check Required, Insert Name Here", "No check currently required, sell price &lt; $1M")))
+&rarr; "No check currently required, sell price &lt; $1M"</div>
+  <p>A self-checking cell: if the eventual sell price exceeds $1,000,000, it changes its own message to demand a manager check.</p>
+
+  <h4>1.2 Display Cases (rows 19-29)</h4>
+  <p>One row per case type. Estimator types a count under "8'"/"12'" (columns C/D); everything else is a formula reading the rate table to the right (columns I-P).</p>
+  <table class="data-table">
+    <tr><th>Case Type</th><th>Material /8'</th><th>Material /12'</th><th>Pipefitter hrs /8'</th><th>Pipefitter hrs /12'</th><th>Case-setter hrs /8'</th><th>Case-setter hrs /12'</th></tr>
+    <tr><td>MD Cases</td><td>$104</td><td>$130</td><td>7</td><td>7</td><td>5</td><td>5</td></tr>
+    <tr><td>SD Cases</td><td>$88</td><td>$110</td><td>6</td><td>7</td><td>5</td><td>5</td></tr>
+    <tr><td>Service Cases</td><td>$104</td><td>$130</td><td>5</td><td>6</td><td>5</td><td>5</td></tr>
+    <tr><td>Wide Islands</td><td>$180</td><td>$225</td><td>7</td><td>7</td><td>5</td><td>5</td></tr>
+    <tr><td>Custom</td><td>$104</td><td>$130</td><td>10</td><td>12</td><td>6</td><td>8</td></tr>
+    <tr><td>Temp/Relocate</td><td>$60</td><td>$75</td><td>3</td><td>3</td><td>5</td><td>5</td></tr>
+    <tr><td>Remove</td><td>$0</td><td>--</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+  </table>
+  <div class="callout callout-warn"><div class="callout-title">Correction to remember</div><div class="callout-body">"Pipefitter labor" / "Case-setter labor" columns are HOURS, not dollars -- they only become dollars after the labor-blend/rate-lookup step (Tab 1, section 1.6).</div></div>
+  <div class="calc-box">Row 21, MD Cases, 70 typed at 12':
+  E21 = C21+D21                                  <span class="calc-result">= 70</span>
+  F21 = XLOOKUP(type,rates,material)*count        <span class="calc-source">(70 x $130)</span>  <span class="calc-result">= $9,100</span>
+  G21 = XLOOKUP(type,rates,pipefitter_hrs)*count  <span class="calc-source">(70 x 7)</span>     <span class="calc-result">= 490 hrs</span>
+  H21 = XLOOKUP(type,rates,casesetter_hrs)*count  <span class="calc-source">(70 x 5)</span>     <span class="calc-result">= 350 hrs</span>
+Row 29 TOTALS: Material <span class="calc-value">$9,175</span> | Pipefitter <span class="calc-value">565 hrs</span> | Case-setter <span class="calc-value">427 hrs</span></div>
+  <div class="callout callout-mismatch"><div class="callout-title"><span class="tag tag-mismatch">Mismatch</span> Where did "70" come from?</div><div class="callout-body">Not one clean sentence, and no drawing exists to check against. The scope letter mixes linear feet ("44' of fresh meat cases"), discrete units ("coffins A6 thru A9"), and door counts ("20 doors of frozen food") with no stated conversion rate. 70 is the estimator's own aggregate judgment. See section 15 for the full write-up.</div></div>
+
+  <h4>1.3 Evaporators (rows 32-37)</h4>
+  <p>Two coil types, each a fixed material/labor rate that the estimator multiplies by a typed quantity:</p>
+  <table class="data-table">
+    <tr><th>Coil Type</th><th>Material</th><th>Labor (hrs)</th></tr>
+    <tr><td>Commercial</td><td>$30</td><td>12</td></tr>
+    <tr><td>Industrial</td><td>$55</td><td>16</td></tr>
+  </table>
+  <div class="calc-box">F34 = XLOOKUP("Commercial",...)*8   <span class="calc-result">= $240</span>   (8 x $30)
+G34 = XLOOKUP("Commercial",...)*8   <span class="calc-result">= 96 hrs</span> (8 x 12)
+Row 37 note: <span class="calc-source">"Material is for hanging coils only!"</span></div>
+  <p>$30 is far too cheap to be an actual coil -- it's furnished by someone else (owner/case manufacturer); Climate Pros prices only the labor + small hardware to mount it.</p>
+  <div class="callout callout-mismatch"><div class="callout-title"><span class="tag tag-mismatch">Mismatch</span> 8 coils priced, only 5 confirmed in text</div><div class="callout-body">Exactly 5 explicit "change out evaporator" bullets exist (meat freezer A10, meat cooler B21, meat holding cooler B22, seafood freezer D30, seafood cooler D43). The remaining 3 are plausibly coils hung inside 3 new-case installs (D29, D36 x2, E51A) but this is inference, not text. See section 15.</div></div>
+
+  <h4>1.4 Non-Itemized Equipment Room &amp; RTU Breakdown (rows 39-52)</h4>
+  <p>A handful of miscellaneous line items that don't fit the Display Cases/Evaporators rate tables, each traced to a scope sentence or a formula pulling from another tab:</p>
+  <table class="data-table">
+    <tr><th>Row</th><th>Description</th><th>Material</th><th>Labor (hrs)</th><th>Source</th></tr>
+    <tr><td>41</td><td>Equipment Sheet Totals</td><td>$3,840</td><td>48</td><td><span class="tag tag-formula">=EQUIPMENT!G43/H43</span></td></tr>
+    <tr><td>43</td><td>Provide &amp; Install CDS-25/47/711</td><td>$3,150</td><td>6</td><td><span class="tag tag-scope">Scope</span> "Install new CDS-25 valve at each new case" (Bakery D36)</td></tr>
+    <tr><td>44</td><td>Remove &amp; Replace Ice Machine + water/drain</td><td>$550</td><td>12</td><td><span class="tag tag-scope">Scope</span> "Remove 2 Ice machines... Install new (2)..."</td></tr>
+    <tr><td>45</td><td>Reskin (2) 3-door Freezer Cases</td><td>$0</td><td>8</td><td><span class="tag tag-scope">Scope</span> "...equipment provided by USM" -- the $0 IS this clause</td></tr>
+    <tr><td>52</td><td><strong>TOTALS</strong></td><td><strong>$13,760.64</strong></td><td><strong>144</strong></td><td>=SUM(G41:G51)/H41:H51</td></tr>
+  </table>
+  <div class="callout callout-warn"><div class="callout-title">Term trap: "Equipment" means 3 different things in this workbook</div><div class="callout-body">(1) the EQUIPMENT tab itself, (2) row 41 "Equipment Sheet Totals" pulling #1 in as one line, (3) row 100 in the hours table (1.5), labeled "EQUIPMENT," which pulls the <strong>whole</strong> $13,760.64/144-hour total from this section -- not just the EQUIPMENT tab.</div></div>
+
+  <h4>1.5 Labor hours by task (rows 96-121)</h4>
+  <p>Header row 95: <strong>FUNCTION | ST HOURS | OT HOURS | DT HOURS | MATERIALS COST</strong>. Each hours cell is a formula pulling from elsewhere on this sheet.</p>
+  <table class="data-table">
+    <tr><th>Row</th><th>Function</th><th>ST</th><th>OT</th><th>DT</th><th>Materials</th><th>Pulled from</th></tr>
+    <tr><td>98</td><td>Pipe</td><td>0</td><td>346</td><td>0</td><td>$51,302.60</td><td><span class="tag tag-formula">='PIPE 2.0'!D3</span>, placed under OT</td></tr>
+    <tr><td>100</td><td>Equipment</td><td>0</td><td>144</td><td>0</td><td>$13,760.64</td><td><span class="tag tag-formula">=G52</span> (section 1.4's whole block)</td></tr>
+    <tr><td>101</td><td>Case Receive, Set &amp; Uncrate</td><td>0</td><td>427</td><td>0</td><td>$0</td><td>= Display Cases case-setter total</td></tr>
+    <tr><td>102</td><td>Piping in Cases</td><td>0</td><td>565</td><td>0</td><td>$9,175</td><td>= Display Cases pipefitter total</td></tr>
+    <tr><td>103</td><td>Coils</td><td>0</td><td>96</td><td>0</td><td>$240</td><td>= Evaporators total</td></tr>
+    <tr><td>121</td><td><strong>TOTAL HOURS</strong></td><td colspan="3"><strong>2,384.34</strong></td><td>--</td><td>=F119+G119+H119</td></tr>
+  </table>
+  <div class="callout callout-critical"><div class="callout-title">Discovery: 992 hours classified as Overtime, and the letter explains why</div><div class="callout-body">Rows 101/102 place 100% of case-setter (427) and pipefitter (565) hours under OT, not ST -- a manual choice. The scope letter's closing line: <em>"All work is night work unless otherwise specified."</em> Night-shift work commonly triggers overtime pay -- directly traceable, and it matters financially because OT carries a richer burden multiplier below.</div></div>
+
+  <h4>1.6 Labor Blend &amp; Rate Lookup (rows 123-131)</h4>
+  <p>Mechanism: see <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a>, step 5. This project's inputs and result:</p>
+  <table class="data-table">
+    <tr><th>Role</th><th>Blend %</th><th>Region</th><th>ST rate</th><th>OT rate</th></tr>
+    <tr><td>Foreman</td><td>30%</td><td>TX</td><td>$80/hr</td><td>$100/hr</td></tr>
+    <tr><td>Startup</td><td>10%</td><td>TX</td><td>$80/hr</td><td>$100/hr</td></tr>
+    <tr><td>Journeyman</td><td>40%</td><td>TX</td><td>$68/hr</td><td>$85/hr</td></tr>
+    <tr><td>Apprentice</td><td>20%</td><td>TX</td><td>$44/hr</td><td>$55/hr</td></tr>
+    <tr><td>Tradesman</td><td>0%</td><td>TX</td><td>$40/hr</td><td>--</td></tr>
+  </table>
+  <div class="calc-box">Row 165 TOTAL LABOR COST <span class="calc-result">= $195,217.12</span></div>
+
+  <h4>1.7 Total Summary (rows 168-190)</h4>
+  <p>The final cost/sell rollup for this project, running each category through the reverse-margin formula before adding warranty, contingency, and tax:</p>
+  <table class="data-table">
+    <tr><th>Row</th><th>Category</th><th>Cost</th><th>Sell</th><th>Formula note</th></tr>
+    <tr><td>170</td><td>Labor</td><td>$195,217.12</td><td>$260,289.49</td><td>Sell = Cost &divide; (1&minus;25%)</td></tr>
+    <tr><td>171</td><td>Materials</td><td>$95,523.33</td><td>$127,364.44</td><td>Same margin formula</td></tr>
+    <tr><td>186</td><td>Fixed 1% Warranty</td><td>$5,502.99</td><td>$5,502.99</td><td>=(labor+mat sell so far)*0.0101</td></tr>
+    <tr><td>187</td><td>Contingency Factor</td><td>$24,852.93</td><td>$31,066.17</td><td>5% margin on labor+materials sell</td></tr>
+    <tr><td>189</td><td>Sales Tax</td><td colspan="2">$41,519.93</td><td>see 1.8</td></tr>
+    <tr><td>190</td><td><strong>TOTAL</strong></td><td><strong>$423,446.30</strong></td><td><strong>$550,295</strong></td><td>Gross Profit $126,848.70 / Margin 23.05%</td></tr>
+  </table>
+
+  <h4>1.8 Sales Tax (row 189)</h4>
+  <p>Mechanism: see <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a>, step 7. This job: category = "Sales Tax Labor &amp; Mats" (taxes everything), rate = <span class="tag tag-manual">0.0825 -- typed by hand</span>, this job's branch = <code>(labor+mat sell+contingency)*rate</code> <span class="calc-result" style="color:#a0650a;">= $41,519.93</span>.</p>
+  <div class="callout callout-mismatch"><div class="callout-title"><span class="tag tag-mismatch">Mismatch</span> Sourced from neither the Uploads nor any formula</div><div class="callout-body">The tax rate is typed in after a manual Google search -- see section 15.</div></div>
+
+  <h3 id="f10-tab2">Tab 2 -- EQUIPMENT</h3>
+  <p>A fixed checklist of ~40 possible equipment/repair line items, unchanged across every project. Estimator types a quantity in column B; columns G/H/I are formulas: <span class="tag tag-formula">=B x rate</span> for material/labor/refrigerant, rates stored off-screen in columns M/N/O.</p>
+  <div class="calc-box">Only 3 non-zero rows on this job (all gas-conversion related, qty 6 each -- one per rack):
+  Row 34: Change Oil Filter (1) OF-303           <span class="calc-result">$660 material / 6 hrs</span>
+  Row 35: Change Rack Main Liquid Drier RC4864HH <span class="calc-result">$780 material / 12 hrs</span>
+  Row 36: Change Rack Suction Filters (8) Cores  <span class="calc-result">$2,400 material / 30 hrs</span>
+  Row 43 TOTALS: =SUM(G11:G42) <span class="calc-result">$3,840 material</span> | =SUM(H11:H42) <span class="calc-result">48 hrs</span></div>
+  <p><span class="tag tag-scope">Scope</span> All three trace directly to the Refrigerant Conversion letter's procedure -- qty 6 = one pass per rack being converted (Base Bid A/B/C + Alternate D/E/F).</p>
+
+  <h3 id="f10-tab3">Tab 3 -- PIPE 2.0</h3>
+  <p>Not empty on this project, despite most case-swap bullets saying "reuse existing lines." Header stats: Install Labor Hours <strong>346</strong>, LF Pipe w/Waste <strong>3,460</strong>, Piping Waste <strong>10%</strong>, HFG Factor <strong>0.45</strong>, HFG Cost <strong>$15,146.28</strong>, Piping Refrigerant <strong>177.708 lbs</strong>.</p>
+  <h4>3.1 Condensate Drain Lines table</h4>
+  <p>One real row: 0.75" pipe, 200 LF, Type M copper, insulation 1.125" ID x 1" thick, 96 LF, $302.40, FG part #3183.</p>
+  <h4>3.2 Systems / Liquid Lines table (67 rows)</h4>
+  <p>One row per system tag; most trace cleanly to a scope bullet, but one pair of rows has no matching sentence anywhere in the Uploads:</p>
+  <table class="data-table">
+    <tr><th>System tag</th><th>Pipe size</th><th>LF</th><th>Matches this scope bullet</th></tr>
+    <tr><td>SYS A3 / A4</td><td>0.625"</td><td>160 / 140</td><td><span class="tag tag-scope">Scope</span> Kysor&rarr;Hussmann swap, systems A3/A4/A5</td></tr>
+    <tr><td>SYS BL13/14/14A/14B</td><td>0.625"</td><td>120/40/40/120</td><td><span class="tag tag-scope">Scope</span> Kysor&rarr;Hussmann swap, systems B13/14/15</td></tr>
+    <tr><td>SYS DR36A / DR36B</td><td>0.375" / 0.5"</td><td>40 / 40</td><td><span class="tag tag-scope">Scope</span> 2 new bakery cases, system D36</td></tr>
+    <tr><td>SYS E44/E47/E48/E51A</td><td>various</td><td>10/40/10/20</td><td><span class="tag tag-scope">Scope</span> Produce/Floral bullets</td></tr>
+    <tr><td>SYS C25 / C26</td><td>0.625"</td><td>60 / 40</td><td><span class="tag tag-scope">Scope</span> Dairy bullets</td></tr>
+    <tr><td>SYS BR19 / BR20</td><td>0.625" / 0.875"</td><td>40 / 40</td><td><span class="tag tag-mismatch">Mismatch</span> No matching sentence found -- see section 15</td></tr>
+  </table>
+  <h4>3.3 Suction/Discharge &amp; Insulation columns (Q-AF)</h4>
+  <p>Copper suction/discharge line sizing, then Black/White Insulation tables with matching LF/cost/part# shape. These feed <code>COPPER_INSULATION_FORM</code> (Tab 7) directly.</p>
+  <div class="callout callout-mismatch"><div class="callout-title"><span class="tag tag-mismatch">Mismatch</span> Exact $ cost of this piping not fully verified</div><div class="callout-body">Columns Q-AF hold real cost-per-LF and part numbers, but I couldn't confidently confirm whether each row-block is a per-system or per-pipe-size aggregation in the time available. See section 15.</div></div>
+
+  <h3 id="f10-tab4">Tab 4 -- PARTS</h3>
+  <p>A static catalog, 150+ named parts with FG part numbers and fixed unit prices -- a price book, not recalculated per project.</p>
+  <table class="data-table">
+    <tr><th>Row</th><th>Part</th><th>Qty</th></tr>
+    <tr><td>92-97</td><td>DX Ball Valves, 3/8"-1-3/8" (Mueller AQ178xx)</td><td>2, 2, 8, 1, 3</td></tr>
+    <tr><td>212</td><td>1-1/2" Galvanized Strut, 10ft</td><td>50</td></tr>
+    <tr><td>227</td><td>15% Silphos brazing rod</td><td>30</td></tr>
+    <tr><td>231-233</td><td>Heat Tape + connector/splice kits</td><td>150ft + 4 + 4</td></tr>
+  </table>
+  <p><span class="tag tag-scope">Scope</span> Ball valves trace to "Install new ball valves" (Produce E44, E47/E48). Strut/silphos/heat-tape are standard consumables for the new branch piping identified in Tab 3.</p>
+
+  <h3 id="f10-tab5">Tab 5 -- LABOR RATES</h3>
+  <p>Static, ~45 rows, one per region: LOCAL code, Foreman/Journeyman/Apprentice/Tradesman base wage, Region name, Burden multiplier, Updated date. This is what every XLOOKUP in SUMMARY and BidCalc reads from.</p>
+  <div class="calc-box">Row 45 -- Texas: LOCAL="TX" | Foreman $40 | Journeyman $34 | Apprentice $22 | Tradesman $20 | Burden 2.0</div>
+
+  <h3 id="f10-tab6">Tab 6 -- EQUIPMENT SALES BUYOUTS</h3>
+  <p>24 blank "XXXX" template rows + a Freight row, all zero on this job. For equipment Climate Pros purchases and resells rather than installs itself -- not used here.</p>
+
+  <h3 id="f10-tab7">Tab 7 -- COPPER_INSULATION_FORM</h3>
+  <p>Not a calculation -- a purchase order. Every cell pulls from PIPE 2.0 and rounds up to the nearest 20 feet, ready to hand to a supplier.</p>
+  <div class="calc-box">C15 =CEILING('PIPE 2.0'!Q23*$R$4, 20)   <span class="calc-source">-- round the piping tab's footage up to the next 20ft</span></div>
+  <p>Fields for Job Site Address, Order POC, Pickup/Delivery date exist but are blank in this sample.</p>
+
+  <h3 id="f10-tab8">Tab 8 -- HVAC</h3>
+  <p>Same labor-hours-by-function layout as the refrigeration side (Mobilization, Duct Install, Demolition, Startup...). Entirely zero -- no HVAC scope on this job. The tab exists in every workbook regardless of job type.</p>
+
+  <h3 id="f10-tab9">Tab 9 -- TAX TABLE</h3>
+  <p>Static: all 50 states x (Existing Construction / New Construction) &rarr; tax category text. Texas + Existing Construction (this job is a Remodel) = <strong>"SALES TAX LABOR &amp; MATS."</strong> This is what <code>SUMMARY!K4</code>'s XLOOKUP reads.</p>
+
+  <h3 id="f10-tab10">Tab 10 -- BidCalc</h3>
+  <p>The final rollup. Pulls SUMMARY's Labor and Materials cost, re-derives sell price the same way, adds its own extra line items, applies tax, and produces one number.</p>
+  <div class="info-box" style="border: 2px solid #e0a458;">
+    <div class="pricing-row"><span class="pricing-label">Construction Material (=Materials)</span><span class="pricing-source">SUMMARY</span><span class="pricing-amount">$127,364.43</span></div>
+    <div class="pricing-row"><span class="pricing-label">Construction Other</span><span class="pricing-source">typed</span><span class="pricing-amount">$16,437.50</span></div>
+    <div class="pricing-row"><span class="pricing-label">Contingency Factor</span><span class="pricing-source">5% margin</span><span class="pricing-amount">$31,066.17</span></div>
+    <div class="pricing-row"><span class="pricing-label">Post Construction Warranty</span><span class="pricing-source">1.01%</span><span class="pricing-amount">$5,502.99</span></div>
+    <div class="pricing-row"><span class="pricing-label">Travel Expenses</span><span class="pricing-source">typed</span><span class="pricing-amount">$68,114.29</span></div>
+    <div class="pricing-row"><span class="pricing-label">Total Bid Tax Minus Equip</span><span class="pricing-source">tax formula</span><span class="pricing-amount">$41,519.93</span></div>
+    <div class="pricing-total"><span class="pricing-label"><strong>TOTAL BID</strong></span><span class="pricing-amount" style="font-size:1.3em;">$550,294.80</span></div>
+  </div>
+
+  <h3 id="f10-walkthrough">Full walkthrough: the 70 MD cases, start to finish</h3>
+  <div class="callout callout-info"><div class="callout-title">Why this walkthrough</div><div class="callout-body">The 70-cases number is the most consequential figure in this bid, and the one traceable through every tab it touches with fully verified formulas.</div></div>
+
+  <div class="step-flow">
+    <div class="step-item"><div class="step-badge">1</div><div class="step-body">
+      <div class="step-title">Read the scope letter</div><div class="step-sheet">Source: Refrigeration Scope letter</div>
+      <div class="step-desc">A dozen scattered bullets across departments, each in a different unit (feet/units/doors). No single sentence adds up to 70.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">2</div><div class="step-body">
+      <div class="step-title">Estimator types 70 into DISPLAY CASES row 21</div><div class="step-sheet">SUMMARY!C21/D21 -- typed by hand, no formula</div>
+      <div class="step-desc">The one un-auditable step in the whole chain.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">3</div><div class="step-body">
+      <div class="step-title">Formulas convert 70 into $ and hours</div><div class="step-sheet">SUMMARY!F21, G21, H21</div>
+      <div class="step-desc"><div class="calc-box">Material: 70 x $130 = <span class="calc-result">$9,100</span> | Pipefitter: 70 x 7 = <span class="calc-result">490 hrs</span> | Case-setter: 70 x 5 = <span class="calc-result">350 hrs</span></div></div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">4</div><div class="step-body">
+      <div class="step-title">Hours land in the task table, entirely as Overtime</div><div class="step-sheet">SUMMARY rows 101-102</div>
+      <div class="step-desc">427 case-setter + 565 pipefitter hrs placed under OT -- because "all work is night work."</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">5</div><div class="step-body">
+      <div class="step-title">All task hours sum to Total Hours</div><div class="step-sheet">SUMMARY!G121</div>
+      <div class="step-desc">2,384.34 total, 1,946 of them OT.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">6</div><div class="step-body">
+      <div class="step-title">Hours split, priced with burden + OT loading</div><div class="step-sheet">SUMMARY rows 123-131, 160-165</div>
+      <div class="step-desc"><div class="calc-box">TOTAL LABOR COST (all roles/tasks): <span class="calc-result">$195,217.12</span></div></div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">7</div><div class="step-body">
+      <div class="step-title">Cost becomes Sell via reverse-margin</div><div class="step-sheet">SUMMARY!I170</div>
+      <div class="step-desc"><div class="calc-box">$195,217.12 &divide; (1-0.25) = <span class="calc-result">$260,289.49</span></div></div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">8</div><div class="step-body">
+      <div class="step-title">Rolls into BidCalc</div><div class="step-sheet">BidCalc row 43</div>
+      <div class="step-desc">Now inseparable from every other bucket -- part of the <span class="calc-result" style="color:#a0650a;">$550,294.80</span> Total Bid.</div>
+    </div></div>
+  </div>
+
+  <h3 id="f10-mismatches">Mismatches: Drawings/Uploads vs. Excel Findings</h3>
+  <p>Every place I found where the Price Sheet and the Uploads either disagree, or where the Price Sheet contains a number with no traceable source in the Uploads at all.</p>
+  <table class="data-table mismatch">
+    <tr><th>#</th><th>Excel location</th><th>What Excel shows</th><th>What Uploads/Drawings show</th><th>Type of mismatch</th></tr>
+    <tr><td>1</td><td>SUMMARY, Display Cases row 21</td><td>70 MD cases @ 12' ($9,100, 490 pipefitter hrs, 350 case-setter hrs)</td><td>Scope letter describes case changes in feet, discrete units, and doors -- no stated conversion between units, no sentence sums to 70</td><td>Unverifiable aggregation -- estimator judgment with zero audit trail</td></tr>
+    <tr><td>2</td><td>SUMMARY, Evaporators row 34</td><td>8 Commercial coils ($240, 96 hrs)</td><td>Only 5 explicit "change out evaporator" bullets in the scope letter</td><td>Partial mismatch -- 5 of 8 confirmed, 3 inferred from new-case installs (not stated anywhere)</td></tr>
+    <tr><td>3</td><td>PIPE 2.0, SYS BR19 / BR20</td><td>40 LF + 40 LF piping priced, real pipe sizes (0.625"/0.875")</td><td>No matching system ID or sentence found anywhere in either letter</td><td>Untraceable line item -- real dollars with zero source document backing</td></tr>
+    <tr><td>4</td><td>SUMMARY C189, Sales Tax rate</td><td>8.25%, drives $41,519.93 of the final bid</td><td>Not in any Upload -- typed after a manual Google search (see the HYPERLINK note in the cell itself)</td><td>Source lies entirely outside the document set -- single point of failure if the search result is wrong or stale</td></tr>
+    <tr><td>5</td><td>Display Cases row 28 "Remove" vs row 21 "MD Cases"</td><td>72 removed vs. 70 installed -- a gap of 2</td><td>Scope letter describes two 5-case Kysor groups being replaced by fewer, wider Hussmann RLN sections</td><td>Explainable gap, but not provable from the text -- logged as plausible inference, not a confirmed match</td></tr>
+    <tr><td>6</td><td>PIPE 2.0, columns Q-AF (Copper/Insulation cost lookup)</td><td>Real $/LF and part numbers present for suction/discharge sizing and insulation</td><td>Could not confirm from either the tab's own layout or the Uploads whether this block is a per-system or per-pipe-size aggregation</td><td>Internal ambiguity -- flagged as an open item rather than a guessed answer</td></tr>
+  </table>
+  <div class="callout callout-mismatch">
+    <div class="callout-title">What this list means for the platform</div>
+    <div class="callout-body">Items 1, 2, and 5 are cases where a human aggregated multiple prose bullets into one number using judgment that leaves no written trail -- exactly the "reasoning lives in the estimator's head" problem the AI platform is meant to solve. Item 3 is a genuine data-integrity gap (a priced line item with no source at all) worth flagging to Climate Pros directly. Item 4 is a process gap (external data source, no verification step) that the new platform's "state drives tax lookup" design should close. Item 6 is my own research limitation, not a project finding -- worth revisiting with more time or someone who knows this tab's internal layout.</div>
+  </div>
+
+  <h3 id="f10-mapping">Mapping table (every traced source, in one place)</h3>
+  <p>Every Price Sheet number discussed above, gathered into one lookup with its source or mismatch tag:</p>
+  <table class="data-table">
+    <tr><th>Price Sheet location</th><th>Value</th><th>Traced to</th></tr>
+    <tr><td>PIPE 2.0, SYS A3/A4</td><td>160+140 LF</td><td><span class="tag tag-scope">Scope</span> Kysor&rarr;Hussmann swap, systems A3/A4/A5</td></tr>
+    <tr><td>PIPE 2.0, SYS DR36A/DR36B</td><td>40+40 LF</td><td><span class="tag tag-scope">Scope</span> 2 new bakery cases, system D36</td></tr>
+    <tr><td>PARTS rows 92-97, ball valves</td><td>2/2/8/1/3 units</td><td><span class="tag tag-scope">Scope</span> "Install new ball valves" (Produce)</td></tr>
+    <tr><td>EQUIPMENT rows 34-36, x6 each</td><td>$3,840 / 48 hrs</td><td><span class="tag tag-scope">Scope</span> Refrigerant Conversion letter's oil/filter/drier procedure</td></tr>
+    <tr><td>SUMMARY row 44 (Ice Machine)</td><td>$550 / 12 hrs</td><td><span class="tag tag-scope">Scope</span> "Remove 2 Ice machines... Install new (2)"</td></tr>
+    <tr><td>SUMMARY row 45 (Reskin, $0 material)</td><td>$0 / 8 hrs</td><td><span class="tag tag-scope">Scope</span> "...equipment provided by USM"</td></tr>
+    <tr><td>SUMMARY rows 101/102 (all hours -&gt; OT)</td><td>427 + 565 hrs</td><td><span class="tag tag-scope">Scope</span> "All work is night work"</td></tr>
+    <tr><td>DISPLAY CASES row 21 (70 MD cases)</td><td>$9,100</td><td><span class="tag tag-mismatch">Mismatch #1</span></td></tr>
+    <tr><td>EVAPORATORS row 34 (8 coils)</td><td>$240 / 96 hrs</td><td><span class="tag tag-mismatch">Mismatch #2</span></td></tr>
+    <tr><td>PIPE 2.0, SYS BR19/BR20</td><td>40+40 LF</td><td><span class="tag tag-mismatch">Mismatch #3</span></td></tr>
+    <tr><td>SUMMARY C189 (tax rate 8.25%)</td><td>$41,519.93 downstream</td><td><span class="tag tag-mismatch">Mismatch #4</span></td></tr>
+  </table>
+
+
+</div>
+
+<!-- ================= FOLDER 1: WALMART 0392-1005 ================= -->
+<div class="section" id="f1">
+  <h2>Folder: Walmart 0392-1005 -- Weatherford, OK</h2>
+  <p style="color:#6b6b6b;">26.05.08 -- Cap X-REF 1 Remodel (Supercenter Remodel w/ SCO2-TCO2-GLYCOL Upgrade)</p>
+
+  <div class="toc">
+    <ol>
+      <li><a href="#f1-glossary">Terms this folder has</a></li>
+      <li><a href="#f1-uploads">The Uploads (39-page combined drawing set)</a></li>
+      <li><a href="#f1-tab1">Tab 1 -- CP Est Pro 2.0 SUMMARY</a></li>
+      <li><a href="#f1-tab2">Tab 2 -- EQUIPMENT</a></li>
+      <li><a href="#f1-tab3">Tab 3 -- PIPE 2.0</a></li>
+      <li><a href="#f1-tab4">Tab 4 -- PARTS (categorized catalog, CO2/glycol-heavy this job)</a></li>
+      <li><a href="#f1-tab5">Tab 5 -- LABOR RATES</a></li>
+      <li><a href="#f1-tab6">Tab 6 -- EQUIPMENT SALES BUYOUTS</a></li>
+      <li><a href="#f1-tab7">Tab 7 -- COPPER_INSULATION_FORM (4 copper types, not 1)</a></li>
+      <li><a href="#f1-tab8">Tab 8 -- HVAC</a></li>
+      <li><a href="#f1-tab9">Tab 9 -- TAX TABLE</a></li>
+      <li><a href="#f1-tab10">Tab 10 -- BidCalc</a></li>
+      <li><a href="#f1-walkthrough">Full walkthrough: the 24 MD cases</a></li>
+      <li><a href="#f1-mismatches">Mismatches: Drawings/Uploads vs. Excel</a></li>
+      <li><a href="#f1-mapping">Mapping table (every traced source)</a></li>
+    </ol>
+  </div>
+
+  <h3 id="f1-glossary">Terms this folder has</h3>
+  <p style="color:#6b6b6b;font-style:italic;">Burden, BidCalc, Responsibility Matrix, RD/RE/BASR, Sublet, and Scheduling Data/Dispatch are now covered once in the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab. What's actually new/unique to this folder:</p>
+  <table class="data-table">
+    <tr><th>Term</th><th>Meaning</th></tr>
+    <tr><td>DX / SCO2 / TCO2 / GLY</td><td>Refrigerant system types on this job: DX = direct-expansion (standard), SCO2 = subcritical CO2, TCO2 = transcritical CO2, GLY = glycol secondary loop. This job runs all three side by side.</td></tr>
+    <tr><td>XHP pipe</td><td>Extra-High-Pressure pipe rating, used for the new 90-Bar TCO2 system -- priced differently than standard Type L copper.</td></tr>
+    <tr><td>Saddle</td><td>A pipe support/clamp component with its own part number and quantity, ordered per pipe size on the COPPER_INSULATION_FORM.</td></tr>
+  </table>
+
+  <h3 id="f1-uploads">The Uploads -- a real 39-page drawing set</h3>
+  <p>One file: <code>392 Combined PDFs.pdf</code>. Mapped every page by the sheet-number codes referenced within it:</p>
+  <table class="data-table">
+    <tr><th>Pages</th><th>Sheet series</th><th>What's on them</th></tr>
+    <tr><td>1</td><td>Architectural (+ index refs)</td><td>Whole-store floor/ceiling plan, room codes, references to A4 and BASR0-3.1 suggesting a small index box.</td></tr>
+    <tr><td>2</td><td>refs RE2</td><td>"Case Installation" generic notes.</td></tr>
+    <tr><td><strong>3</strong></td><td><strong>RM (Responsibility Matrix)</strong></td><td>Equipment-vs-system RC/BASC/N/A table (Existing Racks / TCO2 Condensing Unit / SCO2 Skid / GLY Skid columns) + numbered task list with OEM/WMT, RC, GC, GC/RC responsibility columns.</td></tr>
+    <tr><td>4-8</td><td>Architectural / General Arch (D1, A4, GA1-3)</td><td>Department floor plan continuation + 2 construction details (Diamond Plate Rail, Walk-In Panel/Netting) -- other trades, not refrigeration-specific.</td></tr>
+    <tr><td>9-10</td><td>Structural (S1, S2)</td><td>Special Inspections statement, joist/girder + CMU wall framing notes.</td></tr>
+    <tr><td>11-13</td><td>Plumbing (P1, P1.1, P1.2)</td><td>Department floor plan overlaid with plumbing content.</td></tr>
+    <tr><td><strong>14-21</strong></td><td><strong>BASR</strong> (controls) + RE2</td><td>"Rack LTA Discharge Air Temperature and Defrost Parameters" schedule (p.17), "Leak Detection Equipment Schedule" (p.18), wiring/conduit and control-board diagrams (p.19-21).</td></tr>
+    <tr><td>22-23</td><td><strong>RD</strong> (Demolition)</td><td>Demo plan -- which racks/cases/circuits are being removed.</td></tr>
+    <tr><td>24-26</td><td><strong>R1</strong> (Plan)</td><td>Refrigeration floor plan; p.26 = "Piping Schedule -- Rack LTA (DX)."</td></tr>
+    <tr><td><strong>27-29</strong></td><td><strong>R2</strong> (Schedules)</td><td>p.27 "Refrigeration System Schedule -- Existing Rack LTA (DX)" with real Hill Phoenix/Hussmann model numbers; p.28 "R2.1 -- New System LTA SCO2"; p.29 "R2.2 -- Skid System Parameter Schedule."</td></tr>
+    <tr><td>30-34</td><td><strong>R3</strong> (Details)</td><td>Pipe hanger products (Insulguard, Snap-N-Shield), two-phase return branch, threaded-rod vertical piping option, suction riser/main/liquid branch detail.</td></tr>
+    <tr><td>35-36</td><td>R4.1</td><td>Vendor/manufacturer contact info block (Wal-Mart, Conyers GA).</td></tr>
+    <tr><td>37-39</td><td><strong>RE</strong> (Electrical)</td><td>Refrigeration electrical sheets; p.39 notes a Generac PWRCELL battery-backup inverter (owner-furnished, contractor-installed).</td></tr>
+  </table>
+  <p style="font-style:italic;color:#6b6b6b;font-size:0.88em;">Pages 1-13 are other trades' sheets bundled into the same combined PDF for context -- not authored by the refrigeration engineer, not used by the refrigeration takeoff.</p>
+
+  <h3 id="f1-tab1">Tab 1 -- CP Est Pro 2.0 SUMMARY</h3>
+
+  <h4>1.1 Header</h4>
+  <p>Weatherford, Oklahoma. Scope: "Cap X-REF1 Remodel." Labor division "Dallas, TX" (rate-lookup code is still the flat "TX" row).</p>
+
+  <h4>1.2 Display Cases</h4>
+  <p>24 MD Cases @ 12' installed, 19 Removed. Same rate-lookup table described in <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> (material $130/12', pipefitter 7 hrs, case-setter 5 hrs).</p>
+  <div class="calc-box">24 x $130 = <span class="calc-result">$3,120</span> material
+24 x 7 = <span class="calc-result">168 pipefitter hrs</span>
+24 x 5 = <span class="calc-result">120 case-setter hrs</span></div>
+
+  <h4>1.3 Evaporators</h4>
+  <p>2 Commercial coils. 2 x $30 = <span class="calc-value">$60</span> material, 2 x 12 = <span class="calc-value">24 hrs</span>.</p>
+
+  <h4>1.4 Non-Itemized Equipment Room &amp; RTU Breakdown</h4>
+  <p>Nine miscellaneous line items that don't fit the Display Cases/Evaporators rate tables, each traced back to a scope sentence or entered manually:</p>
+  <table class="data-table">
+    <tr><th>Item</th><th>Material</th><th>Labor (hrs)</th><th>Source</th></tr>
+    <tr><td>Equipment Sheet Totals (=EQUIPMENT!G43/H43)</td><td>$1,880</td><td>96</td><td><span class="tag tag-formula">formula</span></td></tr>
+    <tr><td>Misc CO2 Charging Station (1)</td><td>$350</td><td>10</td><td><span class="tag tag-scope">Scope</span> "CO2 Charging Stations (1)"</td></tr>
+    <tr><td>PVC Chase w/ Flange (3)</td><td>$780</td><td>12</td><td><span class="tag tag-scope">Scope</span> "PVC Pipe Chase w/ Flange (3)" -- verbatim, same qty</td></tr>
+    <tr><td>Drain Pans-Roof Drops &amp; Drain (4)</td><td>$600</td><td>24</td><td><span class="tag tag-manual">Manual</span></td></tr>
+    <tr><td>Equipment Tags &amp; Pipe Labels</td><td>$1,200</td><td>20</td><td><span class="tag tag-scope">Scope</span> "Equipment Labels &amp; Tags" -- near-verbatim</td></tr>
+    <tr><td>Demo Coils (2)</td><td>$0</td><td>12</td><td><span class="tag tag-scope">Scope</span> "Demo Coils (2)" -- verbatim</td></tr>
+    <tr><td>Case Close-offs</td><td>$650</td><td>16</td><td><span class="tag tag-scope">Scope</span> "Standard Close-offs"</td></tr>
+    <tr><td>Exterior Pipe Jacketing</td><td>$1,800</td><td>16</td><td><span class="tag tag-manual">Manual</span></td></tr>
+    <tr><td>Work to Existing Racks (SCO2/Glycol)</td><td>$1,500</td><td>40</td><td><span class="tag tag-scope">Scope</span> "Work to Existing Racks for New Skids (SCO2/GLYCOL)" -- verbatim</td></tr>
+  </table>
+
+  <h4>1.5 IN-HOUSE GC and SUBLET CONTRACTORS</h4>
+  <p>Rate table for subcontracted trades, separate from Climate Pros' own crew: Sheet Metal $100/$150 (ST/OT), Electrical $95/$150, Plumbing $100/$150, Carpentry $68/$150, G.C. $100/$150, Sprinklers + 9x "Other" all $100/$150. All zero hours on this job -- no sublet work needed here, but the mechanism exists for any job that does.</p>
+
+  <h4>1.6 Refrigerant pricing table</h4>
+  <p>Price-per-lb by refrigerant type (R22 $45/lb, R507/404A $18/lb, R448A $18/lb, R744 CO2 $6/lb). This job: 550 lbs of R744 CO2 &rarr; <strong>$3,300 total refrigerant cost</strong> -- matches the labor-hours table's "REFRIGERANT" materials column exactly.</p>
+
+  <h4>1.7 Scheduling Data</h4>
+  <p>Three fields feed the dispatch/duration estimate described below:</p>
+  <table class="data-table">
+    <tr><th>Field</th><th>Value</th></tr>
+    <tr><td># of Fitters</td><td><span class="tag tag-manual">4</span> -- typed by hand</td></tr>
+    <tr><td>Duration</td><td>formula-driven, broken in this cached copy (<code>#NAME?</code>)</td></tr>
+    <tr><td>R / EMS / C / M Dispatch</td><td>trade-crew dispatch flags (Refrigeration / Energy Mgmt / Controls / Mechanical)</td></tr>
+  </table>
+  <div class="callout callout-info"><div class="callout-title">Pricing logic: this workbook estimates schedule, not just cost</div><div class="callout-body">Given total labor hours and crew size, it estimates job duration in days and flags which trade crews need dispatching -- this is the input FieldJetX-style dispatch would need, beyond just the dollar bid.</div></div>
+
+  <h4>1.8 Project Labor Cost Data (the hours-by-task table)</h4>
+  <p>Every hour on the job rolls up into one of these task rows, most pulled directly from the tabs or scope lines noted:</p>
+  <table class="data-table">
+    <tr><th>Function</th><th>ST</th><th>OT</th><th>Materials</th><th>Note</th></tr>
+    <tr><td>Pipe</td><td>0</td><td>350</td><td>$95,705.48</td><td><span class="tag tag-formula">='PIPE 2.0'!D3</span></td></tr>
+    <tr><td>Parts</td><td>0</td><td>0</td><td>$41,047.96</td><td>PARTS tab total</td></tr>
+    <tr><td>Equipment</td><td>2</td><td>244</td><td>--</td><td>mostly OT, not 100% this time</td></tr>
+    <tr><td>Case Receive, Set &amp; Uncrate</td><td>0</td><td>139</td><td>$0</td><td>= Display Cases case-setter total</td></tr>
+    <tr><td>Piping in Cases</td><td>0</td><td>187</td><td>--</td><td>= Display Cases pipefitter total</td></tr>
+    <tr><td>Coils</td><td>0</td><td>24</td><td>--</td><td>= Evaporators total</td></tr>
+    <tr><td><strong>Startup &amp; Termination of Electrical (Ref Only)</strong></td><td>0</td><td><strong>480</strong></td><td>$2,000</td><td><span class="tag tag-scope">Scope</span> "RC to Terminate... Startup Per Walmart Requirements"</td></tr>
+    <tr><td>Commissioning</td><td>0</td><td>40</td><td>--</td><td><span class="tag tag-scope">Scope</span> "Complete Commissioning Per Walmart Requirements"</td></tr>
+    <tr><td><strong>TOTALS</strong></td><td colspan="2"><strong>1,547 OT hrs</strong></td><td colspan="2">most tasks land in OT</td></tr>
+  </table>
+  <div class="callout callout-mismatch"><div class="callout-title"><span class="tag tag-mismatch">Mismatch</span> OT classification has no confirmed cause here</div><div class="callout-body">No "night work" or after-hours sentence found anywhere in this drawing set to explain why most hours land as Overtime. Big-box after-hours retrofit work commonly runs overnight regardless, but that's an assumption, not a citation.</div></div>
+
+  <h4>1.9 Labor Blend &amp; Rate (same mechanism, different margin)</h4>
+  <p>30/10/40/20/0% blend, region "TX", burden 2.0x -- same mechanism as <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a>, step 5.</p>
+
+  <h4>1.10 Market Recovery Funds, Rentals, Out of Town Subsistence</h4>
+  <p>Three add-on cost sections beyond core labor/materials -- one unused, one itemized and material to this job, one present but not material:</p>
+  <table class="data-table">
+    <tr><th>Section</th><th>What it is</th><th>This job</th></tr>
+    <tr><td>Market Recovery Funds</td><td>An optional labor credit mechanism</td><td>Unused (zero)</td></tr>
+    <tr><td>RENTALS</td><td>Freight/Disposal, Forklift, Crane, Rapid Recovery, Scissor Lifts, Container -- itemized</td><td>Freight $1,000 + Crane $8,500 + Scissor Lifts $5,500 + Container $850 = <strong>$15,850 total</strong> -- this is exactly BidCalc's "Construction Other" line</td></tr>
+    <tr><td>Out of Town Subsistence</td><td>Total Hours &divide; 8 = days, x per-day hotel/per-diem/tolls rate</td><td>Formula exists, not materially used</td></tr>
+  </table>
+
+  <h4>1.11 Labor Cost Breakdown</h4>
+  <p>Labeled "Do NOT Adjust" -- a sanity-check mirror, not authoritative. <code>BidCalc</code> is (see <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a>).</p>
+
+  <h4>1.12 Total Summary -- margins vary by category (this project uses 24%, not 25%)</h4>
+  <p>Margin is set per category, not one flat number across the whole bid:</p>
+  <table class="data-table">
+    <tr><th>Category</th><th>Margin</th></tr>
+    <tr><td>Labor, Materials</td><td><strong>24%</strong> -- margin is a per-project input, not fixed; see <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> for the cross-project comparison</td></tr>
+    <tr><td>Parts Sheet Buyouts, Rentals, In-House GC, all Sublet trades</td><td>20%</td></tr>
+    <tr><td>Permits, Subsistence</td><td>30%</td></tr>
+    <tr><td>Contingency Factor</td><td>5%</td></tr>
+  </table>
+  <p><span class="tag tag-manual">Manual</span> Tax rate <code>C189 = 0.09</code> (9%), same manual-Google-search mechanism, now for Oklahoma. Extended Warranty and Equipment Sales are tracked separately and explicitly excluded from the main construction contract cost/sell.</p>
+
+  <h4>1.13 Job Scope Notes &amp; Exclusions</h4>
+  <p>Row 197 carries the same scope bullet list also found in BidCalc (see Tab 10). Row 200's standard Exclusions list matches the boilerplate confirmed in the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab -- this is the folder where that list was first found and transcribed.</p>
+
+  <h3 id="f1-tab2">Tab 2 -- EQUIPMENT</h3>
+  <p>Five compressor-rack service line items, each a flat qty x rate with no lookup dependency:</p>
+  <table class="data-table">
+    <tr><th>Item</th><th>Qty</th><th>Material</th><th>Labor</th></tr>
+    <tr><td>1/4-10 HP Condensing Units</td><td>2</td><td>$200</td><td>32 hrs</td></tr>
+    <tr><td>Comp Rack</td><td>2</td><td>$400</td><td>48 hrs</td></tr>
+    <tr><td>Change Oil Filter OF-303</td><td>2</td><td>$220</td><td>2 hrs</td></tr>
+    <tr><td>Change Rack Main Liquid Drier</td><td>2</td><td>$260</td><td>4 hrs</td></tr>
+    <tr><td>Change Rack Suction Filters</td><td>2</td><td>$800</td><td>10 hrs</td></tr>
+    <tr><td><strong>TOTALS</strong></td><td></td><td><strong>$1,880</strong></td><td><strong>96 hrs</strong></td></tr>
+  </table>
+  <p><span class="tag tag-formula">Pricing logic</span> Every row = <code>qty x fixed rate</code>, no XLOOKUP, no region dependency -- which is exactly why this tab resolves cleanly while SUMMARY/BidCalc show <code>#NAME?</code>.</p>
+
+  <h3 id="f1-tab3">Tab 3 -- PIPE 2.0 (three refrigerant systems running in parallel)</h3>
+  <p>Install Labor Hours 350, LF Pipe w/Waste 3,500, Piping Waste 10%, HFG Factor 0.5, HFG Cost $30,839.60, Piping Refrigerant 615.298 lbs. Condensate: 0.75" pipe, 80 LF, Type M, insulation $378.</p>
+  <p>The Systems table tracks three separate refrigerant systems in parallel, matching the job's full name ("SCO2-TCO2-GLYCOL Upgrade"):</p>
+  <table class="data-table">
+    <tr><th>System group</th><th>Real entries found</th></tr>
+    <tr><td>DX (existing)</td><td>Rack LTA-DX, LTA CONN1/2</td></tr>
+    <tr><td>Glycol (new secondary loop)</td><td>MTD GLY, 1D/1.01D/1.02D/1.03D/1.1D/1.2D GLY, D04/D05/D07/D08/D09/D10 GLY, Rack MTD-DX, MTD CONN1/2</td></tr>
+    <tr><td>SCO2/TCO2 (new)</td><td>CU6 TCO2, CU7 TCO2, LTA SCO2, 1A/1.01A/1.1A SCO2, A02/A06/A07 SCO2</td></tr>
+    <tr><td>Charging stations</td><td>CO2 CHRG ST, GLY CHRG ST -- each with its own piping run</td></tr>
+  </table>
+
+  <h3 id="f1-tab4">Tab 4 -- PARTS (categorized catalog, CO2/glycol-heavy this job)</h3>
+  <p>The catalog spans dozens of part categories; this job draws mainly from the CO2/glycol-specific rows below:</p>
+  <table class="data-table">
+    <tr><th>Category</th><th>Real items on this job</th></tr>
+    <tr><td>Valves &amp; Controls (header row 8)</td><td>ORIT pressure regulators ($260-$1,230), ME-series solenoid-less coils ($172-$1,128), SPORT EPR bodies ($750-$780)</td></tr>
+    <tr><td>CO2 ball valves w/ pressure relief</td><td>3/8"-1-1/8" sizes, qty 2/3/6/2/1</td></tr>
+    <tr><td>CO2 ball valve, Mueller 140 BAR</td><td>16x, 1/2"</td></tr>
+    <tr><td>Glycol/water ball valves</td><td>3/4"/1-1/4"/2-1/2", qty 8/2/4</td></tr>
+    <tr><td>Glycol fluid</td><td>20x 55-gal 35% + 1x 55-gal 100%</td></tr>
+    <tr><td>Consumables</td><td>45x Silphos brazing rod, 100 ft heat tape + kits</td></tr>
+    <tr><td>PVC / wire</td><td>1-1/2" PVC $1.72/ft; W-prefix control wire parts $0.05-$27</td></tr>
+  </table>
+
+  <h3 id="f1-tab5">Tab 5 -- LABOR RATES</h3>
+  <p>TX row: $40/$34/$22/$20, burden 2.0x -- the same fixed reference table described in <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a>.</p>
+
+  <h3 id="f1-tab6">Tab 6 -- EQUIPMENT SALES BUYOUTS</h3>
+  <p>All rows blank (unused this job), but it carries its own independent pricing logic: <strong>Tax: 0.085</strong> (8.5%) -- a different rate than the main SUMMARY tax (9%). Its own Net Margin and Total Sell Price calculation, entirely separate from BidCalc.</p>
+  <div class="callout callout-mismatch"><div class="callout-title"><span class="tag tag-mismatch">Pricing-logic fork</span> Equipment Sales are not taxed/margined the same way as everything else</div><div class="callout-body">If a future project actually uses this tab, remember its tax rate and margin are independent inputs from the main bid -- don't assume the SUMMARY tax rate applies here.</div></div>
+
+  <h3 id="f1-tab7">Tab 7 -- COPPER_INSULATION_FORM (4 copper types, not 1)</h3>
+  <p>This job draws on four separate copper/insulation type tables, each with its own LF-by-size breakdown:</p>
+  <table class="data-table">
+    <tr><th>Copper Type</th><th>This job's real quantities</th></tr>
+    <tr><td>Type L (ACR, standard) + Black Insulation</td><td>120-580 LF across sizes</td></tr>
+    <tr><td>Type K (heavy duty) + White Insulation</td><td>All zero, unused</td></tr>
+    <tr><td>Type M + Black Saddles</td><td>3/4"M = 80 LF; saddles: 182.4 / 8 / 48 / 32 qty by size</td></tr>
+    <tr><td><strong>XHP, 90 BAR</strong></td><td>1/2" ACR = 480 LF, 5/8" ACR = 200 LF</td></tr>
+  </table>
+  <div class="callout callout-money"><div class="callout-title">Pricing logic: pipe rating changes the price per foot</div><div class="callout-body">"XHP, 90 BAR" is the pipe rating for the new TCO2 system -- directly matches the scope text "TCO2 Type 90 Bar." A saddle is a support/clamp component ordered per pipe size, separate from the pipe and insulation cost.</div></div>
+
+  <h3 id="f1-tab8">Tab 8 -- HVAC</h3>
+  <p>Every row checked -- entirely zero. No HVAC scope on a refrigeration Cap-X remodel.</p>
+
+  <h3 id="f1-tab9">Tab 9 -- TAX TABLE</h3>
+  <p>Static, unchanged. Oklahoma's row: <strong>"USE TAX MATS ONLY"</strong> for both Existing and New Construction.</p>
+  <div class="callout callout-money"><div class="callout-title">Pricing logic: "Use Tax Mats Only" taxes materials only, not labor</div><div class="callout-body">See <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> for how the tax category branches by state and construction type.</div></div>
+
+  <h3 id="f1-tab10">Tab 10 -- BidCalc</h3>
+  <p>Same 10-tab rollup structure. The Description/Scope cell (rows 1-2) carries the full bulleted scope summary quoted throughout this section. Construction Other = $15,850 cost / $19,812.50 sell (20% margin) -- traced to the RENTALS section (1.10).</p>
+  <div class="callout callout-critical"><div class="callout-title">Same cached-value limitation as before</div><div class="callout-body"><code>#NAME?</code> appears throughout this tab and several SUMMARY cells that depend on <code>XLOOKUP</code> -- a stale-calculation artifact in this file copy, not a broken formula. I can't verify the exact final Total Bid from this file without live Excel recalculation, and I won't fabricate it.</div></div>
+
+  <h3 id="f1-walkthrough">Full walkthrough: the 24 MD cases -- a clean, fully traceable number</h3>
+  <div class="callout callout-money"><div class="callout-title">A cleanly traceable number</div><div class="callout-body">This number traces perfectly to an explicit scope sentence -- no aggregation guesswork required.</div></div>
+  <div class="step-flow">
+    <div class="step-item"><div class="step-badge">1</div><div class="step-body">
+      <div class="step-title">The drawing's own scope summary states it directly</div><div class="step-sheet">BidCalc rows 1-2 / SUMMARY row 197</div>
+      <div class="step-desc">"New Phase: Install New Cases (24) -- SCO2/TCO2/Glycol." One sentence, one number -- no unit-conversion or aggregation needed.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">2</div><div class="step-body">
+      <div class="step-title">Estimator types 24 into DISPLAY CASES row 21</div><div class="step-sheet">SUMMARY!C21/D21</div>
+      <div class="step-desc"><span class="tag tag-manual">Manual</span> entry, but a direct transcription of a stated number, not a judgment call.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">3</div><div class="step-body">
+      <div class="step-title">Formulas convert 24 into $ and hours</div><div class="step-sheet">SUMMARY!F21, G21, H21</div>
+      <div class="step-desc"><div class="calc-box">24 x $130 = <span class="calc-result">$3,120</span> | 24 x 7 = <span class="calc-result">168 pipefitter hrs</span> | 24 x 5 = <span class="calc-result">120 case-setter hrs</span></div></div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">4</div><div class="step-body">
+      <div class="step-title">Hours mostly land as Overtime, cause unconfirmed</div><div class="step-sheet">SUMMARY rows 101-102</div>
+      <div class="step-desc">No explicit "night work" sentence found in this drawing set to explain this -- flagged as Mismatch, not assumed.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">5</div><div class="step-body">
+      <div class="step-title">Rolls into the project's 1,547 OT hours, then BidCalc</div><div class="step-sheet">BidCalc</div>
+      <div class="step-desc">Final dollar contribution not independently verifiable in this file copy (cached <code>#NAME?</code>), but the path is fully traced.</div>
+    </div></div>
+  </div>
+
+  <h3 id="f1-mismatches">Mismatches: Drawings/Uploads vs. Excel Findings</h3>
+  <p>Every place I found where the Price Sheet and the Uploads either disagree, or where the Price Sheet contains a number with no traceable source in the Uploads at all.</p>
+  <table class="data-table mismatch">
+    <tr><th>#</th><th>Excel location</th><th>What Excel shows</th><th>What Uploads/Drawings show</th><th>Type of mismatch</th></tr>
+    <tr><td>1</td><td>BidCalc + several SUMMARY cells</td><td><code>#NAME?</code> cached results throughout</td><td>N/A -- this is a file/tooling artifact</td><td>Research limitation -- exact Total Bid not independently verifiable from this file copy</td></tr>
+    <tr><td>2</td><td>SUMMARY K4 (tax category)</td><td><code>#NAME?</code> unresolved</td><td>Static TAX TABLE confirms it should read "Use Tax Mats Only" for Oklahoma</td><td>Same cause as #1, but resolvable by cross-reference to the static table</td></tr>
+    <tr><td>3</td><td>SUMMARY rows 101/102, mostly-OT hours</td><td>1,547 OT hours logged</td><td>No explicit "night work" or after-hours sentence found anywhere in the 39-page drawing set</td><td>Unconfirmed cause -- plausible (big-box overnight retrofit convention) but not cited</td></tr>
+    <tr><td>4</td><td>Display Cases: 24 installed vs. 19 removed</td><td>Gap of 5 (net growth)</td><td>Scope states both numbers explicitly but never states the net change as its own fact</td><td>Both numbers individually confirmed; the *relationship* between them is inferred, not stated</td></tr>
+    <tr><td>5</td><td>Uploads pages 1-2, 35-36</td><td>Sheet-number codes present (A4, BASR series, R4.1)</td><td>No literal title-block image reviewed to confirm these page-to-sheet-number assignments with full certainty</td><td>Inferred from in-page cross-references, not a directly-read title block</td></tr>
+  </table>
+
+  <h3 id="f1-mapping">Mapping table -- every traced source, in one place</h3>
+  <p>Every Price Sheet number discussed above, gathered into one lookup with its source or mismatch tag:</p>
+  <table class="data-table">
+    <tr><th>Price Sheet location</th><th>Value</th><th>Traced to</th></tr>
+    <tr><td>Display Cases row 21</td><td>24 MD cases</td><td><span class="tag tag-scope">Scope</span> "Install New Cases (24)" -- exact match</td></tr>
+    <tr><td>Display Cases row 28</td><td>19 removed</td><td><span class="tag tag-scope">Scope</span> "Demo Cases (19)" -- exact match</td></tr>
+    <tr><td>Evaporators row 34</td><td>2 Commercial coils</td><td><span class="tag tag-scope">Scope</span> "Install New Coils (2)" -- exact match</td></tr>
+    <tr><td>Non-Itemized: PVC Chase w/ Flange</td><td>$780 / 12 hrs, qty 3</td><td><span class="tag tag-scope">Scope</span> "PVC Pipe Chase w/ Flange (3)" -- verbatim, same qty</td></tr>
+    <tr><td>Non-Itemized: Demo Coils</td><td>$0 / 12 hrs, qty 2</td><td><span class="tag tag-scope">Scope</span> "Demo Coils (2)" -- verbatim</td></tr>
+    <tr><td>Non-Itemized: Work to Existing Racks</td><td>$1,500 / 40 hrs</td><td><span class="tag tag-scope">Scope</span> "Work to Existing Racks for New Skids (SCO2/GLYCOL)" -- verbatim</td></tr>
+    <tr><td>EQUIPMENT: 2x CU, 2x Comp Rack</td><td>$600 / 80 hrs combined</td><td><span class="tag tag-scope">Scope</span> "Receive, Set New CU TCO2 Units (2)"</td></tr>
+    <tr><td>SUMMARY: Startup &amp; Termination of Electrical</td><td>480 OT hrs, $2,000</td><td><span class="tag tag-scope">Scope</span> "RC to Terminate... Startup Per Walmart Requirements"</td></tr>
+    <tr><td>PIPE 2.0 / COPPER_INSULATION_FORM: XHP 90 BAR</td><td>680 LF combined</td><td><span class="tag tag-scope">Scope</span> "TCO2 Type 90 Bar"</td></tr>
+    <tr><td>SUMMARY C189 (tax rate 9%)</td><td>downstream tax $</td><td><span class="tag tag-manual">Not from any document</span> -- manual Google search</td></tr>
+    <tr><td>SUMMARY rows 101/102 (OT hours)</td><td>1,547 hrs</td><td><span class="tag tag-mismatch">Mismatch #3</span> -- unconfirmed cause</td></tr>
+  </table>
+</div>
+
+</div>
+
+<div class="footer">
+  Climate Pros AI-Assisted Estimation Platform -- Personal analysis progress log, updated as folders are completed.
+</div>
+
+<script>
+function showTab(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
