@@ -137,7 +137,8 @@ p { color: #3a3a3a; font-size: 0.94em; line-height: 1.6; margin-bottom: 10px; }
 
 <div class="tabs">
   <div class="tab" onclick="showTab('pricing-ref')">Pricing Logic Reference</div>
-  <div class="tab active" onclick="showTab('f455')">Folder: Trader Joe's #455</div>
+  <div class="tab active" onclick="showTab('f8250')">Folder: Sam's Club 8250-1010</div>
+  <div class="tab" onclick="showTab('f455')">Folder: Trader Joe's #455</div>
   <div class="tab" onclick="showTab('f344')">Folder: Walmart 0344-1005</div>
   <div class="tab" onclick="showTab('f458')">Folder: HEB Corp #458 - Carthage</div>
   <div class="tab" onclick="showTab('f57')">Folder: HEB 57 - Corpus Christi</div>
@@ -230,28 +231,29 @@ DT cost-rate = base x (burden+1)
   <h3 id="pr-variations">Known variations across folders so far</h3>
   <p>This table only grows. Every new folder either confirms these mechanics hold, or adds a new row.</p>
   <table class="data-table">
-    <tr><th>Mechanism</th><th>United Market #502 (TX, Remodel)</th><th>Walmart 0392-1005 (OK, Remodel)</th><th>HEB 57 (TX, New Construction)</th><th>HEB Corp #458 (TX, Remodel)</th><th>Walmart 0344-1005 (TX, Condenser Replacement)</th><th>Trader Joe's #455 (TX, Remodel w/ CO2 Upgrade)</th></tr>
-    <tr><td>Workbook cached values</td><td>Resolve cleanly</td><td>Broken (<code>#NAME?</code> throughout)</td><td>Resolve cleanly -- first fully verifiable Total Bid</td><td>Resolve cleanly</td><td>Resolve cleanly</td><td>Resolve cleanly</td></tr>
-    <tr><td>Labor/Materials margin</td><td>25%</td><td>24%</td><td>25% -- matches United Market, not Walmart</td><td>24% -- matches Walmart, not United Market/HEB 57</td><td>23% -- a 5th distinct value, matching none of the prior four folders</td><td><strong>26% -- a 6th distinct value</strong>, matching none of the prior five folders</td></tr>
-    <tr><td>Rentals / Contingency margin</td><td>Not itemized separately</td><td>20% / 5%</td><td>20% / 5%</td><td>20% / labeled 5% (but see BidCalc formula note below)</td><td>18% / labeled 3.5% -- both new values, never repeated from any prior folder</td><td>20% / labeled 5% -- matches the original baseline, not the Walmart 0344 outlier</td></tr>
-    <tr><td>Region / burden</td><td>"TX", burden 2.0x</td><td>"TX" (same, despite being a different city), burden 2.0x</td><td>"TX" again (division labeled "TX Valley, TX"), burden 2.0x -- 3rd confirmation that Texas has no city-level rate granularity</td><td>"TX" again (division labeled "Dallas, TX" despite the job being in Carthage), burden 2.0x -- 4th confirmation</td><td>"TX" again (division labeled "TX Valley, TX"), burden 2.0x -- 5th confirmation</td><td>"TX" again (division labeled "San Antonio, TX"), burden 2.0x -- 6th confirmation</td></tr>
-    <tr><td>LABOR RATES base wages (TX row)</td><td>$40 / $34 / $22 / $20 (Foreman/Journeyman/Apprentice/Tradesman)</td><td>$40 / $34 / $22 / $20</td><td>$40 / $34 / $22 / $20</td><td>$40 / $34 / $22 / $20</td><td><strong>$43 / $36 / $27 / $20 -- a different base-wage set</strong>, despite this tab showing the identical "Updated: 1/13/2026" stamp seen in other copies</td><td>$40 / $34 / $22 / $20 -- back to the standard baseline, confirming Walmart 0344's set was an isolated copy, not a drift</td></tr>
-    <tr><td>Tax category</td><td>Sales Tax Labor &amp; Mats (Existing Construction)</td><td>Use Tax Mats Only (materials taxed, labor is not)</td><td>Use Tax Mats Only -- <strong>same state as United Market, different category</strong>, because this one is New Construction not Existing/Remodel</td><td>Sales Tax Labor &amp; Mats -- confirms Texas is one of only two states (with Arizona) where Existing vs. New Construction resolve to different tax categories</td><td>Sales Tax Labor &amp; Mats (Existing/Remodel) -- consistent with the confirmed TX rule</td><td>Sales Tax Labor &amp; Mats (Existing/Remodel) -- consistent again</td></tr>
-    <tr><td>Tax rate</td><td>8.25%, manual</td><td>9%, manual</td><td>8.25%, manual -- confirms the rate is a per-project manual lookup even when the category and state repeat</td><td>8.25%, manual -- same rate as the other Texas folder despite being a different city</td><td>8.25%, manual -- 3rd Texas folder, same rate again</td><td>8.25%, manual -- 4th Texas folder, same rate again</td></tr>
-    <tr><td>Cause of "hours mostly/all OT"</td><td>Confirmed -- explicit "all work is night work" scope sentence</td><td>Unconfirmed -- no equivalent sentence found</td><td><strong>N/A -- 100% Straight Time, zero OT/DT</strong>. Three folders, three different OT outcomes.</td><td>Unconfirmed -- 82% of hours land as OT, but the only "night work" text found anywhere in the source document is a meeting-agenda discussion bullet, not a scope statement</td><td>Confirmed, doubly so -- both the source document's general requirements and the price sheet's own scope text state it directly. 77.5% OT, fully justified.</td><td>Unconfirmed again -- 81.7% OT, but no night-work sentence found in any of the four Uploads packages</td></tr>
-    <tr><td>Responsibility Matrix present?</td><td>No -- relies on prose scope letter only</td><td>Yes -- real RM drawing sheet (page 3)</td><td>No dedicated RM document, but responsibility language embedded in R-0.0's notes and the workbook's Exclusions list</td><td>No -- referenced 36 separate times throughout the source document as living "in Drawings and/or Contract," but never actually present in any form, not even as embedded prose</td><td>Yes -- the richest example yet: a dedicated 57-item numbered scope-of-work matrix, each line assigned to a specific responsible party</td><td>Yes -- a dedicated "Responsibility Matrix and Schedules" sheet (T-101) in the permit set, though it extracts as graphics-only with no readable text</td></tr>
-    <tr><td>Sheet-completeness gap</td><td>N/A -- no drawings at all</td><td>Minor (occasional missing cross-referenced sheet)</td><td>Severe -- 5 of 6 addendum-referenced refrigeration sheets missing</td><td><strong>Total -- no drawings, refrigeration schedule, or fixture plan of any kind</strong>, despite the source document referencing all three by name repeatedly</td><td>None -- every sheet in the index is present, the first folder with full completeness. Two of those sheets are a 2003 OEM as-built package carrying a live revision log through 2026.</td><td>None that matters -- some refrigeration sheets (R2.0/R3.0) are referenced by name but not cleanly indexed, though their actual content is present under a different firm's title-block template within the same combined PDF</td></tr>
-    <tr><td>Display Cases / Evaporators rate tables</td><td>Baseline</td><td>Byte-identical</td><td>Byte-identical -- 3rd confirmation these are fixed template constants</td><td>Byte-identical -- 4th confirmation</td><td>Byte-identical -- 5th confirmation, though both categories are entirely unused on this job</td><td>Byte-identical -- 6th confirmation</td></tr>
-    <tr><td>Equipment Sales Buyouts tax rate</td><td>Not checked</td><td>8.5% (vs main tax 9%)</td><td>8.5% (vs main tax 8.25%) -- confirms 8.5% may itself be a fixed template default, not project-specific</td><td>8.5% (vs main tax 8.25%) -- 3rd confirmation of the same fixed default</td><td>8.5% (vs main tax 8.25%) -- 4th confirmation</td><td>Tab entirely blank/unused this job -- not checked</td></tr>
-    <tr><td>Refrigerant architecture</td><td>Not applicable (gas conversion only, no rack replacement)</td><td>Three systems in parallel: DX, Glycol, SCO2/TCO2</td><td>Not applicable (ice-room-only scope, no rack)</td><td>Halocarbon only (R449A) -- zero CO2/R744 and zero XHP high-pressure piping anywhere in the workbook, despite the source document's largest single section (15 pages) covering CO2 Cascade rack requirements in detail</td><td>Halocarbon only (R-404A, confirmed by the OEM equipment schedule) -- condenser-only scope, zero case/coil/CO2 content</td><td><strong>Transcritical CO2 (R744) only</strong>, with real XHP 90-BAR piping usage confirmed -- the first folder where CO2 is both the scope and the actual priced/piped refrigerant, not just a line-item option</td></tr>
-    <tr><td>Refrigerant reclaim vendor</td><td>Not discussed</td><td>Not discussed</td><td>Not discussed</td><td>Rapid Recovery (Rentals line), for R-22 recovery per spec</td><td>Rapid Recovery (Rentals line), $7,600</td><td><strong>United Refrigeration Inc. (URI)</strong>, named directly in a Non-Itemized line, not the Rentals tab -- Rapid Recovery shows $0. Reclaim vendor/mechanism looks customer-specific, not a template default.</td></tr>
-    <tr><td>Uploads document type</td><td>Drawing set (39 pages)</td><td>Combined drawing set (39 pages)</td><td>Drawing set (6 pages)</td><td>Not a drawing set at all -- a 1,117-page written specification manual. Zero drawings, schedules, or floor plans of any kind</td><td>A real drawing set again (2 combined PDFs, 16 pages total) -- but uniquely, two of its sheets are a decades-old OEM as-built package rather than newly-drafted sheets</td><td><strong>Four distinct document packages from four different firms</strong>, bundled into 2 PDFs (138 pages total): a structural engineering calc package, an architectural/electrical/plumbing permit set, refrigeration case/piping details, and an EMS controls set</td></tr>
+    <tr><th>Mechanism</th><th>United Market #502 (TX, Remodel)</th><th>Walmart 0392-1005 (OK, Remodel)</th><th>HEB 57 (TX, New Construction)</th><th>HEB Corp #458 (TX, Remodel)</th><th>Walmart 0344-1005 (TX, Condenser Replacement)</th><th>Trader Joe's #455 (TX, Remodel w/ CO2 Upgrade)</th><th>Sam's Club 8250-1010 (TX, Major Remodel)</th></tr>
+    <tr><td>Workbook cached values</td><td>Resolve cleanly</td><td>Broken (<code>#NAME?</code> throughout)</td><td>Resolve cleanly -- first fully verifiable Total Bid</td><td>Resolve cleanly</td><td>Resolve cleanly</td><td>Resolve cleanly</td><td>Resolve cleanly</td></tr>
+    <tr><td>Labor/Materials margin</td><td>25%</td><td>24%</td><td>25% -- matches United Market, not Walmart</td><td>24% -- matches Walmart, not United Market/HEB 57</td><td>23% -- a 5th distinct value, matching none of the prior four folders</td><td>26% -- a 6th distinct value, matching none of the prior five folders</td><td>24% -- matches Walmart 0392/HEB Corp #458, not the two most recent folders</td></tr>
+    <tr><td>Rentals / Contingency margin</td><td>Not itemized separately</td><td>20% / 5%</td><td>20% / 5%</td><td>20% / labeled 5% (but see BidCalc formula note below)</td><td>18% / labeled 3.5% -- both new values, never repeated from any prior folder</td><td>20% / labeled 5% -- matches the original baseline, not the Walmart 0344 outlier</td><td>20% / labeled 5% -- matches the baseline again, a 3rd folder at this exact pairing</td></tr>
+    <tr><td>Region / burden</td><td>"TX", burden 2.0x</td><td>"TX" (same, despite being a different city), burden 2.0x</td><td>"TX" again (division labeled "TX Valley, TX"), burden 2.0x -- 3rd confirmation that Texas has no city-level rate granularity</td><td>"TX" again (division labeled "Dallas, TX" despite the job being in Carthage), burden 2.0x -- 4th confirmation</td><td>"TX" again (division labeled "TX Valley, TX"), burden 2.0x -- 5th confirmation</td><td>"TX" again (division labeled "San Antonio, TX"), burden 2.0x -- 6th confirmation</td><td>"TX" again (division labeled "TX Valley, TX," same label as Walmart 0344), burden 2.0x -- 7th confirmation</td></tr>
+    <tr><td>LABOR RATES base wages (TX row)</td><td>$40 / $34 / $22 / $20 (Foreman/Journeyman/Apprentice/Tradesman)</td><td>$40 / $34 / $22 / $20</td><td>$40 / $34 / $22 / $20</td><td>$40 / $34 / $22 / $20</td><td><strong>$43 / $36 / $27 / $20 -- a different base-wage set</strong>, despite this tab showing the identical "Updated: 1/13/2026" stamp seen in other copies</td><td>$40 / $34 / $22 / $20 -- back to the standard baseline, confirming Walmart 0344's set was an isolated copy, not a drift</td><td>$40 / $34 / $22 / $20 -- standard baseline again</td></tr>
+    <tr><td>Labor blend (Foreman/Startup/Journeyman/Apprentice/Tradesman)</td><td>Not checked</td><td>Not checked</td><td>Not checked</td><td>Not checked</td><td>Not checked</td><td>30/10/40/20/0%</td><td>30/10/40/20/0% -- identical to Trader Joe's #455, first repeat of an exact blend</td></tr>
+    <tr><td>Tax category</td><td>Sales Tax Labor &amp; Mats (Existing Construction)</td><td>Use Tax Mats Only (materials taxed, labor is not)</td><td>Use Tax Mats Only -- <strong>same state as United Market, different category</strong>, because this one is New Construction not Existing/Remodel</td><td>Sales Tax Labor &amp; Mats -- confirms Texas is one of only two states (with Arizona) where Existing vs. New Construction resolve to different tax categories</td><td>Sales Tax Labor &amp; Mats (Existing/Remodel) -- consistent with the confirmed TX rule</td><td>Sales Tax Labor &amp; Mats (Existing/Remodel) -- consistent again</td><td>Sales Tax Labor &amp; Mats (Existing/Remodel) -- consistent again</td></tr>
+    <tr><td>Tax rate</td><td>8.25%, manual</td><td>9%, manual</td><td>8.25%, manual -- confirms the rate is a per-project manual lookup even when the category and state repeat</td><td>8.25%, manual -- same rate as the other Texas folder despite being a different city</td><td>8.25%, manual -- 3rd Texas folder, same rate again</td><td>8.25%, manual -- 4th Texas folder, same rate again</td><td>8.25%, manual -- 5th Texas folder, same rate again</td></tr>
+    <tr><td>Cause of "hours mostly/all OT"</td><td>Confirmed -- explicit "all work is night work" scope sentence</td><td>Unconfirmed -- no equivalent sentence found</td><td><strong>N/A -- 100% Straight Time, zero OT/DT</strong>. Three folders, three different OT outcomes.</td><td>Unconfirmed -- 82% of hours land as OT, but the only "night work" text found anywhere in the source document is a meeting-agenda discussion bullet, not a scope statement</td><td>Confirmed, doubly so -- both the source document's general requirements and the price sheet's own scope text state it directly. 77.5% OT, fully justified.</td><td>Unconfirmed again -- 81.7% OT, but no night-work sentence found in any of the four Uploads packages</td><td>Unconfirmed again -- 81.6% OT (every real task row is 100% OT; only two administrative rows are ST), no night-work sentence found</td></tr>
+    <tr><td>Responsibility Matrix present?</td><td>No -- relies on prose scope letter only</td><td>Yes -- real RM drawing sheet (page 3)</td><td>No dedicated RM document, but responsibility language embedded in R-0.0's notes and the workbook's Exclusions list</td><td>No -- referenced 36 separate times throughout the source document as living "in Drawings and/or Contract," but never actually present in any form, not even as embedded prose</td><td>Yes -- the richest example yet: a dedicated 57-item numbered scope-of-work matrix, each line assigned to a specific responsible party</td><td>Yes -- a dedicated "Responsibility Matrix and Schedules" sheet (T-101) in the permit set, though it extracts as graphics-only with no readable text</td><td>Yes -- the same 57-item numbered matrix as Walmart 0344-1005, byte-identical legend and contacts, plus two more matrices (BAS Programming, Walk-In Box Projects) not seen on any prior folder</td></tr>
+    <tr><td>Sheet-completeness gap</td><td>N/A -- no drawings at all</td><td>Minor (occasional missing cross-referenced sheet)</td><td>Severe -- 5 of 6 addendum-referenced refrigeration sheets missing</td><td><strong>Total -- no drawings, refrigeration schedule, or fixture plan of any kind</strong>, despite the source document referencing all three by name repeatedly</td><td>None -- every sheet in the index is present, the first folder with full completeness. Two of those sheets are a 2003 OEM as-built package carrying a live revision log through 2026.</td><td>None that matters -- some refrigeration sheets (R2.0/R3.0) are referenced by name but not cleanly indexed, though their actual content is present under a different firm's title-block template within the same combined PDF</td><td>None -- all 13 documents present and legible</td></tr>
+    <tr><td>Display Cases / Evaporators rate tables</td><td>Baseline</td><td>Byte-identical</td><td>Byte-identical -- 3rd confirmation these are fixed template constants</td><td>Byte-identical -- 4th confirmation</td><td>Byte-identical -- 5th confirmation, though both categories are entirely unused on this job</td><td>Byte-identical -- 6th confirmation</td><td>Byte-identical -- 7th confirmation</td></tr>
+    <tr><td>Equipment Sales Buyouts tax rate</td><td>Not checked</td><td>8.5% (vs main tax 9%)</td><td>8.5% (vs main tax 8.25%) -- confirms 8.5% may itself be a fixed template default, not project-specific</td><td>8.5% (vs main tax 8.25%) -- 3rd confirmation of the same fixed default</td><td>8.5% (vs main tax 8.25%) -- 4th confirmation</td><td>Tab entirely blank/unused this job -- not checked</td><td>8.5% (vs main tax 8.25%) -- 5th confirmation, despite the tab carrying zero dollars this time too</td></tr>
+    <tr><td>Refrigerant architecture</td><td>Not applicable (gas conversion only, no rack replacement)</td><td>Three systems in parallel: DX, Glycol, SCO2/TCO2</td><td>Not applicable (ice-room-only scope, no rack)</td><td>Halocarbon only (R449A) -- zero CO2/R744 and zero XHP high-pressure piping anywhere in the workbook, despite the source document's largest single section (15 pages) covering CO2 Cascade rack requirements in detail</td><td>Halocarbon only (R-404A, confirmed by the OEM equipment schedule) -- condenser-only scope, zero case/coil/CO2 content</td><td>Transcritical CO2 (R744) only, with real XHP 90-BAR piping usage confirmed -- the first folder where CO2 is both the scope and the actual priced/piped refrigerant, not just a line-item option</td><td><strong>Hybrid, first of its kind</strong>: three existing halocarbon racks (R404A x2, R448A x1) kept in service, plus two brand-new standalone transcritical CO2 (R744) Remote Condensing Units for two specific fixtures -- neither a full conversion nor a pure gas swap</td></tr>
+    <tr><td>Refrigerant reclaim vendor</td><td>Not discussed</td><td>Not discussed</td><td>Not discussed</td><td>Rapid Recovery (Rentals line), for R-22 recovery per spec</td><td>Rapid Recovery (Rentals line), $7,600</td><td>United Refrigeration Inc. (URI), named directly in a Non-Itemized line, not the Rentals tab -- Rapid Recovery shows $0. Reclaim vendor/mechanism looks customer-specific, not a template default.</td><td>Not named anywhere -- Rapid Recovery shows $0 and no alternate vendor appears in the Uploads or price sheet either</td></tr>
+    <tr><td>Uploads document type</td><td>Drawing set (39 pages)</td><td>Combined drawing set (39 pages)</td><td>Drawing set (6 pages)</td><td>Not a drawing set at all -- a 1,117-page written specification manual. Zero drawings, schedules, or floor plans of any kind</td><td>A real drawing set again (2 combined PDFs, 16 pages total) -- but uniquely, two of its sheets are a decades-old OEM as-built package rather than newly-drafted sheets</td><td>Four distinct document packages from four different firms, bundled into 2 PDFs (138 pages total): a structural engineering calc package, an architectural/electrical/plumbing permit set, refrigeration case/piping details, and an EMS controls set</td><td>13 separate documents from a single firm (Henderson Engineers): 2 spec excerpts, 2 Responsibility Matrix sheets, 2 demolition plans, 3 refrigeration plans, 2 refrigeration schedules, 2 generic detail sheets</td></tr>
   </table>
 
   <h3 id="pr-boilerplate">Standard boilerplate present on every workbook</h3>
   <div class="callout callout-warn">
     <div class="callout-title">A default Exclusions list -- mostly fixed, but not always identical</div>
-    <div class="callout-body">The same 13-item list appeared byte-identical on five of the six folders checked so far: General Contracting, Permits and Fees, Engineering/Drawings, EMS, Seismic work, Local municipality requirements, Roof/floor/wall openings, Trenching/concrete/backfill, Case refurbishing/repair, Case transport/storage/disposal, Plumbing and case condensates, Electrical, Line covers/flashing. Walmart 0344-1005 was the lone exception, adding a 14th item, "Structural/Steel Work" -- plausibly because that job's scope genuinely involves structural work to mount new condenser frames; Trader Joe's #455 (which also involves real structural work, a new rooftop platform) stayed at 13 items regardless. So this list is a default that <em>can</em> be edited per project, but usually isn't even when the scope would justify it -- worth checking the exact wording on every future folder rather than assuming it matches.</div>
+    <div class="callout-body">The same 13-item list appeared byte-identical on six of the seven folders checked so far: General Contracting, Permits and Fees, Engineering/Drawings, EMS, Seismic work, Local municipality requirements, Roof/floor/wall openings, Trenching/concrete/backfill, Case refurbishing/repair, Case transport/storage/disposal, Plumbing and case condensates, Electrical, Line covers/flashing. Walmart 0344-1005 was the lone exception, adding a 14th item, "Structural/Steel Work" -- plausibly because that job's scope genuinely involves structural work to mount new condenser frames; Trader Joe's #455 and Sam's Club 8250-1010 (both of which also involve real structural/mechanical work) stayed at 13 items regardless. So this list is a default that <em>can</em> be edited per project, but usually isn't even when the scope would justify it -- worth checking the exact wording on every future folder rather than assuming it matches.</div>
   </div>
   <div class="callout callout-info">
     <div class="callout-title">BidCalc is always authoritative; SUMMARY's own labor breakdown never is</div>
@@ -259,16 +261,285 @@ DT cost-rate = base x (burden+1)
   </div>
   <div class="callout callout-mismatch">
     <div class="callout-title">A template-wide formula bug: Contingency Factor's sell price ignores its own margin cell</div>
-    <div class="callout-body">Confirmed on three separate folders now (HEB Corp #458, Walmart 0344-1005, and Trader Joe's #455), with three different margin percentages typed into the Contingency Factor's own margin cell (5%, 3.5%, and 5% again). In every case, the <em>cost</em> is correctly computed off that cell, but the <em>sell</em> value is computed with a hardcoded markup (equivalent to a flat 25% every time) instead of referencing the same cell used for cost. Two other rows (Project Management Fee, Performance Bond) carry the identical hardcoded-divisor pattern. This is a defect baked into the template itself, not a one-off data-entry mistake -- it will inflate the sell price on any future folder where Contingency, Project Management Fee, or Performance Bond actually carries a non-default margin.</div>
+    <div class="callout-body">Confirmed on four separate folders now (HEB Corp #458, Walmart 0344-1005, Trader Joe's #455, and Sam's Club 8250-1010), with three different margin percentages typed into the Contingency Factor's own margin cell (5%, 3.5%, 5%, and 5% again). In every case, the <em>cost</em> is correctly computed off that cell, but the <em>sell</em> value is computed with a hardcoded divisor (cost &divide; 0.8, equivalent to a flat 25% markup every time) instead of referencing the same cell used for cost. Two other rows (Project Management Fee, Performance Bond) carry the identical hardcoded-divisor pattern. This is a defect baked into the template itself, not a one-off data-entry mistake -- it will inflate the sell price on any future folder where Contingency, Project Management Fee, or Performance Bond actually carries a non-default margin.</div>
   </div>
   <div class="callout callout-info">
     <div class="callout-title">The HVAC tab's own header block is internally misaligned</div>
-    <div class="callout-body">Confirmed on three separate folders now (HEB Corp #458, Walmart 0344-1005, and Trader Joe's #455): the HVAC tab's header labels and values are shifted out of alignment relative to each other (e.g. "BID DATE:" displaying the project city, "SCOPE:" displaying "Texas"). Harmless every time because the tab itself is entirely unused, but it's a template-level copy-paste artifact, not a project fact -- don't read anything into it if it shows up again.</div>
+    <div class="callout-body">Confirmed on four separate folders now (HEB Corp #458, Walmart 0344-1005, Trader Joe's #455, and Sam's Club 8250-1010): the HVAC tab's header labels and values are shifted out of alignment relative to each other (e.g. "BID DATE:" displaying the project city, "SCOPE:" displaying "Texas"). Harmless every time because the tab itself is entirely unused, but it's a template-level copy-paste artifact, not a project fact -- don't read anything into it if it shows up again.</div>
+  </div>
+</div>
+
+<!-- ================= FOLDER: SAM'S CLUB 8250-1010 MCALLEN ================= -->
+<div class="section active" id="f8250">
+  <h2>Folder: Sam's Club 8250-1010 -- McAllen, TX</h2>
+  <p style="color:#6b6b6b;">26.05.15 -- Major Remodel (existing halocarbon racks kept in service, plus two new standalone transcritical CO2 units)</p>
+
+  <div class="toc">
+    <ol>
+      <li><a href="#f8250-glossary">Terms this folder has</a></li>
+      <li><a href="#f8250-uploads">The Uploads (13 documents)</a></li>
+      <li><a href="#f8250-tab1">Tab 1 -- CP Est Pro 2.0 SUMMARY</a></li>
+      <li><a href="#f8250-tab2">Tab 2 -- EQUIPMENT</a></li>
+      <li><a href="#f8250-tab3">Tab 3 -- PIPE 2.0</a></li>
+      <li><a href="#f8250-tab4">Tab 4 -- PARTS</a></li>
+      <li><a href="#f8250-tab5">Tab 5 -- LABOR RATES</a></li>
+      <li><a href="#f8250-tab6">Tab 6 -- EQUIPMENT SALES BUYOUTS</a></li>
+      <li><a href="#f8250-tab7">Tab 7 -- COPPER_INSULATION_FORM</a></li>
+      <li><a href="#f8250-tab8">Tab 8 -- HVAC</a></li>
+      <li><a href="#f8250-tab9">Tab 9 -- TAX TABLE</a></li>
+      <li><a href="#f8250-tab10">Tab 10 -- BidCalc</a></li>
+      <li><a href="#f8250-walkthrough">Full walkthrough: the two new standalone CO2 units</a></li>
+      <li><a href="#f8250-mismatches">Mismatches: Uploads vs. Excel</a></li>
+      <li><a href="#f8250-mapping">Mapping table (every traced source)</a></li>
+      <li><a href="#f8250-unique">What's unique about this folder</a></li>
+    </ol>
+  </div>
+
+  <h3 id="f8250-glossary">Terms this folder has</h3>
+  <p style="color:#6b6b6b;font-style:italic;">Universal terms already covered in the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab. What's new here:</p>
+  <table class="data-table">
+    <tr><th>Term</th><th>Meaning</th></tr>
+    <tr><td>Remote Condensing Unit (RCU)</td><td>A small, standalone transcritical CO2 (R744) condensing unit serving one specific fixture, rather than a full multi-case rack. This job installs two, tagged CU1 and CU2, each dedicated to a single new case.</td></tr>
+    <tr><td>KE2 / CC200 (Cold Chain Connect)</td><td>Two distinct, named case-controller BAS platforms both appearing in this folder's controls matrix, each with its own commissioning method: KE2 is set up via WiFi and the manufacturer's own webpages; CC200 is set up via the "Cold Chain Connect" mobile app. The first folder checked so far naming more than one controls platform.</td></tr>
+    <tr><td>Sam's Master Specification</td><td>Sam's Club's own CSI-style spec numbering, distinct from (though conceptually similar to) Walmart's own numbering seen on other folders. Section 13810 = Building Automation System; Section 15600 = Refrigeration Systems.</td></tr>
+    <tr><td>Suction Sub-Loop / Liquid Sub-Loop Branch</td><td>A piping topology term from this job's refrigeration detail sheets: a secondary header running between clusters of cases, itself branching off the main suction/liquid lines, used to organize multi-case circuits.</td></tr>
+    <tr><td>Walk-in Leak Detection Zone</td><td>A refrigerant leak-monitoring boundary drawn around one or more walk-in boxes; this job's details specify one combined liquid/suction valve station per zone.</td></tr>
+  </table>
+
+  <h3 id="f8250-uploads">The Uploads -- 13 documents</h3>
+  <p>Two spec excerpts (BAS Section 13810; Refrigeration Systems Section 15600) set the rules, followed by two Responsibility Matrix sheets and eight drawing sheets. RM1 repeats the same 57-item numbered scope-of-work matrix seen on the Walmart folders, byte-identical down to the legend (RC/GC/BAS/OEM/PS/WMT/AES/WTC/MC) and the contact emails (WMSE@novar.com, WalmartSupport@Copeland.com, RMSupport@Walmart.com, MCEquip@Walmart.com). RM1.1 adds two more matrices: a "Case/Walk-In BAS Programming &amp; Configuration Matrix" (introducing the KE2 and CC200 controller platforms) and a "Walk-In Box Projects" responsibility matrix covering Batten &amp; Seal, Reline, and Replace-Evaporator/Box scenarios.</p>
+  <div class="callout callout-money">
+    <div class="callout-title">A document that says "Walmart" inside a Sam's Club job</div>
+    <div class="callout-body">RM1's own boilerplate note reads: "...READ AND USED IN CONJUNCTION WITH ADDITIONAL, DETAILED INFORMATION IN THE <strong>WALMART</strong> PROJECT DRAWINGS AND SPECIFICATIONS..." -- not a copy-paste coincidence between similar templates, but literally the same corporate document referencing Walmart by name inside a Sam's Club project. Combined with the identical legend, contacts, and (per the drawing details) the same "Quick Refrigeration" salvage vendor pattern seen on a Walmart folder, this confirms Sam's Club and Walmart share one corporate refrigeration-program template, not just a similar one.</div>
+  </div>
+  <p>The eight remaining sheets are Henderson Engineers drawings (job #2450005143; drawn by JJG, checked LAW/CK): two Refrigeration Demolition plans (RD1/RD2, tagging roughly 20 cases relocated and 18-21 demoed per sheet, plus a "SHOP-IN Dairy Cooler" box with its own case tags), three Refrigeration Plans (R1-R3, confirming the R744/CU1/CU2 tags), and two Refrigeration Schedules (R4/R5) that name every rack directly: three existing halocarbon racks staying in service (LTA and MTB on R404A, MTC on R448A) plus two brand-new standalone Carrier R744 transcritical CO2 units, CU1 and CU2, each serving one new fixture (a Cafe Cooler and a Grab-and-Go case). Two generic detail sheets (R6/R7) provide Henderson's standard DX and TCO2 piping/valve/support details, including a CO2 charging-station detail rated to 870 PSIG service pressure and 4,000 PSIG hose burst rating.</p>
+
+  <h3 id="f8250-tab1">Tab 1 -- CP Est Pro 2.0 SUMMARY</h3>
+
+  <h4>1.1 Header</h4>
+  <p>McAllen, Texas. Scope "Major Remodel." Labor division "TX Valley, TX." Estimator: Jay Jarratt Jr. Warranty Contractor: Climate Pros. "Checked By" not required -- sell price is under $1M.</p>
+
+  <h4>1.2 Display Cases</h4>
+  <p>19 new 12' MD Cases installed, 41 12' cases relocated, 13 cases removed. Same rate-lookup table described in <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a>.</p>
+  <div class="calc-box">MD (new): 19 x $130 = <span class="calc-result">$2,470</span> material | 133 pipefitter hrs | 95 case-setter hrs
+Temp/Relocate: 41 x $75 = <span class="calc-result">$3,075</span> material | 123 pipefitter hrs | 205 case-setter hrs
+Remove: 13 EA, $0 material | 13 pipefitter hrs | 13 case-setter hrs
+TOTALS row: <span class="calc-result">60 cases</span> (19 new + 41 relocated; Remove doesn't add to this count) | $5,545 material | 269 pipefitter hrs | 313 case-setter hrs</div>
+  <p>All three numbers trace exactly to BidCalc's own scope text: "Install New Cases (19)," "Relocate Cases (41)," "Demo Existing Cases (13)."</p>
+
+  <h4>1.3 Evaporators</h4>
+  <p>13 Commercial coils + 21 Industrial coils = 34 total. 13 x $30 + 21 x $55 = <span class="calc-value">$1,545</span> material, 13 x 12 + 21 x 16 = <span class="calc-value">492 hrs</span>. The 21 Industrial figure matches the scope's "Install New Coils (13) + (8) Relocated Industrial" exactly (13 new + 8 relocated).</p>
+
+  <h4>1.4 Non-Itemized Equipment Room &amp; RTU Breakdown</h4>
+  <p>A demo/new mix of line items, most tracing directly to BidCalc's own scope text:</p>
+  <table class="data-table">
+    <tr><th>Item</th><th>Material</th><th>Labor (hrs)</th><th>Source</th></tr>
+    <tr><td>Equipment Sheet Totals</td><td>$1,790</td><td>53</td><td><span class="tag tag-formula">formula</span> = EQUIPMENT tab total</td></tr>
+    <tr><td>Temporary Vehicle Fuel Cost Add (+$15 per 8 hrs of labor)</td><td>$6,881.44</td><td>0</td><td><span class="tag tag-mismatch">No source</span> -- the same recurring internal overhead line seen on other folders</td></tr>
+    <tr><td>Demo Coils (18) - Industrial</td><td>$250</td><td>108</td><td><span class="tag tag-scope">Scope</span> "Demo Coils (18) Industrial" -- exact match</td></tr>
+    <tr><td>Demo Coils (10) - Commercial</td><td>$0</td><td>40</td><td><span class="tag tag-scope">Scope</span> "Demo Coils (10) Commercial" -- exact match</td></tr>
+    <tr><td>Demo CU Units (2)</td><td>$0</td><td>8</td><td><span class="tag tag-mismatch">Likely link, not stated directly</span> -- see Mismatches below</td></tr>
+    <tr><td>Demo Pipe &amp; Remove Valves from Existing Racks</td><td>$0</td><td>80</td><td><span class="tag tag-scope">Scope</span> exact match</td></tr>
+    <tr><td>Relocate Coils (8) Shop Around Produce</td><td>$250</td><td>32</td><td><span class="tag tag-scope">Scope</span> "Relocate Coils (8)"</td></tr>
+    <tr><td>Provide &amp; Install PVC Chase (12)</td><td>$2,880</td><td>48</td><td><span class="tag tag-scope">Scope</span> "Provide &amp; Install PVC Pipe Chases"</td></tr>
+    <tr><td>POS &amp; Shop Around Produce/Dairy Drain Lines (PVC Trunk)</td><td>$1,250</td><td>36</td><td></td></tr>
+    <tr><td>Provide &amp; Install Equipment Tags &amp; Pipe Labels</td><td>$1,200</td><td>20</td><td><span class="tag tag-scope">Scope</span> exact match</td></tr>
+    <tr><td>Provide &amp; Install Case Close-offs &amp; PVC Jacketing Exterior Piping</td><td>$2,600</td><td>48</td><td><span class="tag tag-scope">Scope</span> "Island Close-offs" + "Exterior Pipe Jacketing"</td></tr>
+    <tr><td><strong>TOTALS</strong></td><td><strong>$17,101.44</strong></td><td><strong>473</strong></td><td></td></tr>
+  </table>
+
+  <h4>1.5 IN-HOUSE GC and SUBLET CONTRACTORS</h4>
+  <p>Same fixed rate table as every other folder -- see <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a>. Entirely zero hours across Sheet Metal, Electrical, Plumbing, Carpentry, G.C., and Sprinklers; no subcontracted trades on this job.</p>
+
+  <h4>1.6 Refrigerant pricing table -- a real, sizeable pricing gap</h4>
+  <p>1,337.36 lbs total, split across four rows -- but a large share of it sits unpriced:</p>
+  <div class="calc-box">EQUIPMENT tab refrigerant:        <span class="calc-source">40 lbs</span>
++ PIPE 2.0 piping refrigerant:     <span class="calc-source">895.3556 lbs</span>
++ Cases installed/relocated x 5:   <span class="calc-source">60 x 5 = 300 lbs</span>
++ Evaporator coils x 3:            <span class="calc-source">34 x 3 = 102 lbs</span>
+                                    <span class="calc-result">= 1,337.3556 lbs total</span></div>
+  <p>Of that total, only 800 lbs got manually reassigned to a priced row: 600 lbs to R507/404A at $17/lb ($10,200) and 200 lbs to R744 CO2 at $6/lb ($1,200). The remaining <strong>537.36 lbs -- 40% of the whole charge -- sits in the default R407F bucket at $0/lb</strong>, contributing nothing to the $11,400 Total Refrigerant Cost.</p>
+  <div class="callout callout-mismatch">
+    <div class="callout-title">The largest version of the "$0/lb default bucket" gap seen so far</div>
+    <div class="callout-body">On other folders this default-bucket leftover was either the whole charge (correctly, when no refrigerant was priced) or a rounding artifact of a few thousandths of a pound. Here it's 537.36 real pounds -- roughly 40% of the job's total refrigerant weight -- left unpriced. At even the R507/404A rate used elsewhere on this same table ($17/lb), that gap represents over $9,100 of refrigerant value the price sheet is not charging for.</div>
+  </div>
+
+  <h4>1.7 Scheduling Data</h4>
+  <table class="data-table">
+    <tr><th>Field</th><th>Value</th></tr>
+    <tr><td># of Fitters</td><td><span class="tag tag-manual">4</span> -- typed by hand</td></tr>
+    <tr><td>Duration</td><td><strong>16.23 weeks</strong> -- a real multi-week job</td></tr>
+    <tr><td>R / EMS / C / M Dispatch</td><td>R Dispatch: 674.1 ST / 2,996 OT hrs; EMS/C/M all zero or N/A</td></tr>
+  </table>
+
+  <h4>1.8 Project Labor Cost Data (the hours-by-task table)</h4>
+  <p>Every hour on the job rolls up into one of these task rows:</p>
+  <table class="data-table">
+    <tr><th>Function</th><th>Hours</th><th>Materials</th><th>Note</th></tr>
+    <tr><td>Refrigerant</td><td>--</td><td>$11,400</td><td>= the refrigerant table total</td></tr>
+    <tr><td>Pipe</td><td>958 OT</td><td>$194,155.59</td><td>= PIPE 2.0 total -- the single biggest materials line</td></tr>
+    <tr><td>Parts</td><td>--</td><td>$17,771.23</td><td>= PARTS tab total</td></tr>
+    <tr><td>Equipment</td><td>473 OT</td><td>$17,101.44</td><td>= the whole Non-Itemized block</td></tr>
+    <tr><td>Case Receive, Set &amp; Uncrate</td><td>313 OT</td><td>$0</td><td>= Display Cases case-setter total</td></tr>
+    <tr><td>Piping in Cases</td><td>269 OT</td><td>$5,545</td><td>= Display Cases pipefitter total</td></tr>
+    <tr><td>Coils</td><td>492 OT</td><td>$1,545</td><td>= Evaporators total</td></tr>
+    <tr><td>Start Up / Startup &amp; Electrical Termination / Commissioning</td><td>47 / 360 / 40 OT</td><td>$0</td><td></td></tr>
+    <tr><td>Pressure Test/Evacuate</td><td>20 OT</td><td>$0</td><td></td></tr>
+    <tr><td>Case Drains</td><td>24 OT</td><td>$1,800</td><td><span class="tag tag-mismatch">No source</span> -- not named anywhere else on this tab or in the scope text</td></tr>
+    <tr><td>Non-Productive and Travel Time</td><td>374.5 ST</td><td>$0</td><td></td></tr>
+    <tr><td>Fudge Factor (10%)</td><td>299.6 ST</td><td>$0</td><td></td></tr>
+    <tr><td><strong>TOTALS</strong></td><td colspan="2"><strong>674.1 ST / 2,996 OT hrs / $249,318.26</strong></td><td>81.6% of all hours land as Overtime; every real task row is 100% OT -- only the two administrative rows (Non-Productive/Travel, Fudge Factor) are Straight Time</td></tr>
+  </table>
+
+  <h4>1.9 Labor Blend &amp; Rate</h4>
+  <p>30/10/40/20/0% blend (Foreman/Startup/Journeyman/Apprentice/Tradesman) -- the same split seen on one other folder checked so far. Region "TX," margin <strong>24%</strong>. Mechanism: see <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a>, step 5.</p>
+
+  <h4>1.10 Rentals</h4>
+  <table class="data-table">
+    <tr><th>Item</th><th>Cost</th></tr>
+    <tr><td>Freight and Disposal</td><td>$0</td></tr>
+    <tr><td>5K/15K Forklift</td><td>$0</td></tr>
+    <tr><td>Gasoline Charge</td><td>$0</td></tr>
+    <tr><td>Crane</td><td>$4,500</td></tr>
+    <tr><td>Rapid Recovery</td><td>$0</td></tr>
+    <tr><td>Scissor Lifts</td><td>$12,250</td></tr>
+    <tr><td>Container Rental</td><td>$1,000</td></tr>
+    <tr><td><strong>TOTAL RENTALS</strong></td><td><strong>$17,750</strong></td></tr>
+  </table>
+  <p>Rapid Recovery shows $0 again. Unlike one other folder checked, no alternate reclaim-vendor name (e.g. United Refrigeration Inc.) appears anywhere in this folder's Uploads or price sheet either -- refrigerant reclaim on this job simply isn't named to a vendor in any tab checked.</p>
+
+  <h4>1.11 Labor Cost Breakdown</h4>
+  <p>Labeled "Do NOT Adjust" -- a sanity-check mirror, not authoritative. <code>BidCalc</code> is (see <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a>). Total Labor: $300,498.80 (674.1 ST / 2,996 OT hrs).</p>
+
+  <h4>1.12 Total Summary</h4>
+  <table class="data-table">
+    <tr><th>Category</th><th>Cost</th><th>Sell</th><th>Margin</th></tr>
+    <tr><td>Labor</td><td>$300,498.80</td><td>$395,393.16</td><td>24%</td></tr>
+    <tr><td>Materials</td><td>$249,318.26</td><td>$328,050.34</td><td>24%</td></tr>
+    <tr><td>Rentals</td><td>$17,750</td><td>$22,187.50</td><td>20%</td></tr>
+    <tr><td>Fixed 1% Warranty</td><td>$8,689.43</td><td>$8,689.43</td><td>--</td></tr>
+    <tr><td>Contingency Factor</td><td>$39,243.74</td><td>$49,054.67</td><td><span class="tag tag-mismatch">labeled 5%</span></td></tr>
+    <tr><td>Sales Tax (8.25%, Sales Tax Labor &amp; Mats)</td><td>$65,561.57</td><td>$65,561.57</td><td>--</td></tr>
+    <tr><td><strong>TOTAL</strong></td><td><strong>$681,061.80</strong></td><td><strong>$868,937</strong></td><td>Gross Profit $187,875.20 / 21.62%</td></tr>
+  </table>
+  <div class="callout callout-mismatch"><div class="callout-title"><span class="tag tag-mismatch">Formula bug</span> Contingency's sell price ignores its own margin cell</div><div class="callout-body">See <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> -- this is now confirmed on a fourth folder: the margin cell here is labeled 5% (the same value as two prior folders), the cost is computed off it correctly, but the sell is computed as cost &divide; 0.8 -- a hardcoded 20% divisor, equivalent to a flat 25% markup -- completely independent of the 5% cell.</div></div>
+
+  <h4>1.13 Job Scope Notes &amp; Exclusions</h4>
+  <p>Row 197 gives the same Demo/New phase list quoted in the Uploads section above, matching the drawings and the tab-by-tab breakdown throughout this section. The Exclusions list is the standard 13-item baseline described in <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> -- byte-identical wording, another confirmation this is the default, not the 14-item outlier seen on one other folder.</p>
+
+  <h3 id="f8250-tab2">Tab 2 -- EQUIPMENT</h3>
+  <p>Only 3 of the ~40 fixed checklist rows are non-zero -- and they split cleanly along this job's hybrid line:</p>
+  <table class="data-table">
+    <tr><th>Item</th><th>Qty</th><th>Material</th><th>Labor</th><th>Refrigerant</th></tr>
+    <tr><td>1/4 - 10 HP Condensing Units</td><td>2</td><td>$200</td><td>32 hrs</td><td>40 lbs</td></tr>
+    <tr><td>Change Rack Main Liquid Drier (4) RC 4864 HH</td><td>3</td><td>$390</td><td>6 hrs</td><td>0</td></tr>
+    <tr><td>Change Rack Suction Filters (8) Cores</td><td>3</td><td>$1,200</td><td>15 hrs</td><td>0</td></tr>
+    <tr><td><strong>TOTALS</strong></td><td></td><td><strong>$1,790</strong></td><td><strong>53 hrs</strong></td><td><strong>40 lbs</strong></td></tr>
+  </table>
+  <p><span class="tag tag-scope">Scope</span> "1/4-10 HP Condensing Units" x2 is this catalog's closest match for the two new standalone CU1/CU2 remote condensing units -- small, single-fixture units rather than a full rack, consistent with the qty and this rate table's HP class. The liquid-drier and suction-filter changes are routine maintenance on the <em>existing</em> racks being kept in service, not new equipment -- one line for the incremental CO2 addition, two for servicing what's staying.</p>
+
+  <h3 id="f8250-tab3">Tab 3 -- PIPE 2.0</h3>
+  <p>Install Labor Hours <strong>958</strong> (matches SUMMARY exactly), LF Pipe w/Waste <strong>9,580</strong>, Piping Waste 10%, Installation Factor <strong>0.2</strong> (the ".20 T Bar ceiling" option, not the ".15 Standard Remodel" option the scope label might suggest by default -- see Mismatches below). HFG Factor stayed at the standard <strong>0.45</strong>, not the elevated 0.5 seen on a full CO2-conversion folder -- this job's CO2 scope is two small standalone units, not a full rack conversion, which may explain why the estimator didn't bump the factor. Piping Refrigerant 895.3556 lbs. Total Materials Cost $194,155.59 (Pipe $101,459.60 + Insulation $27,850.60 + Saddles $6,882.60 + HFG $57,962.79).</p>
+  <p>36 numbered Systems, tagged directly to circuit names -- <strong>1C, 1.1C, C1-C6, C16-C21, 2C</strong>, plus RISER placeholders -- the exact same tags found on the RD2 demolition plan and the R4/R5 refrigeration schedules, a clean cross-document match.</p>
+
+  <h3 id="f8250-tab4">Tab 4 -- PARTS</h3>
+  <p>Unlike several folders where this tab sits entirely at zero, real hardware shows up here -- and it lines up exactly with the hybrid architecture:</p>
+  <table class="data-table">
+    <tr><th>Category</th><th>Real items on this job</th></tr>
+    <tr><td>DX Ball Valves (Mueller, standard)</td><td>1/2" x7, 5/8" x6, 7/8" x1, 1-1/8" x5, 1-3/8" x3 -- for the three existing halocarbon racks</td></tr>
+    <tr><td>CO2 Ball Valve w/ Integral Pressure Relief</td><td>3/8" x2, 1/2" x2</td></tr>
+    <tr><td>CO2 Ball Valve, Mueller 140 BAR XHP</td><td>1/2" x8 -- high-pressure CO2-rated, for the two new CU1/CU2 units</td></tr>
+    <tr><td>Structural/consumables</td><td>1x Pressure Relief Valve, 40x 15% Silphos brazing rod, 200 ft Heat Tape + 12 connector kits + 12 splice kits</td></tr>
+  </table>
+  <p>Total: $17,771.23. The Heat Tape almost certainly serves the freeze-protection requirement called out explicitly in the R7 detail sheet for exterior CO2 and condensate piping. This tab is the single clearest confirmation of the hybrid design: standard DX valves for the racks staying in service, XHP CO2 valves for the new units, in the same order.</p>
+
+  <h3 id="f8250-tab5">Tab 5 -- LABOR RATES</h3>
+  <p>TX row: $40/$34/$22/$20, burden 2.0x -- the standard baseline described in <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a>.</p>
+
+  <h3 id="f8250-tab6">Tab 6 -- EQUIPMENT SALES BUYOUTS</h3>
+  <p>All 24 buyout rows and the Freight row are zero -- unused on this job. Its own tax-rate lookup cell still shows <strong>8.5%</strong>, matching the fixed default confirmed on four other folders now, despite carrying no dollars this time.</p>
+
+  <h3 id="f8250-tab7">Tab 7 -- COPPER_INSULATION_FORM</h3>
+  <p>Real quantities across Type L copper at nine sizes (3/8"-2-5/8" ACR, roughly 6,140 LF combined), all with Black insulation -- no Type K or Type M copper used, no White insulation. Black Saddles ordered at five sizes.</p>
+  <div class="callout callout-money"><div class="callout-title">A second folder with real XHP piping, at a smaller scale</div><div class="callout-body"><strong>XHP, 90 BAR: 160 LF at 3/8" + 400 LF at 1/2" = 560 LF total</strong> -- confirming genuine high-pressure CO2 piping between the charging station and the two new CU1/CU2 units. Smaller in scale than the full-conversion folder checked previously (which used one XHP size at 80 LF), consistent with this job's two standalone units versus a full rack conversion.</div></div>
+
+  <h3 id="f8250-tab8">Tab 8 -- HVAC</h3>
+  <p>Every row checked -- entirely zero, as expected for a refrigeration-only job. Its header block again shows the same field-label misalignment confirmed on three other folders (e.g. "BID DATE:" shows "McAllen," "SCOPE:" shows "Texas") -- see <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a>, now a fourth confirmation of the same template artifact.</p>
+
+  <h3 id="f8250-tab9">Tab 9 -- TAX TABLE</h3>
+  <p>Static, unchanged. Texas resolves to "Sales Tax Labor &amp; Mats" for this Remodel, as confirmed on every other Texas folder.</p>
+
+  <h3 id="f8250-tab10">Tab 10 -- BidCalc</h3>
+  <p>Same 10-tab rollup structure. Markup 0.3158 on labor/materials checks out exactly against the 24% margin from Tab 1. The Contingency row again shows a markup of 0.25 (cost &divide; 0.8), not matching its own labeled 5% margin -- see the formula-bug callout above. Total Bid Tax Minus Equip: $65,561.57. Total Bid: $868,937.</p>
+
+  <h3 id="f8250-walkthrough">Full walkthrough: the two new standalone CO2 units</h3>
+  <div class="callout callout-money"><div class="callout-title">The architecturally distinctive fact of this folder, traced end to end</div><div class="callout-body">Unlike a full rack conversion, this job adds CO2 in the smallest possible increment -- two single-fixture units -- while three existing halocarbon racks keep running untouched.</div></div>
+  <div class="step-flow">
+    <div class="step-item"><div class="step-badge">1</div><div class="step-body">
+      <div class="step-title">The Refrigeration Schedule names both units directly</div><div class="step-sheet">Uploads: R4/R5</div>
+      <div class="step-desc">Carrier R744 transcritical "Remote Condensing Units," tagged CU1 and CU2, each serving one fixture (a Cafe Cooler and a Grab-and-Go case) -- alongside three existing racks (LTA/MTB on R404A, MTC on R448A) that the schedule confirms are staying in service.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">2</div><div class="step-body">
+      <div class="step-title">EQUIPMENT tab prices them via the closest catalog match</div><div class="step-sheet">EQUIPMENT!row 11</div>
+      <div class="step-desc">"1/4-10 HP Condensing Units," qty 2 -- $200 material, 32 labor hrs, 40 lbs refrigerant.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">3</div><div class="step-body">
+      <div class="step-title">PARTS tab buys the CO2-rated hardware they need</div><div class="step-sheet">PARTS!rows 103-115</div>
+      <div class="step-desc">8x 1/2" Mueller 140 BAR XHP CO2 ball valves, plus 4x smaller CO2 ball valves w/ integral pressure relief -- hardware a standard DX unit would never need.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">4</div><div class="step-body">
+      <div class="step-title">COPPER_INSULATION_FORM orders the high-pressure line itself</div><div class="step-sheet">COPPER_INSULATION_FORM!rows 58-59</div>
+      <div class="step-desc">560 LF of XHP/90-BAR copper (160 LF at 3/8" + 400 LF at 1/2") -- the physical pipe connecting the charging station to CU1/CU2, per the R7 charging-station detail.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">5</div><div class="step-body">
+      <div class="step-title">The 40 lbs of CO2 refrigerant feeds the project total, then BidCalc</div><div class="step-sheet">SUMMARY refrigerant table / BidCalc</div>
+      <div class="step-desc">40 lbs is one of four terms summing to 1,337.36 lbs total charge (though only 200 of the project's eventual R744 lbs get priced -- see the refrigerant-gap callout in Section 1.6). Final Total Bid $868,937.</div>
+    </div></div>
+  </div>
+
+  <h3 id="f8250-mismatches">Mismatches: Uploads vs. Excel Findings</h3>
+  <table class="data-table mismatch">
+    <tr><th>#</th><th>Excel location</th><th>What Excel shows</th><th>What the Uploads show</th><th>Type of mismatch</th></tr>
+    <tr><td>1</td><td>SUMMARY refrigerant table</td><td>537.36 lbs (40% of the total 1,337.36 lb charge) priced at $0/lb in the default R407F bucket</td><td>N/A -- the racks and new units are named with real refrigerant types (R404A, R448A, R744)</td><td>A real, sizeable pricing gap (~$9,100+ of exposure at the R507/404A rate used elsewhere on the same table) -- not a rounding artifact</td></tr>
+    <tr><td>2</td><td>SUMMARY row 187 (Contingency Factor)</td><td>Margin cell displays 5%; actual sell computed as cost &divide; 0.8 (25% flat markup)</td><td>N/A -- internal formula inconsistency</td><td>Confirmed template-wide bug on a fourth folder now -- see Pricing Logic Reference</td></tr>
+    <tr><td>3</td><td>SUMMARY row 108 ("Case Drains," $1,800/24 hrs)</td><td>A real cost with no listed source</td><td>Not named in any Non-Itemized line or scope-text bullet</td><td>Untraced number -- plausibly folded into a broader "install piping" bullet without its own line</td></tr>
+    <tr><td>4</td><td>SUMMARY row 197 ("Demo CU Units (2)")</td><td>Demo-phase bullet naming 2 CU units removed, $0/8 hrs</td><td>R4/R5 name CU1/CU2 as brand-new units being installed, not removed</td><td>Likely a like-for-like swap (2 old units out, CU1/CU2 in) never stated explicitly in the same sentence -- a plausible but unconfirmed link</td></tr>
+    <tr><td>5</td><td>PIPE 2.0 Installation Factor</td><td>Set to ".20 T Bar ceiling," not ".15 Standard Remodel"</td><td>Not addressed directly in the Uploads read</td><td>Plausibly a genuine ceiling-construction fact about this store, not an error -- but it diverges from what the "Major Remodel" scope label alone would suggest</td></tr>
+    <tr><td>6</td><td>HVAC tab header block</td><td>Field labels/values misaligned (e.g. "BID DATE:" shows "McAllen")</td><td>N/A -- tab entirely unused</td><td>Confirmed template artifact, fourth folder -- harmless</td></tr>
+  </table>
+
+  <h3 id="f8250-mapping">Mapping table -- every traced source, in one place</h3>
+  <p>Every Price Sheet number discussed above, gathered into one lookup with its source or mismatch tag:</p>
+  <table class="data-table">
+    <tr><th>Price Sheet location</th><th>Value</th><th>Traced to</th></tr>
+    <tr><td>Display Cases</td><td>19 new, 41 relocated, 13 removed</td><td><span class="tag tag-scope">Scope</span> exact match on all three counts</td></tr>
+    <tr><td>Evaporators</td><td>13 Commercial + 21 Industrial coils</td><td><span class="tag tag-scope">Scope</span> "13 new + (13 new + 8 relocated Industrial)" -- exact match</td></tr>
+    <tr><td>EQUIPMENT: 1/4-10 HP Condensing Units x2</td><td>$200 / 32 hrs / 40 lbs</td><td><span class="tag tag-tab">Uploads</span> R4/R5's CU1/CU2 Remote Condensing Units, by count and HP class</td></tr>
+    <tr><td>PARTS: CO2 Ball Valves + 140 BAR XHP valves</td><td>$17,771.23 total</td><td><span class="tag tag-tab">Uploads</span> matches the two-new-units/three-existing-racks split named in R4/R5</td></tr>
+    <tr><td>COPPER_INSULATION_FORM: XHP piping</td><td>560 LF (160 @ 3/8" + 400 @ 1/2")</td><td><span class="tag tag-scope">Scope</span> consistent with two standalone CO2 units, smaller than a full conversion</td></tr>
+    <tr><td>Non-Itemized: Demo/Relocate Coils, PVC Chase, Close-offs</td><td>$17,101.44 / 473 hrs</td><td><span class="tag tag-scope">Scope</span> line-by-line exact match, except "Case Drains" (Mismatch #3)</td></tr>
+    <tr><td>Refrigerant table (1,337.36 lbs, mixed types)</td><td>$11,400</td><td><span class="tag tag-formula">Formula</span> equipment + piping + case allowance + coil allowance -- resolves to the decimal, but see Mismatch #1 on the unpriced remainder</td></tr>
+    <tr><td>SUMMARY C189 (tax rate 8.25%)</td><td>$65,561.57 downstream</td><td><span class="tag tag-manual">Not from any document</span> -- manual Google search, HYPERLINK formula</td></tr>
+    <tr><td>SUMMARY row 187 (Contingency sell)</td><td>$49,054.67</td><td><span class="tag tag-mismatch">Mismatch #2</span> -- formula bug, not a source fact</td></tr>
+  </table>
+
+  <h3 id="f8250-unique">What's unique about this folder</h3>
+  <div class="callout callout-money">
+    <div class="callout-title">The first hybrid/incremental refrigeration architecture seen</div>
+    <div class="callout-body">Every prior refrigeration-scope folder was either a full conversion (halocarbon to CO2), a pure gas swap, or a like-for-like condenser replacement. This one keeps three existing halocarbon racks running untouched while adding CO2 in the smallest possible increment -- two standalone, single-fixture Remote Condensing Units. The PARTS tab shows this split physically: standard DX valves and 140-BAR XHP CO2 valves, ordered side by side on the same sheet.</div>
+  </div>
+  <div class="callout callout-info">
+    <div class="callout-title">Two named case-controller platforms in one document</div>
+    <div class="callout-body">KE2 and Cold Chain Connect (CC200) both appear in the same BAS Programming &amp; Configuration Matrix, each with its own commissioning procedure. Every prior folder with a named controls platform (Novar) named only one.</div>
+  </div>
+  <div class="callout callout-warn">
+    <div class="callout-title">The largest unpriced-refrigerant gap found so far</div>
+    <div class="callout-body">537.36 lbs -- 40% of this job's total refrigerant charge -- sits in the workbook's $0/lb default bucket, never manually reassigned to a priced row. Worth flagging to the team as a real dollar exposure, not just a template quirk.</div>
   </div>
 </div>
 
 <!-- ================= FOLDER: TRADER JOE'S #455 SAN ANTONIO ================= -->
-<div class="section active" id="f455">
+<div class="section" id="f455">
   <h2>Folder: Trader Joe's #455 -- San Antonio (North), TX</h2>
   <p style="color:#6b6b6b;">26.06.17 -- Remodel with CO2 (Transcritical) Upgrade</p>
 
