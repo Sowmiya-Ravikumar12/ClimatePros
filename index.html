@@ -6,54 +6,54 @@
 <title>Climate Pros Sample Data Analysis</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #fbfaf7; color: #2b2b2b; }
+body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #000000; color: #e5e2d8; }
 
-.hero { background: #ffffff; padding: 36px 20px; text-align: center; border-bottom: 3px solid #8a5a2b; }
-.hero h1 { font-size: 2em; color: #8a5a2b; margin-bottom: 8px; }
-.hero p { color: #6b6b6b; font-size: 1em; }
-.hero .subtitle { color: #3f6b4f; font-size: 0.92em; margin-top: 8px; }
+.hero { background: #0d0d0d; padding: 36px 20px; text-align: center; border-bottom: 3px solid #b3703a; }
+.hero h1 { font-size: 2em; color: #d99a55; margin-bottom: 8px; }
+.hero p { color: #a8a8a0; font-size: 1em; }
+.hero .subtitle { color: #7fd9a0; font-size: 0.92em; margin-top: 8px; }
 
 .tabs {
-    display: flex; justify-content: center; gap: 4px; background: #f1ede4;
+    display: flex; justify-content: center; gap: 4px; background: #0f0f0f;
     padding: 12px 10px; flex-wrap: wrap; position: sticky; top: 0; z-index: 100;
-    border-bottom: 2px solid #e4e0d8;
+    border-bottom: 2px solid #2a2a2a;
 }
 .tab {
-    padding: 10px 16px; background: #ffffff; color: #6b6b6b; border: 1px solid #e4e0d8;
+    padding: 10px 16px; background: #161616; color: #a8a8a0; border: 1px solid #2a2a2a;
     border-radius: 6px; cursor: pointer; font-size: 0.85em; transition: all 0.3s;
 }
-.tab:hover { background: #f1ede4; color: #2b2b2b; }
-.tab.active { background: #8a5a2b; color: #fff; font-weight: bold; border-color: #8a5a2b; }
+.tab:hover { background: #202020; color: #f0f0f0; }
+.tab.active { background: #b3703a; color: #fff; font-weight: bold; border-color: #b3703a; }
 
 .content { max-width: 1100px; margin: 0 auto; padding: 30px 20px; }
 .section { display: none; }
 .section.active { display: block; }
 
-h2 { color: #8a5a2b; font-size: 1.5em; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid #e4e0d8; }
-h3 { color: #3f6b4f; font-size: 1.15em; margin: 28px 0 12px; padding-bottom:6px; border-bottom: 1px solid #eee; }
-h4 { color: #1f6fa8; font-size: 1em; margin: 16px 0 8px; }
-p { color: #3a3a3a; font-size: 0.94em; line-height: 1.6; margin-bottom: 10px; }
+h2 { color: #d99a55; font-size: 1.5em; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid #2a2a2a; }
+h3 { color: #5fae7a; font-size: 1.15em; margin: 28px 0 12px; padding-bottom:6px; border-bottom: 1px solid #262626; }
+h4 { color: #5aa8e0; font-size: 1em; margin: 16px 0 8px; }
+p { color: #cfcdc5; font-size: 0.94em; line-height: 1.6; margin-bottom: 10px; }
 
 .pill { padding:3px 10px; border-radius:20px; font-size:0.75em; font-weight:bold; }
-.pill-done { background:#eef5ee; color:#3f6b4f; border:1px solid #7fa88a; }
-.pill-todo { background:#f1ede4; color:#6b6b6b; border:1px solid #e4e0d8; }
+.pill-done { background:#10241a; color:#7fd9a0; border:1px solid #3f6b4f; }
+.pill-todo { background:#161616; color:#a8a8a0; border:1px solid #2a2a2a; }
 
 .callout { border-radius: 10px; padding: 18px; margin: 15px 0; }
-.callout-critical { background: #fdecea; border: 2px solid #c0504d; }
-.callout-critical .callout-title { color: #a13d3a; }
-.callout-info { background: #e8f2fa; border: 2px solid #4a90c2; }
-.callout-info .callout-title { color: #1f6fa8; }
-.callout-money { background: #eef5ee; border: 2px solid #7fa88a; }
-.callout-money .callout-title { color: #3f6b4f; }
-.callout-warn { background: #fff3e0; border: 2px solid #e0a458; }
-.callout-warn .callout-title { color: #a0650a; }
-.callout-mismatch { background: #fbeee6; border: 2px solid #c76b2c; }
-.callout-mismatch .callout-title { color: #a04d1a; }
+.callout-critical { background: #2a1210; border: 2px solid #c0504d; }
+.callout-critical .callout-title { color: #e0847e; }
+.callout-info { background: #0e1f2b; border: 2px solid #4a90c2; }
+.callout-info .callout-title { color: #5aa8e0; }
+.callout-money { background: #0f1f16; border: 2px solid #7fa88a; }
+.callout-money .callout-title { color: #7fd9a0; }
+.callout-warn { background: #2a1f0d; border: 2px solid #e0a458; }
+.callout-warn .callout-title { color: #e0a458; }
+.callout-mismatch { background: #2a180d; border: 2px solid #c76b2c; }
+.callout-mismatch .callout-title { color: #e0854a; }
 .callout-title { font-weight: bold; margin-bottom: 8px; font-size: 1.05em; }
-.callout-body { color: #3a3a3a; font-size: 0.92em; line-height: 1.6; }
+.callout-body { color: #d5d2c8; font-size: 0.92em; line-height: 1.6; }
 
 .calc-box {
-    background: #2b2b2b; border: 1px solid #444; border-radius: 8px; padding: 16px;
+    background: #141414; border: 1px solid #333; border-radius: 8px; padding: 16px;
     margin: 12px 0; font-family: 'Consolas','Courier New',monospace; font-size: 0.86em; line-height: 1.7;
     overflow-x: auto; white-space: pre-wrap; color: #e9e6df;
 }
@@ -66,117 +66,117 @@ p { color: #3a3a3a; font-size: 0.94em; line-height: 1.6; margin-bottom: 10px; }
 .step-flow { display: flex; gap: 0; flex-direction: column; margin: 15px 0; }
 .step-item { display: flex; gap: 16px; align-items: flex-start; }
 .step-badge {
-    background: #8a5a2b; color: #fff; min-width: 38px; height: 38px; border-radius: 50%;
+    background: #b3703a; color: #fff; min-width: 38px; height: 38px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;
 }
-.step-body { background: #ffffff; padding: 14px 18px; border-radius: 8px; border: 1px solid #e4e0d8; border-left: 3px solid #8a5a2b; flex: 1; }
-.step-connector { width: 3px; height: 16px; background: #e4e0d8; margin-left: 17px; }
-.step-title { color: #232323; font-weight: 600; }
-.step-sheet { color: #8a5a2b; font-size: 0.85em; margin-top: 2px; }
-.step-desc { color: #555; font-size: 0.9em; margin-top: 6px; }
+.step-body { background: #141414; padding: 14px 18px; border-radius: 8px; border: 1px solid #2a2a2a; border-left: 3px solid #b3703a; flex: 1; }
+.step-connector { width: 3px; height: 16px; background: #2a2a2a; margin-left: 17px; }
+.step-title { color: #f0f0f0; font-weight: 600; }
+.step-sheet { color: #d99a55; font-size: 0.85em; margin-top: 2px; }
+.step-desc { color: #b8b5ac; font-size: 0.9em; margin-top: 6px; }
 
-.data-table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.87em; background:#fff; }
-.data-table th { background: #f1ede4; color: #8a5a2b; padding: 10px 12px; text-align: left; border-bottom: 2px solid #8a5a2b; }
-.data-table td { padding: 8px 12px; border-bottom: 1px solid #e4e0d8; color:#333; vertical-align: top; }
-.data-table tr:hover { background: #f8f6f0; }
-.data-table.mismatch th { background:#fbeee6; color:#a04d1a; border-bottom-color:#c76b2c; }
+.data-table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.87em; background:#101010; }
+.data-table th { background: #181818; color: #d99a55; padding: 10px 12px; text-align: left; border-bottom: 2px solid #b3703a; }
+.data-table td { padding: 8px 12px; border-bottom: 1px solid #262626; color:#d5d2c8; vertical-align: top; }
+.data-table tr:hover { background: #1c1c1c; }
+.data-table.mismatch th { background:#241209; color:#e0854a; border-bottom-color:#c76b2c; }
 
 .tag { padding: 2px 8px; border-radius: 3px; font-size: 0.76em; font-weight: bold; white-space:nowrap; }
-.tag-scope { background: #2244aa; color: #fff; }
-.tag-formula { background: #b8541e; color: #fff; }
-.tag-manual { background: #8a2c2c; color: #fff; }
-.tag-tab { background: #6633aa; color: #fff; }
+.tag-scope { background: #2e56c8; color: #fff; }
+.tag-formula { background: #d1682a; color: #fff; }
+.tag-manual { background: #a83737; color: #fff; }
+.tag-tab { background: #7a3fc4; color: #fff; }
 .tag-mismatch { background: #c76b2c; color: #fff; }
 
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 15px 0; }
 @media (max-width: 800px) { .grid-2 { grid-template-columns: 1fr; } }
-.info-box { background: #ffffff; border: 1px solid #e4e0d8; border-radius: 10px; padding: 16px; }
+.info-box { background: #121212; border: 1px solid #2a2a2a; border-radius: 10px; padding: 16px; }
 .info-box h4 { margin-top: 0; }
 
-.pricing-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed #e4e0d8; gap:10px;}
+.pricing-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed #2a2a2a; gap:10px;}
 .pricing-row:last-child { border-bottom: none; }
-.pricing-label { color: #333; flex:1; }
-.pricing-source { color: #8a5a2b; font-size: 0.8em; }
-.pricing-amount { color: #3f6b4f; font-weight: bold; white-space:nowrap; }
+.pricing-label { color: #d5d2c8; flex:1; }
+.pricing-source { color: #d99a55; font-size: 0.8em; }
+.pricing-amount { color: #7fd9a0; font-weight: bold; white-space:nowrap; }
 .pricing-total { display: flex; justify-content: space-between; padding: 12px 0; border-top: 2px solid #7fa88a; margin-top: 8px; font-size: 1.1em; }
-.pricing-total .pricing-amount { color: #a0650a; }
+.pricing-total .pricing-amount { color: #e0a458; }
 
 .doc-excerpt {
-    background:#fdfaf3; color:#2b2b2b; border:1px solid #d8cfa8; border-radius:6px;
+    background:#161208; color:#e5ddc8; border:1px solid #4a4030; border-radius:6px;
     padding:18px 22px; margin:14px 0; font-family:Georgia,'Times New Roman',serif; font-size:0.92em;
-    line-height:1.7; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    line-height:1.7; box-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
-.doc-excerpt .doc-heading { font-weight:bold; text-align:center; margin-bottom:10px; color:#111; }
+.doc-excerpt .doc-heading { font-weight:bold; text-align:center; margin-bottom:10px; color:#f0e8d0; }
 .doc-excerpt ul { margin:6px 0 6px 20px; }
-.doc-excerpt .doc-page-tag { display:block; text-align:right; font-size:0.75em; color:#8a7a4a; font-style:italic; margin-bottom:6px; }
+.doc-excerpt .doc-page-tag { display:block; text-align:right; font-size:0.75em; color:#c4b07a; font-style:italic; margin-bottom:6px; }
 
 .quote-box {
-    background:#f1ede4; border-left:4px solid #8a5a2b; padding:14px 18px; margin:12px 0;
-    font-style:italic; color:#333; font-size:0.93em; line-height:1.6; border-radius:0 8px 8px 0;
+    background:#151310; border-left:4px solid #b3703a; padding:14px 18px; margin:12px 0;
+    font-style:italic; color:#d5d2c8; font-size:0.93em; line-height:1.6; border-radius:0 8px 8px 0;
 }
 
-.daylog { background:#ffffff; border:1px solid #e4e0d8; border-radius:10px; padding:16px 20px; margin: 15px 0; }
-.daylog h4 { color:#3f6b4f; margin-top:0; }
-.daylog ul { margin-left: 20px; color:#333; font-size:0.92em; line-height:1.8; }
+.daylog { background:#121212; border:1px solid #2a2a2a; border-radius:10px; padding:16px 20px; margin: 15px 0; }
+.daylog h4 { color:#7fd9a0; margin-top:0; }
+.daylog ul { margin-left: 20px; color:#d5d2c8; font-size:0.92em; line-height:1.8; }
 
-.toc { background:#ffffff; border:1px solid #e4e0d8; border-radius:10px; padding:16px 22px; margin: 6px 0 24px; }
+.toc { background:#101010; border:1px solid #2a2a2a; border-radius:10px; padding:16px 22px; margin: 6px 0 24px; }
 .toc ol { columns: 2; column-gap: 2rem; margin-left: 18px; font-size: 0.9em; }
 .toc li { margin-bottom: 6px; }
-.toc a { color:#3f6b4f; text-decoration:none; }
+.toc a { color:#7fd9a0; text-decoration:none; }
 .toc a:hover { text-decoration:underline; }
 @media (max-width: 700px) { .toc ol { columns: 1; } }
 
-.footer { text-align: center; padding: 30px; color: #8a8a8a; font-size: 0.8em; border-top: 1px solid #e4e0d8; margin-top: 40px; }
+.footer { text-align: center; padding: 30px; color: #8a8a8a; font-size: 0.8em; border-top: 1px solid #2a2a2a; margin-top: 40px; }
 
 /* ---- progress disclosure ---- */
 .progress { max-width: 1100px; margin: 14px auto 0; padding: 0 20px; }
 .progress summary {
-    cursor: pointer; list-style: none; color: #6b6b6b; font-size: 0.88em;
+    cursor: pointer; list-style: none; color: #a8a8a0; font-size: 0.88em;
     display: inline-block; padding: 4px 2px;
 }
 .progress summary::-webkit-details-marker { display: none; }
-.progress summary strong { color: #8a5a2b; }
-.progress summary::after { content: " \25be"; color: #8a5a2b; }
+.progress summary strong { color: #d99a55; }
+.progress summary::after { content: " \25be"; color: #d99a55; }
 .progress[open] summary::after { content: " \25b4"; }
-.progress ul { margin: 8px 0 0 0; padding: 10px 16px; list-style: none; columns: 2; column-gap: 2rem; background: #f1ede4; border: 1px solid #e4e0d8; border-radius: 8px; }
-.progress li { font-size: 0.85em; color: #555; padding: 3px 0; }
+.progress ul { margin: 8px 0 0 0; padding: 10px 16px; list-style: none; columns: 2; column-gap: 2rem; background: #161616; border: 1px solid #2a2a2a; border-radius: 8px; }
+.progress li { font-size: 0.85em; color: #c5c2b8; padding: 3px 0; }
 
 /* ---- toolbar (search / expand-collapse / flags) ---- */
 .toolbar {
     display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-    background: #ffffff; border-bottom: 1px solid #e4e0d8; padding: 10px 20px;
+    background: #0d0d0d; border-bottom: 1px solid #2a2a2a; padding: 10px 20px;
     position: sticky; top: 53px; z-index: 99;
 }
 .toolbar input[type="search"] {
-    flex: 0 1 260px; padding: 6px 10px; border: 1px solid #d8d2c2; border-radius: 6px;
-    font-size: 0.88em; color: #2b2b2b;
+    flex: 0 1 260px; padding: 6px 10px; border: 1px solid #3a3630; border-radius: 6px;
+    font-size: 0.88em; color: #e5e2d8; background: #151515;
 }
-.toolbar input[type="search"]:focus { outline: 2px solid #8a5a2b33; border-color: #8a5a2b; }
+.toolbar input[type="search"]:focus { outline: 2px solid #d99a5533; border-color: #d99a55; }
 .toolbar button {
-    padding: 6px 12px; border: 1px solid #d8d2c2; border-radius: 6px; background: #f8f6f0;
-    color: #555; font-size: 0.82em; cursor: pointer;
+    padding: 6px 12px; border: 1px solid #3a3630; border-radius: 6px; background: #181818;
+    color: #c5c2b8; font-size: 0.82em; cursor: pointer;
 }
-.toolbar button:hover { background: #f1ede4; border-color: #8a5a2b; color: #2b2b2b; }
-.toolbar .flagnav { display: flex; align-items: center; gap: 6px; margin-left: auto; font-size: 0.82em; color: #a13d3a; }
-.toolbar .flagnav button { color: #a13d3a; border-color: #e0b3b1; }
+.toolbar button:hover { background: #222222; border-color: #d99a55; color: #f0f0f0; }
+.toolbar .flagnav { display: flex; align-items: center; gap: 6px; margin-left: auto; font-size: 0.82em; color: #e0847e; }
+.toolbar .flagnav button { color: #e0847e; border-color: #5a3230; }
 .toolbar .flagnav.none { color: #9aa0a8; }
 .toolbar .flagnav.none button { display: none; }
-.toolbar .hint { font-size: 0.76em; color: #9a958a; }
+.toolbar .hint { font-size: 0.76em; color: #8a8578; }
 
 mark.search-hit { background: #ffe08a; color: #2b2b2b; border-radius: 2px; padding: 0 1px; }
 
 /* ---- accordion sections ---- */
 h3.acc-toggle { cursor: pointer; user-select: none; display: flex; align-items: center; gap: 8px; }
-h3.acc-toggle:hover { color: #b8712f; }
-h3.acc-toggle .chev { font-size: 0.75em; color: #8a5a2b; transition: transform 0.15s ease; display: inline-block; }
+h3.acc-toggle:hover { color: #e0a458; }
+h3.acc-toggle .chev { font-size: 0.75em; color: #d99a55; transition: transform 0.15s ease; display: inline-block; }
 h3.acc-toggle.open .chev { transform: rotate(90deg); }
 .acc-body { display: none; }
 .acc-body.open { display: block; }
 
 @keyframes flagPulse {
-    0% { box-shadow: 0 0 0 0 rgba(161,61,58,0.55); }
-    70% { box-shadow: 0 0 0 10px rgba(161,61,58,0); }
-    100% { box-shadow: 0 0 0 0 rgba(161,61,58,0); }
+    0% { box-shadow: 0 0 0 0 rgba(224,132,126,0.55); }
+    70% { box-shadow: 0 0 0 10px rgba(224,132,126,0); }
+    100% { box-shadow: 0 0 0 0 rgba(224,132,126,0); }
 }
 .flag-focus { animation: flagPulse 1.1s ease-out 2; border-radius: 6px; }
 
@@ -194,16 +194,12 @@ h3.acc-toggle.open .chev { transform: rotate(90deg); }
 </div>
 
 <details class="progress">
-  <summary><strong>7 of 19</strong> project folders analyzed</summary>
+  <summary><strong>11 of 19</strong> project folders analyzed</summary>
   <ul>
-    <li>HEB 383 &ndash; Port Isabel TX</li>
-    <li>Joe V's #831 &ndash; Garland TX</li>
-    <li>Walmart 3112-1009 &ndash; San Antonio TX</li>
     <li>HEB Corp #271 &ndash; West Columbia TX</li>
     <li>Whole Foods 10593 &ndash; Frisco TX</li>
     <li>United #0510 &ndash; Hereford TX</li>
     <li>Walmart 5102-258 &ndash; Gretna LA</li>
-    <li>Kroger DAL653 &ndash; Fate TX</li>
     <li>Walmart 0395-1013 &ndash; Mission TX</li>
     <li>Walmart 3295-1013 &ndash; Broken Arrow OK</li>
     <li>Walmart 6786-1004 &ndash; McAllen TX</li>
@@ -222,6 +218,8 @@ h3.acc-toggle.open .chev { transform: rotate(90deg); }
   <div class="tab" onclick="showTab('f10')">Folder: United Market #502</div>
   <div class="tab" onclick="showTab('f383')">Folder: HEB 383 - Port Isabel</div>
   <div class="tab" onclick="showTab('jv831')">Folder: Joe V's #831 - Garland</div>
+  <div class="tab" onclick="showTab('f3112')">Folder: Walmart 3112-1009 - San Antonio</div>
+  <div class="tab" onclick="showTab('fdal653')">Folder: Kroger DAL653 - Fate</div>
 </div>
 
 <div class="toolbar">
@@ -362,7 +360,7 @@ DT cost-rate = base x (burden+1)
 <!-- ================= FOLDER: SAM'S CLUB 8250-1010 MCALLEN ================= -->
 <div class="section active" id="f8250">
   <h2>Folder: Sam's Club 8250-1010 -- McAllen, TX</h2>
-  <p style="color:#6b6b6b;">26.05.15 -- Major Remodel (existing halocarbon racks kept in service, plus two new standalone transcritical CO2 units)</p>
+  <p style="color:#a8a8a0;">26.05.15 -- Major Remodel (existing halocarbon racks kept in service, plus two new standalone transcritical CO2 units)</p>
 
   <div class="toc">
     <ol>
@@ -386,7 +384,7 @@ DT cost-rate = base x (burden+1)
   </div>
 
   <h3 id="f8250-glossary">Terms this folder has</h3>
-  <p style="color:#6b6b6b;font-style:italic;">Universal terms already covered in the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab. What's new here:</p>
+  <p style="color:#a8a8a0;font-style:italic;">Universal terms already covered in the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab. What's new here:</p>
   <table class="data-table">
     <tr><th>Term</th><th>Meaning</th></tr>
     <tr><td>Remote Condensing Unit (RCU)</td><td>A small, standalone transcritical CO2 (R744) condensing unit serving one specific fixture, rather than a full multi-case rack. This job installs two, tagged CU1 and CU2, each dedicated to a single new case.</td></tr>
@@ -631,7 +629,7 @@ TOTALS row: <span class="calc-result">60 cases</span> (19 new + 41 relocated; Re
 <!-- ================= FOLDER: TRADER JOE'S #455 SAN ANTONIO ================= -->
 <div class="section" id="f455">
   <h2>Folder: Trader Joe's #455 -- San Antonio (North), TX</h2>
-  <p style="color:#6b6b6b;">26.06.17 -- Remodel with CO2 (Transcritical) Upgrade</p>
+  <p style="color:#a8a8a0;">26.06.17 -- Remodel with CO2 (Transcritical) Upgrade</p>
 
   <div class="toc">
     <ol>
@@ -655,7 +653,7 @@ TOTALS row: <span class="calc-result">60 cases</span> (19 new + 41 relocated; Re
   </div>
 
   <h3 id="f455-glossary">Terms this folder has</h3>
-  <p style="color:#6b6b6b;font-style:italic;">Universal terms already covered in the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab. What's new here:</p>
+  <p style="color:#a8a8a0;font-style:italic;">Universal terms already covered in the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab. What's new here:</p>
   <table class="data-table">
     <tr><th>Term</th><th>Meaning</th></tr>
     <tr><td>Transcritical CO2</td><td>A refrigeration architecture using CO2 (R744) as the sole refrigerant at pressures above its critical point on the discharge side. Requires a Gas Cooler instead of a condenser, and a Booster Rack (two-stage compression) instead of a standard rack.</td></tr>
@@ -891,7 +889,7 @@ TOTALS row 29: <span class="calc-result">29 cases</span> | $3,260 material | 221
 <!-- ================= FOLDER: WALMART 0344-1005 EL CAMPO ================= -->
 <div class="section" id="f344">
   <h2>Folder: Walmart 0344-1005 -- El Campo, TX</h2>
-  <p style="color:#6b6b6b;">26.06.24 -- Cap-X REF-1 Condenser Replacement (Racks A, B, C)</p>
+  <p style="color:#a8a8a0;">26.06.24 -- Cap-X REF-1 Condenser Replacement (Racks A, B, C)</p>
 
   <div class="toc">
     <ol>
@@ -915,7 +913,7 @@ TOTALS row 29: <span class="calc-result">29 cases</span> | $3,260 material | 221
   </div>
 
   <h3 id="f344-glossary">Terms this folder has</h3>
-  <p style="color:#6b6b6b;font-style:italic;">Universal terms already covered in the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab. What's new here:</p>
+  <p style="color:#a8a8a0;font-style:italic;">Universal terms already covered in the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab. What's new here:</p>
   <table class="data-table">
     <tr><th>Term</th><th>Meaning</th></tr>
     <tr><td>Cap-X</td><td>Capital Expenditure -- Walmart's classification for this project type. The source document lists the full family: COMBO, REF-1 through REF-4, HVAC-1 through HVAC-4, each with different jobsite signage requirements.</td></tr>
@@ -1133,7 +1131,7 @@ TOTALS row 29: <span class="calc-result">29 cases</span> | $3,260 material | 221
 <!-- ================= FOLDER: HEB CORP #458 CARTHAGE ================= -->
 <div class="section" id="f458">
   <h2>Folder: HEB Corp #458 -- Carthage, TX</h2>
-  <p style="color:#6b6b6b;">26.06.30 -- RRP Remodel (Refrigeration Upgrade)</p>
+  <p style="color:#a8a8a0;">26.06.30 -- RRP Remodel (Refrigeration Upgrade)</p>
 
   <div class="toc">
     <ol>
@@ -1157,7 +1155,7 @@ TOTALS row 29: <span class="calc-result">29 cases</span> | $3,260 material | 221
   </div>
 
   <h3 id="f458-glossary">Terms this folder has</h3>
-  <p style="color:#6b6b6b;font-style:italic;">Universal terms already covered in the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab. What's new here:</p>
+  <p style="color:#a8a8a0;font-style:italic;">Universal terms already covered in the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab. What's new here:</p>
   <table class="data-table">
     <tr><th>Term</th><th>Meaning</th></tr>
     <tr><td>SC Case</td><td>Self-Contained Case -- has its own built-in compressor, never connects to a central rack. Confirmed by name in the source document, which is why this line prices at $0 material and only startup labor.</td></tr>
@@ -1390,7 +1388,7 @@ TOTALS row 29: <span class="calc-result">57 cases</span> | $7,011 material | 449
 <!-- ================= FOLDER: HEB 57 CORPUS CHRISTI ================= -->
 <div class="section" id="f57">
   <h2>Folder: HEB 57 -- Corpus Christi 18, TX</h2>
-  <p style="color:#6b6b6b;">26.05.11 -- New Ice Room</p>
+  <p style="color:#a8a8a0;">26.05.11 -- New Ice Room</p>
 
   <div class="toc">
     <ol>
@@ -1414,7 +1412,7 @@ TOTALS row 29: <span class="calc-result">57 cases</span> | $7,011 material | 449
   </div>
 
   <h3 id="f57-glossary">Terms this folder has</h3>
-  <p style="color:#6b6b6b;font-style:italic;">Universal terms already covered in the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab. What's new here:</p>
+  <p style="color:#a8a8a0;font-style:italic;">Universal terms already covered in the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab. What's new here:</p>
   <table class="data-table">
     <tr><th>Term</th><th>Meaning</th></tr>
     <tr><td>WICP</td><td>Walk-In Control Panel -- provided by H-E-B via the EMS vendor, mounted/powered by the Electrical Contractor, everything else on the panel done by the Refrigeration Contractor.</td></tr>
@@ -1611,7 +1609,7 @@ TOTALS row 29: <span class="calc-result">57 cases</span> | $7,011 material | 449
     </div></div><div class="step-connector"></div>
     <div class="step-item"><div class="step-badge">5</div><div class="step-body">
       <div class="step-title">Rolls into the $8,494.47 Non-Itemized total, then BidCalc</div><div class="step-sheet">SUMMARY row 52 -&gt; BidCalc</div>
-      <div class="step-desc">Part of the fully-resolved <span class="calc-result" style="color:#a0650a;">$105,468.01</span> Total Bid.</div>
+      <div class="step-desc">Part of the fully-resolved <span class="calc-result" style="color:#e0a458;">$105,468.01</span> Total Bid.</div>
     </div></div>
   </div>
   <div class="callout callout-money"><div class="callout-title">Why this is reassuring, not just a gap</div><div class="callout-body">Three independent tabs (Non-Itemized, EQUIPMENT, PARTS) agree on "6" without any of them citing R-1.2 directly -- strong circumstantial evidence the estimator had accurate information despite the missing sheet, even though we can't verify it from the Uploads alone.</div></div>
@@ -1670,10 +1668,10 @@ TOTALS row 29: <span class="calc-result">57 cases</span> | $7,011 material | 449
   </div>
 
   <h3 id="f10-howto">How to read this section</h3>
-  <p>Each numbered tab below follows the same shape: what the section is, the real numbers in it, the formula behind each number (dark code block, exactly as it appears in Excel), and where the input came from. A <span class="tag tag-scope">Scope</span> tag means traced to a specific Upload sentence; <span class="tag tag-manual">Manual</span> means the estimator typed it with no traceable source; <span class="tag tag-mismatch">Mismatch</span> flags a place where Excel and Uploads disagree or don't reconcile. Cell references like <span class="tag-formula" style="background:#eee;color:#333;padding:1px 6px;border-radius:3px;">F21</span> are real coordinates -- open <code>United Market Street #502 Lubbock TX 06.04.26 - Refrg SOW.xlsx</code> (password <code>noZZel</code>) and follow along.</p>
+  <p>Each numbered tab below follows the same shape: what the section is, the real numbers in it, the formula behind each number (dark code block, exactly as it appears in Excel), and where the input came from. A <span class="tag tag-scope">Scope</span> tag means traced to a specific Upload sentence; <span class="tag tag-manual">Manual</span> means the estimator typed it with no traceable source; <span class="tag tag-mismatch">Mismatch</span> flags a place where Excel and Uploads disagree or don't reconcile. Cell references like <span class="tag-formula" style="background:#241a0f;color:#e0a458;padding:1px 6px;border-radius:3px;">F21</span> are real coordinates -- open <code>United Market Street #502 Lubbock TX 06.04.26 - Refrg SOW.xlsx</code> (password <code>noZZel</code>) and follow along.</p>
 
   <h3 id="f10-glossary">Terms this folder has</h3>
-  <p style="color:#6b6b6b;font-style:italic;">Every term this folder introduced turned out to be universal to the workbook template -- see the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab for the full glossary (MD/SD Case, Burden, Labor Blend, Margin, XLOOKUP, Region/Local code, REFERENCE ONLY blocks, HFG, BidCalc, and more). This project's specific values: margin <strong>25%</strong>, region <strong>"TX"</strong>, burden <strong>2.0x</strong>.</p>
+  <p style="color:#a8a8a0;font-style:italic;">Every term this folder introduced turned out to be universal to the workbook template -- see the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab for the full glossary (MD/SD Case, Burden, Labor Blend, Margin, XLOOKUP, Region/Local code, REFERENCE ONLY blocks, HFG, BidCalc, and more). This project's specific values: margin <strong>25%</strong>, region <strong>"TX"</strong>, burden <strong>2.0x</strong>.</p>
 
   <h3 id="f10-uploads">The Uploads (source documents)</h3>
   <div class="callout callout-critical">
@@ -1716,7 +1714,7 @@ TOTALS row 29: <span class="calc-result">57 cases</span> | $7,011 material | 449
   <div class="doc-excerpt">
     <span class="doc-page-tag">page 3-4 -- closing list</span>
     <p><strong>General items to include in your bid:</strong> line set covers/close-offs, trim install, dispose of removed cases, unloading (forklift), setting/leveling cases, crane service for RTUs, rental equipment, roof penetration repair, refrigerant supply, condensate drains, all piping/insulation/hangers, CPC sensor connections, temperature control/defrost/fan relays, Start Up, name tags on new cases, refrigerant tracking updates.</p>
-    <p style="color:#a13d3a;font-weight:bold;">"All work is night work unless otherwise specified."</p>
+    <p style="color:#e0847e;font-weight:bold;">"All work is night work unless otherwise specified."</p>
   </div>
 
   <h4>Refrigerant Conversion letter</h4>
@@ -1837,7 +1835,7 @@ Row 37 note: <span class="calc-source">"Material is for hanging coils only!"</sp
   </table>
 
   <h4>1.8 Sales Tax (row 189)</h4>
-  <p>Mechanism: see <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a>, step 7. This job: category = "Sales Tax Labor &amp; Mats" (taxes everything), rate = <span class="tag tag-manual">0.0825 -- typed by hand</span>, this job's branch = <code>(labor+mat sell+contingency)*rate</code> <span class="calc-result" style="color:#a0650a;">= $41,519.93</span>.</p>
+  <p>Mechanism: see <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a>, step 7. This job: category = "Sales Tax Labor &amp; Mats" (taxes everything), rate = <span class="tag tag-manual">0.0825 -- typed by hand</span>, this job's branch = <code>(labor+mat sell+contingency)*rate</code> <span class="calc-result" style="color:#e0a458;">= $41,519.93</span>.</p>
   <div class="callout callout-mismatch"><div class="callout-title"><span class="tag tag-mismatch">Mismatch</span> Sourced from neither the Uploads nor any formula</div><div class="callout-body">The tax rate is typed in after a manual Google search -- see section 15.</div></div>
 
   <h3 id="f10-tab2">Tab 2 -- EQUIPMENT</h3>
@@ -1943,7 +1941,7 @@ Row 37 note: <span class="calc-source">"Material is for hanging coils only!"</sp
     </div></div><div class="step-connector"></div>
     <div class="step-item"><div class="step-badge">8</div><div class="step-body">
       <div class="step-title">Rolls into BidCalc</div><div class="step-sheet">BidCalc row 43</div>
-      <div class="step-desc">Now inseparable from every other bucket -- part of the <span class="calc-result" style="color:#a0650a;">$550,294.80</span> Total Bid.</div>
+      <div class="step-desc">Now inseparable from every other bucket -- part of the <span class="calc-result" style="color:#e0a458;">$550,294.80</span> Total Bid.</div>
     </div></div>
   </div>
 
@@ -1986,7 +1984,7 @@ Row 37 note: <span class="calc-source">"Material is for hanging coils only!"</sp
 <!-- ================= FOLDER 1: WALMART 0392-1005 ================= -->
 <div class="section" id="f1">
   <h2>Folder: Walmart 0392-1005 -- Weatherford, OK</h2>
-  <p style="color:#6b6b6b;">26.05.08 -- Cap X-REF 1 Remodel (Supercenter Remodel w/ SCO2-TCO2-GLYCOL Upgrade)</p>
+  <p style="color:#a8a8a0;">26.05.08 -- Cap X-REF 1 Remodel (Supercenter Remodel w/ SCO2-TCO2-GLYCOL Upgrade)</p>
 
   <div class="toc">
     <ol>
@@ -2009,7 +2007,7 @@ Row 37 note: <span class="calc-source">"Material is for hanging coils only!"</sp
   </div>
 
   <h3 id="f1-glossary">Terms this folder has</h3>
-  <p style="color:#6b6b6b;font-style:italic;">Burden, BidCalc, Responsibility Matrix, RD/RE/BASR, Sublet, and Scheduling Data/Dispatch are now covered once in the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab. What's actually new/unique to this folder:</p>
+  <p style="color:#a8a8a0;font-style:italic;">Burden, BidCalc, Responsibility Matrix, RD/RE/BASR, Sublet, and Scheduling Data/Dispatch are now covered once in the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab. What's actually new/unique to this folder:</p>
   <table class="data-table">
     <tr><th>Term</th><th>Meaning</th></tr>
     <tr><td>DX / SCO2 / TCO2 / GLY</td><td>Refrigerant system types on this job: DX = direct-expansion (standard), SCO2 = subcritical CO2, TCO2 = transcritical CO2, GLY = glycol secondary loop. This job runs all three side by side.</td></tr>
@@ -2250,7 +2248,7 @@ Row 37 note: <span class="calc-source">"Material is for hanging coils only!"</sp
 <!-- ================= FOLDER: HEB 383 PORT ISABEL ================= -->
 <div class="section" id="f383">
   <h2>Folder: HEB 383 -- Port Isabel, TX</h2>
-  <p style="color:#6b6b6b;">26.05.11 -- New Ice Room (4 fully independent ice-maker/bagger circuits, brand-new construction, no existing cases/coils/rack touched)</p>
+  <p style="color:#a8a8a0;">26.05.11 -- New Ice Room (4 fully independent ice-maker/bagger circuits, brand-new construction, no existing cases/coils/rack touched)</p>
 
   <div class="toc">
     <ol>
@@ -2274,7 +2272,7 @@ Row 37 note: <span class="calc-source">"Material is for hanging coils only!"</sp
   </div>
 
   <h3 id="f383-glossary">Terms this folder has</h3>
-  <p style="color:#6b6b6b;font-style:italic;">Universal terms already covered in the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab. What's new here:</p>
+  <p style="color:#a8a8a0;font-style:italic;">Universal terms already covered in the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab. What's new here:</p>
   <table class="data-table">
     <tr><th>Term</th><th>Meaning</th></tr>
     <tr><td>Ice Room Bagger / SIC circuit</td><td>A self-contained ice-maker/bagger machine treated as its own fully independent refrigeration circuit -- its own dedicated rooftop condensing unit, not tied into any store rack. This job has four: SIC08, SIC09, SIC10, SIC11.</td></tr>
@@ -2541,7 +2539,7 @@ At the drawing's real 195ft: would be $23.40 and $3.80 -- roughly 1.86x higher o
 <!-- ================= FOLDER: JOE V'S #831 GARLAND ================= -->
 <div class="section" id="jv831">
   <h2>Folder: Joe V's #831 -- Garland, TX</h2>
-  <p style="color:#6b6b6b;">26.05.19 -- New Store (Existing Building): a CO2 Cascade Split rack, 5 self-contained singles, 61 display cases, 20 evaporator coils, and a real walk-in complex. The largest and most complete Uploads set analyzed so far.</p>
+  <p style="color:#a8a8a0;">26.05.19 -- New Store (Existing Building): a CO2 Cascade Split rack, 5 self-contained singles, 61 display cases, 20 evaporator coils, and a real walk-in complex. The largest and most complete Uploads set analyzed so far.</p>
 
   <div class="toc">
     <ol>
@@ -2565,7 +2563,7 @@ At the drawing's real 195ft: would be $23.40 and $3.80 -- roughly 1.86x higher o
   </div>
 
   <h3 id="jv831-glossary">Terms this folder has</h3>
-  <p style="color:#6b6b6b;font-style:italic;">Universal terms already covered in the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab. What's new here:</p>
+  <p style="color:#a8a8a0;font-style:italic;">Universal terms already covered in the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab. What's new here:</p>
   <table class="data-table">
     <tr><th>Term</th><th>Meaning</th></tr>
     <tr><td>CO2 Cascade Split</td><td>Rack A's actual system type per its own equipment schedule: two separate refrigerant loops sharing the same rack -- R-744 (CO2) on the low-temp/frozen (LT) side, R-513A on the medium-temp (MT) side -- linked by 3 "Cascade Condenser Plate Heat Exchangers" that transfer heat between the two loops without mixing the refrigerants.</td></tr>
@@ -2812,6 +2810,541 @@ At the drawing's real 195ft: would be $23.40 and $3.80 -- roughly 1.86x higher o
     <li><strong>The best-verified PIPE 2.0 tab yet</strong> -- 150 real circuits, with the MT trunk lines matching the drawing schedule almost perfectly (29 of 30 exact), proving the earlier flagged errors are real, isolated mistakes rather than a general transcription problem.</li>
     <li><strong>"New Store - Existing Building"</strong> -- a distinct scope category, stated in the price sheet's own header, that explicitly reconciles what would otherwise look like a contradiction between the folder name and the drawings' repeated remodel/decommissioning language.</li>
     <li><strong>The off-menu 0.18 Installation Factor recurs</strong> -- now seen on a 2nd folder, both estimated by the same person (Jay Jarratt Jr), suggesting this may be a real but undocumented option rather than a one-off override.</li>
+  </ul>
+</div>
+
+<!-- ================= FOLDER: WALMART 3112-1009 SAN ANTONIO ================= -->
+<div class="section" id="f3112">
+  <h2>Folder: Walmart 3112-1009 -- San Antonio, TX</h2>
+  <p style="color:#a8a8a0;">26.05.22 -- CU04 TCO2 Upgrade: the smallest, most self-contained job analyzed so far. One rooftop CO2 (R744) condensing unit bolted onto an existing, operating store to feed 2 new Grab-N-Go cases and a chicken warmer -- not a remodel of the store's own refrigeration system at all. Everything in this folder ties out unusually cleanly, which makes the one real data-entry error easy to isolate.</p>
+
+  <div class="toc">
+    <ol>
+      <li><a href="#f3112-glossary">Terms this folder has</a></li>
+      <li><a href="#f3112-uploads">The Uploads (1 combined 22-sheet Bid Set)</a></li>
+      <li><a href="#f3112-tab1">Tab 1 -- CP Est Pro 2.0 SUMMARY</a></li>
+      <li><a href="#f3112-tab2">Tab 2 -- EQUIPMENT</a></li>
+      <li><a href="#f3112-tab3">Tab 3 -- PIPE 2.0</a></li>
+      <li><a href="#f3112-tab4">Tab 4 -- PARTS</a></li>
+      <li><a href="#f3112-tab5">Tab 5 -- LABOR RATES</a></li>
+      <li><a href="#f3112-tab6">Tab 6 -- EQUIPMENT SALES BUYOUTS</a></li>
+      <li><a href="#f3112-tab7">Tab 7 -- COPPER_INSULATION_FORM</a></li>
+      <li><a href="#f3112-tab8">Tab 8 -- HVAC</a></li>
+      <li><a href="#f3112-tab9">Tab 9 -- TAX TABLE</a></li>
+      <li><a href="#f3112-tab10">Tab 10 -- BidCalc</a></li>
+      <li><a href="#f3112-walkthrough">Full walkthrough: the case-sizing error</a></li>
+      <li><a href="#f3112-mismatches">Mismatches: Uploads vs. Excel</a></li>
+      <li><a href="#f3112-mapping">Mapping table (every traced source)</a></li>
+      <li><a href="#f3112-unique">What's unique about this folder</a></li>
+    </ol>
+  </div>
+
+  <h3 id="f3112-glossary">Terms this folder has</h3>
+  <p style="color:#a8a8a0;font-style:italic;">Universal terms already covered in the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab. What's new here:</p>
+  <table class="data-table">
+    <tr><th>Term</th><th>Meaning</th></tr>
+    <tr><td>CU04 TCO2</td><td>The project's own tag for the single new rooftop condensing unit: a Kysor Warren ED-010-040-CM-OXV-A, R744 (CO2), rated for 80 bar, contractor-installed but owner-furnished through supplier Carrier. "CU04" is this store's running equipment number for its 4th condensing unit, not a 4th unit installed on this job.</td></tr>
+    <tr><td>CO2 Charging Station</td><td>A dedicated, ground-level (not roof-level) service point for charging the CO2 system, reached by piping that runs through a wall penetration at the truck well, protected by a bollard. Distinct from the condensing unit itself.</td></tr>
+    <tr><td>"90 BAR" pipe designation</td><td>The pressure-rated copper class used for every CO2 line on this job (in place of the standard "ACR" copper class used on R448A/R449A/R513A jobs) -- appears throughout PIPE 2.0 and has its own dedicated ordering block on COPPER_INSULATION_FORM.</td></tr>
+    <tr><td>Order %</td><td>A COPPER_INSULATION_FORM-wide factor (here set to 80%) that deliberately orders less material than the full calculated quantity, to be trued up later -- a real, intentional purchasing buffer, not a rounding error.</td></tr>
+    <tr><td>RM1 Field Installed Components Matrix</td><td>A second, equipment-specific responsibility matrix (beyond the standard Case Installation checklist) that explicitly marks Compressors, Compressor Capacity Controls, and Glycol as N/A to this scope -- confirming the job never opens or touches any existing rack.</td></tr>
+  </table>
+
+  <h3 id="f3112-uploads">The Uploads -- 1 combined 22-sheet Bid Set</h3>
+  <p>Unlike every other folder, this one has a single PDF -- <code>_3112.1009 SAN ANTONIO, TX - BID SET.pdf</code> (22 pages) -- where each page is a full drawing sheet from a Revit-authored, multi-discipline bid set (architect Galloway & Company AE Services; MPW Engineering holds Electrical, Refrigeration, and Fire Protection). Every page's sheet number was confirmed directly from its own title block, cross-checked against the Drawing Index on the Cover Sheet -- all 22 accounted for, no gaps.</p>
+  <table class="data-table">
+    <tr><th>Sheet</th><th>What's in it</th></tr>
+    <tr><td>C1 -- Cover Sheet</td><td>Store #03112-1009, San Antonio TX. General Scope of Work states directly: remove self-checkout registers, install staffed registers; install vendor sushi kiosk; install new Grab n' Go refrigeration cases; install new chicken warmer. Refrigeration consultant: MPW Engineering, Scott C. Webb, P.E.</td></tr>
+    <tr><td>RM1 -- Responsibility Matrices</td><td>A 45-item generic Case Installation checklist, plus a TCO2-specific Field Installed Components matrix that marks Compressors/Capacity Controls/Glycol as N/A -- confirming no existing rack is touched.</td></tr>
+    <tr><td>A1 -- Overall Floor Plan</td><td>Four job-specific details: TCO2 Charging Station Elevation, Bollard Detail (32" core-drilled, 4" OD steel), Wall Penetration (4" dia., for TCO2 lines through the truck-well wall), Plan at Truckwell/DSD Door.</td></tr>
+    <tr><td>A4 -- Roof Plan</td><td>Confirms the new curb ("NEW CU, REF 4 & 5-A4") and roof penetration; a non-structural, non-sloped curb requiring field-leveled unistrut to match roof slope.</td></tr>
+    <tr><td>A5.4 -- Enlarged Plans and Details</td><td>Enlarged checkout demo/new plans, trenching plan, sushi kiosk ceiling/RCP details.</td></tr>
+    <tr><td>GA1 -- Front Grocery Plan</td><td>The Refrigerated Case Legend: 2x RDC1069.652 (Hillphoenix QC-R-35, <strong>8FT</strong> self-service multi-deck, "Grab-N-Go") and 1x RH0123.000 (Custom Delis Equipment, 4FT hot self-service island/chicken warmer).</td></tr>
+    <tr><td>S1 -- Plan, General Notes and Details</td><td>Roof framing plan explicitly labels the new unit <strong>"NEW CU04 (350 LBS MAX)"</strong> -- consistent with everywhere else except two BAS sheets (see the walkthrough table below).</td></tr>
+    <tr><td>P1 -- Plumbing Plans, Details and Schedules</td><td>Adds floor drain mark FD3 (Sioux Chief/Josam, light duty, 9" half grate) for the new case drain detail; standard domestic water/waste tie-in keynotes.</td></tr>
+    <tr><td>E1 -- Electrical Power Plan</td><td>Chicken warmer circuit L4D1-37,39 (sushi-kiosk-style pre-wired panel); CU04 tagged directly on the power plan with a 60A/3P NEMA 3R disconnect labeled "RCU-4" fed from panel H4B.</td></tr>
+    <tr><td>E2 -- Electrical Schedules and Details</td><td>Existing panel L4D1 (208Y/120V, 300A M.L.O.) schedule: circuit 41 "GRAB N GO CASES" at 20A/1P (1.20 kVA, a controls-only circuit); circuit 37/39 "SUSHI KIOSK (2)"; circuit 49 "RH0135 HOT CASE."</td></tr>
+    <tr><td>FP1 -- Fire Protection Enlarged Views and Details</td><td>NFPA 13 (2019 ed.) sprinkler relocate/reconnect notes around the new checkout/grocery layout. Nothing refrigeration-specific.</td></tr>
+    <tr><td>BASR1 / BASR1.1 -- Refrigeration BAS Plans</td><td>Tag the new unit <strong>"CU01 TCO2"</strong> / "CU01a/CU01b TCO2" -- see the walkthrough below.</td></tr>
+    <tr><td>BASR2 -- Refrigeration BAS Schedules</td><td>Discharge-air-temp/defrost schedule, correctly tagged "CU04 TCO2": fixed defrost, 6x/day, 30 min duration, KE2/CC200 controlled.</td></tr>
+    <tr><td>BASR3 -- BAS Details</td><td>Case Connection Schematic and Refrigeration BAS One-Line Diagram, correctly tagged "CU04a/CU04b TCO2." Novar ES1 executive controller talking to KE2-CC case controllers and the condensing unit's factory HECU controller.</td></tr>
+    <tr><td>R1 -- Refrigeration Overall Plan</td><td>20 general refrigeration notes (standard boilerplate); references a "Seismic Restraint Sheet SR1" that is <strong>not included anywhere in this 22-sheet set</strong>.</td></tr>
+    <tr><td>R1.1 -- Enlarged Refrigeration Plan</td><td>Keynote 15.671: "install CO2 isolation check valves in a service accessible location inside case drain pan... fully insulate" -- confirms CO2 (not a generic refrigerant) throughout.</td></tr>
+    <tr><td>R2 -- Refrigeration Schedules</td><td>The core technical schedule. Piping Schedule: one 127 ft segment, System CU04 TCO2. TCO2 Condensing Unit Schedule: Kysor Warren ED-010-040-CM-OXV-A, R744, PAG100 oil, MCA 21A, MOPD 30A, rated 80 bar. Refrigeration System Schedule: all three refrigerant-charge fields (Estimated Charge, Rack and Condenser Charge, Fixture/Field Piping) left blank ("--") on the drawing itself.</td></tr>
+    <tr><td>R3 -- Refrigeration Details</td><td>7 standard pipe-support/routing details, no project-specific values.</td></tr>
+    <tr><td>R3.1 -- Refrigeration Details</td><td>5 TCO2-specific details, most importantly "Charging Station (CO2)": 650 psig relief valve, mandatory warning signage, routing through the wall penetration protected by the bollard.</td></tr>
+    <tr><td>R4 -- Refrigeration Submittals</td><td>Blank -- placeholder boilerplate only ("NOT TO BE SIGNED"), no actual submittal content at bid time.</td></tr>
+    <tr><td>FXS1 -- Fixture Anchorage Plan Details and Notes</td><td>GC anchors all shelving/racking per RMI 2023 / ASCE 7-22; not refrigeration-specific.</td></tr>
+  </table>
+
+  <h3 id="f3112-tab1">Tab 1 -- CP Est Pro 2.0 SUMMARY</h3>
+
+  <h4>1.1 Header</h4>
+  <p>Project "Walmart 3112-1009 - CU04 TCO2 Upgrade," San Antonio, Texas. Estimator Jay Jarratt Jr, labor division "SAN ANTONIO, TX" (correct match). <strong>New/Remodel = REMODEL</strong> (not NEW) -- Texas resolves via the opposite tax branch from a "NEW" toggle: <span class="tag tag-formula">"Sales Tax Labor & Mats"</span>, taxing labor and materials both, not just materials.</p>
+
+  <h4>1.2 Display Cases</h4>
+  <table class="data-table">
+    <tr><th>Type</th><th>8'</th><th>12'</th><th>Material</th><th>Pipefitter</th><th>Case Setter</th></tr>
+    <tr><td>MD Cases</td><td><span class="tag tag-mismatch">0</span></td><td><span class="tag tag-mismatch">2</span></td><td>$260</td><td>14 hrs</td><td>10 hrs</td></tr>
+  </table>
+  <div class="callout callout-mismatch">
+    <div class="callout-title"><span class="tag tag-mismatch">Confirmed error</span> The 2 new cases were entered as 12' cases; GA1 says 8FT</div>
+    <div class="callout-body">GA1's Refrigerated Case Legend explicitly lists both RDC1069.652 cases as <strong>8FT</strong> (Hillphoenix QC-R-35). The price sheet counted them under the 12' column instead of the 8' column -- $130/unit charged instead of $104/unit. Labor hours are identical for both sizes (7 hrs pipefitter, 5 hrs case setter) so only the material dollars are affected: <strong>$260 charged vs. $208 if entered correctly -- a $52 overstatement.</strong></div>
+  </div>
+
+  <h4>1.3 Evaporators</h4>
+  <p>Entirely zero -- correct, this scope has no separate coils.</p>
+
+  <h4>1.4 Non-Itemized Equipment Room &amp; RTU Breakdown</h4>
+  <table class="data-table">
+    <tr><th>Item</th><th>Material</th><th>Labor</th><th>Source</th></tr>
+    <tr><td>Equipment Sheet Totals</td><td>$365</td><td>19.5 hrs</td><td><span class="tag tag-formula">formula</span> = EQUIPMENT tab total</td></tr>
+    <tr><td>Temporary Vehicle Fuel Cost Add</td><td>$347.52</td><td>0</td><td><span class="tag tag-mismatch">No source</span> -- same recurring overhead line as every folder</td></tr>
+    <tr><td>Equipment Tags &amp; Pipe Labels</td><td>$250</td><td>2 hrs</td><td><span class="tag tag-scope">Scope</span></td></tr>
+    <tr><td>PVC Pipe Chase (1)</td><td>$260</td><td>4 hrs</td><td><span class="tag tag-scope">Scope</span> matches GA1's "PVC Refrigeration Chase" detail exactly</td></tr>
+    <tr><td>Exterior Pipe Jacketing</td><td>$150</td><td>4 hrs</td><td><span class="tag tag-scope">Scope</span></td></tr>
+    <tr><td>Misc Parts for CO2 Charge Station</td><td>$350</td><td>10 hrs</td><td><span class="tag tag-scope">Scope</span> matches R3.1's CO2 Charging Station detail exactly</td></tr>
+    <tr><td><strong>TOTALS</strong></td><td><strong>$1,722.52</strong></td><td><strong>39.5 hrs</strong></td><td></td></tr>
+  </table>
+
+  <h4>1.5 IN-HOUSE GC and SUBLET CONTRACTORS</h4>
+  <p>Entirely zero -- no subcontracted trades on this job.</p>
+
+  <h4>1.6 Refrigerant</h4>
+  <div class="calc-box">PIPE 2.0 piping refrigerant:       <span class="calc-source">10.3562 lbs</span>
++ Cases installed x 5:             <span class="calc-source">2 x 5 = 10 lbs</span>
++ EQUIPMENT tab refrigerant:       <span class="calc-source">20 lbs</span>
+                                    <span class="calc-result">= 40.3562 lbs computed total</span></div>
+  <p>All 40.3562 lbs assigned to <strong>R744 CO2</strong> at $6/lb -- correctly matching the uploads' CO2-only architecture, with no leftover R407F/other-refrigerant residue this time. Total Refrigerant Cost = <span class="calc-result">$242.16</span>.</p>
+
+  <h4>1.7 Scheduling Data</h4>
+  <table class="data-table">
+    <tr><th>Field</th><th>Value</th></tr>
+    <tr><td># of Fitters</td><td><span class="tag tag-manual">2</span></td></tr>
+    <tr><td>Duration</td><td><strong>1.42 weeks</strong></td></tr>
+    <tr><td>R Dispatch</td><td>34.34 ST / <strong>151 OT hrs (81.5% OT)</strong></td></tr>
+  </table>
+  <div class="callout callout-warn">
+    <div class="callout-title">The most overtime-heavy labor dispatch analyzed so far</div>
+    <div class="callout-body">81.5% of all dispatched hours are logged as overtime, not straight time -- the highest OT share of any folder checked. This matters because the workbook's OT/DT cost isn't just a flat rate premium: the underlying burden multiplier is 2.0x for ST hours, but the formulas add +0.5 for OT and +1.0 for DT on top of that base (effectively ~2.5x burden on OT, ~3.0x on DT). That's a real, consistent template mechanism -- just one that becomes financially material here because so much of this job's labor was entered as OT rather than ST.</div>
+  </div>
+
+  <h4>1.8 Labor Blend &amp; Rate</h4>
+  <p>30/10/40/20/0% blend (Foreman/Startup/Journeyman/Apprentice/Tradesman), region "TX," standard $40/$34/$22/$20 base wages, margin <strong>25%</strong>.</p>
+
+  <h4>1.9 Rentals</h4>
+  <table class="data-table">
+    <tr><th>Item</th><th>Cost</th></tr>
+    <tr><td>Freight and Disposal</td><td>$0</td></tr>
+    <tr><td>Forklift</td><td>$0</td></tr>
+    <tr><td>Gasoline Charge</td><td>$0</td></tr>
+    <tr><td>Crane</td><td>$2,500</td></tr>
+    <tr><td>Rapid Recovery</td><td>$0</td></tr>
+    <tr><td>Scissor Lifts</td><td>$625</td></tr>
+    <tr><td>Container Rental</td><td>$0</td></tr>
+    <tr><td><strong>TOTAL RENTALS</strong></td><td><strong>$3,125</strong></td></tr>
+  </table>
+  <p>Unlike Joe V's #831, the $0 Rapid Recovery line here is <em>not</em> a flagged gap -- nothing in this folder's uploads calls for R-22 recovery from an existing rack, and RM1 explicitly marks Compressors/Glycol as N/A to this scope.</p>
+
+  <h4>1.10 Total Summary</h4>
+  <table class="data-table">
+    <tr><th>Category</th><th>Cost</th><th>Sell</th><th>Margin</th></tr>
+    <tr><td>Labor</td><td>$15,170.29</td><td>$20,227.05</td><td>25%</td></tr>
+    <tr><td>Materials</td><td>$11,111.14</td><td>$14,814.85</td><td>25%</td></tr>
+    <tr><td>PARTS Sheet Buyouts</td><td>$0</td><td>$0</td><td>20%</td></tr>
+    <tr><td>Rentals</td><td>$3,125</td><td>$3,906.25</td><td>20%</td></tr>
+    <tr><td>Fixed 1% Warranty</td><td>$453.89</td><td>$453.89</td><td>--</td></tr>
+    <tr><td>Contingency Factor</td><td>$2,049.90</td><td>$2,562.38</td><td><span class="tag tag-mismatch">labeled 5%</span></td></tr>
+    <tr><td>Sales Tax (8.25%, Labor &amp; Mats)</td><td>$3,424.62</td><td>$3,424.62</td><td>--</td></tr>
+    <tr><td><strong>TOTAL</strong></td><td><strong>$35,334.84</strong></td><td><strong>$45,390</strong></td><td>Gross Profit $10,055.16 (22.15%)</td></tr>
+  </table>
+  <div class="callout callout-mismatch"><div class="callout-title"><span class="tag tag-mismatch">Formula bug</span> Now confirmed on a seventh folder</div><div class="callout-body">Contingency's cost is correctly computed off the 5% margin cell, but sell uses the hardcoded &divide;0.8 divisor instead of &divide;(1-0.05) -- $2,562.38 instead of the ~$2,157.79 a true 5%-margin sell would produce.</div></div>
+
+  <h4>1.11 Job Scope Notes &amp; Exclusions</h4>
+  <p>Row 197's scope bullets read almost like a checklist and independently confirm nearly everything found in the uploads: 2 new cases, 1 new CU04 TCO2 unit (roof), 1 CO2 charge station, isolation valves, all new piping, equipment labels/tags, PVC pipe chase, "All Refrigerant Provided by RC (<strong>R744</strong>)," and "NEW SUSHI EQUIPMENT PROVIDED &amp; INSTALLED BY VENDOR." The Exclusions list is the <strong>full standard 13 items</strong> (7 in column B + 6 in column F) -- no truncation here, unlike HEB 383 and Joe V's #831.</p>
+
+  <h3 id="f3112-tab2">Tab 2 -- EQUIPMENT</h3>
+  <table class="data-table">
+    <tr><th>Item</th><th>Qty</th><th>Material</th><th>Labor</th><th>Refrigerant</th></tr>
+    <tr><td>1/4-10 HP Condensing Units</td><td>1</td><td>$100</td><td>16 hrs</td><td>20 lbs</td></tr>
+    <tr><td>Change Rack Main Liquid Drier (4) RC 4864 HH</td><td>0.5</td><td>$65</td><td>1 hr</td><td>0</td></tr>
+    <tr><td>Change Rack Suction Filters (8) Cores</td><td>0.5</td><td>$200</td><td>2.5 hrs</td><td>0</td></tr>
+    <tr><td><strong>TOTALS</strong></td><td></td><td><strong>$365</strong></td><td><strong>19.5 hrs</strong></td><td><strong>20 lbs</strong></td></tr>
+  </table>
+  <p>The $100/16hr/20lb condensing-unit line is <em>not</em> pricing the actual Kysor Warren unit -- it's the installation-only labor/hardware charge, since R2's schedule states the unit is "contractor installed and owner furnished through refrigeration equipment supplier: Carrier." Climate Pros never buys the equipment itself.</p>
+  <div class="callout callout-warn">
+    <div class="callout-title">Half-unit "existing rack" service charge, with no existing rack in scope</div>
+    <div class="callout-body">RM1 explicitly marks Compressors/Compressor Capacity Controls as N/A to this job, and nothing in the uploads describes an existing rack being opened for this CU04 addition -- yet a 0.5-unit charge for rack filter/drier service appears anyway. This reads like a leftover template default rather than a scoped item, though it's possible (not confirmed) it ties to some other rack elsewhere in the store not shown in these drawings.</div>
+  </div>
+  <p>Also: the mini header block (E6) leaks a raw date serial (46080) instead of a formatted date -- the same field-formatting artifact seen on HVAC tabs across several other folders.</p>
+
+  <h3 id="f3112-tab3">Tab 3 -- PIPE 2.0</h3>
+  <p>Header: Install Labor Hours 48, LF Pipe w/waste 480, <strong>Installation Factor 0.20</strong> -- genuinely on-menu this time ("T Bar ceiling," one of five documented options), unlike the undocumented 0.18 seen on HEB 383 and Joe V's #831. Total Materials $7,090.98, Piping Refrigerant 10.36 lbs -- both feed SUMMARY exactly.</p>
+  <p>Only 3 of 67 available "System" rows are used:</p>
+  <table class="data-table">
+    <tr><th>System</th><th>Description</th><th>Liquid Line</th><th>Suction Line</th></tr>
+    <tr><td>1</td><td>CU04 TCO2</td><td>1/2" x 127 ft</td><td>5/8" x 127 ft</td></tr>
+    <tr><td>2</td><td>RISER</td><td>--</td><td>1/2" x 10 ft</td></tr>
+    <tr><td>4</td><td>CO2 CHRG ST</td><td>--</td><td>1/2" x 160 ft</td></tr>
+  </table>
+  <div class="callout callout-money">
+    <div class="callout-title">System 1 is an exact match to R2's Piping Schedule</div>
+    <div class="callout-body">System 1's 127 ft (both liquid and suction) is an exact match to R2's own "estimated total length" of 127 ft for System CU04 TCO2. The 480 LF total shown at the top of the tab (after 10% waste and per-size rounding) looks larger only because it correctly adds the riser and CO2-charging-station runs -- both real, separately documented scope items (R1.1, R3.1) that R2's minimal one-line schedule doesn't itemize.</div>
+  </div>
+  <p>Insulation: $963.80, traced to two exact bucket rows -- 340 LF of 1"-thick black insulation on the 0.5" pipe bucket (covering System 1's liquid line + System 2's + System 4's suction lines) and 140 LF on the 0.625" bucket (System 1's suction line). Both reconcile to the cent against N5.</p>
+
+  <h3 id="f3112-tab4">Tab 4 -- PARTS</h3>
+  <p>Total <strong>$1,735.48</strong>, and every dollar traces to five specific CO2-appropriate parts:</p>
+  <table class="data-table">
+    <tr><th>Part</th><th>Qty</th><th>Cost</th></tr>
+    <tr><td>Pressure Relief Valve 1/2x5/8 #400 (15504-400)</td><td>1</td><td>$125</td></tr>
+    <tr><td>CO2 BV w/Integral Pressure Relief 1/2" (EBVTPR1040)</td><td>1</td><td>$127.45</td></tr>
+    <tr><td>CO2 BV w/Integral Pressure Relief 5/8" (EBVTPR1050)</td><td>1</td><td>$128.51</td></tr>
+    <tr><td>CO2 BV Mueller 140 BAR 1/2" (AQ17861XHP)</td><td>4</td><td>$762.96</td></tr>
+    <tr><td>15% Silphos brazing rod 1/8"x1/8"x36"</td><td>2</td><td>$591.56</td></tr>
+  </table>
+  <p>The relief valve matches R3.1's "650 psig service pressure relief valve" detail exactly; the CO2-rated ball valves and silver-phos brazing rod (required for CO2's higher line pressures, not standard tin-based solder) match R1.1's isolation-check-valve keynote and R3.1's charging-station detail. No "two-totals trap" here -- SUMMARY correctly references J378, and the buyout sub-list (P11) is correctly $0.</p>
+
+  <h3 id="f3112-tab5">Tab 5 -- LABOR RATES</h3>
+  <p>Standard, unchanged. TX row: $40/$34/$22/$20, burden 2.0x.</p>
+
+  <h3 id="f3112-tab6">Tab 6 -- EQUIPMENT SALES BUYOUTS</h3>
+  <p>Entirely zero -- consistent with CU04 being furnished directly by Walmart's supplier rather than sold through Climate Pros' buyout mechanism. Carries its own independent tax rate of <strong>8.5%</strong>, separate from the main SUMMARY's 8.25% -- the same cross-folder mechanism documented in the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab, just unused here since there's nothing to tax.</p>
+
+  <h3 id="f3112-tab7">Tab 7 -- COPPER_INSULATION_FORM</h3>
+  <p>A real order, entirely under the <strong>"90 BAR" (XHP) CO2-rated copper</strong> category rather than standard ACR copper: 280 LF of 1/2" and 120 LF of 5/8" (both already net of the tab's 80% "Order %" purchasing-buffer factor), plus a small saddle order (38.4 units of the 3.25" bucket -- also net of the same 80% factor; the raw calculated quantity in PIPE 2.0 is 48).</p>
+  <div class="callout callout-mismatch">
+    <div class="callout-title"><span class="tag tag-mismatch">Template gap</span> No insulation-ordering columns exist for the 90-BAR CO2 section</div>
+    <div class="callout-body">The standard ACR copper blocks on this same tab (Type L and Type K) each have adjacent Black/White insulation order columns built in. The "90 BAR" block that this job's CO2 lines actually use (rows 56-66) has only two columns -- regular-wall LF and XHP-wall LF -- with no insulation columns at all. PIPE 2.0 correctly prices $963.80 of insulation for this job's CO2 lines, but there's no corresponding line on the literal purchase order telling the supply house how much insulation to send. This looks like a genuine template gap for TCO2/CO2 jobs specifically, since the form was clearly built with standard-refrigerant (ACR) piping in mind.</div>
+  </div>
+
+  <h3 id="f3112-tab8">Tab 8 -- HVAC</h3>
+  <p>Entirely zero, as expected for a refrigeration-only job. Header block shows the same field-label misalignment confirmed on six other folders (e.g. "BID DATE:" shows "San Antonio," "SCOPE:" shows "Texas," "REVISIONS #:" shows the raw date serial 46080) -- a seventh confirmation of this template artifact.</p>
+
+  <h3 id="f3112-tab9">Tab 9 -- TAX TABLE</h3>
+  <p>Texas row: Existing/Remodel &rarr; "Sales Tax Labor &amp; Mats," New &rarr; "Use Tax Mats Only." Since this job's toggle is REMODEL, the sell price is taxed on labor and materials both, at 8.25%.</p>
+
+  <h3 id="f3112-tab10">Tab 10 -- BidCalc</h3>
+  <p>Total Bid = <strong>$45,389.04</strong>, matching SUMMARY's rounded-up $45,390 exactly. Every bucket (labor by category, OT, materials, rentals, contingency, warranty, tax) ties out one-for-one with the SUMMARY tab.</p>
+
+  <h3 id="f3112-walkthrough">Full walkthrough: the case-sizing error</h3>
+  <div class="step-flow">
+    <div class="step-item"><div class="step-badge">1</div><div class="step-body">
+      <div class="step-title">The drawings specify 8FT cases</div><div class="step-sheet">GA1, Refrigerated Case Legend</div>
+      <div class="step-desc">2x RDC1069.652, Hillphoenix QC-R-35, explicitly listed as "8FT" self-service multi-deck (Grab-N-Go).</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">2</div><div class="step-body">
+      <div class="step-title">The price sheet enters them as 12' cases</div><div class="step-sheet">SUMMARY, Display Cases</div>
+      <div class="step-desc"><div class="calc-box">C21 (8' column): <span class="calc-source">0</span>
+D21 (12' column): <span class="calc-source">2</span></div></div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">3</div><div class="step-body">
+      <div class="step-title">The wrong per-unit rate gets applied</div><div class="step-sheet">SUMMARY row 21, XLOOKUP against J21:P21</div>
+      <div class="step-desc"><div class="calc-box">Charged: 2 x $130 (12' rate) = <span class="calc-result">$260</span>
+Should be: 2 x $104 (8' rate) = <span class="calc-result">$208</span></div></div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">4</div><div class="step-body">
+      <div class="step-title">Net effect</div><div class="step-sheet">--</div>
+      <div class="step-desc">A $52 material overstatement flows silently into Materials cost/sell and the final Total Summary. Labor hours are unaffected because the pipefitter/case-setter hour rates happen to be identical for 8' and 12' MD Cases (7 hrs / 5 hrs either way) -- only the material dollar amount is wrong.</div>
+    </div></div>
+  </div>
+
+  <h3 id="f3112-mismatches">Mismatches: Uploads vs. Excel</h3>
+  <table class="data-table mismatch">
+    <tr><th>#</th><th>Excel location</th><th>What Excel shows</th><th>What Uploads/Drawings show</th><th>Type of mismatch</th></tr>
+    <tr><td>1</td><td>SUMMARY, Display Cases</td><td>2 cases entered as 12' ($130/unit)</td><td>GA1 legend states both cases are 8FT ($104/unit)</td><td><span class="tag tag-mismatch">Confirmed</span> -- $52 material overstatement</td></tr>
+    <tr><td>2</td><td>COPPER_INSULATION_FORM, 90-BAR section</td><td>No insulation-order columns exist</td><td>PIPE 2.0 prices $963.80 of insulation for this job's CO2 lines</td><td>Template gap -- priced in the estimate, not represented on the literal order form</td></tr>
+    <tr><td>3</td><td>EQUIPMENT tab, rack filter/drier lines</td><td>0.5 qty charged for existing-rack service</td><td>RM1 marks Compressors/Glycol N/A; no existing rack described in scope</td><td>Likely leftover default, unconfirmed</td></tr>
+    <tr><td>4</td><td>R1's general notes</td><td>References "Seismic Restraint Sheet SR1"</td><td>SR1 is not included anywhere in the 22-sheet set</td><td>Referenced-but-missing sheet</td></tr>
+    <tr><td>5</td><td>BASR1 / BASR1.1</td><td>Tag the new unit "CU01 TCO2" / "CU01a/CU01b TCO2"</td><td>Every other sheet (R1, R1.1, R2, R3, S1, A1, A5.4, GA1) calls it "CU04 TCO2," matching the folder name</td><td>Narrow naming inconsistency, confined to 2 of 22 sheets sharing the same author</td></tr>
+    <tr><td>6</td><td>R2, Refrigeration System Schedule</td><td>All three refrigerant-charge fields ("--")</td><td>N/A -- gap exists in the source drawing itself, not an Excel mismatch</td><td>Missing engineering data, not comparable to price sheet</td></tr>
+  </table>
+
+  <h3 id="f3112-mapping">Mapping table -- every traced source, in one place</h3>
+  <table class="data-table">
+    <tr><th>Price Sheet location</th><th>Value</th><th>Traced to</th></tr>
+    <tr><td>Display Cases: MD Cases</td><td>2 (mis-sized)</td><td><span class="tag tag-scope">Scope</span> GA1 legend (2x RDC1069.652), but wrong size column used</td></tr>
+    <tr><td>Non-Itemized: PVC Pipe Chase</td><td>$260 / 4 hrs</td><td><span class="tag tag-scope">Scope</span> matches GA1's PVC Refrigeration Chase detail exactly</td></tr>
+    <tr><td>Non-Itemized: CO2 Charge Station Parts</td><td>$350 / 10 hrs</td><td><span class="tag tag-scope">Scope</span> matches R3.1's Charging Station (CO2) detail</td></tr>
+    <tr><td>Refrigerant: 40.3562 lbs, all R744</td><td>$242.16</td><td><span class="tag tag-scope">Scope</span> matches R2/R1.1's CO2-only architecture exactly</td></tr>
+    <tr><td>PIPE 2.0 System 1 (CU04 TCO2)</td><td>127 ft LL + 127 ft SL</td><td><span class="tag tag-scope">Scope</span> exact match to R2's Piping Schedule</td></tr>
+    <tr><td>PARTS: relief valve + CO2 ball valves + silphos rod</td><td>$1,735.48</td><td><span class="tag tag-scope">Scope</span> exact match to R3.1's charging-station parts list and R1.1's isolation-valve keynote</td></tr>
+    <tr><td>EQUIPMENT: 1/4-10 HP Condensing Unit line</td><td>$100 / 16 hrs / 20 lbs</td><td><span class="tag tag-scope">Scope</span> installation-only charge, consistent with R2's "contractor installed, owner furnished" note</td></tr>
+  </table>
+
+  <h3 id="f3112-unique">What's unique about this folder</h3>
+  <ul>
+    <li><strong>The smallest, most self-contained scope analyzed so far</strong> -- a single bolt-on CO2 condensing unit and 2 cases added to an otherwise-untouched operating store, not a remodel of any existing refrigeration system.</li>
+    <li><strong>A single combined 22-page Bid Set PDF</strong> instead of many separate upload files -- every sheet number confirmed directly from its own title block against the Cover Sheet's Drawing Index, with zero gaps.</li>
+    <li><strong>The cleanest-reconciling folder analyzed so far</strong> -- refrigerant type, piping schedule, and parts all tie exactly to the uploads, with only one confirmed dollar error (case sizing) rather than several.</li>
+    <li><strong>The first "Order %" purchasing-buffer mechanism identified</strong> -- COPPER_INSULATION_FORM deliberately orders only 80% of the calculated material quantity, a real and intentional design choice, not a rounding artifact.</li>
+    <li><strong>The first confirmed template gap specific to CO2/TCO2 jobs</strong> -- the order form has no insulation-ordering columns for 90-BAR pipe, even though the estimate itself prices insulation for it correctly.</li>
+    <li><strong>The most overtime-heavy labor dispatch seen</strong> -- 81.5% of hours logged as OT, making the OT/DT burden-increment mechanism (base burden +0.5/+1.0) financially visible for the first time.</li>
+  </ul>
+</div>
+
+<div class="section" id="fdal653">
+  <h2>Folder: Kroger DAL653 -- Fate, TX</h2>
+  <p style="color:#a8a8a0;">26.06.09 -- New Store, ground up. By far the richest Uploads folder analyzed so far: a 143-page 90% CDs drawing set plus a 680-page CSI spec manual, versus the single combined bid-set PDFs seen on most other jobs. It's also the first price sheet that arrived password-encrypted at the file level (not just sheet-protected) -- the workbook only opened after the password was supplied directly by the user.</p>
+
+  <div class="toc">
+    <ol>
+      <li><a href="#fdal653-glossary">Terms this folder has</a></li>
+      <li><a href="#fdal653-uploads">The Uploads (143-page drawing set + 680-page spec manual)</a></li>
+      <li><a href="#fdal653-tab1">Tab 1 -- CP Est Pro 2.0 SUMMARY</a></li>
+      <li><a href="#fdal653-tab2">Tab 2 -- EQUIPMENT</a></li>
+      <li><a href="#fdal653-tab3">Tab 3 -- PIPE 2.0</a></li>
+      <li><a href="#fdal653-tab4">Tab 4 -- PARTS</a></li>
+      <li><a href="#fdal653-tab5">Tab 5 -- LABOR RATES</a></li>
+      <li><a href="#fdal653-tab6">Tab 6 -- EQUIPMENT SALES BUYOUTS</a></li>
+      <li><a href="#fdal653-tab7">Tab 7 -- COPPER_INSULATION_FORM</a></li>
+      <li><a href="#fdal653-tab8">Tab 8 -- HVAC</a></li>
+      <li><a href="#fdal653-tab9">Tab 9 -- TAX TABLE</a></li>
+      <li><a href="#fdal653-tab10">Tab 10 -- BidCalc</a></li>
+      <li><a href="#fdal653-walkthrough">Full walkthrough: the vector-only schedule that looked missing</a></li>
+      <li><a href="#fdal653-mismatches">Mismatches: Uploads vs. Excel</a></li>
+      <li><a href="#fdal653-mapping">Mapping table (every traced source)</a></li>
+      <li><a href="#fdal653-unique">What's unique about this folder</a></li>
+    </ol>
+  </div>
+
+  <h3 id="fdal653-glossary">Terms this folder has</h3>
+  <p style="color:#a8a8a0;font-style:italic;">Universal terms already covered in the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab. What's new here:</p>
+  <table class="data-table">
+    <tr><th>Term</th><th>Meaning</th></tr>
+    <tr><td>Rack A / Rack B (SYS A / SYS B)</td><td>This store's two parallel CO2 transcritical racks, each with its own suction/liquid main loop, gas cooler, and vent line -- the entire job is organized around this A/B split, in the Uploads and in every price-sheet tab.</td></tr>
+    <tr><td>Gas Cooler</td><td>The CO2-system equivalent of an air-cooled condenser (BAC T5DC2-CO2-202-12.4, 1182 MBH). "Air Cooled Condenser 12 Fan" on the EQUIPMENT tab is this job's line-item name for the same rooftop unit.</td></tr>
+    <tr><td>CC1 / CC2 / CC3</td><td>Danfoss AK-CC 55 case-controller types: CC1 = single-coil case/walk-in without electric defrost, CC2 = multi-coil medium-temp case, CC3 = walk-in with electric defrost. Tagged on every case circuit across R1.1, E1.3C/D, and the EM-series.</td></tr>
+    <tr><td>Protocol / Proto-Aire</td><td>A Hussmann distributed remote-compressor architecture described in full in spec section 11 41 63 -- but this particular store's rack architecture is CO2, not Protocol. The spec section is boilerplate carried over from Kroger's master template ("some items specified in this Section will not be used on the Project"), not evidence this job actually uses Protocol units.</td></tr>
+    <tr><td>Direct Buy Refrigeration Copper Pipe Program</td><td>Kroger-specific purchasing arrangement (spec 00 21 13 / 00 43 27): the Owner directly supplies refrigeration pipe, fittings, brazing rods, and piping insulation through a named vendor (United Refrigeration Inc.); Climate Pros supplies everything else and installs. This explains why COPPER_INSULATION_FORM functions as a literal supplier order form, not just an internal estimating tab.</td></tr>
+    <tr><td>90 BAR / XHP (Gas Cooler piping)</td><td>The CO2-rated pipe class used specifically for the RA/RB Gas Cooler supply and return runs (1.625" XHP copper) -- distinct from the ordinary "K" and "L" copper classes used on the rest of the rack piping.</td></tr>
+    <tr><td>Order %</td><td>Same purchasing-buffer mechanism seen on Walmart 3112-1009: COPPER_INSULATION_FORM here is set to 0.8, ordering 80% of the calculated quantity up front.</td></tr>
+  </table>
+
+  <h3 id="fdal653-uploads">The Uploads -- a 143-page drawing set, a 680-page spec manual, and a raw text dump</h3>
+  <p><code>Uploads\</code> contains three items: <code>2026.05.04 - Kroger Fate (DAL653) - 90% CDs - Builidng Package.pdf</code> (143 pages, confirmed 143-for-143 against its own embedded Sheet Index -- no missing sheets, a first for this analysis), <code>2026.05.05 - Kroger Fate (DAL653) - Project Manual.pdf</code> (680 pages, text-native CSI spec book), and <code>pkg.txt</code> (a 27,890-line raw OCR/text-layer dump of the drawing set, not a separate document). One level above Uploads sits the price sheet itself, in its own <code>Price Sheet\</code> folder.</p>
+
+  <h4>Drawing set -- the refrigeration/EMS-relevant sheets</h4>
+  <table class="data-table">
+    <tr><th>Sheet</th><th>What's in it</th></tr>
+    <tr><td>R1.1 -- Refrigeration Equipment Layout</td><td>Case floor plan tagging every circuit (e.g. <code>ALT-01A</code>) plus CC1/CC2/CC3 controller types. Confirms Condenser A = <code>TSDC2-CO2-202-12.4</code> (4,916 lbs, 460V/3PH/17.0A), a grocery freezer (2x MK34E-315), a dairy cooler (2x KR56A-242). Sheet Index box on this sheet lists all 4 R-series sheets by name. Note: <em>"ALL COOLERS, RETARDERS, FREEZERS AND COILS SUPPLIED BY KROGER."</em></td></tr>
+    <tr><td>R1.2 -- Refrigeration Piping</td><td>CO2 (R744) line-sizing tables and a piping isometric confirming the rooftop gas-cooler tie-in. Carries 141 hand-placed dimension annotations authored directly on the PDF by "Jay.JarrattJr" (dated 2026-06-01) -- a de facto independent line-length takeoff already embedded in the file (see the walkthrough below).</td></tr>
+    <tr><td>R5.1 -- Refrigeration Standard Details</td><td>9 populated master details: protocol piping/water-reclaim, pipe supports (wall/stud-cavity/freestanding), case-top piping, service-case/island riser chases, 3-phase electric-defrost wiring.</td></tr>
+    <tr><td>R6.1 -- Refrigeration Equip. Schedule</td><td>The core case-by-case schedule across all four racks (ALT/AMT/BLT/BMT) plus flash-tank bypass rows, full CO2 two-stage compressor data, and the gas-cooler spec. <code>page.get_text()</code> returns zero characters here -- the schedule is drawn entirely as vector CAD line-work, not searchable text. A render confirms it's fully populated, not missing (see the walkthrough).</td></tr>
+    <tr><td>G0.4 -- Compliance Path Reports Summary</td><td>Not a drawing sheet at all -- 6 scanned pages of a 2021 IECC energy-compliance report, which states <em>"Refrigeration served by gas coolers"</em> and tracks refrigeration as its own "Refrig EUI" category in the building energy model.</td></tr>
+    <tr><td>E0.1 -- Electrical Symbols, Legend, Notes</td><td>A full Refrigeration Controls Legend (CC1/CC2/CC3 = Danfoss AK-CC 550A) spelling out the wiring split between EMS installer, case/coil supplier, and electrician.</td></tr>
+    <tr><td>E1.3C / E1.3D -- Partial Refrigeration Plan (N/S)</td><td>Electrical circuits to every case, busway tap boxes <code>TBA1</code>-<code>TBFS18</code> on busways <code>BWA</code>-<code>BWF</code>, 12 general refrigeration notes.</td></tr>
+    <tr><td>E6.1 -- Electrical Equipment Schedule</td><td>Refrigeration loads as electrical tags: <code>GE455</code> (auxiliary CO2 condensing unit, generator-fed), <code>E120</code>/<code>E120CP</code> (leak detector / EMS I/O panel). <code>CR-3</code> here is an electric-cart charging station, not a refrigeration charging station -- a literal-string false match worth remembering.</td></tr>
+    <tr><td>E6.2.1-2.8 -- Panel Schedules</td><td>Main switchboard breaks out "Refrigeration 443,566 VA" and "Defrost 231,714 VA" as top-level load categories; dedicated defrost panel DEF-1; two auxiliary CO2 condensing-unit feeders on panel EHB; leak-detection circuits on panel LC1.</td></tr>
+    <tr><td>E6.2 -- Single Line Electrical Diagram</td><td>Shows <code>CO2-A</code>/<code>CO2-B</code> (30A/2P) and <code>GAS COOLER-A</code>/<code>GAS COOLER-B</code> (20A/3P) as their own named branch circuits off the main 480V bus -- a clean independent cross-check against R6.1.</td></tr>
+    <tr><td>EM1.0-EM8.0B -- Energy Management series</td><td>The full Danfoss EMS package: rack riser diagrams for Rack A/B, CO2 exhaust-fan/damper sequence (1,950/1,600 ppm thresholds), VFD wiring, AK-CC 55 schematics, and EM7.0's 16-zone refrigerant leak-detection list (Deli Raw Cooler, Deli Freezer, Seafood Cooler, Bakery Retarder/Freezer, Produce Prep/Cooler, Grocery Cooler, Meat Prep/Cooler, Floral Cooler, Dairy Cooler, Ref Units A/B, Frozen Food Sales, Pickup Cooler). EM7.0 also has genuine unresolved design questions left in the 90%-issue set verbatim ("DOES DANFOSS BUILD PANELS?").</td></tr>
+    <tr><td>S1.2A/B, S5.1 -- Roof framing</td><td>Keynote K4: <em>"CONDENSER SUPPORTED WITH A PREFABRICATED STRUCTURAL CURB. SEE... ASD-81 AND ASD-81A"</em> -- a dedicated structural curb for the gas coolers, distinct from the RTU curb (K3, ASD-78).</td></tr>
+    <tr><td>A-series floor plans</td><td>Direct callouts for a "6&Prime; REFRIGERATION CHASE" and a "PAINTED PVC REFRIGERATION PIPING RISER, RE: RISD-36 &amp; RISD-36A," plus a "COOLER PANEL WALL" legend item.</td></tr>
+    <tr><td>M-series (HVAC)</td><td>Two project-wide general notes: <em>"CONSOLIDATE REFRIGERATION AND OTHER UTILITY LINE DROPS... CONSTRUCT BOX AROUND"</em> and <em>"PROVIDE INSULATION AND UV TAPE FOR ALL EXTERIOR HVAC REFRIGERATION PIPE."</em></td></tr>
+    <tr><td>P-series (plumbing)</td><td>Repeated "COOLER COOLING COIL CONDENSATE" routing keynotes for every refrigerated room. No water-reclaim content beyond ordinary condensate drainage.</td></tr>
+  </table>
+
+  <h4>Project Manual -- the 7 refrigeration-relevant CSI sections (of 46 total)</h4>
+  <table class="data-table">
+    <tr><th>Section</th><th>What's in it</th></tr>
+    <tr><td>11 41 03 -- Prefabricated Insulated Wall Panels</td><td>The walk-in cooler/freezer box shell itself: Kroger-supplied insulated panel walls and stainless cove base, contractor-installed, with insulation-core fire ratings. Sits one section before the range usually associated with refrigeration -- the architectural enclosure everything else hangs off of.</td></tr>
+    <tr><td>11 41 22 -- Refrigerated Fixture Installation</td><td>Case setting/leveling/sealing, Kroger's temp-tag and loose-thermometer requirements, walk-in evaporator coil hanging, strip curtains.</td></tr>
+    <tr><td>11 41 33 / 11 41 34 -- Plumbing / Condensate Drain Connections</td><td>Water supply split from case/coil condensate (handled separately in 11 41 34): Raychem heat tape, PVC case drains (1 stub for Hussmann Impact cases, 2 for Excel cases), freezer drain slope/heat-tape/hard-wire rules.</td></tr>
+    <tr><td>11 41 43 -- Refrigeration System Installation</td><td>The core spec: Kroger Direct Buy Program furnish/install split, CO2-specific piping classes and insulation-thickness table, brazing/joint rules, a full evacuation/charging procedure (1000&rarr;700&rarr;300 microns), superheat setpoints, the Temperature Performance Chart, and a <strong>$1,500-per-event fine</strong> if nitrogen purge isn't used during brazing. No glycol content anywhere -- this store is DX/CO2 only.</td></tr>
+    <tr><td>11 41 46 -- EMS Controls Installation</td><td>Danfoss EMS install spec, furnish/install responsibility matrix, CO2-specific Controller Programming matrix referencing a "Kroger CO2 Setpoint File," and the 16-zone leak-detection alarm-threshold spec (&gt;1000 ppm).</td></tr>
+    <tr><td>11 41 63 -- Electrical Installation</td><td>Includes the "Protocol Refrigeration Equipment" article in full -- boilerplate for an architecture this store doesn't actually use -- plus arc-flash certification requirements.</td></tr>
+  </table>
+  <p>Genuine cross-references found outside these 7 sections: <strong>00 21 13 / 00 43 27</strong> (Direct Buy Refrigeration Copper Pipe bidding procedure, naming vendor United Refrigeration Inc.); <strong>00 72 14</strong> General Conditions requiring "Refrigerant Management Documents" as a contractual closeout deliverable; <strong>01 64 00</strong> Vendor Contact List naming the actual OEMs (Danfoss, Copeland/CPC, United Refrigeration, KPS Global, Hussmann, Chase Industries); <strong>07 72 13</strong> Manufactured Curbs specifying heavier 2&times;6&Prime; nailers for condenser curbs vs. 2&times;2&Prime; for RTUs; <strong>07 21 00</strong> / <strong>06 10 53</strong> freezer-floor XPS insulation and HDPE thermal-break threshold specs. No PDF annotations exist anywhere in the 680-page manual -- it's a clean, flattened document.</p>
+
+  <h3 id="fdal653-tab1">Tab 1 -- CP Est Pro 2.0 SUMMARY</h3>
+
+  <h4>1.1 Header</h4>
+  <p>Project "Kroger DAL653 - New Store," Fate, Texas. Estimator Jay Jarratt Jr, labor division "DALLAS, TX." <strong>New/Remodel = NEW</strong> -- correctly resolves Texas's "Use Tax, Materials Only" branch on the New Construction column of the TAX TABLE.</p>
+  <div class="callout callout-mismatch">
+    <div class="callout-title"><span class="tag tag-mismatch">Process gap</span> A $1M-threshold sign-off requirement, triggered but left blank</div>
+    <div class="callout-body">Cell E13 ("CHECKED BY") carries a workbook comment: <em>"Check required if bid is greater than $1,000,000."</em> This bid totals <strong>$1,022,862</strong> -- over the threshold -- yet F13 still reads the unedited placeholder text, <em>"Check Required, Insert Name Here."</em> The required second-reviewer sign-off appears never to have been completed on a bid that explicitly needed one. (A second comment, on E185/"Performance Bond Required?," doesn't apply here since that field is answered NO.)</div>
+  </div>
+
+  <h4>1.2 Display Cases</h4>
+  <table class="data-table">
+    <tr><th>Type</th><th>8'</th><th>12'</th><th>Total</th><th>Material</th><th>Pipefitter</th><th>Case Setter</th></tr>
+    <tr><td>MD Cases</td><td>58</td><td>92</td><td>150</td><td>$17,992</td><td>1,050 hrs</td><td>750 hrs</td></tr>
+    <tr><td>Wide Islands</td><td>--</td><td>8</td><td>8</td><td>$1,800</td><td>56 hrs</td><td>40 hrs</td></tr>
+    <tr><td><strong>TOTALS</strong></td><td></td><td></td><td><strong>158</strong></td><td><strong>$19,792</strong></td><td><strong>1,106 hrs</strong></td><td><strong>790 hrs</strong></td></tr>
+  </table>
+  <p>158 total cases (150 MD Cases + 8 Wide Islands) matches the job-scope notes exactly ("New Cases (150), New Wide Islands (8)"). SD Cases, Service Cases, Tables, Custom, Temp/Relocate, and Remove are all correctly zero for a ground-up new store.</p>
+
+  <h4>1.3 Evaporators</h4>
+  <p>19 Commercial coils, $570 material / 228 labor hrs -- matches "New Coils (19)" in the scope notes. Industrial coils correctly zero.</p>
+
+  <h4>1.4 Non-Itemized Equipment Room &amp; RTU Breakdown</h4>
+  <table class="data-table">
+    <tr><th>Item</th><th>Material</th><th>Labor</th><th>Source</th></tr>
+    <tr><td>Equipment Sheet Totals</td><td>$1,660</td><td>94 hrs</td><td><span class="tag tag-formula">formula</span> = EQUIPMENT tab total</td></tr>
+    <tr><td>Temporary Vehicle Fuel Cost Add</td><td>$10,414.49</td><td>0</td><td><span class="tag tag-formula">formula</span> ($15 per 8 hrs of labor)</td></tr>
+    <tr><td>Receive, Set &amp; Startup S/C Cases (70)</td><td>$0</td><td>280 hrs</td><td><span class="tag tag-scope">Scope</span> matches "New S/C Cases (70)"</td></tr>
+    <tr><td>Case Close-offs</td><td>$4,500</td><td>40 hrs</td><td><span class="tag tag-scope">Scope</span></td></tr>
+    <tr><td>Pipe Labels &amp; Equipment Tags</td><td>$6,500</td><td>40 hrs</td><td><span class="tag tag-scope">Scope</span></td></tr>
+    <tr><td>Pipe Chase per Detail (RISD-36)</td><td>$1,850</td><td>40 hrs</td><td><span class="tag tag-scope">Scope</span> matches R5.1's RISD-36 detail</td></tr>
+    <tr><td>Pipe Jacketing, Exterior Piping</td><td>$5,500</td><td>20 hrs</td><td><span class="tag tag-scope">Scope</span></td></tr>
+    <tr><td>Install OEM Provided Valves (Labor)</td><td>$0</td><td>80 hrs</td><td><span class="tag tag-scope">Scope</span> matches "All Valves Provided by OEM &amp; Installed by RC"</td></tr>
+    <tr><td><strong>TOTALS</strong></td><td><strong>$30,424.49</strong></td><td><strong>594 hrs</strong></td><td></td></tr>
+  </table>
+
+  <h4>1.5 IN-HOUSE GC and SUBLET CONTRACTORS</h4>
+  <p>Entirely zero -- no subcontracted trades, consistent with the exclusions list (General Contracting, Electrical, EMS all explicitly excluded).</p>
+
+  <h4>1.6 Refrigerant</h4>
+  <div class="calc-box">R744 CO2:        <span class="calc-source">2,800 lbs @ $6/lb</span>
+R407F:            <span class="calc-source">641.499 lbs @ $0/lb</span>
+                  <span class="calc-result">= 3,441.499 lbs total, $16,800 total cost</span></div>
+  <div class="callout callout-warn">
+    <div class="callout-title">641.499 lbs of refrigerant weight carries zero dollars</div>
+    <div class="callout-body">Only the 2,800 lbs of R744 is priced (at $6/lb = $16,800, the exact figure in "TOTAL REFRIGERANT COST"). The 641.499 lbs of R407F sits in the table with a real weight but <strong>$0/lb</strong>. R6.1's case schedule includes its own per-case "REFRIG" column for factory-charged refrigerant inside each case -- 641.499 lbs is a very plausible match for that column's total, which would make the $0 price intentional (factory charge, not a field fill Climate Pros buys). But nothing in the Uploads or the workbook states this explicitly, so it's flagged as a real gap rather than a confirmed non-issue.</div>
+  </div>
+
+  <h4>1.7 Scheduling Data</h4>
+  <table class="data-table">
+    <tr><th>Field</th><th>Value</th></tr>
+    <tr><td># of Fitters</td><td>6</td></tr>
+    <tr><td>Duration</td><td>17.23 weeks</td></tr>
+    <tr><td>R Dispatch</td><td>5,134.395 ST / 420 OT hrs (7.6% OT)</td></tr>
+  </table>
+
+  <h4>1.8 Labor Blend &amp; Rate</h4>
+  <p>30/10/40/20/0% blend (Foreman/Startup/Journeyman/Apprentice/Tradesman), region "TX," standard $40/$34/$22/$20 base wages, margin 25%.</p>
+
+  <h4>1.9 Rentals</h4>
+  <table class="data-table">
+    <tr><th>Item</th><th>Cost</th></tr>
+    <tr><td>Crane (40/70/120 ton)</td><td>$10,500</td></tr>
+    <tr><td>Scissor Lifts</td><td>$9,500</td></tr>
+    <tr><td>Container Rental 24'</td><td>$2,000</td></tr>
+    <tr><td><strong>TOTAL RENTALS</strong></td><td><strong>$22,000</strong></td></tr>
+  </table>
+
+  <h4>1.10 Total Summary</h4>
+  <table class="data-table">
+    <tr><th>Category</th><th>Cost</th><th>Sell</th><th>Margin</th></tr>
+    <tr><td>Labor</td><td>$384,838.86</td><td>$513,118.48</td><td>25%</td></tr>
+    <tr><td>Materials</td><td>$285,063.60</td><td>$380,084.80</td><td>25%</td></tr>
+    <tr><td>PARTS Sheet Buyouts</td><td>$0</td><td>$0</td><td>20%</td></tr>
+    <tr><td>Rentals</td><td>$22,000</td><td>$27,500</td><td>20%</td></tr>
+    <tr><td>Fixed 1% Warranty</td><td>$10,228.70</td><td>$10,228.70</td><td>--</td></tr>
+    <tr><td>Contingency Factor</td><td>$48,458.07</td><td>$60,572.58</td><td>5%</td></tr>
+    <tr><td>Sales Tax (8.25%, Materials Only)</td><td>$31,356.996</td><td>$31,356.996</td><td>--</td></tr>
+    <tr><td><strong>TOTAL</strong></td><td><strong>$781,946.22</strong></td><td><strong>$1,022,862</strong></td><td>Gross Profit $240,915.78 (23.55%)</td></tr>
+  </table>
+
+  <h4>1.11 Job Scope Notes &amp; Exclusions</h4>
+  <p>Row 197's scope bullets read as a near-complete checklist, independently confirming almost everything found in the Uploads: New Cases (150), New Wide Islands (8), New Coils (19), New S/C Cases (70), Receive &amp; Set New Racks (2, ground level), Receive &amp; Set New Gas Coolers (2, rooftop), Main Suction/Liquid Loops (2 each, RA &amp; RB), Gas Cooler Piping (XHP), case close-offs/pipe chases/labels/jacketing, "Provide Refrigerant (R744)," "All Valves Provided by OEM &amp; Installed by RC," startup/commissioning/punchlist per Kroger requirements. The Exclusions list is the full standard set (General Contracting, Permits, Engineering, EMS, Seismic, Local Requirements, Roof/floor/wall openings, Trenching/concrete, Case refurbishing, Case transport/disposal, Plumbing/case condensates, Electrical, Line covers/flashing) -- no truncation.</p>
+
+  <h3 id="fdal653-tab2">Tab 2 -- EQUIPMENT</h3>
+  <table class="data-table">
+    <tr><th>Item</th><th>Qty</th><th>Material</th><th>Labor</th><th>Refrigerant</th></tr>
+    <tr><td>Comp Rack</td><td>2</td><td>$400</td><td>48 hrs</td><td>1,000 lbs</td></tr>
+    <tr><td>Air Cooled Condenser 12 Fan</td><td>2</td><td>$200</td><td>32 hrs</td><td>800 lbs</td></tr>
+    <tr><td>Change Rack Main Liquid Drier (4) RC 4864 HH</td><td>2</td><td>$260</td><td>4 hrs</td><td>0</td></tr>
+    <tr><td>Change Rack Suction Filters (8) Cores</td><td>2</td><td>$800</td><td>10 hrs</td><td>0</td></tr>
+    <tr><td><strong>TOTALS</strong></td><td></td><td><strong>$1,660</strong></td><td><strong>94 hrs</strong></td><td><strong>1,800 lbs</strong></td></tr>
+  </table>
+  <p>2 Comp Racks + 2 Air Cooled Condensers (the gas coolers) matches R1.1/R1.2/R6.1 exactly: Rack A/Rack B, Gas Cooler A/Gas Cooler B. The liquid-drier and suction-filter service lines are consistent with new-rack startup service, not existing-rack retrofit -- appropriate for a ground-up new store.</p>
+
+  <h3 id="fdal653-tab3">Tab 3 -- PIPE 2.0</h3>
+  <p>Header: Install Labor Hours 1,084, LF Pipe w/waste 12,040, Piping Refrigerant 794.499 lbs, Total Materials $184,866.54 (Pipe $89,207 + Insulation $28,771 + Saddles $8,183.04 + HFG $58,705.50) -- all feed SUMMARY exactly.</p>
+  <p>Circuit-by-circuit takeoff mirroring the drawings' own tags: <strong>SYS A-SUC / SYS A-LIQ</strong> (Rack A, circuits AS1R-AS77 / AL1R-AL77) and <strong>SYS B-SUC / SYS B-LIQ</strong> (Rack B, BS1R-BS77 / BL1R-BL77), then individual case-circuit branches (e.g. <code>1A-B</code> + its own <code>RISER</code> row) grouped under "RA-CIRCUIT"/"RB-CIRCUIT," plus <strong>RA GAS CLR / RB GAS CLR</strong> (100 LF of 1.625" XHP each, 91.2 lbs refrigerant each) and <strong>RA VENT / RB VENT</strong> (60 LF of 1.625" K-copper each -- matching R6.1's AFT/BFT flash-tank bypass rows). The tab's template supports up to 600 "systems"; this job populated the first ~307, the rest are blank template rows.</p>
+  <div class="callout callout-money">
+    <div class="callout-title">An independent takeoff already sits inside the source PDF</div>
+    <div class="callout-body">R1.2 (the Refrigeration Piping sheet) carries 141 hand-placed dimension annotations authored directly on the PDF by the same estimator ("Jay.JarrattJr," dated 2026-06-01) -- a manual line-length takeoff layered on top of the drawing. This is a real, checkable second source for PIPE 2.0's circuit lengths that a plain render or text extraction alone wouldn't surface.</div>
+  </div>
+
+  <h3 id="fdal653-tab4">Tab 4 -- PARTS</h3>
+  <p>Total <strong>$27,870.57</strong>, and every dollar traces to just 10 of the tab's 400+ catalog lines:</p>
+  <table class="data-table">
+    <tr><th>Part</th><th>Qty</th><th>Cost</th></tr>
+    <tr><td>Roof Top Strut Blocks - Small</td><td>25</td><td>$600</td></tr>
+    <tr><td>1-1/2" Galvanized Strut - 10ft</td><td>50</td><td>$2,150</td></tr>
+    <tr><td>7/8" / 1-1/8" / 1-3/8" / 1-5/8" Cush Clamps</td><td>150 / 75 / 25 / 50</td><td>$1,274.75</td></tr>
+    <tr><td>15% Silphos brazing rod, 1/8"x1/8"x36"</td><td>75</td><td>$22,183.50</td></tr>
+    <tr><td>Heat Tape / Connector Kits / Splice Kits</td><td>250 ft / 6 / 6</td><td>$1,662.32</td></tr>
+  </table>
+  <p>The pipe-support hardware matches R5.1's support details exactly. The brazing rod is by far the single largest PARTS-tab line -- consistent with spec 11 41 43's brazing requirements (and its $1,500-per-event fine for skipping the nitrogen purge during brazing). Heat tape matches the condensate-drain spec (11 41 34) and R1.1's dedicated GFCI note. <strong>Glycol (35%/100%, 55-gal drums) exists in the catalog at qty 0</strong> -- consistent with 11 41 43 having no glycol content anywhere.</p>
+
+  <h3 id="fdal653-tab5">Tab 5 -- LABOR RATES</h3>
+  <p>Standard, unchanged. TX row: $40/$34/$22/$20, burden 2.0x.</p>
+
+  <h3 id="fdal653-tab6">Tab 6 -- EQUIPMENT SALES BUYOUTS</h3>
+  <p>Entirely zero -- every row is still the placeholder "XXXX," consistent with no equipment resale on this job.</p>
+
+  <h3 id="fdal653-tab7">Tab 7 -- COPPER_INSULATION_FORM</h3>
+  <p>A real order form, net of the tab's 80% "Order %" purchasing-buffer factor: Type L/M copper across multiple sizes, black insulation, PVC saddles (mostly the 3.25" bucket), and a dedicated "XHP / 90 BAR" block for the gas-cooler piping (360 LF of 1-5/8"). Same template gap confirmed on Walmart 3112-1009: the XHP/90-BAR block has only plain LF columns, no adjacent insulation-order columns, even though PIPE 2.0 correctly prices insulation for those same runs.</p>
+
+  <h3 id="fdal653-tab8">Tab 8 -- HVAC</h3>
+  <p>Entirely zero, as expected for a refrigeration-only job. Header block shows the same field-label misalignment seen on other folders (BID DATE shows "Fate," SCOPE shows "Texas," DRAWINGS DATE shows "New Store Ground Up") -- another confirmation of this recurring template artifact.</p>
+
+  <h3 id="fdal653-tab9">Tab 9 -- TAX TABLE</h3>
+  <p>Texas row: New Construction &rarr; "Use Tax, Materials Only." Since this job's toggle is NEW, only materials are taxed, at 8.25% -- correctly matching SUMMARY's $31,356.996 tax line.</p>
+
+  <h3 id="fdal653-tab10">Tab 10 -- BidCalc</h3>
+  <p>Total Bid = <strong>$1,022,861.56</strong>, matching SUMMARY's rounded $1,022,862 to the cent (rounding aside). Every bucket (labor by category/OT, materials, rentals, contingency, warranty, tax) ties out one-for-one with the SUMMARY tab.</p>
+
+  <h3 id="fdal653-walkthrough">Full walkthrough: the vector-only schedule that looked missing</h3>
+  <div class="step-flow">
+    <div class="step-item"><div class="step-badge">1</div><div class="step-body">
+      <div class="step-title">R6.1 exists in the Sheet Index and the file</div><div class="step-sheet">G0.2 Sheet Index, page 69 of the Building Package</div>
+      <div class="step-desc">The Sheet Index lists R6.1, "REFRIGERATION EQUIP. SCHEDULE," as sheet 4 of 4 in the R-series, and page 69 of the PDF is physically that sheet.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">2</div><div class="step-body">
+      <div class="step-title">A text-only read comes back empty</div><div class="step-sheet">page.get_text() on page 69</div>
+      <div class="step-desc"><div class="calc-box">Characters extracted: <span class="calc-source">0</span></div>The entire schedule table -- every case row, every compressor spec -- is drawn as vector CAD line-work with no embedded text layer. An automated or keyword-search-based read of this sheet returns nothing, which is exactly the failure mode that led an earlier pass to flag R6.1 as "referenced but missing."</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">3</div><div class="step-body">
+      <div class="step-title">A rendered image shows it's fully populated</div><div class="step-sheet">page.get_pixmap() at high zoom, page 69</div>
+      <div class="step-desc">Dozens of case rows across all four racks (ALT/AMT/BLT/BMT), full CO2 two-stage compressor data, percent-loaded figures (73-77%), and the gas-cooler spec are all visibly present -- nothing about the sheet is blank or a placeholder.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">4</div><div class="step-body">
+      <div class="step-title">Three independent sources agree at "2 racks, 2 gas coolers"</div><div class="step-sheet">R1.1, EQUIPMENT tab, E6.2</div>
+      <div class="step-desc"><div class="calc-box">R1.1 plan: Condenser A + Condenser B tagged on the roof
+EQUIPMENT tab: Comp Rack qty=2, Air Cooled Condenser 12 Fan qty=2
+E6.2 single-line diagram: CO2-A/CO2-B and Gas Cooler-A/Gas Cooler-B as named breakers
+                                    <span class="calc-result">= all three agree independently</span></div></div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">5</div><div class="step-body">
+      <div class="step-title">Net effect</div><div class="step-sheet">--</div>
+      <div class="step-desc">The lesson isn't a dollar error -- it's a methodology one: a vector-drawn schedule with no text layer will read as absent to any tool that only searches text, even when it's the most densely populated sheet in the entire set. Cross-checking against the price sheet's own quantities (and a second, independent electrical schedule) is what actually confirms the sheet is there and correct.</div>
+    </div></div>
+  </div>
+
+  <h3 id="fdal653-mismatches">Mismatches: Uploads vs. Excel</h3>
+  <table class="data-table mismatch">
+    <tr><th>#</th><th>Excel location</th><th>What Excel shows</th><th>What Uploads/Drawings show</th><th>Type of mismatch</th></tr>
+    <tr><td>1</td><td>SUMMARY, E13 comment vs. F13</td><td>"Check Required, Insert Name Here" (unedited placeholder)</td><td>N/A -- workbook's own comment requires sign-off above $1M; bid = $1,022,862</td><td><span class="tag tag-mismatch">Confirmed</span> -- required review sign-off never completed</td></tr>
+    <tr><td>2</td><td>SUMMARY, Refrigerant table</td><td>641.499 lbs R407F priced at $0/lb</td><td>R6.1's per-case "REFRIG" column plausibly explains the weight, but this isn't stated anywhere</td><td>Unconfirmed gap -- real weight, zero dollars, no documented reason</td></tr>
+    <tr><td>3</td><td>COPPER_INSULATION_FORM, XHP/90-BAR block</td><td>No insulation-order columns exist for this pipe class</td><td>PIPE 2.0 correctly prices insulation for the same Gas Cooler runs</td><td>Template gap, second confirmed instance (also seen on Walmart 3112-1009)</td></tr>
+    <tr><td>4</td><td>HVAC tab header</td><td>BID DATE/SCOPE/DRAWINGS DATE fields shifted one column off</td><td>N/A -- cosmetic only, tab totals $0 regardless</td><td>Recurring template artifact, not job-specific</td></tr>
+    <tr><td>5</td><td>-- (a confirmed non-mismatch, included for completeness)</td><td>R6.1 initially appeared to have no extractable content</td><td>R6.1 is fully populated -- it's simply vector-drawn, not missing</td><td>Investigative-method correction, not a real gap (see walkthrough)</td></tr>
+  </table>
+
+  <h3 id="fdal653-mapping">Mapping table -- every traced source, in one place</h3>
+  <table class="data-table">
+    <tr><th>Price Sheet location</th><th>Value</th><th>Traced to</th></tr>
+    <tr><td>Display Cases: 150 MD + 8 Wide Islands</td><td>$19,792 / 1,106+790 hrs</td><td><span class="tag tag-scope">Scope</span> job-scope notes and F1 Final Fixture Plan</td></tr>
+    <tr><td>EQUIPMENT: 2 Comp Racks + 2 Air Cooled Condensers</td><td>$1,660 / 94 hrs / 1,800 lbs</td><td><span class="tag tag-scope">Scope</span> exact match to R1.1/R1.2/R6.1's Rack A/B, Gas Cooler A/B</td></tr>
+    <tr><td>PIPE 2.0: AS1R-AS77 / AL1R-AL77 / BS1R-BS77 / BL1R-BL77</td><td>$184,866.54 / 1,084 hrs</td><td><span class="tag tag-scope">Scope</span> circuit tags match R1.2's line-sizing schedule directly</td></tr>
+    <tr><td>PARTS: brazing rod + heat tape + pipe supports</td><td>$27,870.57</td><td><span class="tag tag-scope">Scope</span> matches spec 11 41 43 (brazing) and 11 41 34 (condensate heat tape) plus R5.1's support details</td></tr>
+    <tr><td>Non-Itemized: Pipe Chase per RISD-36</td><td>$1,850 / 40 hrs</td><td><span class="tag tag-scope">Scope</span> matches R5.1's RISD-36/36A detail and the A-series "6&Prime; REFRIGERATION CHASE" callout</td></tr>
+    <tr><td>Refrigerant: 2,800 lbs R744 @ $6/lb</td><td>$16,800</td><td><span class="tag tag-scope">Scope</span> matches "Provide Refrigerant (R744)" and the CO2-only architecture throughout</td></tr>
+  </table>
+
+  <h3 id="fdal653-unique">What's unique about this folder</h3>
+  <ul>
+    <li><strong>The richest Uploads folder analyzed</strong> -- a 143-page drawing set plus a 680-page spec manual, versus a single combined bid-set PDF on most other jobs.</li>
+    <li><strong>The first encrypted price sheet</strong> -- the workbook was password-protected at the file level (OLE2/CFB container with EncryptionInfo/EncryptedPackage streams), not just sheet-protected; it only opened once the password was supplied directly.</li>
+    <li><strong>A real embedded shadow takeoff</strong> -- 141 hand-placed PDF annotations by the job's own estimator sitting directly on the piping drawing, a second independent source for the PIPE 2.0 circuit lengths.</li>
+    <li><strong>The clearest example yet of a vector-only sheet masquerading as "missing"</strong> -- R6.1 returns zero characters from a text extraction despite being the most densely populated sheet in the set, corrected only by rendering and cross-checking against three independent sources.</li>
+    <li><strong>A complete sheet set, for once</strong> -- 143 sheets in the Sheet Index, 143 sheets in the PDF, zero "referenced but missing" gaps -- unlike several other folders analyzed.</li>
+    <li><strong>Kroger's own Direct Buy Refrigeration Copper Pipe program</strong> -- a distinct owner-supplies-materials arrangement (pipe, fittings, brazing rod, insulation) documented nowhere in the refrigeration-specific spec sections themselves, only in Division 00's bidding procedures and the Division 01 vendor list.</li>
+    <li><strong>Zero glycol, confirmed at every level</strong> -- absent from the spec text, priced at qty 0 in the PARTS catalog, and consistent with the CO2-only rack architecture found throughout the drawings.</li>
   </ul>
 </div>
 
