@@ -1,0 +1,612 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Equipment Findability Guide</title>
+<style>
+:root{--navy:#39c2af;--blue:#4fd6c5;--ink:#eef5f3;--soft:#96a9a5;--line:#25403c;--bg:#000;--panel:#0e1513;--panel2:#111a17;--red:#ff6f6f;--green:#3ddc71;--gray:#8a9694}
+*{box-sizing:border-box} body{margin:0;font:16px/1.62 -apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+.wrap{max-width:1000px;margin:0 auto;padding:26px 20px 80px}
+h1{color:var(--navy);font-size:27px;margin:0 0 4px} .sub{color:var(--soft);font-style:italic;margin:0 0 16px;border-bottom:3px solid var(--navy);padding-bottom:12px}
+h2{color:#04120f;background:var(--navy);font-size:19px;margin:30px 0 0;padding:9px 12px;border-radius:8px 8px 0 0}
+h2 .num{display:inline-block;background:rgba(4,18,15,.25);border-radius:50%;width:26px;height:26px;text-align:center;line-height:26px;margin-right:8px;font-size:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-top:none;border-radius:0 0 8px 8px;padding:6px 18px 16px;margin:0 0 22px}
+.step{margin:16px 0 6px;font-weight:700;color:var(--blue)} .step .n{display:inline-block;background:var(--blue);color:#04120f;width:23px;height:23px;border-radius:50%;text-align:center;line-height:23px;font-size:13px;margin-right:7px}
+/* --- consistent screenshot sizing: every image gets the same frame, regardless of source resolution/aspect ratio --- */
+/* default: tall/detail-drawing screenshots — capped height, no scroll needed */
+figure.shot{margin:8px 0 4px;text-align:center;background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:12px}
+figure.shot img{max-width:100%;max-height:420px;width:auto;height:auto;display:inline-block;border:1px solid #2a3a37;border-radius:3px;background:#fff}
+/* wide multi-column schedule tables — scale to full container width instead of cropping off-screen columns */
+figure.shot.wide img{width:100%;max-width:100%;height:auto;max-height:none}
+figcaption{font-size:12px;color:var(--soft);margin-top:8px;font-family:ui-monospace,Consolas,monospace;word-break:break-word}
+.lit{background:#050a09;color:#d8f3ec;font-family:ui-monospace,Consolas,monospace;font-size:13px;border-radius:6px;padding:12px 14px;white-space:pre-wrap;line-height:1.55;overflow-x:auto;border:1px solid var(--line)}
+.lit .k{color:#6fe0cc}
+.callout{background:var(--panel2);border:1px solid var(--line);border-left:6px solid var(--blue);border-radius:8px;padding:13px 15px;margin:14px 0}
+.callout.warn{background:#241c0d;border-left-color:#e0a23f}
+.callout.absent{background:#161616;border-left-color:var(--gray)}
+.callout.confirm{background:#0e211a;border-left-color:var(--green)}
+.cell{font-family:ui-monospace,Consolas,monospace;background:#16302c;color:var(--ink);border:1px solid #2c4a44;border-radius:4px;padding:1px 5px;font-weight:700}
+p{margin:8px 0} b.r{color:var(--red)}
+.val{font-size:15px;background:#132417;color:var(--ink);border:1px solid #2c4a34;border-radius:6px;padding:10px 13px;margin:8px 0}
+.badge{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;border-radius:4px;padding:2px 8px;margin-left:6px;vertical-align:middle}
+.badge.strong{background:#1f4d2b;color:#8be6a0}
+.badge.thin{background:#4a3410;color:#ffcf8a}
+.badge.absent{background:#333;color:#cfcfcf}
+table.data{width:100%;border-collapse:collapse;font-size:14px;margin:10px 0}
+table.data th,table.data td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+table.data th{background:var(--panel2)}
+.toc{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 18px;margin:16px 0}
+.toc h3{margin:0 0 8px;color:var(--navy);font-size:15px}
+.toc ol{margin:0;padding-left:20px;columns:2;column-gap:24px}
+.toc li{margin-bottom:4px;font-size:14px}
+.toc a{color:var(--blue);text-decoration:none}
+.toc a:hover{text-decoration:underline}
+.variant-tag{display:inline-block;background:var(--navy);color:#04120f;font-size:11px;border-radius:4px;padding:2px 8px;margin:10px 0 4px}
+.steps-row{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 14px}
+.steps-row .chip{flex:1 1 150px;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:9px 11px;font-size:13.5px;line-height:1.4}
+.steps-row .chip .n{display:inline-block;background:var(--blue);color:#04120f;width:20px;height:20px;border-radius:50%;text-align:center;line-height:20px;font-size:12px;margin-right:7px;flex-shrink:0}
+.legend{margin-top:10px;border-top:1px solid var(--line);padding-top:10px}
+.legend .row{display:flex;gap:10px;align-items:baseline;font-size:14px;margin:6px 0}
+.legend .row .badge{margin-left:0;flex-shrink:0}
+.finding{border-radius:8px;padding:12px 15px;margin:10px 0}
+.finding .tag{display:block;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--soft);margin-bottom:5px}
+.finding .head{display:block;font-weight:700;font-size:15.5px;margin-bottom:6px;color:var(--ink)}
+.finding p{margin:0 0 6px;font-size:14.5px;line-height:1.6}
+.finding p:last-child{margin-bottom:0}
+.finding ul{margin:2px 0 8px;padding-left:20px;font-size:14px;line-height:1.55}
+.finding li{margin:3px 0}
+.finding .takeaway{display:flex;gap:7px;margin-top:8px;font-weight:700;font-size:14.5px;line-height:1.5}
+.finding .takeaway .arrow{flex-shrink:0}
+</style></head><body><div class="wrap">
+
+<h1>Equipment Findability Guide</h1>
+
+<div class="callout">
+<b>How to use this.</b> Every equipment item with real evidence follows the same four steps below — and every step's evidence comes only from the client's own Uploads (drawings, schedules, specs), never from Climate Pros' internal estimating workbook.
+<div class="steps-row">
+<div class="chip"><span class="n">1</span>Where it sits on the sheet</div>
+<div class="chip"><span class="n">2</span>On the sheet — a screenshot of it</div>
+<div class="chip"><span class="n">3</span>The exact text as printed — nothing paraphrased</div>
+<div class="chip"><span class="n">4</span>How you'd actually count it from what's on that page</div>
+</div>
+<p style="font-size:13.5px;color:var(--soft);margin:0 0 10px">Screenshots are all shown at the same frame size regardless of source resolution, so the guide scans consistently item to item.</p>
+<div class="legend">
+<b>Confidence badges</b>
+<div class="row"><span class="badge strong">STRONG</span> Same document type/table confirmed on 3+ jobs.</div>
+<div class="row"><span class="badge thin">THIN</span> Real evidence, but only 1-2 jobs — often spec text rather than a drawing schedule.</div>
+<div class="row"><span class="badge absent">NOT OBSERVED</span> Never seen on a drawing in any job checked — still a real rulebook category, just not one that came up here.</div>
+</div>
+</div>
+
+<h2 style="margin-top:20px;">Cross-cutting findings — read this first</h2>
+<div class="card">
+<p>Nine patterns from checking dozens of jobs, plus Climate Pros' own bid-review records — these matter more than any single lookup below.</p>
+<div class="callout warn finding">
+<span class="tag">01 · Risk</span>
+<span class="head">"Referenced but missing" sheets — confirmed on 7 jobs, 5 chains</span>
+<p>The sheet index lists an Equipment Schedule, Responsibility Matrix, or detail sheet that <i>isn't actually included</i> in what the client sent — HEB 57's R-2.4, HEB 383's R-5.2, HEB Corp #271's R-2.0/R-2.2, Whole Foods 10593's G700, Kroger DAL653's R6.1, Safeway 2944's own general notes referencing an undelivered R9.1, and Sprouts Anna's piping plan citing a rack/condenser sheet "R6.0" that isn't anywhere in that job's set either. <b>Always check the sheet index against what's physically in the upload before concluding a schedule doesn't exist</b> — it may just be missing, and worth asking the client for.</p>
+</div>
+<div class="callout confirm finding">
+<span class="tag">02 · Confirmed pattern</span>
+<span class="head">Sheet numbers vary by engineering firm; the document types underneath don't</span>
+<p>Nearly every job with real drawings has some version of: an Equipment Schedule, a Circuit/Case Schedule, a Refrigerant Disclosure/Charge Schedule, a Responsibility Matrix, a Line-Size Schedule, a Details sheet, a Roof Plan, and a Controls/EMS sheet. Confirmed independently by Climate Pros' own "AI Client Bid Estimator Requirements" document, which lists this same document taxonomy as what the estimating tool needs to ingest from client Uploads.</p>
+</div>
+<div class="callout finding">
+<span class="tag">03 · Terminology</span>
+<span class="head">Same equipment, different names by refrigerant type and chain</span>
+<p>TXV / "Expansion Valve" / EEV are the same part. Air-Cooled Condenser becomes a "Gas Cooler" on CO2 jobs. "Water Reclaim Tank" is always written as "Heat Reclaim Tank" in the actual specs (and sometimes a specific product name like "Doucette" instead). A Charging Station shows up as "Charge Savers" on one chain's drawings and as a bare panel-circuit tag ("CR-3") on another's.</p>
+</div>
+<div class="callout warn finding">
+<span class="tag">04 · No schedule exists</span>
+<span class="head">Some items are never on a drawing — the only evidence is a sentence</span>
+<p>TXV Service, Comp Rack Service/Retrofit Ops, and Pipe Insulation Service typically have no dedicated schedule table anywhere in the uploads. The only evidence is a line in a Scope-of-Work narrative, a demolition-plan note, or a Responsibility Matrix describing the service operation (e.g. "if any rack systems are opened, replace filter cores"). If you're hunting for a schedule row for these three, stop looking — there usually isn't one; the count comes from that sentence, not a table.</p>
+</div>
+<div class="callout finding">
+<span class="tag">05 · Watch for</span>
+<span class="head">Some drawing sheets are rasterized images, not searchable text</span>
+<p>Confirmed on HEB CORP #0833 and on Whole Foods 10593's own schedule sheet. A text search across the PDF comes back empty even though the schedule is right there — open the actual page and look before concluding it's missing.</p>
+</div>
+<div class="callout absent finding">
+<span class="tag">06 · Not observed</span>
+<span class="head">Four items never showed up on a single drawing, in any job checked</span>
+<p>Porta Pack, New Tower Install (water side), Tower Circuits, and R&amp;R Water-Cooled Condenser as its own scope. They're still real equipment categories — see items 5, 7, 8, and 9 below for what Climate Pros' own bid-review records say about them instead.</p>
+</div>
+<div class="callout warn finding">
+<span class="tag">07 · Cost impact</span>
+<span class="head">The real money is lost in count mismatches, not missing items</span>
+<p>Climate Pros' own PMO bid-review records (June 2026) show the costliest recurring mistake isn't failing to find an equipment type — it's <b>the count on the bid not matching the count on the schedule</b>: Publix 2118's refrigeration schedule showed 85 cases, the bid carried 24; Walmart 3478's drawings showed 36 cases and 6 evaporators, the bid had 40 cases and zero evaporators; Walmart 2101's review found half the piping and insulation missing, a $393,092 correction. <b>Whenever you find an item using this guide, count it against the schedule a second time before moving on</b> — finding it once is not the same as counting it right.</p>
+</div>
+<div class="callout warn finding">
+<span class="tag">08 · Watch for</span>
+<span class="head">Filenames aren't always trustworthy — verify the title block, not the filename</span>
+<p>On HEB 385 (a vendor-exported "CPQ" drawing set), the PDF named "...R-3.0 REFRIG CONTROLS NTS &amp; SYMBS.pdf" actually contains the R-2.1 Refrigeration Schedule, and two files named for different demo sheets turned out to be byte-identical copies of an unrelated architectural wall-section detail. This looks like a one-off vendor export bug, not a chain-wide pattern — but it means a keyword search across filenames alone can send you to the wrong page. Open the sheet and read its own title block before trusting what the filename says it is.</p>
+</div>
+<div class="callout finding">
+<span class="tag">09 · No correlation</span>
+<span class="head">Job size doesn't predict document richness</span>
+<p>HEB 566 — a single seafood-case swap, the smallest job checked — still arrived with the full formal HEB drawing set (cover sheet, demo plan, demo schedule, partial plan, Refrigeration Schedule, controls notes, four detail sheets, EMS sheets). Don't assume a small-sounding job means a thin Uploads folder; check the sheet index regardless of how minor the scope sounds.</p>
+</div>
+</div>
+
+<div class="toc">
+<h3>Jump to an item</h3>
+<ol>
+<li><a href="#item1">1. 1/4-10 HP Condensing Unit</a></li>
+<li><a href="#item2">2. 10-35 HP Condensing Unit</a></li>
+<li><a href="#item3">3. Comp Rack (HFC parallel)</a></li>
+<li><a href="#item4">4. CO2 Cascade Comp Rack</a></li>
+<li><a href="#item5">5. Porta Pack (packaged rack)</a></li>
+<li><a href="#item6">6. Air-Cooled Condenser (12-fan class)</a></li>
+<li><a href="#item7">7. New Tower Install (water side)</a></li>
+<li><a href="#item8">8. Tower Circuits (refrigerant charge only)</a></li>
+<li><a href="#item9">9. R&amp;R Water-Cooled Condenser</a></li>
+<li><a href="#item10">10-11. New Stub — Gas / Off-time-Electric</a></li>
+<li><a href="#item12">12. TXV Service</a></li>
+<li><a href="#item13">13. Water Reclaim Tank</a></li>
+<li><a href="#item14">14. Protocol / Proto-Aire</a></li>
+<li><a href="#item15">15. EVAC System (mains &amp; risers)</a></li>
+<li><a href="#item16">16. Comp Rack - Service/Retrofit Ops</a></li>
+<li><a href="#item17">17. Pipe Insulation Service</a></li>
+<li><a href="#item18">18. Display Cases (lineups)</a></li>
+<li><a href="#item19">19. Walk-in Coolers/Freezers + Evap Coils</a></li>
+<li><a href="#item20">20. Refrigerant Piping (system)</a></li>
+<li><a href="#item21">21. Glycol / Secondary Loop</a></li>
+<li><a href="#item22">22. EMS / Controls System</a></li>
+<li><a href="#item23">23. Roof Support / Penetration / Chase</a></li>
+<li><a href="#item24">24. Charging Station (CO2 / Glycol)</a></li>
+</ol>
+</div>
+
+<!-- ITEM 1 -->
+<h2 id="item1"><span class="num">1</span>1/4-10 HP Condensing Unit <span class="badge strong">STRONG</span></h2>
+<div class="card">
+<p class="step"><span class="n">1</span>Where it sits</p>
+<p>Sheet R-2.0, the <b>lower</b> of two stacked tables on the page — the upper table is the per-rack schedule (see Item 3); this lower one is headed by the cell "APPLIANCE NUMBER" and lists standalone condensing units one per row.</p>
+<p class="step"><span class="n">2</span>On the sheet</p>
+<figure class="shot wide"><img src="images/01-condensing-unit-quarter-to-10hp.png" alt="Condensing unit schedule table"><figcaption>Zoom of the Appliance Number table. File: HEB CORP #0833 – Carrollton, TX · R-2.0-REFRIGERATION-EQUIPMENT-SCHEDULE-Rev.A.pdf · page 1 · sheet R-2.0.</figcaption></figure>
+<p class="step"><span class="n">3</span>The exact text, as printed</p>
+<div class="lit"><span class="k">Refrigeration Equipment Schedule — Appliance Number table (row example)</span>
+Appliance Number     SISF08
+Description          Seafood Ice Flaker (2K)
+Refrigeration Load    17,050 BTU/hr
+SST                   -7°F
+Refrigerant           R449A
+Manufacturer          Howe
+Compressor Model      ZF15K4ETF5251
+Condensing Unit Model HA2001-A-R449A-1-HG
+Dimension             30.5"x43.875"x29.25"
+Weight                323 LBS
+Liquid Line           1/2"
+Suction Line          1 1/8"</div>
+<p>Eight rows total on this sheet (Appliance Numbers SIDA01 through SISF08). Every character above is copied straight off the printed table — nothing guessed.</p>
+<p class="step"><span class="n">4</span>How you count it</p>
+<div class="val"><b>Count one row = one unit.</b> This sheet lists 8 rows, each with its own Condensing Unit Model number, so this job has 8 standalone condensing units in this class. The Appliance Number prefix ("SI") plus the Description column tells you which space each one serves (Dairy Cooler, Frozen Food Freezer, Meat Cooler, Seafood Ice Flaker) — that's what makes this a genuine <i>condensing unit</i> schedule and not just a box/space list, even though the description text alone can look like the latter at a glance.</div>
+</div>
+
+<!-- ITEM 2 -->
+<h2 id="item2"><span class="num">2</span>10-35 HP Condensing Unit <span class="badge thin">THIN</span></h2>
+<div class="card">
+<p class="step"><span class="n">1</span>Where it sits</p>
+<p>The same Equipment Schedule table type as Item 1 — not a separate sheet, just a bigger HP value in the same compressor table. On a rack-based job it's a "Compressor Schedule" table with its own explicit HP column, one row per compressor.</p>
+<p class="step"><span class="n">2</span>On the sheet</p>
+<figure class="shot wide"><img src="images/02-condensing-unit-10-35hp.png" alt="Larger condensing unit / compressor HP schedule"><figcaption>Zoom of the low-temp rack compressor table. File: Walmart 6786-1004 – McAllen, TX · 6786 Combined PDFs.pdf · page 9 · sheet R2.</figcaption></figure>
+<p class="step"><span class="n">3</span>The exact text, as printed</p>
+<div class="lit"><span class="k">Group "A" Rack - Low Temp - R-407A — Compressor table (row example)</span>
+Unit Designation      LTA1
+Compressor Mfr        COPELAND
+Compressor Model      4DJXF76KL-TSK-C55
+Modulation            UNLOADER
+Capacity              66.5 MBH
+THR                   97.6 MBH
+KW                    4.40
+Comp HP               12.5
+EER                   15.11
+RLA (460/3/60)        28.3 A
+                      -- SYSTEM 'A' TOTALS: 42.00 HP across 4 compressors --</div>
+<p>Individual compressors here ran 7.0-12.5 HP each; the rulebook's "10-35 HP" bucket is really a size range, not a printed label — you place the row into it based on this HP column, or the equivalent capacity/model number when no HP column exists.</p>
+<p class="step"><span class="n">4</span>How you count it</p>
+<div class="val"><b>Count whole units, not compressors.</b> A single condensing unit whose one (or combined) compressor lands in the 10-35 HP band is 1 unit — a 4-compressor rack (like this one) isn't 4 units in this bucket, it's 1 rack, priced under Item 3 instead. Only count here when the schedule shows a genuinely standalone unit (its own Appliance Number/Mark, its own condensing-unit model) whose HP falls in this range.</div>
+</div>
+
+<!-- ITEM 3 -->
+<h2 id="item3"><span class="num">3</span>Comp Rack (HFC parallel) <span class="badge strong">STRONG</span></h2>
+<div class="card">
+<p class="step"><span class="n">1</span>Where it sits</p>
+<p>Sheet R-2.0, the <b>upper</b> table — columns are the rack names themselves (Rack A / Rack B / Rack C), with manufacturer, model, refrigerant, and electrical data running down the rows for each. A "Compressor Schedule" variant lists the same rack as a row-per-compressor table instead.</p>
+<p class="step"><span class="n">2</span>On the sheet</p>
+<figure class="shot wide"><img src="images/03-comp-rack-hfc.png" alt="Compressor rack schedule, HFC parallel"><figcaption>Zoom of the Appliance Name / Rack A-B-C table. File: HEB CORP #0833 – Carrollton, TX · R-2.0-REFRIGERATION-EQUIPMENT-SCHEDULE-Rev.A.pdf · page 1 · sheet R-2.0.</figcaption></figure>
+<div class="variant-tag">Naming variant — "Compressor Schedule" (row-per-compressor)</div>
+<figure class="shot wide"><img src="images/03b-comp-rack-hfc-variant.png" alt="Compressor schedule variant"><figcaption>Zoom of the Compressor Schedule. File: Walmart 5102-258 – Gretna, LA · 3721 - R2.1 REFRIGERATION SCHEDULES.pdf · page 1.</figcaption></figure>
+<p class="step"><span class="n">3</span>The exact text, as printed</p>
+<div class="lit"><span class="k">Compressor Schedule — System LTA DX (row example)</span>
+System                LTA DX
+Compressor #          2
+Model                 4DJNF76KLTSKC23
+NRE                   59 MBH
+% of Required Load     33.1%
+THR                   89.7 MBH
+Variable Capacity?     NO
+HP                    12.5
+RPM                   1750
+RLA                   32.1
+LRA                   187
+                      -- LTA DX TOTAL: 44.5 HP across 4 compressors --</div>
+<p>Identifier = the rack/system name itself (<b>LTA DX</b>), not a serial number — every compressor under it shares that same tag.</p>
+<p class="step"><span class="n">4</span>How you count it</p>
+<div class="val"><b>Count distinct rack names/columns, not compressors.</b> The HEB CORP #0833 sheet names 3 racks (A/B/C) — that's 3 racks, regardless of how many compressors sit inside each one. On the Compressor Schedule variant, count the number of different System names (LTA DX, MTAS DX, MTB DX, etc.) the same way; the compressor rows underneath each one are detail, not a separate count. Cross-check the rack's own refrigerant charge against a Refrigerant Disclosure/Charge Schedule where one exists, rather than assuming a single default value applies to every rack.</div>
+</div>
+
+<!-- ITEM 4 -->
+<h2 id="item4"><span class="num">4</span>CO2 Cascade Comp Rack <span class="badge strong">STRONG</span></h2>
+<div class="card">
+<p class="step"><span class="n">1</span>Where it sits</p>
+<p>The same rack table as Item 3 — look for the phrase <b>"CO2 Cascade Split"</b> in the System Application row of one rack's column. There's no separate sheet for it; it's a CO2-flavored row inside the ordinary rack schedule.</p>
+<p class="step"><span class="n">2</span>On the sheet</p>
+<figure class="shot"><img src="images/04-co2-cascade-rack.png" alt="CO2 cascade rack schedule column"><figcaption>Zoom of the Rack C column. File: HEB CORP #0833 – Carrollton, TX · R-2.0-REFRIGERATION-EQUIPMENT-SCHEDULE-Rev.A.pdf · page 1 · sheet R-2.0.</figcaption></figure>
+<p class="step"><span class="n">3</span>The exact text, as printed</p>
+<div class="lit"><span class="k">Rack C column, same Refrigeration Equipment Schedule</span>
+System Application    CO2 CASCADE SPLIT
+Rack Model             CO2 CASCADE 300/600 SPLIT TEMP
+Refrigerant            R513A&amp;R744</div>
+<p class="step"><span class="n">4</span>How you count it</p>
+<div class="val"><b>It's one more rack in the same count as Item 3 — don't count it twice or file it separately.</b> Rack C above is one of the 3 racks total on this sheet. What's different about a CO2 cascade rack is that its Refrigerant row lists <i>two</i> refrigerants (a high-side HFC blend and R-744/CO2) instead of one — both need their own charge amount, which comes from the job's Refrigerant Disclosure/Charge Schedule, not this Equipment Schedule row. If a rack's Refrigerant field lists two refrigerants joined by "&amp;", that's your signal you're looking at a cascade system, not a plain single-refrigerant rack.</div>
+</div>
+
+<!-- ITEM 5 -->
+<h2 id="item5"><span class="num">5</span>Porta Pack (packaged rack) <span class="badge absent">NOT OBSERVED ON A DRAWING</span></h2>
+<div class="card">
+<div class="callout absent">
+<b>Never found on a drawing in any of the 24 folders checked.</b> No PDF in this dataset contains the term "Porta Pack" or an equivalent packaged-rack schedule row. Kroger's spec has the closest relative — a "Prefabricated Mechanical Center" (Section 11 41 43, Article 3.3.B) — but that's Kroger's own related-but-different term, not a confirmed sighting.
+</div>
+<div class="callout warn"><b>But it's real enough to have cost real money.</b> Climate Pros' own PMO bid-review records (Publix 2118) list Portapack as one of the items missed from an empty equipment tab, alongside 3 water-cooled condensers and filter/drier changes — so this item does show up on real jobs, this dataset's drawing sets simply didn't happen to include one. If a job's Equipment Schedule lists any kind of fully-packaged, self-contained rack unit (its own Mark/Appliance Number, its own model, described as shipping complete rather than field-assembled from a rack + separate condenser), that's the profile to watch for.</div>
+</div>
+
+<!-- ITEM 6 -->
+<h2 id="item6"><span class="num">6</span>Air-Cooled Condenser (12-fan class) <span class="badge strong">STRONG</span></h2>
+<div class="card">
+<p class="step"><span class="n">1</span>Where it sits</p>
+<p>Its own "Condenser Schedule" block, either inside the combined Equipment Schedule sheet or as its own dedicated "Equipment Schedule" table on a fixture sheet (coded "F1" on the CapX condenser-replacement jobs).</p>
+<p class="step"><span class="n">2</span>On the sheet</p>
+<figure class="shot"><img src="images/05-air-cooled-condenser.png" alt="Air-cooled condenser schedule"><figcaption>Zoom of the Condenser Equipment Schedule. File: Walmart 0344-1005 – El Campo, TX · 344 Combined PDFs 6-17-26.pdf · page 7 of 11 · sheet R2.</figcaption></figure>
+<div class="variant-tag">Naming variant — CO2 systems call it a "Gas Cooler"</div>
+<figure class="shot"><img src="images/05b-air-cooled-condenser-gas-cooler-variant.png" alt="Gas cooler schedule, CO2 equivalent"><figcaption>Zoom of the Gas Cooler Schedule. File: Whole Foods 10593 – Frisco, TX · WF-R200 FRISCO.pdf · page 1 · sheet R200.</figcaption></figure>
+<p class="step"><span class="n">3</span>The exact text, as printed</p>
+<div class="lit"><span class="k">Condenser Equipment Schedule (row example)</span>
+Mark              MTB DX
+Manufacturer      Hill Phoenix
+Model             BNH-D08-A068
+Refrigerant       R-404A
+Fan Quantity      8
+
+<span class="k">Gas Cooler Schedule (CO2 variant, row example)</span>
+Rack              RACK DTA
+Manufacturer      BAC
+Model             TSDC2-CO2-202-12.4
+System THR        571.7 MBH
+Spare Capacity    192.3 MBH (33.64%)</div>
+<p>The fan count is often baked into the model number itself rather than spelled out as its own "12-fan" label — that literal phrase was never found verbatim anywhere in this dataset.</p>
+<p class="step"><span class="n">4</span>How you count it</p>
+<div class="val"><b>Count real standalone condensers only — check the rack's own "Condenser Mounting" field first.</b> If the rack schedule (Item 3) says "Condenser Mounting: Integrated" for a given rack, its condenser is already built into that rack — don't count it again here. Only count a condenser on this item when it has its own Mark and model, separate from any rack, the way the El Campo condensers above do (one row = one condenser).</div>
+</div>
+
+<!-- ITEM 7 -->
+<h2 id="item7"><span class="num">7</span>New Tower Install (water side) <span class="badge absent">NOT OBSERVED</span></h2>
+<div class="card">
+<div class="callout absent">
+<b>Never found — 0 for 24 folders, including a dedicated re-check.</b> Zero occurrences of "cooling tower" tied to actual project scope anywhere, including a Walmart "Mechanical Schedules" (M3) sheet specifically checked because HVAC schedules sometimes carry tower content — it had only an Air Device Schedule and a small heat-pump split-system schedule, no tower. A generic HVAC abbreviations legend on one Sprouts job defines "CT = Cooling Tower" among dozens of stock abbreviations, but it isn't tied to any schedule, tag, or installed unit on that job. Every CO2/SCO2 job in this dataset uses air-cooled gas coolers instead.
+</div>
+<p>If this comes up on a real job: expect it on a Mechanical Schedule (Division 23, not the refrigeration-specific sheets), plus a Roof/Site Plan for placement — a real tower would show its own Mark, manufacturer, and tonnage/GPM rating there the same way a condenser schedule shows a condenser.</p>
+</div>
+
+<!-- ITEM 8 -->
+<h2 id="item8"><span class="num">8</span>Tower Circuits (refrigerant charge only) <span class="badge absent">NOT OBSERVED</span></h2>
+<div class="card">
+<div class="callout absent"><b>Never found.</b> Same reason as Item 7 — no cooling tower jobs exist in this dataset, so there's no tower-circuit charge-only line to point to.</div>
+</div>
+
+<!-- ITEM 9 -->
+<h2 id="item9"><span class="num">9</span>R&amp;R Water-Cooled Condenser <span class="badge absent">NOT OBSERVED ON A DRAWING</span></h2>
+<div class="card">
+<div class="callout absent">
+<b>Never found on a drawing.</b> The 3 Walmart "Condenser Replacement" CapX jobs in this dataset are all confirmed <b>air-cooled</b> swaps. Every condenser reference checked elsewhere is explicitly air-cooled too (Safeway 2944's schedule literally says "Condenser Type: Air" on every circuit). The only water-cooled hits anywhere were a generic commissioning-checklist line and a "self-contained water-cooled cases" product mention — neither an R&amp;R scope item.
+</div>
+<div class="callout warn"><b>But — same as Porta Pack — it's real enough to show up in a bid-review loss.</b> The same Publix 2118 review that missed Portapack also missed 3 water-cooled condensers. If a demo plan flags an existing condenser for removal and the equipment schedule doesn't explicitly say "air-cooled," don't assume — check for a water-side connection (isolation/check valves at a water loop, a condenser-water piping plan) before pricing it as an air-cooled swap.</div>
+<div class="callout"><b>Close relative worth knowing about — the adiabatic/hybrid air-cooled condenser.</b> Sprouts Cibolo's plumbing details (P401/P402, "Refrigeration Condenser Make-Up Water") show a condenser type this dataset hadn't seen before: an air-cooled condenser with a water-spray pre-cooler pad, EMS-controlled to fill at 40°F ambient and drain at 45°F. It's water-<i>assisted</i>, not water-cooled or tower-fed — don't file it under this item, but do expect a small domestic-water connection and an EMS solenoid valve on the plumbing plan if you see one, since it's easy to mistake for either a true water-cooled condenser or a plain air-cooled one.</div>
+</div>
+
+<!-- ITEM 10/11 -->
+<h2 id="item10"><span class="num">10-11</span>New Stub — Gas / Off-time-Electric <span class="badge thin">THIN</span></h2>
+<div class="card">
+<p class="step"><span class="n">1</span>Where it sits</p>
+<p>A row inside the ordinary Circuit Schedule — spare/future circuits get their own row alongside the active ones, plus a matching floor-plan keynote.</p>
+<p class="step"><span class="n">2</span>On the sheet</p>
+<figure class="shot wide"><img src="images/06-new-stub-gas-electric.png" alt="Spare stub circuit rows with defrost-type column"><figcaption>Zoom of the circuit table's Spare Stub rows. File: Walmart 0395-1013 – Mission, TX · 395 Combined PDFs.pdf · page 13 of 19 · sheet R2.</figcaption></figure>
+<p class="step"><span class="n">3</span>The exact text, as printed</p>
+<div class="lit"><span class="k">Refrigeration Schedule System MTB — circuit row example</span>
+CKT #            B04 DX
+Description      Spare Stub
+Comment          New Spare Stub for Future Use
+Defrost Type     OT
+
+CKT #            B09 DX
+Defrost Type     EL</div>
+<p>Whether it's a gas (hot-gas defrost) stub or an off-time/electric stub is read off that same row's Defrost Type column — <span class="cell">EL</span> for electric, <span class="cell">OT</span> for off-time.</p>
+<p class="step"><span class="n">4</span>How you count it</p>
+<div class="val"><b>Count "Spare Stub" rows, split by their Defrost Type column.</b> Each spare-stub row with Defrost Type = OT is one off-time/electric stub; each with a hot-gas defrost designation is a gas stub. Count them separately — they price differently (a hot-gas stub needs a brazed gas-line tie-in, an off-time/electric stub doesn't).</div>
+</div>
+
+<!-- ITEM 12 -->
+<h2 id="item12"><span class="num">12</span>TXV Service <span class="badge strong">STRONG</span></h2>
+<div class="card">
+<p class="step"><span class="n">1</span>Where it sits</p>
+<p>A column inside the Circuit Schedule on new-construction jobs, one value per circuit. On a pure service/retrofit job, there's usually no schedule at all — the count comes straight from a Scope-of-Work sentence instead (see cross-cutting finding #4).</p>
+<p class="step"><span class="n">2</span>On the sheet</p>
+<figure class="shot wide"><img src="images/07-txv-service.png" alt="TXV column in circuit schedule"><figcaption>Zoom of the Evaporator Coil TXV column. File: Walmart 0395-1013 – Mission, TX · 395 Combined PDFs.pdf · page 13 of 19 · sheet R2.</figcaption></figure>
+<div class="variant-tag">Naming variant — "Expansion Valve" / EEV</div>
+<figure class="shot"><img src="images/07b-txv-service-expansion-valve-variant.png" alt="Expansion valve terminology variant"><figcaption>Zoom of the Symbol Legend. File: Walmart 6786-1004 – McAllen, TX · 6786 Combined PDFs.pdf · page 11 of 17 · sheet R3.1.</figcaption></figure>
+<p class="step"><span class="n">3</span>The exact text, as printed</p>
+<div class="lit"><span class="k">Refrigeration Schedule System LTA — circuit row example</span>
+CKT #                          A04 DX
+Evaporator Coil TXV /
+  Distributor Nozzle           EGVE-3-Z / #2
+
+<span class="k">Symbol Legend (variant sheet)</span>
+Symbol   [schematic valve symbol]
+Label    ELECTRONIC EXPANSION VALVE</div>
+<p><b>Watch the terminology</b> — 2 of 3 Walmart CapX folders never use the literal word "TXV," calling it "Expansion Valve" or "Holdback Valve" instead; Whole Foods calls it an EEV and explicitly notes "TXV NOT ACCEPTABLE" on one schedule.</p>
+<p class="step"><span class="n">4</span>How you count it</p>
+<div class="val"><b>On new construction, count circuit rows in the TXV/Expansion Valve column — one per circuit.</b> On a service job, there's no schedule row to count at all; the quantity is whatever the Scope of Work states (e.g. "replace TXV on 5 circuits"), and whether it's a full body change (brazed, system opened) versus a cartridge/power-head swap (mechanical only, no braze) has to be read directly out of that same SOW language, not assumed.</div>
+</div>
+
+<!-- ITEM 13 -->
+<h2 id="item13"><span class="num">13</span>Water Reclaim Tank <span class="badge thin">THIN</span></h2>
+<div class="card">
+<p class="step"><span class="n">1</span>Where it sits</p>
+<p>A header field inside the main Refrigeration System Schedule — every schedule checked has a place for it ("H/R Media," "H/R Use," "H/R Water GPM," "H/R Glycol Type/%"), but on every job checked so far those fields print as blank dashes. The spec's own name for it is <b>"Heat Reclaim Tank,"</b> not "Water Reclaim Tank."</p>
+<p class="step"><span class="n">3</span>The exact text, as printed</p>
+<div class="lit"><span class="k">Section 20 69 93 — Sequence of Operations for Refrigeration Controls (HEB CORP #0833)</span>
+"Heat Reclaim Tank(s) provides supplemental heating to the water heater
+by preheating refrigerant. Heat reclaim mode activates 3-way valve to
+divert high temperature discharge vapor refrigerant away from
+condenser into the heat reclaim tank(s)."
+
+<span class="k">Refrigeration System Schedule header fields (confirmed blank on Walmart 0383-277)</span>
+H/R Media:              --
+H/R Use:                --
+H/R Water GPM:          --
+H/R Glycol Type/%:      --</div>
+<p>Whole Foods 10593 names an actual product for it (Specifications §223530, "Heat Reclaim Tanks," Lochinvar) and notes the rack OEM supplies the heat exchanger/pump/3-way valve factory-installed at the rack. HEB 385 names a different specific product for the same underlying function — a <b>"Doucette" heat exchanger/desuperheater</b> mounted on the rack itself, with a general note that "Kysor Warren will supply/install the Doucette heat exchanger... plumbing contractor responsible for water connections." Same equipment category, a third distinct product name — add "Doucette" to what you search for.</p>
+<p class="step"><span class="n">4</span>How you count it</p>
+<div class="val"><b>Count 1 only if the schedule's H/R fields are actually filled in — leave it at zero if they print as dashes.</b> A blank H/R row means this job's rack doesn't reclaim heat at all; don't infer a tank exists just because the spec generically describes what one would do. When it is filled in, the tank count and its sizing come from that same schedule row (or the plumbing water-heater schedule's own reclaim-tank line, if a separate one exists).</div>
+</div>
+
+<!-- ITEM 14 -->
+<h2 id="item14"><span class="num">14</span>Protocol / Proto-Aire <span class="badge thin">THIN</span></h2>
+<div class="card">
+<p class="step"><span class="n">1</span>Where it sits</p>
+<p>Chain-specific: strongly present on Kroger, essentially absent everywhere else. It shows up on the floor plan as a bare keynote, not a schedule row with a count column — plus a dedicated spec section on Kroger jobs.</p>
+<p class="step"><span class="n">3</span>The exact text, as printed</p>
+<div class="lit"><span class="k">Section 11 41 63 — Fixture and Equipment Electrical Installation, "3.5 Protocol Refrigeration Equipment" (Kroger DAL653)</span>
+"Protocol units are a remote compressor unit that is placed in various
+locations throughout the store as indicated on the Fixture and
+Refrigeration Drawings. Each protocol unit is furnished with a branch
+circuit and compressor panel located in the front door of the unit...
+These remote compressors work in conjunction with a fluid cooler,
+pump station and/or air cooled condenser."
+
+<span class="k">Floor plan keynote (same job)</span>
+"PROTOCOL AND ASSOC. EQUIPMENT. RE: PLUMBING &amp; ELECTRICAL
+DRAWINGS FOR ADDITIONAL INFORMATION."</div>
+<p>Walmart 0395 mentions "Protocol" only once, as a defined term inside a "Compressor House" glossary note, with no actual unit scheduled. No hits at all on the HEB, Whole Foods, Safeway, or Carrs folders checked.</p>
+<p class="step"><span class="n">4</span>How you count it</p>
+<div class="val"><b>Count the distinct floor-plan keynote instances — there usually isn't a schedule row with its own count column.</b> Each "PROTOCOL AND ASSOC. EQUIPMENT" callout on the fixture/refrigeration drawings is one unit; cross-reference against the electrical drawings' branch-circuit count for that unit type to confirm the number.</div>
+</div>
+
+<!-- ITEM 15 -->
+<h2 id="item15"><span class="num">15</span>EVAC System (mains &amp; risers) <span class="badge strong">STRONG</span></h2>
+<div class="card">
+<p class="step"><span class="n">1</span>Where it sits</p>
+<p>A procedural section in the specification document — described as a process, not a schedule table with a quantity column. Actual PVC main/copper riser footage comes from the piping/floor plan instead.</p>
+<p class="step"><span class="n">2</span>On the sheet</p>
+<figure class="shot"><img src="images/16-evac-system.png" alt="Evacuation and charging spec section"><figcaption>Spec section 20 63 96, pages 3-4 of 6 (stitched). File: HEB CORP #0833 – Carrollton, TX · 206396_REFG SYS EVAC AND CHARGING-NEW INSTALLATIONS.pdf.</figcaption></figure>
+<p class="step"><span class="n">3</span>The exact text, as printed</p>
+<div class="lit"><span class="k">Section 20 63 96 — Refrigeration System Evacuation and Charging, 3.2/3.3</span>
+"3. Connect the vacuum pump to three points on the compressor rack.
+Connect to two points on condensing units."
+...
+"A. Evacuate system to 1,000 microns (±50 microns) and close the
+vacuum header valve."</div>
+<p>Not tagged/counted in the schedule sense — identified by connection points on the rack/condensing unit described in the procedure text.</p>
+<p class="step"><span class="n">4</span>How you count it</p>
+<div class="val"><b>There's no count in the spec itself — it's a per-rack/per-unit procedure, not a line item.</b> What you can count: the PVC main and copper/PVC riser footage, read off the piping/line-size schedule under the same rack name as any other refrigerant piping (see Item 20) — that's where the actual linear footage for evacuation mains and risers comes from, not this spec section.</div>
+</div>
+
+<!-- ITEM 16 -->
+<h2 id="item16"><span class="num">16</span>Comp Rack - Service/Retrofit Ops <span class="badge strong">STRONG</span></h2>
+<div class="card">
+<p class="step"><span class="n">1</span>Where it sits</p>
+<p>Triggered by a note on the demolition plan, Responsibility Matrix, or BAS sheet describing a retrofit — there is no dedicated schedule table for this item anywhere in the uploads checked.</p>
+<p class="step"><span class="n">2</span>On the sheet</p>
+<figure class="shot"><img src="images/17-comp-rack-service-retrofit-ops.png" alt="Controls retrofit trigger note" style="max-height:240px"><figcaption>General notes box, Refrigeration BAS One-Line Diagram. File: Walmart 3295-1013 – Broken Arrow, OK · 3295 Combined PDFs.pdf · page 9 · sheet BASR2.</figcaption></figure>
+<p class="step"><span class="n">3</span>The exact text, as printed</p>
+<div class="lit"><span class="k">General notes box, Refrigeration BAS One-Line Diagram</span>
+"COORDINATE WITH LEGACY BAS VENDOR (NOVAR) FOR THE
+REPROGRAMMING OF THEIR RACK CONTROLLER WITH THE REMOVAL OF
+REFRIGERATION CIRCUITS FROM THEIR CONTROL. VERIFY DEFROST
+SCHEDULES ARE COORDINATED BETWEEN THE EXISTING RACK
+CONTROLLER AND THE NEW CASE AND WALK-IN CONTROLS."</div>
+<p>Not tagged with its own line item on the drawing — it's a plain-English coordination instruction.</p>
+<p class="step"><span class="n">4</span>How you count it</p>
+<div class="val"><b>Count service operations, not parts — read the operation count straight from the note or demo-plan scope, not from a schedule.</b> A note like this one describes a single reprogramming operation for the rack being retrofitted; if the same job's demo plan also calls for changing rack filters/driers "if any rack systems are opened," that's a separate, distinct operation to count once per rack actually opened — the exact wording on the demo plan or Responsibility Matrix is the only source for how many times each operation happens.</div>
+</div>
+
+<!-- ITEM 17 -->
+<h2 id="item17"><span class="num">17</span>Pipe Insulation Service <span class="badge thin">THIN</span></h2>
+<div class="card">
+<p class="step"><span class="n">1</span>Where it sits</p>
+<p>A generic insulation-material table in the spec, organized by pipe size and service temperature — there is no dedicated "replace insulation" schedule or count column anywhere in the uploads checked; the actual linear footage has to come from the piping plan plus the Scope of Work.</p>
+<p class="step"><span class="n">2</span>On the sheet</p>
+<figure class="shot"><img src="images/12-pipe-insulation-service.png" alt="Piping insulation schedule in the spec"><figcaption>"Schedule I" piping insulation table. File: Walmart 5102-258 – Gretna, LA · 15600 - 05102 Version=1.pdf · page 9 (printed 15600-9).</figcaption></figure>
+<p class="step"><span class="n">3</span>The exact text, as printed</p>
+<div class="lit"><span class="k">Schedule I — Piping Insulation, Part 2.4-B</span>
+Service           R404A/R407A/R448A/R422D - Suction
+Piping Size       1-5/8 inches and larger
+Piping Material   Type L Hard Drawn Copper, Sealed ACR Tubing
+Insulation        1-1/2 inch</div>
+<p>By pipe size and refrigerant band, not by a count. The R744/CO2 rows of this same schedule continue onto the next spec page.</p>
+<p class="step"><span class="n">4</span>How you count it</p>
+<div class="val"><b>Read linear feet off the piping plan for whichever existing runs the Scope of Work says get new insulation, then look up the required thickness for that pipe size/service band on this table.</b> The spec table tells you <i>what</i> insulation is required per size; it never states a footage total by itself — that comes from measuring the actual runs called out for re-insulation on the plan.</div>
+</div>
+
+<!-- ITEM 18 -->
+<h2 id="item18"><span class="num">18</span>Display Cases (lineups) <span class="badge strong">STRONG</span></h2>
+<div class="card">
+<p class="step"><span class="n">1</span>Where it sits</p>
+<p>The single most reliably findable item in this whole guide — case tags on the floor plan plus a matching row in the Circuit/Case Schedule, on every job with real drawings.</p>
+<p class="step"><span class="n">2</span>On the sheet</p>
+<figure class="shot wide"><img src="images/09-display-cases.png" alt="Refrigerated circuit summary / case schedule"><figcaption>Zoom of the Refrigerated Circuit Summary. File: HEB CORP #0833 – Carrollton, TX · R-2.1-REFRIGERATION-SCHEDULE-Rev.A.pdf · page 1 · sheet R-2.1.</figcaption></figure>
+<p class="step"><span class="n">3</span>The exact text, as printed</p>
+<div class="lit"><span class="k">Refrigerated Circuit Summary / Case-Coil Information (row example)</span>
+Sys. No.                RACB01
+Description              Curbside Cooler
+Case/Coil Manufacturer   Krack
+Model #                  GHD56D-340NDBA</div>
+<p>Tagged by department-prefixed circuit code, with a Description column naming the real fixture and a Case/Coil Manufacturer + Model column alongside it.</p>
+<p class="step"><span class="n">4</span>How you count it</p>
+<div class="val"><b>Count case tags on the floor plan, then group consecutive same-run circuits into lineups, cross-checked against the schedule's own row count.</b> The schedule's Length/Doors and fixture-length columns tell you how each individual case is sized; the floor plan tells you which ones sit end-to-end as one physical lineup. Count both and make sure they agree — this is exactly the kind of count that gets lost between drawing and bid per finding #7 above.</div>
+</div>
+
+<!-- ITEM 19 -->
+<h2 id="item19"><span class="num">19</span>Walk-in Coolers/Freezers + Evap Coils <span class="badge strong">STRONG</span></h2>
+<div class="card">
+<p class="step"><span class="n">1</span>Where it sits</p>
+<p>Columns inside the same main schedule used for cases — look for "Walk-In Box Size" and "WI Evaps" columns — or, on jobs with no formal schedule, bare room-dimension callouts on the floor plan.</p>
+<p class="step"><span class="n">2</span>On the sheet</p>
+<figure class="shot wide"><img src="images/10-walk-in-coolers-evap-coils.png" alt="Walk-in box size and evaporator columns"><figcaption>Zoom of the Walk-In Box Size / WI Evaps columns. File: Walmart 5102-258 – Gretna, LA · 3720 - R2 REFRIGERATION SCHEDULES.pdf · page 1 · sheet R2, System DTA DX.</figcaption></figure>
+<p class="step"><span class="n">3</span>The exact text, as printed</p>
+<div class="lit"><span class="k">Refrigeration System Schedule, System DTA DX (row example)</span>
+CKT #              AS01a DX
+Walk-In Box Size   1/2 Dairy Cooler W.I. w/ drs.
+Case/Coil Model    KR34A-173
+Manufacturer       KRACK
+LSHX               N</div>
+<p>By the same circuit tag as any other case row; when no formal schedule exists, the fallback is a bare room label directly on the floor plan (e.g. "DAIRY VAULT / 47'-0" X 15'-7" X 10'-0" HT.").</p>
+<p class="step"><span class="n">4</span>How you count it</p>
+<div class="val"><b>Count coils by circuit row, count boxes by room label — they aren't the same number.</b> A single walk-in box can carry sub-circuits (this row's "1/2 Dairy Cooler" notation means the box is split across two circuits), so count evaporator coils from the schedule's coil/model column, and count physical walk-in boxes separately from the floor plan's room labels or dimensioned box outlines.</div>
+</div>
+
+<!-- ITEM 20 -->
+<h2 id="item20"><span class="num">20</span>Refrigerant Piping (system) <span class="badge strong">STRONG</span></h2>
+<div class="card">
+<p class="step"><span class="n">1</span>Where it sits</p>
+<p>A dedicated Piping/Line-Size Schedule — essentially universal wherever real drawings exist, and the most consistently tagged item in this dataset.</p>
+<p class="step"><span class="n">2</span>On the sheet</p>
+<figure class="shot wide"><img src="images/11-refrigerant-piping-line-size-schedule.png" alt="Line size schedule by rack"><figcaption>Zoom of the Rack RA Line Size Schedule (MT). File: HEB CORP #0833 – Carrollton, TX · R-1.5-REFRIGERATION-LINE-SIZING-SCHEDULE-Rev.A.pdf · page 1 · sheet R-1.5.</figcaption></figure>
+<p class="step"><span class="n">3</span>The exact text, as printed</p>
+<div class="lit"><span class="k">Rack RA Line Size Schedule (MT), Loop 1 (row example)</span>
+Trunkline              1A
+Liquid                 1-1/8"
+Suction                2-5/8"
+Suction Riser          1-5/8"-1-3/8"
+Actual Line Length     106'
+Equiv. Line Length     138'</div>
+<p class="step"><span class="n">4</span>How you count it</p>
+<div class="val"><b>Count every branch/trunk row on the schedule and read its size and length straight off that row.</b> Each row is one pipe segment (a trunkline or a numbered branch like RA02/RA02A); the schedule already separates liquid, suction, and suction-riser sizes and gives both an actual and an equivalent (fitting-adjusted) length, so no measurement or waste-factor math is needed to identify what's there — that math happens downstream, this schedule is the source of truth for what to measure against.</div>
+</div>
+
+<!-- ITEM 21 -->
+<h2 id="item21"><span class="num">21</span>Glycol / Secondary Loop <span class="badge strong">STRONG</span></h2>
+<div class="card">
+<div class="callout confirm"><b>Upgraded from "not observed" once a real CO2-Glycol Upgrade job (Walmart 0383-277, Silsbee TX) came through.</b> That job adds a brand-new secondary glycol loop ("MTB GLY") alongside a transcritical CO2 conversion, with a genuinely rich schedule set: a dedicated pump-skid schedule, a refrigerant-charge schedule showing the actual loop volume, glycol-specific piping/detail sheets, and glycol circuit tags all the way through the BAS/electrical drawings.</div>
+<p class="step"><span class="n">1</span>Where it sits</p>
+<p>A "Secondary Pump Skid Schedule" inside the same Equipment Schedule sheet set, plus its own glycol-specific rows on the Refrigerant Charge Schedule, Piping Schedule, and Responsibility Matrix (a "GLY SKID" column sits alongside "Existing Racks," "TCO2 Pack/Rack," and "SCO2 Skid").</p>
+<p class="step"><span class="n">2</span>On the sheet</p>
+<figure class="shot wide"><img src="images/18-glycol-secondary-loop.png" alt="Refrigeration secondary pump skid schedule"><figcaption>Zoom of the Refrigeration Secondary Pump Skid Schedule. File: Walmart 0383-277 – Silsbee, TX · 3724 - R2.4 REFRIGERATION SCHEDULES.pdf · sheet R2.4.</figcaption></figure>
+<p class="step"><span class="n">3</span>The exact text, as printed</p>
+<div class="lit"><span class="k">Refrigeration Secondary Pump Skid Schedule (row example)</span>
+Mark                     MTB GLY
+Manufacturer             RAECorp
+Model                    WMT-SEC-GLY-32-160
+Location                 Ground
+Primary Refrigerant      R404a
+Secondary Refrigerant    35% Glycol
+System Load              169.3 MBH
+Min/Max Flow Rate        32 / 160 GPM
+Voltage                  460V 3Ph 60Hz
+
+<span class="k">Refrigerant Charge Schedule (same job)</span>
+Mark                                       MTB GLY
+Unit of Measure                            GAL
+New Refrigerant Type                       35% GLY
+Estimated New Refrigerant Type Added        203.2 gal
+Total Estimated New Charge                  203.2 gal</div>
+<p>The loop volume (203.2 gallons of 35% propylene glycol) is disclosed directly on the Refrigerant Charge Schedule — the same sheet type used for refrigerant lbs on an HFC/CO2 job, just in gallons for a glycol loop.</p>
+<p class="step"><span class="n">4</span>How you count it</p>
+<div class="val"><b>Count 1 skid per Mark on the Pump Skid Schedule, and read the fluid volume straight off the Refrigerant Charge Schedule — in gallons, not lbs.</b> Detail sheets for this job also carry glycol-specific construction details ("Islander Case Piping (Glycol)," "Temporary U-Bend Bypass (Glycol)," "End-of-Loop Bypass Valve (Glycol)") — each one is a real, distinct piece of scope worth checking off against the Responsibility Matrix's "GLY SKID" column rather than assuming it's covered by whatever a plain CO2 or HFC job's detail sheets already show.</div>
+</div>
+
+<!-- ITEM 22 -->
+<h2 id="item22"><span class="num">22</span>EMS / Controls System <span class="badge strong">STRONG</span></h2>
+<div class="card">
+<p class="step"><span class="n">1</span>Where it sits</p>
+<p>A dedicated Controls/BAS sheet (coded "BASR" or "R-3.x"), usually a symbol legend plus one or more setpoint/schedule tables.</p>
+<p class="step"><span class="n">2</span>On the sheet</p>
+<figure class="shot wide"><img src="images/13-ems-controls.png" alt="Discharge air temperature and defrost parameters schedule"><figcaption>Zoom of the Rack LTA Discharge Air Temperature and Defrost Parameters table. File: Walmart 0392-1005 – Weatherford, OK · 392 Combined PDFs.pdf · page 17 · sheet BASR2.</figcaption></figure>
+<div class="variant-tag">Naming variant — Symbol Legend format</div>
+<figure class="shot"><img src="images/13b-ems-controls-symbol-legend-variant.png" alt="EMS symbol legend"><figcaption>Zoom of the EMS Symbol Legend. File: HEB CORP #0833 – Carrollton, TX · R-3.0-REFRIGERATION-CONTROL-NOTES-_-SYMBOLS-Rev.A.pdf · page 1 · sheet R-3.0.</figcaption></figure>
+<p class="step"><span class="n">3</span>The exact text, as printed</p>
+<div class="lit"><span class="k">EMS Symbol Legend (excerpt)</span>
+RA    Return Air Temperature Sensor
+DA    Discharge Air Temperature Sensor
+LT    Liquid Temperature Sensor
+ST    Suction Temperature Sensor
+PT    Pressure Transducer
+EEV   Electronic Expansion Valve
+LLSV  Liquid Line Solenoid Valve</div>
+<p>By controller brand (Novar, KE2, Sporlan, CPC all appear across different jobs) and point/sensor symbol code. A "Leak Detection Equipment Schedule" often sits right next to the main controls table and should be counted alongside it.</p>
+<p class="step"><span class="n">4</span>How you count it</p>
+<div class="val"><b>The legend defines what each symbol means — it doesn't itself give a count.</b> Tally how many times each symbol actually appears on the Controls floor plan (BASR1/BASR2-style sheets) to get real device counts, then cross-reference the Responsibility Matrix to confirm who furnishes/programs each device type before pricing anything — that furnish/install split is stated on the matrix, not the legend.</div>
+</div>
+
+<!-- ITEM 23 -->
+<h2 id="item23"><span class="num">23</span>Roof Support / Penetration / Chase <span class="badge strong">STRONG</span></h2>
+<div class="card">
+<p class="step"><span class="n">1</span>Where it sits</p>
+<p>A "Details" sheet (often coded "R-5.x") for the generic pipe-support hardware, plus a dedicated Roof Plan sheet ("MEPR" or similar) for the actual curb/penetration locations. Two of the CapX condenser-replacement jobs give it its own fully separate structural sheet.</p>
+<p class="step"><span class="n">2</span>On the sheet</p>
+<figure class="shot"><img src="images/14-roof-support-penetration-chase.png" alt="Roof equipment curb detail"><figcaption>Zoom of the Refrigeration Rack Roof Equipment Curb Detail. File: HEB CORP #0833 – Carrollton, TX · MEPR-0.1-MEPR-ROOF-PLAN-DETAILS-Rev.A.pdf · page 1 · sheet MEPR-0.1.</figcaption></figure>
+<div class="variant-tag">Naming variant — its own dedicated structural sheet</div>
+<figure class="shot"><img src="images/14b-roof-support-dedicated-sheet-variant.png" alt="Condenser support framing plan, dedicated sheet"><figcaption>Zoom of the Condenser Support Framing Plan. File: Walmart 3295-1013 – Broken Arrow, OK · 3295 Combined PDFs.pdf · page 7 · sheet S1.</figcaption></figure>
+<p class="step"><span class="n">3</span>The exact text, as printed</p>
+<div class="lit"><span class="k">Sheet MEPR-0.1 title block</span>
+MEPR Refrigeration Rack Roof Equipment Curb Detail
+
+<span class="k">Sheet S1 title block (variant)</span>
+Condenser Support Framing Plan and Details
+Detail 1: Condenser Support Framing Plan
+  — "NEW CONDENSER A (1340 LBS)"</div>
+<p>Not counted by a quantity column — identified by detail-number callouts on the roof plan (e.g. "REF 4-S1"), each pointing to a numbered construction detail on the Details/structural sheet.</p>
+<p class="step"><span class="n">4</span>How you count it</p>
+<div class="val"><b>Count the distinct callout instances on the roof or floor plan — the Details sheet itself never carries a count.</b> Every place the roof plan references a detail number (like "REF 4-S1") is one penetration/curb/chase to price; the Details sheet only tells you what that one instance looks like, not how many there are on this job.</div>
+</div>
+
+<!-- ITEM 24 -->
+<h2 id="item24"><span class="num">24</span>Charging Station (CO2 / Glycol) <span class="badge strong">STRONG</span></h2>
+<div class="card">
+<p class="step"><span class="n">1</span>Where it sits</p>
+<p>A labeled construction detail on a Details sheet, plus a matching callout on the floor/roof plan showing where it's physically located.</p>
+<p class="step"><span class="n">2</span>On the sheet</p>
+<figure class="shot"><img src="images/15-charging-station.png" alt="TCO2 charging station elevation detail"><figcaption>Zoom of the TCO2 Charging Station Elevation detail. File: Walmart 3112-1009 – San Antonio, TX · Bid Set PDF · page 7 · sheet A1.</figcaption></figure>
+<div class="variant-tag">Naming variant — a bare electrical panel-circuit tag</div>
+<figure class="shot wide"><img src="images/15b-charging-station-panel-tag-variant.png" alt="Charging station electrical panel tag"><figcaption>Zoom of Branch Panel: CL, Circuit 1. File: Kroger DAL653 – Fate, TX · 90% CDs Building Package.pdf · page 122 · sheet E6.2.1.</figcaption></figure>
+<p class="step"><span class="n">3</span>The exact text, as printed</p>
+<div class="lit"><span class="k">Branch Panel: CL (row example)</span>
+CKT      1
+Circuit Description   CHARGING STATION
+Trip                   20 A
+Poles                  1
+Load (A/B)             190 VA / 246 VA</div>
+<p>One station per job in every example found — identified by the plan label rather than a schedule count. Naming varies by chain: "Remote CO2 Charging Station" (Joe V's #831), "TCO2 Charging Station Elevation" (Walmart 3112), "Refrigeration Rack Charge Savers" (Whole Foods 10593), or nothing more than a panel-circuit label like "CHARGING STATION"/"CR-3" (Kroger). Always CO2 in this dataset — no real glycol charging station was found; Walmart 0383-277's glycol loop uses a bypass-valve/fill procedure instead (see Item 21), not a charging station.</p>
+<p class="step"><span class="n">4</span>How you count it</p>
+<div class="val"><b>Count the plan/detail callouts — one station is the norm in every job checked.</b> Confirm it's actually in Climate Pros' scope (versus owner-furnished) by checking the Responsibility Matrix's charging-station row before pricing it as a purchased/installed item.</div>
+</div>
+
+
+</div></body></html>
