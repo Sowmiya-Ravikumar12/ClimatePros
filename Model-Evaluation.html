@@ -1,0 +1,227 @@
+<title>Model Evaluation</title>
+<style>
+:root {
+  --ink: #1c2321;
+  --accent: #9c6b2e;
+  --good: #3f6b52;
+  --warn: #a8432f;
+  --mute: #7c847b;
+}
+body {
+  font-family: Georgia, 'Times New Roman', serif;
+  color: var(--ink);
+  background: #ffffff;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  line-height: 1.55;
+  font-size: 16px;
+}
+h1 { font-size: 1.7rem; margin: 0 0 6px; color: var(--ink); }
+.dek { color: #4a4a4a; font-size: 1rem; margin: 0 0 30px; max-width: 65ch; }
+.eyebrow {
+  font-family: Arial, sans-serif; font-size: 0.8rem; letter-spacing: 0.04em;
+  text-transform: uppercase; color: var(--accent); margin: 0 0 8px; font-weight: bold;
+}
+h2 {
+  font-size: 1.25rem; margin: 34px 0 10px;
+  border-bottom: 2px solid var(--accent); padding-bottom: 6px;
+  color: var(--ink);
+}
+h2 .secnum { color: var(--accent); }
+h3 { font-size: 1.05rem; margin: 20px 0 6px; color: var(--accent); }
+p { margin: 0 0 12px; max-width: 72ch; }
+ul, ol { margin: 0 0 12px; padding-left: 22px; max-width: 68ch; }
+li { margin-bottom: 6px; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; font-size: 0.88rem; }
+th, td { border: 1px solid #d8d3c8; padding: 6px 10px; text-align: left; vertical-align: top; }
+th {
+  background: #f4efe4; font-family: Arial, sans-serif; font-size: 0.8rem;
+  color: #6f552f;
+}
+.table-wrap { overflow-x: auto; }
+.recommended { background: #eaf2ec; }
+.note { font-size: 0.85rem; color: #666; }
+a { color: var(--accent); }
+.status-good { color: var(--good); font-weight: bold; }
+.status-warn { color: var(--warn); font-weight: bold; }
+.status-mute { color: var(--mute); }
+.flow {
+  background: #faf6ed; border-left: 3px solid var(--accent);
+  padding: 10px 16px; margin: 10px 0 14px; font-style: italic;
+}
+th.sortable { cursor: pointer; user-select: none; }
+th.sortable:hover { background: #ede5d3; }
+th.sortable .arrow { opacity: 0.4; margin-left: 3px; }
+th.sortable.sorted .arrow { opacity: 1; color: var(--good); }
+.table-note-row { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-top: -6px; margin-bottom: 8px; }
+.reset-link { font-family: Arial, sans-serif; font-size: 0.78rem; color: var(--accent); background: none; border: none; cursor: pointer; padding: 0; text-decoration: underline; }
+</style>
+
+<p class="eyebrow">Climate Pros &middot; AI-Assisted Estimation Platform</p>
+<h1>Model Evaluation</h1>
+<p class="dek">Which OpenAI model should read refrigeration &amp; construction drawings and propose equipment quantities &mdash; evaluated across accuracy, cost, and the failure modes that matter when the output feeds a customer quotation.</p>
+
+<h2><span class="secnum">1</span>. What the model actually has to do</h2>
+<p>The deliverable is a quotation, but the model never sees a price. It sees a drawing and has to answer one question correctly, repeatedly, at scale: what equipment is here, and how many? That number flows unchanged into a deterministic pricing calculator downstream &mdash; a miscount isn't a stylistic flaw, it's a wrong number on a bid.</p>
+<p>Concretely, the model has to:</p>
+<ul>
+  <li>Find and count equipment symbols on dense, often large-format, sometimes poorly scanned sheets</li>
+  <li>Read tabular equipment schedules and reconcile them against what the floor plan shows</li>
+  <li>Compute a real-world length (e.g. run of pipe) from a drawing's stated scale</li>
+  <li>Return a confidence signal honest enough to decide whether a human needs to look at it</li>
+  <li>Cross-reference the same physical item appearing on more than one sheet, without double-counting it</li>
+</ul>
+<p>Given that, the metric that should decide this evaluation is <b>detection and counting accuracy</b> &mdash; not general writing quality, and not benchmark scores unrelated to finding and counting objects in an image.</p>
+
+<h2><span class="secnum">2</span>. The full model catalog, filtered</h2>
+<p>OpenAI's current lineup spans well beyond document reading. The categories below were excluded before any benchmark comparison, because they cannot do this task at all:</p>
+<div class="table-wrap">
+<table>
+<tr><th>Category</th><th>Examples</th><th>Why excluded</th></tr>
+<tr><td>Image generation</td><td>gpt-image-2</td><td>Produces images; does not read them</td></tr>
+<tr><td>Realtime &amp; audio</td><td>gpt-realtime-2.1, whisper-1, tts-1, transcribe family</td><td>Speech-focused, no relevance to drawings</td></tr>
+<tr><td>Cybersecurity</td><td>gpt-5.6-cyber, daybreak-red, daybreak-blue</td><td>Purpose-built for security research</td></tr>
+<tr><td>Embeddings</td><td>text-embedding-3-large/small</td><td>Vector search, not image reading</td></tr>
+<tr><td>Moderation</td><td>omni-moderation</td><td>Content-safety classifier</td></tr>
+<tr><td>Coding agent</td><td>gpt-5.3-codex</td><td>Built for writing/editing code</td></tr>
+<tr><td>Open-weight</td><td>gpt-oss-120b, gpt-oss-20b</td><td><b>Text-only &mdash; no image input at all.</b> Disqualified regardless of reasoning quality.</td></tr>
+</table>
+</div>
+<p class="note">That leaves every current text+image model OpenAI offers &mdash; compared in full below.</p>
+
+<h2><span class="secnum">3</span>. Comparison: every vision-capable candidate</h2>
+<div class="table-wrap">
+<table id="cmpTable">
+<tr>
+  <th>Model</th>
+  <th class="sortable" data-key="det">Detection (mAP@50) <span class="arrow">&#8645;</span></th>
+  <th class="sortable" data-key="count">Counting acc. <span class="arrow">&#8645;</span></th>
+  <th class="sortable" data-key="ocr">OCR <span class="arrow">&#8645;</span></th>
+  <th class="sortable" data-key="ctx">Context <span class="arrow">&#8645;</span></th>
+  <th>Reasoning effort</th>
+  <th class="sortable" data-key="price">Price (in/out per 1M) <span class="arrow">&#8645;</span></th>
+  <th>Status</th>
+</tr>
+<tr class="recommended"><td>GPT-5.6 Sol</td><td data-v="46.2">46.2</td><td data-v="73.0">73.0%</td><td data-v="90.7">90.7%</td><td data-v="1050000">1.05M</td><td>none&rarr;low&rarr;med&rarr;high&rarr;xhigh&rarr;max</td><td data-v="30">$5 / $30</td><td><span class="status-good">Recommended &mdash; extraction</span></td></tr>
+<tr class="recommended"><td>GPT-5.6 Terra</td><td data-v="44.7">44.7</td><td data-v="">&mdash;</td><td data-v="">&mdash;</td><td data-v="1050000">1.05M</td><td>&mdash;</td><td data-v="12">~$2 / $12</td><td><span class="status-good">Recommended &mdash; triage</span></td></tr>
+<tr><td>GPT-5.6 Luna</td><td data-v="43.3">43.3</td><td data-v="">&mdash;</td><td data-v="">&mdash;</td><td data-v="1050000">1.05M</td><td>&mdash;</td><td data-v="1.2">$0.20 / $1.20</td><td><span class="status-mute">Viable fallback for triage</span></td></tr>
+<tr><td>GPT-5.5</td><td data-v="13.8">13.8</td><td data-v="">far behind</td><td data-v="91.2">91.2%</td><td data-v="">large</td><td>yes</td><td data-v="">mid</td><td><span class="status-warn">Superseded</span></td></tr>
+<tr><td>GPT-5.4 / Pro</td><td data-v="">&mdash;</td><td data-v="">&mdash;</td><td data-v="">&mdash;</td><td data-v="400000">400K</td><td>yes</td><td data-v="">mid&ndash;high</td><td><span class="status-mute">Unproven on detection</span></td></tr>
+<tr><td>GPT-5.4 mini</td><td data-v="">&mdash;</td><td data-v="">&mdash;</td><td data-v="">&mdash;</td><td data-v="400000">400K</td><td>yes</td><td data-v="4.5">$0.75 / $4.50</td><td><span class="status-mute">Cheap, unproven</span></td></tr>
+<tr><td>GPT-5.4 nano</td><td data-v="">&mdash;</td><td data-v="">&mdash;</td><td data-v="">&mdash;</td><td data-v="400000">400K</td><td>yes</td><td data-v="1.25">$0.20 / $1.25</td><td><span class="status-mute">Cheap, unproven</span></td></tr>
+<tr><td>GPT-5.2 / 5.1 / 5-family</td><td data-v="">&mdash;</td><td data-v="">&mdash;</td><td data-v="">&mdash;</td><td data-v="1000000">200K&ndash;1M</td><td>yes</td><td data-v="8">$2&ndash;$8+</td><td><span class="status-warn">Pre-dates the detection fix</span></td></tr>
+<tr><td>o3 / o3-pro</td><td data-v="">&mdash;</td><td data-v="">&mdash;</td><td data-v="">&mdash;</td><td data-v="200000">200K</td><td>yes</td><td data-v="8">$2 / $8*</td><td><span class="status-warn">Reasoning-token cost inflation</span></td></tr>
+<tr><td>GPT-4.1</td><td data-v="">&mdash;</td><td data-v="">&mdash;</td><td data-v="">&mdash;</td><td data-v="1050000">1.05M</td><td><b>none</b></td><td data-v="8">$2 / $8</td><td><span class="status-warn">No confidence-tunable reasoning</span></td></tr>
+<tr><td>GPT-4o / mini</td><td data-v="">&mdash;</td><td data-v="">&mdash;</td><td data-v="">&mdash;</td><td data-v="128000">128K</td><td>none</td><td data-v="10">$2.50 / $10</td><td><span class="status-mute">Older baseline</span></td></tr>
+</table>
+</div>
+<div class="table-note-row" style="justify-content: flex-end;">
+  <button class="reset-link" id="resetSort" type="button">Reset order</button>
+</div>
+
+<h2><span class="secnum">4</span>. Recommendation</h2>
+<p><b>A two-tier pipeline: GPT-5.6 Terra for triage, GPT-5.6 Sol for extraction.</b></p>
+<p>No single model is both cheap and maximally accurate. Splitting the work by difficulty gets Sol's accuracy where an error would reach a customer's price, without paying Sol's cost and latency on every page of a large drawing package.</p>
+<ul>
+  <li><b>Stage 1 &mdash; Terra:</b> runs on every uploaded page. Classifies sheet type, checks legibility, sorts what the package contains. Cheap, fast, doesn't need frontier accuracy.</li>
+  <li><b>Stage 2 &mdash; Sol:</b> runs on the pages that matter &mdash; the actual equipment identification, counting, and scale-based measurement. Escalated to automatically wherever Terra's confidence is low.</li>
+</ul>
+<p><b>Why two models, not one:</b> the tasks in this workflow are not equally hard. Classifying what kind of sheet a page is is a simpler problem than finding and correctly counting every piece of equipment on it. Paying the most expensive model's cost and latency for the easy step wastes both, and a confidence-gated escalation gets Sol's accuracy exactly where it is needed without paying for it everywhere else:</p>
+<p class="flow">Every page &rarr; Terra classifies &amp; triages &rarr; confident pages proceed as-is; uncertain pages escalate to Sol for extraction &amp; counting &rarr; validated equipment counts.</p>
+
+<h2><span class="secnum">5</span>. Why not the alternatives</h2>
+<p>Each was evaluated on its own merits, not dismissed by default. Here is the specific reason each falls short of Sol for the extraction step.</p>
+
+<h3>Terra &amp; Luna</h3>
+<p>Not disqualified &mdash; reassigned. Both trail Sol on detection (44.7 and 43.3 vs. 46.2) and neither has a published counting-accuracy figure at all, against Sol&rsquo;s measured 73.0%. On the one step where an error becomes a wrong price, that gap is worth Sol&rsquo;s extra cost. Their real value is the cheaper triage pass, not the extraction itself.</p>
+
+<h3>GPT-5.5</h3>
+<p>13.8 mAP vs. Sol&rsquo;s 46.2 &mdash; not a marginal gap, a different tier of capability at the exact skill this task needs most. Its OCR is fine, even slightly ahead of Sol&rsquo;s, but OCR was never the bottleneck; finding and counting equipment is.</p>
+
+<h3>GPT-5.4 family</h3>
+<p>No detection or counting benchmark has been published for this generation at all. Given the model immediately preceding it (5.5) scored 13.8 mAP, there is no basis to assume 5.4 did meaningfully better. Cheap and unproven is not a trade worth making on the step that determines pricing accuracy.</p>
+
+<h3>GPT-5.2, 5.1, GPT-5-family, o3, o3-pro</h3>
+<p>All pre-date the release cycle where detection and counting were specifically targeted and fixed &mdash; none has published evidence of clearing that bar. o3 additionally burns 5,000&ndash;20,000 internal reasoning tokens per answer billed at output rates, so its real cost can run 10&ndash;15&times; the headline price with no accuracy evidence to justify it.</p>
+
+<h3>GPT-4.1</h3>
+<p>The closest real trade-off &mdash; cheap, vision-capable, huge context window. But it has no reasoning-effort control at all (&ldquo;the smartest non-reasoning model&rdquo;). Reading a scale bar to compute a real-world length, or reconciling a schedule against a floor plan, are multi-step reasoning problems. A model that cannot be told to think harder on a hard sheet has no way to signal it is struggling &mdash; it answers confidently either way.</p>
+
+<h3>GPT-4o &amp; mini</h3>
+<p>A solid, well-established baseline, but a much smaller context window (128K vs. 1.05M) makes cross-referencing a large multi-sheet package harder, and it predates every detection improvement above. No reason to prefer it over Sol on accuracy, or over Terra/Luna on cost.</p>
+
+<h3>gpt-oss-120b &amp; 20b</h3>
+<p>Not a close call. Confirmed text-only &mdash; no image input whatsoever. Cannot see the drawing, regardless of reasoning quality.</p>
+
+<h2><span class="secnum">6</span>. Known limitations of Sol</h2>
+<p>Recommending Sol is not the same as trusting it blind. These are the specific, evidenced weaknesses to engineer around:</p>
+<ol>
+  <li><b>Unreliable on large images</b> &mdash; degrades above roughly 2,000&times;2,000 pixels, placing bounding boxes in the wrong parts of the image at lower reasoning effort. Real construction scans are frequently this size or larger &mdash; sheets must be resized or tiled before submission.</li>
+  <li><b>Coordinate-format sensitivity</b> &mdash; omitting an explicit instruction to return absolute XYXY pixel coordinates costs roughly 15 mAP points.</li>
+  <li><b>Weak on small, low-contrast text</b> &mdash; text-extraction accuracy dropped versus the prior generation (87.6%&rarr;82.5%), especially on small, low-contrast, or oddly oriented text &mdash; exactly the profile of dimension callouts and pipe/circuit tags on real drawings.</li>
+  <li><b>Most expensive, slowest tier</b> &mdash; ~2.5&cent; and ~10 seconds per image at $5/$30 per million tokens. Running every page of a hundred-plus-page package through Sol is both costly and slow.</li>
+  <li><b>Counting still imperfect on hard cases</b> &mdash; 73.0% is the best published score, but that still means roughly one in four counts needs correction, particularly on visually similar items differing only in subtle state.</li>
+  <li><b>No domain-specific benchmark exists</b> &mdash; every figure above comes from general vision benchmarks, none tests construction or engineering drawings specifically.</li>
+</ol>
+
+<h2><span class="secnum">7</span>. Required before production use</h2>
+<p>Not a drop-in decision &mdash; three things need to happen first: resize/tile drawings before submission (Sol degrades on large images), standardize prompts to request exact pixel coordinates, and validate against real Climate Pros drawing samples before committing in production.</p>
+
+<h2><span class="secnum">8</span>. Sources</h2>
+<ul class="note">
+  <li><a href="https://blog.roboflow.com/openai-gpt-5-6/">GPT 5.6 Sol is the best "vision" model OpenAI ever released &mdash; Roboflow</a></li>
+  <li><a href="https://blog.roboflow.com/openai-gpt-5-6-sol-terra-and-luna/">GPT-5.6 Sol, Terra &amp; Luna Vision: Live in Roboflow Playground</a></li>
+  <li><a href="https://playground.roboflow.com/models/compare/gpt-5-6-sol-vs-gpt-5-6-terra">GPT-5.6 Sol vs GPT-5.6 Terra: Vision Model Comparison</a></li>
+  <li><a href="https://docsbot.ai/models/compare/gpt-5-5/gpt-5-6-sol">GPT-5.5 vs GPT-5.6 Sol &mdash; Detailed Comparison</a></li>
+  <li><a href="https://www.glbgpt.com/hub/how-much-is-gpt-5-4-mini-nano/">How Much is GPT-5.4 Mini &amp; Nano? (2026 Costs)</a></li>
+  <li><a href="https://openai.com/index/introducing-gpt-oss/">Introducing gpt-oss &mdash; OpenAI</a></li>
+  <li><a href="https://valueaddvc.com/blog/openai-api-pricing-2026-gpt-4o-o3-and-gpt-5-cost-breakdown-for-developers">OpenAI API Pricing 2026: GPT-4o, o3, and GPT-5</a></li>
+  <li><a href="https://developers.openai.com/api/docs/models/gpt-4.1">GPT-4.1 Model &mdash; OpenAI API Docs</a></li>
+  <li><a href="https://developers.openai.com/api/docs/models/o3">o3 Model &mdash; OpenAI API Docs</a></li>
+  <li><a href="https://developers.openai.com/api/docs/models">OpenAI API &mdash; All Models</a></li>
+</ul>
+
+<script>
+(function () {
+  var table = document.getElementById('cmpTable');
+  if (!table) return;
+  var rows = Array.prototype.slice.call(table.querySelectorAll('tr')).slice(1);
+  var original = rows.slice();
+  var headers = Array.prototype.slice.call(table.querySelectorAll('th.sortable'));
+  var colIndex = {};
+  headers.forEach(function (h, i) { colIndex[h.getAttribute('data-key')] = i + 1; });
+  var current = null;
+
+  function val(row, key) {
+    var raw = row.children[colIndex[key]].getAttribute('data-v');
+    return raw === '' || raw === null ? null : parseFloat(raw);
+  }
+
+  headers.forEach(function (h) {
+    h.addEventListener('click', function () {
+      var key = h.getAttribute('data-key');
+      var dir = (current && current.key === key && current.dir === 'desc') ? 'asc' : 'desc';
+      rows.slice().sort(function (a, b) {
+        var va = val(a, key), vb = val(b, key);
+        if (va === null && vb === null) return 0;
+        if (va === null) return 1;
+        if (vb === null) return -1;
+        return dir === 'asc' ? va - vb : vb - va;
+      }).forEach(function (r) { table.appendChild(r); });
+      headers.forEach(function (x) { x.classList.remove('sorted'); });
+      h.classList.add('sorted');
+      current = { key: key, dir: dir };
+    });
+  });
+
+  var reset = document.getElementById('resetSort');
+  if (reset) {
+    reset.addEventListener('click', function () {
+      original.forEach(function (r) { table.appendChild(r); });
+      headers.forEach(function (x) { x.classList.remove('sorted'); });
+      current = null;
+    });
+  }
+})();
+</script>
