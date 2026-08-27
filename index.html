@@ -194,12 +194,11 @@ h3.acc-toggle.open .chev { transform: rotate(90deg); }
 </div>
 
 <details class="progress">
-  <summary><strong>11 of 19</strong> project folders analyzed</summary>
+  <summary><strong>12 of 19</strong> project folders analyzed</summary>
   <ul>
     <li>HEB Corp #271 &ndash; West Columbia TX</li>
     <li>Whole Foods 10593 &ndash; Frisco TX</li>
     <li>United #0510 &ndash; Hereford TX</li>
-    <li>Walmart 5102-258 &ndash; Gretna LA</li>
     <li>Walmart 0395-1013 &ndash; Mission TX</li>
     <li>Walmart 3295-1013 &ndash; Broken Arrow OK</li>
     <li>Walmart 6786-1004 &ndash; McAllen TX</li>
@@ -220,6 +219,7 @@ h3.acc-toggle.open .chev { transform: rotate(90deg); }
   <div class="tab" onclick="showTab('jv831')">Folder: Joe V's #831 - Garland</div>
   <div class="tab" onclick="showTab('f3112')">Folder: Walmart 3112-1009 - San Antonio</div>
   <div class="tab" onclick="showTab('fdal653')">Folder: Kroger DAL653 - Fate</div>
+  <div class="tab" onclick="showTab('f5102')">Folder: Walmart 5102-258 - Gretna</div>
 </div>
 
 <div class="toolbar">
@@ -3345,6 +3345,268 @@ E6.2 single-line diagram: CO2-A/CO2-B and Gas Cooler-A/Gas Cooler-B as named bre
     <li><strong>A complete sheet set, for once</strong> -- 143 sheets in the Sheet Index, 143 sheets in the PDF, zero "referenced but missing" gaps -- unlike several other folders analyzed.</li>
     <li><strong>Kroger's own Direct Buy Refrigeration Copper Pipe program</strong> -- a distinct owner-supplies-materials arrangement (pipe, fittings, brazing rod, insulation) documented nowhere in the refrigeration-specific spec sections themselves, only in Division 00's bidding procedures and the Division 01 vendor list.</li>
     <li><strong>Zero glycol, confirmed at every level</strong> -- absent from the spec text, priced at qty 0 in the PARTS catalog, and consistent with the CO2-only rack architecture found throughout the drawings.</li>
+  </ul>
+</div>
+
+<div class="section" id="f5102">
+  <h2>Folder: Walmart 5102-258 -- Gretna, LA</h2>
+  <p style="color:#a8a8a0;">26.06.08 -- Remodel with an "SCO2 Upgrade." The most document-rich folder of the Walmart CapX/remodel jobs analyzed so far: 16 separate Uploads files (a responsibility matrix, 14 single-sheet refrigeration/electrical drawings, and a 40-page spec) all built around adding one new Secondary CO2 pump skid onto two existing R407A racks -- not a new store, not a new rack, just a new secondary loop bolted onto what's already there.</p>
+
+  <div class="toc">
+    <ol>
+      <li><a href="#f5102-glossary">Terms this folder has</a></li>
+      <li><a href="#f5102-uploads">The Uploads (16 files: RM1, 14 drawing sheets, 40-page spec)</a></li>
+      <li><a href="#f5102-tab1">Tab 1 -- CP Est Pro 2.0 SUMMARY</a></li>
+      <li><a href="#f5102-tab2">Tab 2 -- EQUIPMENT</a></li>
+      <li><a href="#f5102-tab3">Tab 3 -- PIPE 2.0</a></li>
+      <li><a href="#f5102-tab4">Tab 4 -- PARTS</a></li>
+      <li><a href="#f5102-tab5">Tab 5 -- LABOR RATES</a></li>
+      <li><a href="#f5102-tab6">Tab 6 -- EQUIPMENT SALES BUYOUTS</a></li>
+      <li><a href="#f5102-tab7">Tab 7 -- COPPER_INSULATION_FORM</a></li>
+      <li><a href="#f5102-tab8">Tab 8 -- HVAC</a></li>
+      <li><a href="#f5102-tab9">Tab 9 -- TAX TABLE</a></li>
+      <li><a href="#f5102-tab10">Tab 10 -- BidCalc</a></li>
+      <li><a href="#f5102-walkthrough">Full walkthrough: the copper type that drifted from spec</a></li>
+      <li><a href="#f5102-mismatches">Mismatches: Uploads vs. Excel</a></li>
+      <li><a href="#f5102-mapping">Mapping table (every traced source)</a></li>
+      <li><a href="#f5102-unique">What's unique about this folder</a></li>
+    </ol>
+  </div>
+
+  <h3 id="f5102-glossary">Terms this folder has</h3>
+  <p style="color:#a8a8a0;font-style:italic;">Universal terms already covered in the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab. What's new here:</p>
+  <table class="data-table">
+    <tr><th>Term</th><th>Meaning</th></tr>
+    <tr><td>SCO2 / LTA SCO2</td><td>"Secondary CO2" -- the drawings' own System Type field defines it as "CO2 Liquid Overfeed / Parallel DX": a secondary loop where liquid R744 is pumped by a RAE Corp skid, evaporates in the SCO2-tagged cases, and is re-condensed by a heat exchanger fed from the existing DTA DX rack's suction group. Not a transcritical/subcritical CO2 booster rack, despite the "SCO2 Upgrade" job title.</td></tr>
+    <tr><td>LTA CONN: 1 / LTA CONN: 2</td><td>The two taps off the existing DTA DX rack's header that cool the new secondary skid. Connection 1 carries both suction and liquid to the skid; Connection 2 carries suction only.</td></tr>
+    <tr><td>"LTA DX" / "MTAS DX" (Compressor Schedule)</td><td>Legacy/drafting labels for DTA DX's own Suction Groups #1 and #2 -- capacity cross-check confirms these aren't separate racks, but the "LTA DX" name is easy to confuse with the unrelated "LTA SCO2" skid.</td></tr>
+    <tr><td>Type K vs. Type L copper</td><td>Two ACR hard-drawn copper wall-thickness classes. Spec 15600 calls for Type L on R744 liquid-overfeed lines 1-3/8" and smaller, Type K only at 1-5/8" and larger. This job's price sheet uses Type K uniformly across every SCO2 circuit regardless of size -- see the walkthrough below.</td></tr>
+    <tr><td>U-Bend Bypass (SCO2)</td><td>A temporary supply-to-return jumper installed during phased cutover so a CO2 circuit, case, or walk-in can be tested/evacuated/filled before its final connection -- specified only for the CO2 side, with no DX equivalent in spec 15600.</td></tr>
+    <tr><td>Battery Backup (BB-2)</td><td>A Generac PWRCELL2 cabinet/inverter/transformer assembly serving the LTA SCO2 skid -- on this job, the cabinet/inverter/transformer are existing equipment being augmented with new battery modules, not installed fresh.</td></tr>
+  </table>
+
+  <h3 id="f5102-uploads">The Uploads -- RM1, 14 drawing sheets, and a 40-page spec</h3>
+  <p>All 16 files share Job No. 765727-01, Store No. 05102-258, Proto 41. Consultant MPW Engineering (Refrigeration EOR Scott C. Webb, Electrical EOR Aaron B. Morse). Unlike Kroger DAL653, every drawing sheet here has a real, readable text layer -- except R4/R4.1, which look blank under a text-only read but actually carry dense OEM submittal content as embedded raster images.</p>
+  <table class="data-table">
+    <tr><th>Sheet</th><th>What's in it</th></tr>
+    <tr><td>RM1 -- Responsibility Matrices</td><td>Four tables: KE2/RE2 case-controller install (38 lines), Pump Skid install (38 lines, including CO2-specific and unused-glycol-boilerplate items), Case Install (45 lines), and the headline Field-Installed-Components matrix (Existing Racks vs. SCO2 Skid columns). Legend: RC/GC/BAS/OEM/PS/WMT/AES/WTC/MC.</td></tr>
+    <tr><td>RD1 -- Demolition Plan</td><td>Two existing roof racks (ETR DTA DX, ETR MTB DX) with demo/relocate case tags. 24-48hr post-shutdown filter/drier replacement requirement if any rack is opened.</td></tr>
+    <tr><td>R1 -- Overall Plan</td><td>Adds the new "NEW LTA SCO2 (ON ROOF)," a battery-backup callout, and a new CO2 charging station. "Existing refrigeration piping may be re-used unless otherwise noted."</td></tr>
+    <tr><td>R1.1 -- Enlarged Plan</td><td>Full case-tag layout, DX and SCO2 side by side. LTA CONN: 1/2 taps shown. 32 keynotes, several CO2-specific (isolation check valves, pump skid install, riser traps, spare stubs).</td></tr>
+    <tr><td>R2 / R2.1 / R2.2 -- Schedules</td><td>The core equipment data: three Refrigeration System Schedules (DTA DX, LTA SCO2, MTB DX), a Pump Skid Schedule (RAECorp WMT-SEC-CO2-1-10), a Compressor Schedule, a Refrigerant Charge Schedule, an SCO2 Phasing Schedule, Piping Schedules, and a ~100-row Skid Parameter Schedule.</td></tr>
+    <tr><td>R3 / R3.1 / R3.2 -- Details</td><td>21 standard details total -- generic DX pipe-support standards, then the CO2-specific package (skid piping connections, roof penetration, charging-station sign text, U-bend bypass, isolation check valves). Several labeled "(SCO2)(GLYCOL)" -- shared templates even though this job has no glycol.</td></tr>
+    <tr><td>R4 / R4.1 -- Submittals</td><td>Text-only extraction returns almost nothing ("INFORMATION ONLY / NOT TO BE SIGNED") -- but both carry real embedded-image content: full Hussmann rack data sheets for both existing racks, and the RAE Corp CO2 skid unit drawing with dimensions, clearances, and a 4,848 lb shipping weight.</td></tr>
+    <tr><td>RE1 / RE1.1 / RE1.2 -- Electrical</td><td>Roof plan (panels CHA1/CHA2/CHB off MSB), enlarged per-circuit wiring, and the CO2 Skid Backup Battery & Inverter Wiring Diagram (Generac PWRCELL2, 9 kWh, existing equipment augmented with new battery modules).</td></tr>
+    <tr><td>15600 -- Spec (40 pp.)</td><td>UniSpec Section 15600, Refrigeration Systems. Schedule I insulation table (R744 liquid-overfeed: Type L at 1-3/8" and smaller, Type K at 1-5/8" and larger). Full DX and CO2 evacuation/charging procedures. The U-bend bypass procedure. Pages 25-40 are unlabeled exhibits (AHRI recovery-cylinder tables, handover forms, an RFI flow chart) -- entirely fluorocarbon-focused; CO2/R-744 never appears in the recovery/banking exhibits, and the CO2 execution article has no "Recovery and Removal" subsection at all.</td></tr>
+  </table>
+  <p>Confirmed cross-document oddities worth carrying into the estimate review: the Trans-critical CO2 and Secondary/LOF CO2 valve-pressure specs in 15600 are word-for-word identical (90 bar/1305 PSIG) -- likely copy-paste, questionable for a subcritical secondary loop; the CO2 evacuation-pump spec says "50 microns or more" where the parallel DX clause correctly says "or less"; "BASR plans and one-line diagram" is cited on RE1/RE1.1 but not included in this Uploads set.</p>
+
+  <h3 id="f5102-tab1">Tab 1 -- CP Est Pro 2.0 SUMMARY</h3>
+
+  <h4>1.1 Header</h4>
+  <p>Project "Walmart 5102-258 - SCO2 Upgrade," Gretna, Louisiana. Estimator Jay Jarratt Jr, labor division "HOUSTON, TX." REMODEL. Tax Type "USE TAX MATS ONLY."</p>
+
+  <h4>1.2 Display Cases</h4>
+  <table class="data-table">
+    <tr><th>Type</th><th>12'</th><th>Material</th><th>Pipefitter</th><th>Case Setter</th></tr>
+    <tr><td>MD Cases</td><td>30</td><td>$3,900</td><td>210 hrs</td><td>150 hrs</td></tr>
+    <tr><td>Wide Islands</td><td>2</td><td>$450</td><td>14 hrs</td><td>10 hrs</td></tr>
+    <tr><td>Temp/Relocate</td><td>14</td><td>$1,050</td><td>42 hrs</td><td>70 hrs</td></tr>
+    <tr><td>Remove</td><td>32 (labor only)</td><td>$0</td><td>32 hrs</td><td>32 hrs</td></tr>
+    <tr><td><strong>TOTALS</strong></td><td></td><td><strong>$5,400</strong></td><td><strong>298 hrs</strong></td><td><strong>262 hrs</strong></td></tr>
+  </table>
+  <p>Matches the job-scope bullets closely: "Demo Cases (32)," "Relocate Cases (14)," "Install New Cases (30)." The 2 Wide Islands (almost certainly R2's A16/A18 SCO2 Low Temp Coffin Islands) aren't separately called out in the scope bullet's "30," a minor reconciliation gap rather than a real dollar issue.</p>
+
+  <h4>1.3 Evaporators</h4>
+  <p>Entirely zero -- no separate coils on this job.</p>
+
+  <h4>1.4 Non-Itemized Equipment Room &amp; RTU Breakdown</h4>
+  <table class="data-table">
+    <tr><th>Item</th><th>Material</th><th>Labor</th><th>Source</th></tr>
+    <tr><td>Equipment Sheet Totals</td><td>$1,260</td><td>38 hrs</td><td><span class="tag tag-formula">formula</span> = EQUIPMENT tab</td></tr>
+    <tr><td>Temporary Vehicle Fuel Cost Add</td><td>$3,572.56</td><td>0</td><td><span class="tag tag-formula">formula</span></td></tr>
+    <tr><td>Extra Labor Case Setting (RLNI back-to-back glass doors)</td><td>$0</td><td>120 hrs</td><td><span class="tag tag-scope">Scope</span> matches R2's recurring RLN/RLNI comment</td></tr>
+    <tr><td>Receive, Set &amp; Startup Stand-alone Cases (7)</td><td>$0</td><td>42 hrs</td><td><span class="tag tag-scope">Scope</span></td></tr>
+    <tr><td>Misc Parts &amp; Labor for CO2 Charging Station</td><td>$350</td><td>10 hrs</td><td><span class="tag tag-scope">Scope</span> matches R3.1's Charging Station (CO2) detail</td></tr>
+    <tr><td>Drain Pan &amp; Drain Line for Pipe Drop &amp; Cases</td><td>$450</td><td>6 hrs</td><td><span class="tag tag-scope">Scope</span></td></tr>
+    <tr><td>Pipe Labels &amp; Equipment Tags</td><td>$1,800</td><td>16 hrs</td><td><span class="tag tag-scope">Scope</span></td></tr>
+    <tr><td>Labor &amp; Materials for Modifications to Existing Rack</td><td>$500</td><td>10 hrs</td><td><span class="tag tag-scope">Scope</span> matches the LTA CONN: 1/2 tie-in work on DTA DX</td></tr>
+    <tr><td>Exterior Pipe Jacketing</td><td>$850</td><td>8 hrs</td><td><span class="tag tag-scope">Scope</span></td></tr>
+    <tr><td>Case Close-offs</td><td>$1,100</td><td>16 hrs</td><td><span class="tag tag-scope">Scope</span></td></tr>
+    <tr><td><strong>TOTALS</strong></td><td><strong>$9,882.56</strong></td><td><strong>266 hrs</strong></td><td></td></tr>
+  </table>
+
+  <h4>1.5 IN-HOUSE GC and SUBLET CONTRACTORS</h4>
+  <p>Entirely zero.</p>
+
+  <h4>1.6 Refrigerant</h4>
+  <div class="calc-box">R407F (default/balance):  <span class="calc-source">-934.997 lbs @ $13.75/lb</span>
+R448A:                    <span class="calc-source">935 lbs @ $13.60/lb = $12,716.00</span>
+R744 CO2:                 <span class="calc-source">858.17 lbs @ $6.00/lb = $5,149.02</span>
+                          <span class="calc-result">TOTAL LBS = 858.173  |  TOTAL COST = $17,865.02</span></div>
+  <div class="callout callout-warn">
+    <div class="callout-title"><span class="tag tag-mismatch">Confirmed defect</span> A negative refrigerant quantity, on a live bid</div>
+    <div class="callout-body">"TOTAL LBS" is the straight arithmetic sum of every row in the table, including the -934.997 R407F line -- which very nearly cancels the +935 lbs manually entered into R448A (off by 0.003 lbs). "TOTAL REFRIGERANT COST" ($17,865.02) matches exactly 935&times;13.6 + 858.17&times;6, meaning the negative R407F row contributes $0 despite carrying negative weight -- so the dollar total is unaffected. But a bid document showing <strong>-934.997 lbs of refrigerant</strong> is a real, visible defect in the template's "shift the balance to Type as needed" mechanic: typing a real quantity into R448A drove the R407F "default" cell negative instead of to zero.</div>
+  </div>
+
+  <h4>1.7 Scheduling Data</h4>
+  <table class="data-table">
+    <tr><th>Field</th><th>Value</th></tr>
+    <tr><td># of Fitters</td><td>3</td></tr>
+    <tr><td>Duration</td><td>10.8 weeks</td></tr>
+    <tr><td>R Dispatch</td><td>350.365 ST / <strong>1,555 OT hrs (81.6% OT)</strong></td></tr>
+  </table>
+  <div class="callout callout-warn">
+    <div class="callout-title">The new most overtime-heavy labor dispatch analyzed</div>
+    <div class="callout-body">1,555 of 1,905.365 total dispatched hours (81.6%) are logged as overtime -- edging out Walmart 3112-1009's previous high of 81.5%. Same OT/DT burden-increment mechanism applies (base burden +0.5 for OT, +1.0 for DT), now confirmed material on two separate folders.</div>
+  </div>
+
+  <h4>1.8 Labor Blend &amp; Rate</h4>
+  <p>30/10/40/20/0% blend (Foreman/Startup/Journeyman/Apprentice/Tradesman), region <strong>"TX"</strong> (not Louisiana), standard $40/$34/$22/$20 base wages, margin 25%. See Tab 5 -- the LABOR RATES tab has no Louisiana entry, so "TX" isn't a data-entry slip, it's the only region available for a Gulf Coast job like this one.</p>
+
+  <h4>1.9 Rentals</h4>
+  <table class="data-table">
+    <tr><th>Item</th><th>Cost</th></tr>
+    <tr><td>Freight and Disposal</td><td>$1,500</td></tr>
+    <tr><td>Crane</td><td>$5,500</td></tr>
+    <tr><td>Scissor Lifts</td><td>$7,125</td></tr>
+    <tr><td>Container Rental</td><td>$500</td></tr>
+    <tr><td><strong>TOTAL RENTALS</strong></td><td><strong>$14,625</strong></td></tr>
+  </table>
+
+  <h4>1.10 Total Summary</h4>
+  <table class="data-table">
+    <tr><th>Category</th><th>Cost</th><th>Sell</th><th>Margin</th></tr>
+    <tr><td>Labor</td><td>$155,999.82</td><td>$207,999.76</td><td>25%</td></tr>
+    <tr><td>Materials</td><td>$107,080.63</td><td>$142,774.17</td><td>25%</td></tr>
+    <tr><td>Rentals</td><td>$14,625</td><td>$18,281.25</td><td>20%</td></tr>
+    <tr><td>Subsistence</td><td>$38,080</td><td>$54,400</td><td>30%</td></tr>
+    <tr><td>Fixed 1% Warranty</td><td>$4,699.38</td><td>$4,699.38</td><td>--</td></tr>
+    <tr><td>Contingency Factor</td><td>$22,287.11</td><td>$27,858.89</td><td>5%</td></tr>
+    <tr><td>Sales Tax (9.75%, Materials Only)</td><td>$13,920.48</td><td>$13,920.48</td><td>--</td></tr>
+    <tr><td><strong>TOTAL</strong></td><td><strong>$356,692.42</strong></td><td><strong>$469,934</strong></td><td>Gross Profit $113,241.58 (24.10%)</td></tr>
+  </table>
+
+  <h4>1.11 Job Scope Notes &amp; Exclusions</h4>
+  <p>Row 197's bullets read as a Demo Phase / New Phase checklist matching the drawings closely: Demo Cases (32), Relocate Cases (14), modify existing piping to meet new layout; Install New Cases (30), Receive/Set New LTA SCO2 Unit (1 Roof), Install CO2 Charge Station (1), isolation valves, all new piping, labels/tags, close-offs, PVC pipe chase, control valves by OEM/installed by RC, pressure test &amp; evacuate, "RC to Terminate All Refrigeration Equipment (ONLY)," startup per Walmart requirements, <strong>"All Refrigerant Provided by RC (R407A/R744),"</strong> commissioning. Exclusions are the full standard set, no truncation.</p>
+
+  <h3 id="f5102-tab2">Tab 2 -- EQUIPMENT</h3>
+  <table class="data-table">
+    <tr><th>Item</th><th>Qty</th><th>Material</th><th>Labor</th><th>Refrigerant</th></tr>
+    <tr><td>Comp Rack</td><td>1</td><td>$200</td><td>24 hrs</td><td>500 lbs</td></tr>
+    <tr><td>Change Rack Main Liquid Drier (4) RC 4864 HH</td><td>2</td><td>$260</td><td>4 hrs</td><td>0</td></tr>
+    <tr><td>Change Rack Suction Filters (8) Cores</td><td>2</td><td>$800</td><td>10 hrs</td><td>0</td></tr>
+    <tr><td><strong>TOTALS</strong></td><td></td><td><strong>$1,260</strong></td><td><strong>38 hrs</strong></td><td><strong>500 lbs</strong></td></tr>
+  </table>
+  <p>The qty-2 filter/drier lines match RD1/spec 15600's "IF ANY RACK SYSTEMS WILL BE OPENED... PROVIDE AND CHANGE LIQUID LINE FILTER CORES... AND REPLACE SUCTION FILTERS" requirement almost exactly -- both DTA DX and MTB DX get opened on this job.</p>
+  <div class="callout callout-mismatch">
+    <div class="callout-title"><span class="tag tag-mismatch">Unresolved</span> The 500 lbs on "Comp Rack" doesn't tie to any drawing figure</div>
+    <div class="callout-body">Qty 1 "Comp Rack" ($200/24hr/500 lbs) is the closest rate-card line to "one rack got serviced," but 500 lbs doesn't match the 825 lbs CO2 charge on R2.1's Refrigerant Charge Schedule, nor the 465/470 lb DTA DX/MTB DX new-charge totals, nor is it the same item as the separately-priced $500/10hr "Modifications to Existing Rack" line in SUMMARY. It's a real cost in the bid without a confirmed drawing source.</div>
+  </div>
+
+  <h3 id="f5102-tab3">Tab 3 -- PIPE 2.0</h3>
+  <p>Header: Install Labor Hours 348, LF Pipe w/waste 3,480, Piping Refrigerant 128.173 lbs, Total Materials $55,742.31 (Pipe $25,736.20 + Insulation $8,630.40 + Saddles $2,474.08 + HFG $18,901.63) -- all feed SUMMARY exactly.</p>
+  <p>Circuit-by-circuit takeoff matching the drawings' own tags: the <code>LTA SCO2</code> header row, every <code>1A/1.1A/.../A01-A20 SCO2</code> case circuit, <code>LTA CONN 1</code> (17 ft, 1-1/8" liquid/2-5/8" suction) and <code>LTA CONN 2</code> (17 ft, 2-5/8" suction only, no liquid) -- an exact match to R2.1's Piping Schedule -- <code>CO2 CHRG ST</code> (160 ft of 1/2" suction-only line to the charging station), then <code>MTB DX</code> and <code>DTA DX</code> header rows with their own DX circuits (<code>B02-B08 DX</code>, <code>1.1AS-AS11 DX</code>). Nothing populated past the last real DX riser row -- the rest of the 600-system template is blank.</p>
+  <div class="callout callout-warn">
+    <div class="callout-title">Every SCO2 circuit uses Type K copper, regardless of size</div>
+    <div class="callout-body">Spec 15600's own Schedule I table calls for Type L on R744 liquid-overfeed lines 1-3/8" and smaller, reserving Type K for 1-5/8" and larger. Every SCO2 circuit on this sheet -- down to 0.5" and 0.625" lines -- is entered as Type K on both liquid and suction. Every DX circuit on the same sheet correctly uses Type L at equivalent small sizes. See the full walkthrough below.</div>
+  </div>
+
+  <h3 id="f5102-tab4">Tab 4 -- PARTS</h3>
+  <p>Total <strong>$15,310.74</strong>, tracing to exactly 12 of the tab's 400+ catalog lines:</p>
+  <table class="data-table">
+    <tr><th>Part</th><th>Qty</th><th>Cost</th></tr>
+    <tr><td>Pressure Relief Valve 1/2x5/8 #400 (15504-400)</td><td>1</td><td>$125</td></tr>
+    <tr><td>DX Ball Valves, Mueller AQ178xxc series (1/2"-2-5/8")</td><td>9</td><td>$1,792.72</td></tr>
+    <tr><td>"C02 BV" Mueller 140 BAR 1/2" AQ17861XHP</td><td>4</td><td>$762.96</td></tr>
+    <tr><td>Magnetic Check Valves (1/2"-2-1/8")</td><td>22</td><td>$2,146.25</td></tr>
+    <tr><td>1-1/2" Galvanized Strut - 10ft</td><td>30</td><td>$1,290</td></tr>
+    <tr><td>15% Silphos brazing rod, 1/8"x1/8"x36"</td><td>30</td><td>$9,193.80</td></tr>
+  </table>
+  <p>The relief valve matches R3.1's 650 PSIG requirement; the CO2-rated ball valves and check valves match R1.1's isolation check-valve keynotes; brazing rod is again the single largest PARTS line. Minor catalog typo: the CO2 ball valve's own description reads <strong>"C02 BV"</strong> (zero, not letter O) rather than "CO2 BV."</p>
+
+  <h3 id="f5102-tab5">Tab 5 -- LABOR RATES</h3>
+  <div class="callout callout-mismatch">
+    <div class="callout-title"><span class="tag tag-mismatch">Confirmed gap</span> No Louisiana row exists in this company-wide table</div>
+    <div class="callout-body">Checked the full tab: there is no Louisiana entry anywhere in the regional labor-rate list. SUMMARY's use of "TX" (Houston division) for a Gretna, LA job isn't an oversight -- it's the nearest available option in a table that simply doesn't cover this state.</div>
+  </div>
+
+  <h3 id="f5102-tab6">Tab 6 -- EQUIPMENT SALES BUYOUTS</h3>
+  <p>Entirely zero -- all rows still the placeholder "XXXX."</p>
+
+  <h3 id="f5102-tab7">Tab 7 -- COPPER_INSULATION_FORM</h3>
+  <p>Order % factor 0.8, same purchasing-buffer mechanism as other folders. <strong>Type L block (DX side):</strong> 700 LF of copper across six sizes, plus 520 LF of Black insulation ordered against it. <strong>Type K block (SCO2 side):</strong> 2,200 LF of copper across eight sizes -- matching every SCO2 circuit in PIPE 2.0.</p>
+  <div class="callout callout-mismatch">
+    <div class="callout-title"><span class="tag tag-mismatch">Template gap, third confirmed instance</span> Type K's insulation columns are labeled White, not Black</div>
+    <div class="callout-body">This job's SCO2 piping is insulated Black throughout (confirmed in PIPE 2.0, $8,630.40 priced). But the Type K copper block's adjacent insulation-order columns are headed "WHITE INSULATION" -- so none of the CO2 secondary loop's insulation has a matching line on the literal supplier order form, because the only columns available next to Type K copper are for a color this job doesn't use. Walmart 3112-1009 hit a version of this same gap (no insulation columns at all for XHP pipe); here the columns exist but assume the wrong color. Saddle quantities (Black, net of the 80% order factor) and the unused XHP/90-BAR block are both correct.</div>
+  </div>
+
+  <h3 id="f5102-tab8">Tab 8 -- HVAC</h3>
+  <p>Entirely zero. Same recurring header field-label misalignment (BID DATE shows "Gretna," SCOPE shows "Louisiana," DRAWINGS DATE shows the scope text) confirmed on every folder checked so far.</p>
+
+  <h3 id="f5102-tab9">Tab 9 -- TAX TABLE</h3>
+  <p>Louisiana row: "Use Tax, Materials Only" for both Existing and New Construction -- matches SUMMARY's 9.75% rate regardless of the REMODEL/NEW toggle.</p>
+
+  <h3 id="f5102-tab10">Tab 10 -- BidCalc</h3>
+  <p>Total Bid = <strong>$469,933.93</strong>, matching SUMMARY's rounded $469,934 to the cent.</p>
+
+  <h3 id="f5102-walkthrough">Full walkthrough: the copper type that drifted from spec</h3>
+  <div class="step-flow">
+    <div class="step-item"><div class="step-badge">1</div><div class="step-body">
+      <div class="step-title">The spec sets a size-based rule</div><div class="step-sheet">Spec 15600, Part 2, Schedule I</div>
+      <div class="step-desc">R744 Liquid Overfeed CO2: pipe 1-3/8" and smaller = Type L hard-drawn copper; pipe 1-5/8" and larger = Type K. The HFC/DX rows carry no such size-based type split.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">2</div><div class="step-body">
+      <div class="step-title">Almost every SCO2 circuit is well under 1-3/8"</div><div class="step-sheet">R2/R2.1 Piping Schedules, R1.1 plan</div>
+      <div class="step-desc">The individual case circuits (A01-A20 SCO2, 1.1A-1.41A SCO2, etc.) run mostly 0.5"-0.875" liquid and 0.5"-2.125" suction -- squarely in the "should be Type L" band by the spec's own rule.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">3</div><div class="step-body">
+      <div class="step-title">PIPE 2.0 prices every one of them as Type K anyway</div><div class="step-sheet">PIPE 2.0, columns F/L (Copper Type)</div>
+      <div class="step-desc"><div class="calc-box">A07 SCO2:  0.5" liquid = Type <span class="calc-source">K</span>, 0.625" suction = Type <span class="calc-source">K</span>
+A16 SCO2:  0.5" liquid = Type <span class="calc-source">K</span>, 0.5" suction = Type <span class="calc-source">K</span>
+                          <span class="calc-result">every SCO2 circuit on the sheet: Type K</span></div>Meanwhile every MTB DX/DTA DX circuit on the same sheet correctly alternates and uses Type L at equivalent sizes.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">4</div><div class="step-body">
+      <div class="step-title">The order form confirms it wasn't a one-off entry</div><div class="step-sheet">COPPER_INSULATION_FORM</div>
+      <div class="step-desc">The Type K block is fully populated with 2,200 LF across eight sizes, matching the SCO2 total -- not a stray row, a consistent choice across the whole CO2 scope.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">5</div><div class="step-body">
+      <div class="step-title">Net effect</div><div class="step-sheet">--</div>
+      <div class="step-desc">Type K is thicker-walled and more expensive than Type L, so this deviation runs conservative/safe rather than short -- but it's a real, consistent departure from what the governing spec calls for. It also has a second-order consequence: because Type K's insulation-order columns are White-only on this form, none of the SCO2 side's $8,630.40 of (Black) insulation has a matching purchase-order line at all.</div>
+    </div></div>
+  </div>
+
+  <h3 id="f5102-mismatches">Mismatches: Uploads vs. Excel</h3>
+  <table class="data-table mismatch">
+    <tr><th>#</th><th>Excel location</th><th>What Excel shows</th><th>What Uploads/Spec show</th><th>Type of mismatch</th></tr>
+    <tr><td>1</td><td>PIPE 2.0, all SCO2 circuits</td><td>Copper Type "K" on every circuit regardless of size</td><td>Spec 15600 Schedule I: Type L required at 1-3/8" and smaller</td><td><span class="tag tag-mismatch">Confirmed, systematic</span> -- conservative direction, not a shortfall</td></tr>
+    <tr><td>2</td><td>SUMMARY, Refrigerant table</td><td>-934.997 lbs of R407F (negative quantity)</td><td>N/A -- template "balance" mechanic reacting to a manual R448A entry</td><td><span class="tag tag-mismatch">Confirmed defect</span> -- $0 net cost impact, but a real display defect</td></tr>
+    <tr><td>3</td><td>COPPER_INSULATION_FORM, Type K block</td><td>Insulation-order columns labeled "White"</td><td>PIPE 2.0 prices $8,630.40 of Black insulation for the SCO2 side</td><td>Template gap, third confirmed instance across folders</td></tr>
+    <tr><td>4</td><td>EQUIPMENT, "Comp Rack" line</td><td>500 lbs refrigerant tied to 1 unit</td><td>No drawing figure (825 lb CO2 charge, 465/470 lb DX totals) matches 500 lbs</td><td>Unconfirmed gap</td></tr>
+    <tr><td>5</td><td>LABOR RATES tab</td><td>No Louisiana row exists</td><td>N/A -- job site is Gretna, LA</td><td>Reference-table coverage gap, not an estimator error</td></tr>
+    <tr><td>6</td><td>PARTS, CO2 ball valve description</td><td>"C02 BV Mueller 140 BAR 1/2″"</td><td>N/A</td><td>Catalog typo (zero for letter O)</td></tr>
+  </table>
+
+  <h3 id="f5102-mapping">Mapping table -- every traced source, in one place</h3>
+  <table class="data-table">
+    <tr><th>Price Sheet location</th><th>Value</th><th>Traced to</th></tr>
+    <tr><td>Display Cases: 30 MD + 2 Wide Island + 14 Relocate + 32 Remove</td><td>$5,400 / 298+262 hrs</td><td><span class="tag tag-scope">Scope</span> job-scope Demo/New Phase bullets</td></tr>
+    <tr><td>EQUIPMENT: filter/drier + suction filter changes (qty 2 each)</td><td>$1,060 / 14 hrs</td><td><span class="tag tag-scope">Scope</span> matches RD1/Spec 15600's post-shutdown filter requirement for both opened racks</td></tr>
+    <tr><td>PIPE 2.0: LTA CONN 1/LTA CONN 2</td><td>17 ft each, 1-1/8" liquid / 2-5/8" suction</td><td><span class="tag tag-scope">Scope</span> exact match to R2.1's Piping Schedule</td></tr>
+    <tr><td>PIPE 2.0: CO2 CHRG ST</td><td>160 ft of 1/2" suction line</td><td><span class="tag tag-scope">Scope</span> matches R3.1's Charging Station (CO2) detail piping size</td></tr>
+    <tr><td>PARTS: relief valve + CO2/DX ball valves + check valves + brazing rod</td><td>$15,310.74</td><td><span class="tag tag-scope">Scope</span> matches R3.1's charging-station relief valve and R1.1's isolation check-valve keynotes</td></tr>
+    <tr><td>Refrigerant: 858.17 lbs R744 + 935 lbs R448A</td><td>$17,865.02</td><td><span class="tag tag-scope">Scope</span> matches "All Refrigerant Provided by RC (R407A/R744)" and R2.1's Refrigerant Charge Schedule direction (825 lbs new R744 documented on the drawing side)</td></tr>
+  </table>
+
+  <h3 id="f5102-unique">What's unique about this folder</h3>
+  <ul>
+    <li><strong>The clearest "bolt a secondary CO2 loop onto an existing DX rack" job analyzed</strong> -- LTA SCO2 is cooled by taps off the existing DTA DX rack (LTA CONN: 1/2), not a standalone booster system, despite the "SCO2 Upgrade" name.</li>
+    <li><strong>A confirmed, systematic copper-type deviation from the governing spec</strong> -- every SCO2 circuit uses Type K regardless of size, where spec 15600 calls for Type L below 1-5/8". Conservative in direction, but consistent enough (fully mirrored on the COPPER_INSULATION_FORM) to be a deliberate estimating choice, not a slip.</li>
+    <li><strong>A negative refrigerant-pounds line on a live bid</strong> -- the first folder where the "shift the balance to Type as needed" refrigerant mechanic visibly breaks, producing -934.997 lbs of R407F (net $0 cost impact, but a real display defect).</li>
+    <li><strong>The new record for overtime-heavy dispatch</strong> -- 81.6% of hours logged as OT, edging out Walmart 3112-1009's prior 81.5%.</li>
+    <li><strong>A confirmed reference-table gap, not an estimator error</strong> -- LABOR RATES has no Louisiana row at all, so this Gulf Coast job runs on Texas rates by necessity.</li>
+    <li><strong>A third confirmed instance of the CO2-insulation order-form gap</strong> -- Type K's insulation columns are White-only, leaving this job's Black-insulated SCO2 piping with no matching purchase-order line.</li>
+    <li><strong>Two sheets that read as blank but aren't</strong> -- R4/R4.1's text-only extraction returns almost nothing, but both carry dense, real OEM submittal content (Hussmann rack data sheets, RAE Corp skid unit drawing) as embedded images -- the same "vector/image trap" pattern first confirmed on Kroger DAL653's R6.1.</li>
   </ul>
 </div>
 
