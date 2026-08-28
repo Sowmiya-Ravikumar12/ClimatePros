@@ -194,11 +194,8 @@ h3.acc-toggle.open .chev { transform: rotate(90deg); }
 </div>
 
 <details class="progress">
-  <summary><strong>12 of 19</strong> project folders analyzed</summary>
+  <summary><strong>15 of 19</strong> project folders analyzed</summary>
   <ul>
-    <li>HEB Corp #271 &ndash; West Columbia TX</li>
-    <li>Whole Foods 10593 &ndash; Frisco TX</li>
-    <li>United #0510 &ndash; Hereford TX</li>
     <li>Walmart 0395-1013 &ndash; Mission TX</li>
     <li>Walmart 3295-1013 &ndash; Broken Arrow OK</li>
     <li>Walmart 6786-1004 &ndash; McAllen TX</li>
@@ -220,6 +217,9 @@ h3.acc-toggle.open .chev { transform: rotate(90deg); }
   <div class="tab" onclick="showTab('f3112')">Folder: Walmart 3112-1009 - San Antonio</div>
   <div class="tab" onclick="showTab('fdal653')">Folder: Kroger DAL653 - Fate</div>
   <div class="tab" onclick="showTab('f5102')">Folder: Walmart 5102-258 - Gretna</div>
+  <div class="tab" onclick="showTab('f510')">Folder: United #0510 - Hereford</div>
+  <div class="tab" onclick="showTab('f271')">Folder: HEB Corp #271 - West Columbia</div>
+  <div class="tab" onclick="showTab('f10593')">Folder: Whole Foods 10593 - Frisco</div>
 </div>
 
 <div class="toolbar">
@@ -3607,6 +3607,724 @@ A16 SCO2:  0.5" liquid = Type <span class="calc-source">K</span>, 0.5" suction =
     <li><strong>A confirmed reference-table gap, not an estimator error</strong> -- LABOR RATES has no Louisiana row at all, so this Gulf Coast job runs on Texas rates by necessity.</li>
     <li><strong>A third confirmed instance of the CO2-insulation order-form gap</strong> -- Type K's insulation columns are White-only, leaving this job's Black-insulated SCO2 piping with no matching purchase-order line.</li>
     <li><strong>Two sheets that read as blank but aren't</strong> -- R4/R4.1's text-only extraction returns almost nothing, but both carry dense, real OEM submittal content (Hussmann rack data sheets, RAE Corp skid unit drawing) as embedded images -- the same "vector/image trap" pattern first confirmed on Kroger DAL653's R6.1.</li>
+  </ul>
+</div>
+
+<div class="section" id="f510">
+  <h2>Folder: United #0510 -- Hereford, TX</h2>
+  <p style="color:#a8a8a0;">26.06.05 -- Remodel, Produce/Meat/Dairy. The smallest, plainest Uploads set analyzed so far: no formal refrigeration schedule (R1/R2-style) at all -- just a 2-page prose scope-of-work letter and a hand-marked-up FF&amp;E floor plan. That plainness is exactly what makes this folder's gap real: without a schedule to check against, the only way to find what the scope letter left out is to trace the plan's own color-coded markup system item by item.</p>
+
+  <div class="toc">
+    <ol>
+      <li><a href="#f510-glossary">Terms this folder has</a></li>
+      <li><a href="#f510-uploads">The Uploads (a scope letter and 3 floor-plan sheets)</a></li>
+      <li><a href="#f510-tab1">Tab 1 -- CP Est Pro 2.0 SUMMARY</a></li>
+      <li><a href="#f510-tab2">Tab 2 -- EQUIPMENT</a></li>
+      <li><a href="#f510-tab3">Tab 3 -- PIPE 2.0</a></li>
+      <li><a href="#f510-tab4">Tab 4 -- PARTS</a></li>
+      <li><a href="#f510-tab5">Tab 5 -- LABOR RATES</a></li>
+      <li><a href="#f510-tab6">Tab 6 -- EQUIPMENT SALES BUYOUTS</a></li>
+      <li><a href="#f510-tab7">Tab 7 -- COPPER_INSULATION_FORM</a></li>
+      <li><a href="#f510-tab8">Tab 8 -- HVAC</a></li>
+      <li><a href="#f510-tab9">Tab 9 -- TAX TABLE</a></li>
+      <li><a href="#f510-tab10">Tab 10 -- BidCalc</a></li>
+      <li><a href="#f510-walkthrough">Full walkthrough: the "C" tags the scope letter never mentions</a></li>
+      <li><a href="#f510-mismatches">Mismatches: Uploads vs. Excel</a></li>
+      <li><a href="#f510-mapping">Mapping table (every traced source)</a></li>
+      <li><a href="#f510-unique">What's unique about this folder</a></li>
+    </ol>
+  </div>
+
+  <h3 id="f510-glossary">Terms this folder has</h3>
+  <p style="color:#a8a8a0;font-style:italic;">Universal terms already covered in the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab. What's new here:</p>
+  <table class="data-table">
+    <tr><th>Term</th><th>Meaning</th></tr>
+    <tr><td>System A#/B#</td><td>This scope letter's own circuit-designation scheme (A5, A7, A8, B1, B3, B9, B10, B11), each tied directly to a specific color-coded zone on the marked-up floor plan (RED=NEW/SURPLUS, GREEN=RELOCATED, BLUE=PRIORITY 2).</td></tr>
+    <tr><td>"C##" tags</td><td>A second, entirely separate numbering scheme (C18 through C36) on the same marked-up plan, never mentioned anywhere in the scope letter -- see the walkthrough below.</td></tr>
+    <tr><td>CDS valve</td><td>A numbered case/circuit valve reused or newly installed per circuit (e.g. "Reuse existing CDS valve," "New CDS 2-5," "new CDS 4-7") -- the acronym itself is never spelled out anywhere in this folder's uploads.</td></tr>
+    <tr><td>CPC</td><td>This store's case-controller/EMS standard -- the scope letter states directly: "No time clocks or thermostats. Everything needs to be on CPC."</td></tr>
+    <tr><td>PureCold (R10-109)</td><td>The self-contained 6' drink-case model used for the "Front End: (2) new self-contained 6' inline drink cases" item -- confirmed by name and model number directly on the marked-up plan.</td></tr>
+  </table>
+
+  <h3 id="f510-uploads">The Uploads -- a scope letter and 3 floor-plan sheets</h3>
+  <p>No RM1, no R-series schedule -- refrigeration scope here rides entirely on a plain-English letter cross-referenced against a hand-marked general-merchandising floor plan.</p>
+  <table class="data-table">
+    <tr><th>File</th><th>What's in it</th></tr>
+    <tr><td>0210-510-Refrigeration Scope.pdf (2 pp.)</td><td>The scope-of-work letter, department by department: Meat Market (reduce service case to 16' on System B3; relocate fresh meat on A7; new 12' door case on B11; relocate 28' smoked meat/cheese on B1; new 6-door freezer cases on A8), Dairy (remove coffin, new 12' ISLA + end caps on A5), Produce (32' deck-case swaps on B9 and B10, "one for one," reuse existing lines), Front End (2 new self-contained 6' drink cases). Plus a general-items list: line set covers, close-offs, forklift/crane/scissor-lift rentals, roof-penetration repair (bid-optional), refrigerant supply, CPC sensor wiring back to the input board, "No time clocks or thermostats," night work.</td></tr>
+    <tr><td>510-REMODEL PLAN - Mark Up_01.pdf (1 pp.)</td><td>The actual "X101 PROPOSED FF&amp;E" store plan, hand-marked with a color legend (NEW/SURPLUS red, PRIORITY 2 blue, DEMO orange, RELOCATED green, EXISTING black, REMOVED magenta). Every A#/B# system from the scope letter traces cleanly to a colored zone and a real case model: A5 = "12' DAIRY ISLA + END CAPS," model IM-D5-C12-R (red/new); A7 = "20' FRESH MEAT," model REF-MK01 x2 (green/relocated); A8 = "16' LOW TEMP," model R1-158 "LT 3 DOOR REACH-IN RL-3" x2 -- 6 doors total (red/new); B1 = "28' REF.," model REF-GR03/DD5X-ULP x3 (green/relocated); B3 = "16' SERVICE MEAT," model ESGMVS x2 (green/relocated); B9 = "12'/12'/6' INSIGHT MERCHANDISER," models R1-307/R1-306 ID5SL (red/new -- not the same equipment the scope letter's "one for one, use existing lines" language implies); B10 = "32' 5 DECK PRODUCE," models R1-307/R1-306 D5X-LEP (blue/PRIORITY 2 -- a status the scope letter never distinguishes from B9's); B11 = "12' BREAKFAST," model R1-314 "12' INSIGHT W/ DOORS IDD5SU" (red/new); front-end drink cases = "12' DRINK," 2x R10-109 6' PureCold (red/new, with a new electrical outlet keynote). Also carries 19 unrelated "C##" tags -- see the walkthrough.</td></tr>
+    <tr><td>D101 DEMO.pdf / X101 PROPOSED.pdf (1 pp. each)</td><td>The un-marked demo-state and proposed-state versions of the same store plan (full merchandising layout, not refrigeration-specific). Diffing their text confirms the department-level changes the scope letter describes. Both embed a raster "510 REMODEL NOTES" punch-list image (invisible to text extraction) with additional refrigeration items not in the scope letter -- see the walkthrough. X101 carries one more revision ("DUG &amp; KPS," 04.24.26) than D101, so the two sheets are one revision out of sync with each other.</td></tr>
+  </table>
+  <p>Confirmed negative: none of the 4 files is a roof plan, and "RTU"/"roof"/"crane" appear nowhere in the text layers -- the scope letter's "Crane service for setting RTUs on roof" line has no visual counterpart anywhere in this Uploads set. PDF annotations across all 4 files are either empty AutoCAD-SHX-text export artifacts or, on the Mark Up and X101 sheets, genuine but non-refrigeration hand marks (an invisible white ink stroke; a "25 more baskets" note; a red strike-out over the Training Kiosk room).</p>
+
+  <h3 id="f510-tab1">Tab 1 -- CP Est Pro 2.0 SUMMARY</h3>
+
+  <h4>1.1 Header</h4>
+  <p>Project "United #510 - Remodel," Hereford, Texas. Estimator Jay Jarratt Jr, labor division "DALLAS, TX." Scope "Remodel - Produce/Meat/Dairy." REMODEL. Tax Type "SALES TAX LABOR &amp; MATS" -- Texas's remodel branch, taxing labor and materials both (not the "Use Tax, Materials Only" branch NEW jobs get).</p>
+
+  <h4>1.2 Display Cases</h4>
+  <table class="data-table">
+    <tr><th>Type</th><th>12'</th><th>Material</th><th>Pipefitter</th><th>Case Setter</th></tr>
+    <tr><td>MD Cases</td><td>9</td><td>$1,170</td><td>63 hrs</td><td>45 hrs</td></tr>
+    <tr><td>Wide Islands</td><td>1</td><td>$225</td><td>7 hrs</td><td>5 hrs</td></tr>
+    <tr><td>Temp/Relocate</td><td>5</td><td>$375</td><td>15 hrs</td><td>25 hrs</td></tr>
+    <tr><td>Remove</td><td>10 (labor only)</td><td>$0</td><td>10 hrs</td><td>10 hrs</td></tr>
+    <tr><td><strong>TOTALS</strong></td><td></td><td><strong>$1,770</strong></td><td><strong>95 hrs</strong></td><td><strong>85 hrs</strong></td></tr>
+  </table>
+
+  <h4>1.3 Evaporators</h4>
+  <p>Entirely zero.</p>
+
+  <h4>1.4 Non-Itemized Equipment Room &amp; RTU Breakdown</h4>
+  <table class="data-table">
+    <tr><th>Item</th><th>Material</th><th>Labor</th><th>Source</th></tr>
+    <tr><td>Equipment Sheet Totals</td><td>$1,060</td><td>14 hrs</td><td><span class="tag tag-formula">formula</span> = EQUIPMENT tab</td></tr>
+    <tr><td>Temporary Vehicle Fuel Cost Add</td><td>$895.78</td><td>0</td><td><span class="tag tag-formula">formula</span></td></tr>
+    <tr><td>Provide &amp; Install Case Close-offs</td><td>$750</td><td>10 hrs</td><td><span class="tag tag-scope">Scope</span></td></tr>
+    <tr><td>Provide &amp; Install New Equipment Tags</td><td>$350</td><td>4 hrs</td><td><span class="tag tag-scope">Scope</span></td></tr>
+    <tr><td>Receive, Set &amp; Startup S/C Cases</td><td>$0</td><td>12 hrs</td><td><span class="tag tag-scope">Scope</span> matches the front-end PureCold drink cases</td></tr>
+    <tr><td><strong>TOTALS</strong></td><td><strong>$3,055.78</strong></td><td><strong>40 hrs</strong></td><td></td></tr>
+  </table>
+
+  <h4>1.5 IN-HOUSE GC and SUBLET CONTRACTORS</h4>
+  <p>Entirely zero.</p>
+
+  <h4>1.6 Refrigerant</h4>
+  <div class="calc-box">R507/404A:  <span class="calc-source">97.28 lbs @ $17/lb = $1,653.76</span>
+R407F:      <span class="calc-source">0.002 lbs @ $13.75/lb (negligible)</span>
+            <span class="calc-result">TOTAL LBS = 97.282  |  TOTAL COST = $1,653.7875</span></div>
+  <p>A stray 0.002 lbs of R407F sits in the "default/balance" row -- essentially zero, and nothing like Walmart 5102-258's -935 lb version of this same mechanic. All the real refrigerant weight and cost is R507/404A, consistent with a plain-DX job (no CO2 anywhere in this folder).</p>
+
+  <h4>1.7 Scheduling Data</h4>
+  <table class="data-table">
+    <tr><th>Field</th><th>Value</th></tr>
+    <tr><td># of Fitters</td><td>2</td></tr>
+    <tr><td>Duration</td><td>3.88 weeks</td></tr>
+    <tr><td>R Dispatch</td><td>87.75 ST / <strong>390 OT hrs (81.7% OT)</strong></td></tr>
+  </table>
+  <div class="callout callout-warn">
+    <div class="callout-title">Yet another new high for overtime share</div>
+    <div class="callout-body">390 of 477.75 total dispatched hours (81.7%) are OT -- edging past Walmart 5102-258's 81.6% and Walmart 3112-1009's 81.5%. Three folders in a row now with OT running above 80% of total hours, on jobs of very different sizes -- worth treating as a real pattern in how this crew dispatches labor, not a one-off.</div>
+  </div>
+
+  <h4>1.8 Labor Blend &amp; Rate</h4>
+  <p>30/10/40/20/0% blend, region "TX," standard $40/$34/$22/$20 base wages, margin 25%.</p>
+
+  <h4>1.9 Rentals</h4>
+  <table class="data-table">
+    <tr><th>Item</th><th>Cost</th></tr>
+    <tr><td>Freight and Disposal</td><td>$2,000</td></tr>
+    <tr><td>Forklift</td><td>$1,350</td></tr>
+    <tr><td>Scissor Lifts</td><td>$1,625</td></tr>
+    <tr><td>Container Rental</td><td>$1,000</td></tr>
+    <tr><td><strong>TOTAL RENTALS</strong></td><td><strong>$5,975</strong></td></tr>
+  </table>
+  <p>No Crane line, despite the scope letter's general-items list including "Crane service for setting RTUs on roof" -- consistent with there being no rooftop refrigeration equipment install on this particular job (the scope's crane/RTU line reads as boilerplate carried from the template, not this job's actual scope).</p>
+
+  <h4>1.10 Total Summary</h4>
+  <table class="data-table">
+    <tr><th>Category</th><th>Cost</th><th>Sell</th><th>Margin</th></tr>
+    <tr><td>Labor</td><td>$39,117</td><td>$52,156</td><td>25%</td></tr>
+    <tr><td>Materials</td><td>$18,434.63</td><td>$24,579.51</td><td>25%</td></tr>
+    <tr><td>Rentals</td><td>$5,975</td><td>$7,468.75</td><td>20%</td></tr>
+    <tr><td>Subsistence</td><td>$9,600</td><td>$13,714.29</td><td>30%</td></tr>
+    <tr><td>Fixed 1% Warranty</td><td>$1,141.12</td><td>$1,141.12</td><td>--</td></tr>
+    <tr><td>Contingency Factor</td><td>$5,153.61</td><td>$6,442.01</td><td>5%</td></tr>
+    <tr><td>Sales Tax (8.25%, Labor &amp; Mats)</td><td>$8,609.75</td><td>$8,609.75</td><td>--</td></tr>
+    <tr><td><strong>TOTAL</strong></td><td><strong>$88,031.10</strong></td><td><strong>$114,112</strong></td><td>Gross Profit $26,080.90 (22.86%)</td></tr>
+  </table>
+
+  <h4>1.11 Job Scope Notes &amp; Exclusions</h4>
+  <p>Row 197 reproduces the refrigeration scope letter verbatim, department by department, with one addition not present in the standalone PDF: the roof-penetration-repair general item has <strong>"EXCLUDED"</strong> typed directly onto the end of that line -- confirming the estimator exercised the PDF's own "if you want to exclude this... make sure you specifically exclude it" option. Exclusions list is the full standard set, with "Any Roof Work/Roof Penetration Repairs" appended to column F -- consistent with the same exclusion decision.</p>
+
+  <h3 id="f510-tab2">Tab 2 -- EQUIPMENT</h3>
+  <table class="data-table">
+    <tr><th>Item</th><th>Qty</th><th>Material</th><th>Labor</th><th>Refrigerant</th></tr>
+    <tr><td>Change Rack Main Liquid Drier (4) RC 4864 HH</td><td>2</td><td>$260</td><td>4 hrs</td><td>0</td></tr>
+    <tr><td>Change Rack Suction Filters (8) Cores</td><td>2</td><td>$800</td><td>10 hrs</td><td>0</td></tr>
+    <tr><td><strong>TOTALS</strong></td><td></td><td><strong>$1,060</strong></td><td><strong>14 hrs</strong></td><td><strong>0 lbs</strong></td></tr>
+  </table>
+  <p>Qty 2 for both lines is consistent with two existing rack systems (the A-side and B-side circuits the scope letter references) getting opened for the various relocate/tie-in work -- no new-rack or new-condenser line items anywhere, correctly reflecting that this job touches no rooftop equipment at all.</p>
+
+  <h3 id="f510-tab3">Tab 3 -- PIPE 2.0</h3>
+  <p>Header: 66 install labor hrs, 660 LF pipe w/waste, 22.282 lbs piping refrigerant, $7,673 total materials (Pipe $4,034.40 + Insulation $946 + Saddles $451.42 + HFG $2,241.18) -- all tie to SUMMARY exactly.</p>
+  <table class="data-table">
+    <tr><th>System</th><th>Scope-letter match</th><th>Liquid</th><th>Suction</th></tr>
+    <tr><td>SYS AL8</td><td>A8 -- new 6-door freezer cases</td><td>80 ft, 1/2"</td><td>80 ft, 7/8" + 10 ft riser, 5/8"</td></tr>
+    <tr><td>SYS AH7</td><td>A7 -- relocated fresh meat</td><td>40 ft, 1/2"</td><td>40 ft, 1-1/8" + riser</td></tr>
+    <tr><td>SYS B1</td><td>B1 -- relocated smoked meat/cheese</td><td>20 ft, 1/2"</td><td>20 ft, 7/8" + riser</td></tr>
+    <tr><td>SYS B3</td><td>B3 -- reduced service meat case</td><td>20 ft, 1/2"</td><td>20 ft, 7/8" + riser</td></tr>
+    <tr><td>SYS B9 / SYS B10</td><td>B9 / B10 -- produce deck swaps</td><td>20 ft each, 5/8"</td><td>10 ft each, 1-3/8" + riser</td></tr>
+    <tr><td>SYS B11</td><td>B11 -- new 12' door case</td><td>40 ft, 1/2"</td><td>40 ft, 5/8" + riser</td></tr>
+  </table>
+  <div class="callout callout-money">
+    <div class="callout-title">System A5 correctly carries zero new pipe</div>
+    <div class="callout-body">The scope letter says A5 (the new dairy ISLA) will "Use existing line sets" -- and PIPE 2.0 has no A5 row at all, meaning no new pipe was priced for it. That's the correct outcome, not a gap: the one item explicitly scoped as "no new piping needed" is the one item with no piping cost.</div>
+  </div>
+
+  <h3 id="f510-tab4">Tab 4 -- PARTS</h3>
+  <p>Total <strong>$3,832.06</strong>, tracing to exactly 6 catalog lines: 5 sizes of DX Ball Valve (Mueller AQ178xxc series, 3/8" through 1-1/8", 14 valves total, $874.26) plus 10 units of 15% Silphos brazing rod ($2,957.80 -- again the single largest PARTS line). No CO2-rated parts anywhere, consistent with a plain-DX scope.</p>
+
+  <h3 id="f510-tab5">Tab 5 -- LABOR RATES</h3>
+  <p>Standard, unchanged. TX row: $40/$34/$22/$20, burden 2.0x.</p>
+
+  <h3 id="f510-tab6">Tab 6 -- EQUIPMENT SALES BUYOUTS</h3>
+  <p>Entirely zero -- placeholder "XXXX" rows throughout.</p>
+
+  <h3 id="f510-tab7">Tab 7 -- COPPER_INSULATION_FORM</h3>
+  <p>Order % factor 0.8. Type L copper fully populated across six sizes (580 LF total) with matching Black insulation -- correctly the only copper type used, since this job has no CO2/secondary loop. Type K entirely zero. Saddles ordered only in the small 3/4"/1" sizes, matching the produce/meat case drain needs. No template gap here -- this job's piping profile is simple enough that the form's ACR/Black-insulation columns cover it completely.</p>
+
+  <h3 id="f510-tab8">Tab 8 -- HVAC</h3>
+  <p>Entirely zero. Same recurring header field-label misalignment (BID DATE shows "Hereford," SCOPE shows "Texas," DRAWINGS DATE shows the scope text) confirmed on every folder checked.</p>
+
+  <h3 id="f510-tab9">Tab 9 -- TAX TABLE</h3>
+  <p>Texas row, Existing Construction column: "Sales Tax, Labor &amp; Mats" -- matches SUMMARY's 8.25% rate for this REMODEL job.</p>
+
+  <h3 id="f510-tab10">Tab 10 -- BidCalc</h3>
+  <p>Total Bid = <strong>$114,111.42</strong>, matching SUMMARY's rounded $114,112.</p>
+
+  <h3 id="f510-walkthrough">Full walkthrough: the "C" tags the scope letter never mentions</h3>
+  <div class="step-flow">
+    <div class="step-item"><div class="step-badge">1</div><div class="step-body">
+      <div class="step-title">The scope letter describes 8 systems, and only 8</div><div class="step-sheet">0210-510-Refrigeration Scope.pdf</div>
+      <div class="step-desc">A5, A7, A8, B1, B3, B9, B10, B11 -- every refrigeration line item in the bid traces to one of these eight tags.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">2</div><div class="step-body">
+      <div class="step-title">The marked-up plan carries a second, unexplained tag series</div><div class="step-sheet">510-REMODEL PLAN Mark Up_01.pdf</div>
+      <div class="step-desc">19 "C##" tags (C18 through C36) are scattered across the store -- present only on the marked-up sheet, not in D101/X101's base drawing, and never referenced anywhere in the scope letter.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">3</div><div class="step-body">
+      <div class="step-title">15 of the 19 land directly on refrigeration equipment</div><div class="step-sheet">Same sheet, rendered at high zoom</div>
+      <div class="step-desc"><div class="calc-box">C18-C21:  frozen-food island cases (RLNI back-to-back)
+C22:      Meat Freezer walk-in
+C23-C24:  dual-temp frozen coffin cases
+C25:      Deli Freezer walk-in
+C26:      Frozen Cakes case
+C27:      Bakery Freezer walk-in
+C29:      Bakery Vault (cooler)
+C33-C34:  Produce Prep Vault, Produce Vault
+C35-C36:  Service Deli case, Deli Retail Case
+                          <span class="calc-result">= 15 of 19 "C" tags are real refrigerated equipment</span></div></div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">4</div><div class="step-body">
+      <div class="step-title">A separate embedded punch-list image adds even more</div><div class="step-sheet">D101/X101's raster "510 REMODEL NOTES" image</div>
+      <div class="step-desc">Invisible to a text-only read, this image lists refrigeration items with no scope-letter counterpart at all -- most notably <strong>"Add 4' Pure Cold end cap cooler between aisles 1 and 2"</strong> -- alongside an open, unresolved question: "Ask Joe about freezer vault doors."</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">5</div><div class="step-body">
+      <div class="step-title">Net effect</div><div class="step-sheet">--</div>
+      <div class="step-desc">Nothing in the price sheet traces to a "C" tag or to the punch-list image -- both exist purely in the Uploads, disconnected from the eight-system scope letter this bid was actually built from. Whether that's because those items are genuinely out of scope, already covered elsewhere, or simply missed, isn't resolvable from these documents alone -- but the gap between "what's marked on the plan" and "what the bid prices" is real and traceable.</div>
+    </div></div>
+  </div>
+
+  <h3 id="f510-mismatches">Mismatches: Uploads vs. Excel</h3>
+  <table class="data-table mismatch">
+    <tr><th>#</th><th>Excel location</th><th>What Excel shows</th><th>What Uploads show</th><th>Type of mismatch</th></tr>
+    <tr><td>1</td><td>Whole price sheet</td><td>8 priced systems (A5, A7, A8, B1, B3, B9, B10, B11)</td><td>15 of 19 "C" tags on the marked-up plan land on real refrigeration equipment, none priced</td><td><span class="tag tag-mismatch">Confirmed scope gap</span> -- see walkthrough</td></tr>
+    <tr><td>2</td><td>Whole price sheet</td><td>No line for a new end-cap cooler</td><td>Punch-list image: "Add 4' Pure Cold end cap cooler between aisles 1 and 2"</td><td>Possible missing scope item -- not in the formal scope letter either</td></tr>
+    <tr><td>3</td><td>SUMMARY Rentals</td><td>No Crane line item</td><td>Scope letter lists "Crane service for setting RTUs on roof" as a general item</td><td>Boilerplate scope language with no matching drawing or cost -- correctly not priced</td></tr>
+    <tr><td>4</td><td>N/A -- an Uploads-internal inconsistency</td><td>N/A</td><td>X101 carries a revision ("DUG &amp; KPS," 04.24.26) that D101 doesn't have</td><td>Sheets one revision out of sync with each other</td></tr>
+    <tr><td>5</td><td>PIPE 2.0, System A5</td><td>$0 -- no row exists</td><td>Scope letter: "Use existing line sets" for A5</td><td>Confirmed correct, not a mismatch -- included for completeness</td></tr>
+  </table>
+
+  <h3 id="f510-mapping">Mapping table -- every traced source, in one place</h3>
+  <table class="data-table">
+    <tr><th>Price Sheet location</th><th>Value</th><th>Traced to</th></tr>
+    <tr><td>PIPE 2.0: SYS AL8 (80 ft)</td><td>$-, sized 1/2" liq / 7/8"+5/8" suction</td><td><span class="tag tag-scope">Scope</span> System A8's "New line set 1/2" suction, 7/8" riser 5/8" riser"</td></tr>
+    <tr><td>PIPE 2.0: SYS B9 / SYS B10 (identical sizing)</td><td>20 ft liquid, 10 ft suction each</td><td><span class="tag tag-scope">Scope</span> matches both systems' identical "one for one swap" wording</td></tr>
+    <tr><td>PARTS: DX ball valves + brazing rod</td><td>$3,832.06</td><td><span class="tag tag-scope">Scope</span> generic DX tie-in hardware, consistent with no CO2/secondary loop anywhere in this job</td></tr>
+    <tr><td>EQUIPMENT: liquid drier + suction filter changes (qty 2 each)</td><td>$1,060 / 14 hrs</td><td><span class="tag tag-scope">Scope</span> two existing rack systems opened for tie-ins across A5/A7/A8/B1/B3/B9/B10/B11</td></tr>
+    <tr><td>Refrigerant: 97.28 lbs R507/404A</td><td>$1,653.79</td><td><span class="tag tag-scope">Scope</span> matches the plain-DX architecture confirmed throughout the marked-up plan</td></tr>
+  </table>
+
+  <h3 id="f510-unique">What's unique about this folder</h3>
+  <ul>
+    <li><strong>The plainest source documentation analyzed so far</strong> -- no formal refrigeration schedule at all, just a prose scope letter and a hand-colored merchandising floor plan standing in for one.</li>
+    <li><strong>The first folder where the primary evidence is a color-coded legend</strong> rather than a CAD schedule -- NEW/SURPLUS, PRIORITY 2, DEMO, RELOCATED, EXISTING, REMOVED, each system tag matched to a colored zone and a real case model number.</li>
+    <li><strong>A genuine, traced documentation gap</strong> -- 15 of 19 "C" tags on the marked-up plan sit directly on refrigerated equipment with zero mention in the scope letter the bid was built from, plus a punch-list image (invisible to text extraction) naming a specific missing item ("4' Pure Cold end cap cooler").</li>
+    <li><strong>A third consecutive folder above 80% overtime</strong> -- 81.7% here, following Walmart 5102-258's 81.6% and Walmart 3112-1009's 81.5%, now reading as a real pattern rather than a one-off.</li>
+    <li><strong>A confirmed non-issue used as a control case</strong> -- System A5's $0 piping cost is exactly what the scope letter's "use existing line sets" note predicts, a clean example of the Uploads and Excel agreeing.</li>
+    <li><strong>Confirmed negative on the crane/RTU line</strong> -- the scope letter's general boilerplate item has no roof plan, no RTU, and no crane cost anywhere in this job, correctly reflected by SUMMARY's $0 crane rental.</li>
+  </ul>
+</div>
+
+<div class="section" id="f271">
+  <h2>Folder: HEB Corp #271 -- West Columbia, TX</h2>
+  <p style="color:#a8a8a0;">26.05.25 -- "Refrigeration Upgrade & Merch Remodel." By far the largest Uploads folder analyzed: a 94-sheet full construction drawing set plus a 1,229-page master spec book (of which roughly 165 pages are actually refrigeration-relevant). One new multiplex rack ("RACK RA") replaces an entire legacy R-22/R-404A/R-407A system store-wide, running R-449A exclusively -- and the documents themselves spend a surprising number of pages talking about a refrigerant this store doesn't use.</p>
+
+  <div class="toc">
+    <ol>
+      <li><a href="#f271-glossary">Terms this folder has</a></li>
+      <li><a href="#f271-uploads">The Uploads (94-sheet drawing set + 1,229-page spec book)</a></li>
+      <li><a href="#f271-tab1">Tab 1 -- CP Est Pro 2.0 SUMMARY</a></li>
+      <li><a href="#f271-tab2">Tab 2 -- EQUIPMENT</a></li>
+      <li><a href="#f271-tab3">Tab 3 -- PIPE 2.0</a></li>
+      <li><a href="#f271-tab4">Tab 4 -- PARTS</a></li>
+      <li><a href="#f271-tab5">Tab 5 -- LABOR RATES</a></li>
+      <li><a href="#f271-tab6">Tab 6 -- EQUIPMENT SALES BUYOUTS</a></li>
+      <li><a href="#f271-tab7">Tab 7 -- COPPER_INSULATION_FORM</a></li>
+      <li><a href="#f271-tab8">Tab 8 -- HVAC</a></li>
+      <li><a href="#f271-tab9">Tab 9 -- TAX TABLE</a></li>
+      <li><a href="#f271-tab10">Tab 10 -- BidCalc</a></li>
+      <li><a href="#f271-walkthrough">Full walkthrough: the CO2 store that isn't</a></li>
+      <li><a href="#f271-mismatches">Mismatches: Uploads vs. Excel</a></li>
+      <li><a href="#f271-mapping">Mapping table (every traced source)</a></li>
+      <li><a href="#f271-unique">What's unique about this folder</a></li>
+    </ol>
+  </div>
+
+  <h3 id="f271-glossary">Terms this folder has</h3>
+  <p style="color:#a8a8a0;font-style:italic;">Universal terms already covered in the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab. What's new here:</p>
+  <table class="data-table">
+    <tr><th>Term</th><th>Meaning</th></tr>
+    <tr><td>RACK RA</td><td>The single new Hussmann custom multiplex rack replacing the entire legacy system -- one physical rack with separate LT and MT suction groups (not two racks), 88 total HP, R449A, 15,700 lbs, ground-mounted on a new dedicated concrete pad.</td></tr>
+    <tr><td>WICP</td><td>Walk-In Control Panel -- the field enclosure wiring together case controllers, sensors, door alarms, and leak detectors for a group of walk-in boxes, reporting back to the RDM Data Manager.</td></tr>
+    <tr><td>RDM</td><td>HEB's case-controller/EMS network standard (RDM Data Manager, RDM IDF) -- every case tag on this job routes to it; its physical cabling is specified separately, in the low-voltage communications division, not in the refrigeration spec sections.</td></tr>
+    <tr><td>"NOT USED" CO2 details</td><td>A recurring pattern across this drawing set: dedicated CO2/R-744 construction details (charging station, ball valves) exist in the shared HEB detail library but are explicitly crossed out "NOT USED" on this specific job -- see the walkthrough.</td></tr>
+    <tr><td>Three Fitting Test</td><td>Spec 20 63 95's QC mechanism: HEB may cut out up to 3 random field-brazed fittings for inspection -- if even one is found oxidized/failed, <em>the entire project's</em> pipework and fittings must be re-done.</td></tr>
+    <tr><td>KV (Key Valve)</td><td>The plumbing symbol for a shutoff valve at a refrigerated case's water connection (misting/ice systems), formally defined on P-4.1's legend.</td></tr>
+  </table>
+
+  <h3 id="f271-uploads">The Uploads -- a 94-sheet drawing set and a 1,229-page spec book</h3>
+  <p>Project: H-E-B West Columbia, Corp #271, 110 Brazos Street. Refrigeration/MEP Engineer of Record: Erdman Anthony (David Graser, PE). Approved refrigeration installers list (appearing on both R-1.0 and M-0.1) includes <strong>Climate Pros (Mike Palmer)</strong> by name, alongside Hussmann, CoolSys, and others.</p>
+  <table class="data-table">
+    <tr><th>Sheet(s)</th><th>What's in it</th></tr>
+    <tr><td>DG-1.1 / G-1.1 -- Phasing Plans</td><td>A 5-phase demo/rebuild sequence (Phase 0-4) with the store required to stay &ge;50% operational per department throughout. "START UP NEW RACK RA - MEDIUM TEMPERATURE SUCTION GROUP" (PH-1a), "...LOW TEMPERATURE SUCTION GROUP" (PH-3b).</td></tr>
+    <tr><td>Q-0.0 / Q-1.0 -- Responsibility Matrix / Equipment Plan</td><td>Cases, condensers/coils/compressors, and the EMS are H-E-B-vendor-supplied; warranty on condensers/compressors and EMS is split "HEB/Contractor." Full case schedule -- all Hussmann (ID5SL multidecks, RL frozen reach-ins).</td></tr>
+    <tr><td>DR-1.1 / DR-2.0 -- Demolition Plan &amp; Schedule</td><td>~21 individual circuits on the legacy rack, all marked REMOVE, running <strong>R-404A, R-407A, and R-22</strong> -- a full legacy-refrigerant retirement, not a like-for-like swap. Demo general notes require copper turned in to HEB's Returned Goods Center and an Asset Retirement Form within 72 hours. DR-2.0 itself is a different page size (612&times;792 pt Letter) than every neighboring sheet (3024&times;2160 or 792&times;612) -- a real production/export inconsistency in the PDF, not a content gap.</td></tr>
+    <tr><td>A-2.0 -- Enlarged Cooler/Freezer Plans</td><td>Three 1/4"=1'-0" enlarged plans: Dairy Cooler, Frozen Food Freezer, Produce Cooler, each dimensioned with a 50' wall-mount hose-reel keynote. "REPLACE COOLER/FREEZER PANELS IN SAME LOCATION," insulated door/strip-curtain keynote, and "REFER TO Q SHEETS FOR EQUIPMENT TO BE REINSTALLED."</td></tr>
+    <tr><td>R-1.0 through R-4.1 -- General Notes, Floor Plan, Schedules, Controls, Condensate</td><td>The core equipment record: <strong>every disclosed circuit and the RACK RA nameplate itself confirm R-449A, with zero exceptions</strong>. RACK RA: 88 HP, MCA 360A/MOPD 400A, LT group (3 compressors, 90.3 MBH) + MT group (4x model 4PES-12, 439.6 MBH), condenser model MXF-10. Heat-traced condensate (Chromalox SRF, 5W/ft) in freezer/cooler departments.</td></tr>
+    <tr><td>R-2.2 -- Refrigeration Disclosure Schedules</td><td>The IFC 605 compliance table names R-513A and CO2 (R-744) alongside R-449A -- but every actual disclosure row on the same sheet lists only R-449A. See the walkthrough.</td></tr>
+    <tr><td>R-5.1 through R-5.4 -- Refrigeration Details</td><td>21+ construction details. <strong>Two dedicated CO2 details -- "Remote CO2 (R744) Charging Station Detail" and "CO2 Ball Valves w/ 3/8" By-Pass" (x2) -- are explicitly stamped "NOT USED."</strong> Detail 8's engraved-tag example correctly reads "RACK A +22F SUCTION HEADER" / "RAMK01 R449A EEV."</td></tr>
+    <tr><td>S-1.0 / S-1.1 -- Slab Plan / Foundation Details</td><td>Equipment weight schedule confirms RACK RA at 15,700 lbs, new, on a new concrete slab (detail 7/S-1.1) -- not the existing slab.</td></tr>
+    <tr><td>A-4.1 - A-4.8 -- Architectural Details</td><td>Exterior walk-in flashing/gutter/corner-closure, interior slab/threshold details by adjacency type, and a dedicated "Refrigeration Chase Detail" (A-4.5) plus "Individual Narrow Island Case Chase Detail."</td></tr>
+    <tr><td>E-2.1 / E-4.1 / E-6.1-6.2 / E-7.1 / E-8.1 -- Electrical</td><td>Two 400A/3P/208V disconnects feed RACK RA directly off the main 1000A/1600A switchboard via new Panel RB. Refrigeration loads spread across 9 panels (largest: Panel RB, 76,360 VA). E-8.1 shows the full RDM network topology back to "RDM IDF #1." <strong>Naming trap:</strong> the demo one-line (DE-4.1) shows an existing electrical panel that is <em>also</em> named "RA" -- a coincidental match to "Refrigeration Rack RA," entirely separate equipment.</td></tr>
+    <tr><td>P-series -- Plumbing</td><td>Key-valve (KV) locations at every case, a produce misting-system schematic, ice-maker/bagger filtration schedule (Howe filters, 1,000-6,000 lb/day), and a 12" minimum separation rule between underground refrigerant and waste/water lines. P-2.1 also shows a domestic hot-water recirculation pump mounted directly above a refrigeration box.</td></tr>
+    <tr><td>Fire Protection (DFP-1.0, FP-1.1)</td><td>Coolers/Freezers/Sales Floor classified Ordinary Hazard Group 2 for sprinkler design. Dry-pipe risers required above freezers with insulated arms "to prevent condensate build-up rolling down into sprinkler trigger" -- fire protection rules directly shaped by the refrigeration equipment. No ammonia/CO2 detection interlock anywhere, consistent with R-449A.</td></tr>
+    <tr><td>Spec 13 21 26 -- Walk-In Coolers and Freezers</td><td>Box construction spec; 10-year parts warranty on panels/boxes, 2-year on electrical hardware.</td></tr>
+    <tr><td>Spec 20 61 00 through 20 90 00 -- the core Division 20 refrigeration sections (~130 pp.)</td><td>Full evacuation stairstep (1000&mu;&rarr;500&mu;&rarr;300&mu;, 24-hr final hold, &plusmn;100&mu; drift max), 300 psig nitrogen pressure test held 24 hrs, brazing at 15%/45% silver by joint type, the Three Fitting Test, leak alarm thresholds (500 ppm halocarbon), and full RDM controller setpoint tables.</td></tr>
+    <tr><td>Spec 20 63 92 -- CO2 Cascade &amp; Parallel Compressor Racks (15 pp.)</td><td>Zero store-specific references anywhere in the section -- pure generic boilerplate for whichever HEB stores actually run CO2. Closing line reads "END OF SECTION 23 62 13" -- wrong CSI division entirely, a copy-paste artifact.</td></tr>
+    <tr><td>Spec 02 41 00 -- Demolition</td><td>Detailed refrigerant-retrieval pipe-capping tolerances by equipment type, plus HEB's own Refrigerant Management Reclaim Program (United Refrigeration Inc., named contact Bruce Campbell, Verisae work-order process, cylinder part numbers, pallet-loading rules).</td></tr>
+    <tr><td>Spec 20 61 00 -- Refrigerant Compliance (named-vendor find)</td><td>Names a separate, specific R-22 recovery vendor -- <strong>"Rapid Recovery," contact Chad Fancher</strong> -- distinct from the URI reclamation vendor in 02 41 00. This is the same name as SUMMARY's $4,500 "Rapid Recovery" rental line (Tab 1.9): the rental line isn't a generic label, it's this named subcontractor.</td></tr>
+    <tr><td>Spec 28 44 00 -- Refrigerant Detection and Alarm</td><td>Monitors "R-407C, R-449A." Two alarm levels, distinct from the rack-level 500 ppm threshold elsewhere: <strong>Level 1 = 50 ppm</strong> (low-speed ventilation, blue strobe), <strong>Level 2 = 250 ppm</strong> (high-speed ventilation &ge;5 min, amber strobe). Sensors at all coolers/freezers, wall-mounted at 60" AFF.</td></tr>
+  </table>
+  <p>Confirmed negative: PDF annotations across both files are essentially just PE-seal stamps (no redlines, no substantive markup) -- except one incidental find: page 8 of the spec book's own Seals section still carries a leftover header from a <em>different</em> HEB project ("H-E-B EDNA, CORP #351... Plan Mod #20"), a template-reuse artifact rather than a scope issue. Several spec cross-references are internally malformed ("Section 2060100," "Section 25 6395 Appendix A") -- a sloppy citation layer sitting on top of otherwise solid technical content. Section 20 70 00 (Refrigerant Conversion) describes converting an existing system's charge <em>in place</em>, which doesn't match this store's overall demo-and-replace scope -- though R-2.0's own appliance schedule notes that several retained existing condensing units (SIFF04, SIBW05, SIFF06, SIDA07) were themselves converted to R449A from their original charge, so the section isn't purely inapplicable, just mismatched to the rack itself. Its own page headers still read the unfilled placeholder "XX XX XX."</p>
+
+  <h3 id="f271-tab1">Tab 1 -- CP Est Pro 2.0 SUMMARY</h3>
+
+  <h4>1.1 Header</h4>
+  <p>Project "HEB CORP #271 - RRP Remodel," West Columbia, Texas. Estimator Jay Jarratt Jr, region TX. REMODEL. Tax Type "Sales Tax, Labor &amp; Mats."</p>
+
+  <h4>1.2 Display Cases</h4>
+  <table class="data-table">
+    <tr><th>Type</th><th>12'</th><th>Material</th><th>Pipefitter</th><th>Case Setter</th></tr>
+    <tr><td>MD Cases</td><td>26</td><td>$3,380</td><td>182 hrs</td><td>130 hrs</td></tr>
+    <tr><td>Remove</td><td>32 (labor only)</td><td>$0</td><td>32 hrs</td><td>32 hrs</td></tr>
+    <tr><td><strong>TOTALS</strong></td><td></td><td><strong>$3,380</strong></td><td><strong>214 hrs</strong></td><td><strong>162 hrs</strong></td></tr>
+  </table>
+  <p>26 new cases and 32 demo'd cases both tie exactly to the Uploads (Q-1.0's schedule and DR-2.0's demo table).</p>
+
+  <h4>1.3 Evaporators</h4>
+  <p>12 Commercial coils, $360 material / 144 labor hrs -- matches "Demo Coils (12)" in the scope notes exactly.</p>
+
+  <h4>1.4 Non-Itemized Equipment Room &amp; RTU Breakdown</h4>
+  <table class="data-table">
+    <tr><th>Item</th><th>Material</th><th>Labor</th><th>Source</th></tr>
+    <tr><td>Equipment Sheet Totals</td><td>$2,090</td><td>93 hrs</td><td><span class="tag tag-formula">formula</span> = EQUIPMENT tab</td></tr>
+    <tr><td>Temporary Vehicle Fuel Cost Add</td><td>$4,144.48</td><td>0</td><td><span class="tag tag-formula">formula</span></td></tr>
+    <tr><td>Demo RTU (4)</td><td>$0</td><td>24 hrs</td><td><span class="tag tag-scope">Scope</span></td></tr>
+    <tr><td>Demo Condensing Units (20) &amp; Demo Piping</td><td>$500</td><td>120 hrs</td><td><span class="tag tag-scope">Scope</span> matches DR-2.0's ~21-circuit demo table</td></tr>
+    <tr><td>Demo Condensers (2)</td><td>$0</td><td>20 hrs</td><td><span class="tag tag-scope">Scope</span></td></tr>
+    <tr><td>Demo Coils (12) &amp; Relocate RTU (2)</td><td>$0</td><td>42 hrs</td><td><span class="tag tag-scope">Scope</span></td></tr>
+    <tr><td>Receive, Set &amp; Startup S/C Cases (3)</td><td>$0</td><td>18 hrs</td><td><span class="tag tag-scope">Scope</span></td></tr>
+    <tr><td>Receive, Set New RTU (2)</td><td>$0</td><td>12 hrs</td><td><span class="tag tag-scope">Scope</span></td></tr>
+    <tr><td>Equipment Tags &amp; Pipe Labels</td><td>$1,200</td><td>10 hrs</td><td><span class="tag tag-scope">Scope</span></td></tr>
+    <tr><td>Case Close-offs &amp; Pipe Chases</td><td>$1,500</td><td>20 hrs</td><td><span class="tag tag-scope">Scope</span> matches A-4.5's Refrigeration Chase Detail</td></tr>
+    <tr><td><strong>TOTALS</strong></td><td><strong>$9,434.48</strong></td><td><strong>359 hrs</strong></td><td></td></tr>
+  </table>
+  <p>All the RTU demo/relocate/receive-and-set labor is priced here, in the refrigeration Non-Itemized bucket -- not on the HVAC tab, which stays entirely at $0 (see Tab 8).</p>
+
+  <h4>1.5 IN-HOUSE GC and SUBLET CONTRACTORS</h4>
+  <div class="callout callout-mismatch">
+    <div class="callout-title"><span class="tag tag-mismatch">Unusual entry</span> "Climate Pros" appears as its own sublet line</div>
+    <div class="callout-body">Row 64 reads <strong>"CLIMATE PROS"</strong> -- "In-House Exterior Pipe Jacketing" -- $2,200 material + $1,360 labor ($3,560 cost, $4,188.24 sell) at a <strong>15% margin</strong>, distinct from the 25%/20% margins used elsewhere on this bid. This is the only folder analyzed so far where the estimator's own company name appears as a line item in the IN-HOUSE GC/SUBLET table -- an unusual internal cost allocation for one specific scope slice, carried at its own separate margin.</div>
+  </div>
+
+  <h4>1.6 Refrigerant</h4>
+  <div class="calc-box">R449A:  <span class="calc-source">1,552.46 lbs @ $10.25/lb = $15,912.72</span>
+R407F (default/balance):  <span class="calc-source">-0.0015 lbs (negligible)</span>
+                          <span class="calc-result">TOTAL LBS = 1,552.4585  |  TOTAL COST = $15,912.72</span></div>
+  <p>R449A is the sole real refrigerant on this job -- confirmed by the drawings and spec book to be the store's only actual charge. The reconciliation is clean: <strong>1,552.4585 total &minus; 980 lbs (EQUIPMENT tab) &minus; 406.4585 lbs (PIPE 2.0) = 166.0 lbs exactly</strong>, which resolves as 26 cases &times; 5 lbs + 12 coils &times; 3 lbs -- a per-fixture refrigerant-charge formula, not a gap.</p>
+
+  <h4>1.7 Scheduling Data</h4>
+  <table class="data-table">
+    <tr><th>Field</th><th>Value</th></tr>
+    <tr><td># of Fitters</td><td>4</td></tr>
+    <tr><td>Duration</td><td>9.03 weeks</td></tr>
+    <tr><td>R Dispatch</td><td>406.39 ST / <strong>1,804 OT hrs (81.6% OT)</strong></td></tr>
+  </table>
+  <p>Lands in the same 81-82% OT band as the last three folders checked (Walmart 3112-1009 81.5%, Walmart 5102-258 81.6%, United #0510 81.7%) -- four consecutive large jobs now cluster in this exact range, reading as a genuine dispatch pattern rather than a coincidence.</p>
+
+  <h4>1.8 Labor Blend &amp; Rate</h4>
+  <p>30/10/40/20/0% blend, region "TX," margin 25%.</p>
+
+  <h4>1.9 Rentals</h4>
+  <table class="data-table">
+    <tr><th>Item</th><th>Cost</th></tr>
+    <tr><td>Freight and Disposal</td><td>$2,000</td></tr>
+    <tr><td>Forklift</td><td>$1,500</td></tr>
+    <tr><td>Crane</td><td>$7,500</td></tr>
+    <tr><td>Rapid Recovery</td><td>$4,500</td></tr>
+    <tr><td>Scissor Lifts</td><td>$6,500</td></tr>
+    <tr><td>Container Rental</td><td>$1,100</td></tr>
+    <tr><td><strong>TOTAL RENTALS</strong></td><td><strong>$23,100</strong></td></tr>
+  </table>
+  <p>The $4,500 Rapid Recovery line is the legacy R-22/R-404A/R-407A gas recovery from the demolished rack -- the only folder so far with this line actually populated at a meaningful amount. Spec 20 61 00 names an actual company by this exact name -- <strong>"Rapid Recovery," contact Chad Fancher</strong> -- as HEB's designated R-22 recovery vendor, confirming this line item isn't a generic template label but a real named subcontractor.</p>
+
+  <h4>1.10 Total Summary</h4>
+  <table class="data-table">
+    <tr><th>Category</th><th>Cost</th><th>Sell</th><th>Margin</th></tr>
+    <tr><td>Labor</td><td>$217,222.66</td><td>$289,630.20</td><td>25%</td></tr>
+    <tr><td>Materials</td><td>$169,762.52</td><td>$226,350.03</td><td>25%</td></tr>
+    <tr><td>Rentals</td><td>$23,100</td><td>$28,875</td><td>20%</td></tr>
+    <tr><td>Sublet Other (Climate Pros pipe jacketing)</td><td>$3,560</td><td>$4,188.24</td><td>15%</td></tr>
+    <tr><td>Fixed 1% Warranty</td><td>$6,398.44</td><td>$6,398.44</td><td>--</td></tr>
+    <tr><td>Contingency Factor</td><td>$28,897.02</td><td>$36,121.28</td><td>5%</td></tr>
+    <tr><td>Sales Tax (8.25%, Labor &amp; Mats)</td><td>$48,276.09</td><td>$48,276.09</td><td>--</td></tr>
+    <tr><td><strong>TOTAL</strong></td><td><strong>$497,216.74</strong></td><td><strong>$639,840</strong></td><td>Gross Profit $142,623.26 (22.29%)</td></tr>
+  </table>
+
+  <h4>1.11 Job Scope Notes &amp; Exclusions</h4>
+  <p>Row 197 reproduces a Demo Phase / New Phase checklist matching the drawings closely: recover gas &amp; remove condensing units/condensers/RTU, demo cases (32)/coils (12), relocate RTU (2); receive/set new Rack RA "w/ Condenser Above Rack (Ground Level)," provide all refrigerant (R449A), install valves per R-1.0, install roof piping supports and exterior pipe jacketing, <strong>"Non-Subcooled LQ lines (not insulated)... Subcooled LQ lines (insulated w/ 1" wall)... All MT &amp; LT Suction Lines (insulated w/ 1" wall),"</strong> new cases (26)/coils (12)/S-C cases (3), and "ALL NEW WALK-IN COOLERS/FREEZERS PROVIDED by HEB &amp; INSTALLED BY OTHERS." Exclusions are the standard set.</p>
+
+  <h3 id="f271-tab2">Tab 2 -- EQUIPMENT</h3>
+  <table class="data-table">
+    <tr><th>Item</th><th>Qty</th><th>Material</th><th>Labor</th><th>Refrigerant</th></tr>
+    <tr><td>10-35 HP Condensing Units</td><td>2</td><td>$200</td><td>32 hrs</td><td>80 lbs</td></tr>
+    <tr><td>Comp Rack</td><td>1</td><td>$200</td><td>24 hrs</td><td>500 lbs</td></tr>
+    <tr><td>Air Cooled Condenser 12 Fan</td><td>1</td><td>$100</td><td>16 hrs</td><td>400 lbs</td></tr>
+    <tr><td>Change Rack Main Liquid Drier (4) RC 4864 HH</td><td>3</td><td>$390</td><td>6 hrs</td><td>0</td></tr>
+    <tr><td>Change Rack Suction Filters (8) Cores</td><td>3</td><td>$1,200</td><td>15 hrs</td><td>0</td></tr>
+    <tr><td><strong>TOTALS</strong></td><td></td><td><strong>$2,090</strong></td><td><strong>93 hrs</strong></td><td><strong>980 lbs</strong></td></tr>
+  </table>
+  <p>Comp Rack (1) is RACK RA itself; Air Cooled Condenser 12 Fan (1) is its condenser (model MXF-10 per R-2.0). The qty-3 filter/drier changes match exactly 3 systems being opened: RACK RA plus the 2 "10-35 HP" condensing units.</p>
+
+  <h3 id="f271-tab3">Tab 3 -- PIPE 2.0</h3>
+  <p>Header: 496 install labor hrs, 4,960 LF pipe w/waste, 406.4585 lbs piping refrigerant, $124,435.29 total materials (Pipe $66,677.20 + Insulation $16,725.90 + Saddles $3,671.84 + HFG $37,360.35) -- all tie to SUMMARY exactly.</p>
+  <p>Circuit-by-circuit data ties to R-1.1's pipe sizing schedule to the inch: <code>1A</code> (1-3/8" liquid / 3-1/8" suction, 85 ft), <code>2A</code> (7/8" / 2-5/8", 238 ft), <code>RADA04</code> (1/2" / 1-3/8", 32 ft), plus the full RAFF/RAMK/RAPR/SIDA01/SIFF03/SIMK02 circuit list -- real data ends cleanly at System 79, the rest of the 600-system template is blank.</p>
+  <div class="callout callout-warn">
+    <div class="callout-title">Every liquid line is insulated, contradicting the scope's own stated exception</div>
+    <div class="callout-body">The job scope explicitly distinguishes "Non-Subcooled LQ lines (not insulated)" from "Subcooled LQ lines (insulated w/ 1" wall)." But <strong>every single liquid-line row in PIPE 2.0 carries 1" Black insulation</strong> -- including small branch circuits like RAFF16 (0.375" liquid). This is confirmed independently on COPPER_INSULATION_FORM (Tab 7): the Type L copper and Black insulation columns show identical linear footage, size for size, with no non-insulated segment anywhere. Either the entire rack's liquid header really is subcooled end-to-end (which would make this correct), or the estimate blanket-insulated every liquid run regardless of the split the scope itself describes -- a real, cross-confirmed item worth a second look, not a stray data entry.</div>
+  </div>
+
+  <h3 id="f271-tab4">Tab 4 -- PARTS</h3>
+  <p>Total <strong>$15,460.03</strong>, tracing to 16 catalog lines: solenoid valve coils/bodies (MKC-2, ME9S240/250/270), 8 sizes of DX ball valves (3/8"-2-1/8", $3,721.36), 4 sizes of magnetic check valves ($1,690.45), 25 units of 15% Silphos brazing rod ($7,508.25 -- again the largest single line), and 125 ft of heat tape + connector/splice kits ($951.10 -- matches R-4.0's Chromalox SRF condensate heat-trace requirement directly).</p>
+
+  <h3 id="f271-tab5">Tab 5 -- LABOR RATES</h3>
+  <p>Standard, unchanged. TX row.</p>
+
+  <h3 id="f271-tab6">Tab 6 -- EQUIPMENT SALES BUYOUTS</h3>
+  <p>Entirely zero -- placeholder "XXXX" rows throughout.</p>
+
+  <h3 id="f271-tab7">Tab 7 -- COPPER_INSULATION_FORM</h3>
+  <p>Order % factor 0.8. Type L copper populated across 10 sizes (140-720 ft each); Type M (condensate) at 120 ft of 3/4" + 80 ft of 1" with matching black saddle quantities. Type K and XHP/90-BAR both correctly zero -- no CO2 anywhere, confirmed again at the order-form level. As noted in Tab 3, the Black insulation columns match the copper columns foot-for-foot across every size -- the same 100%-liquid-line-insulation pattern, independently confirmed here.</p>
+
+  <h3 id="f271-tab8">Tab 8 -- HVAC</h3>
+  <p>Entirely zero. Same recurring header field-label misalignment (BID DATE shows "West Columbia," SCOPE shows "Texas," DRAWINGS DATE shows the scope text). Note that the RTU demo/relocate/new-set labor tracked in SUMMARY's Non-Itemized section (Tab 1.4) is real, priced work -- it's just booked under refrigeration, not here.</p>
+
+  <h3 id="f271-tab9">Tab 9 -- TAX TABLE</h3>
+  <p>Texas row, Existing Construction column: "Sales Tax, Labor &amp; Mats" -- matches SUMMARY's 8.25% rate for this REMODEL job.</p>
+
+  <h3 id="f271-tab10">Tab 10 -- BidCalc</h3>
+  <p>Total Bid = <strong>$639,839.27</strong>, matching SUMMARY's rounded $639,840.</p>
+
+  <h3 id="f271-walkthrough">Full walkthrough: the CO2 store that isn't</h3>
+  <div class="step-flow">
+    <div class="step-item"><div class="step-badge">1</div><div class="step-body">
+      <div class="step-title">The real equipment is unambiguous: R449A, no exceptions</div><div class="step-sheet">R-2.0 / R-2.2 schedules</div>
+      <div class="step-desc">Every circuit schedule row and the RACK RA nameplate itself list R-449A. Not one piece of actual, disclosed equipment on this project runs anything else.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">2</div><div class="step-body">
+      <div class="step-title">Yet CO2/R-513A surfaces repeatedly across the drawings</div><div class="step-sheet">R-2.2, R-3.0, R-5.2, R-5.4</div>
+      <div class="step-desc">The IFC 605 compliance table names R-513A and CO2 (R-744) as project refrigerants; the case-controller refrigerant-code key includes "21 if CO2"; two dedicated CO2 construction details exist -- a Remote CO2 Charging Station and CO2 Ball Valves w/ 3/8" By-Pass.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">3</div><div class="step-body">
+      <div class="step-title">Both CO2 details are explicitly crossed out</div><div class="step-sheet">R-5.2 detail 6, R-5.4 details 3 &amp; 7</div>
+      <div class="step-desc">Each one is stamped "NOT USED" directly on the sheet -- the CO2 content is present in the shared HEB detail library, but deliberately not part of this specific store's scope.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">4</div><div class="step-body">
+      <div class="step-title">The spec book confirms it independently</div><div class="step-sheet">Spec 20 63 92, CO2 Cascade &amp; Parallel Compressor Racks</div>
+      <div class="step-desc"><div class="calc-box">Store-specific references found in this 15-page section:  <span class="calc-source">zero</span>
+"RACK RA" mentioned:                                          <span class="calc-source">no</span>
+"West Columbia" mentioned:                                    <span class="calc-source">no</span>
+Closing line:                                                 <span class="calc-result">"END OF SECTION 23 62 13" (wrong division)</span></div>Pure generic boilerplate, confirmed by its own copy-paste error at the very end.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">5</div><div class="step-body">
+      <div class="step-title">Net effect</div><div class="step-sheet">--</div>
+      <div class="step-desc">The price sheet gets this right -- zero CO2 parts, zero R-513A/R-744 anywhere in EQUIPMENT, PIPE 2.0, or PARTS, matching the store's real R449A-only scope. But a reader working from the drawings or spec alone, without cross-checking the actual equipment schedule, could easily walk away thinking this store has a CO2 component. Four independent documents (two drawing sheet types, one spec section, and its own internal typo) all point the same direction: this is leftover shared-template content, not real scope -- worth flagging to the client if a fully "clean" record set matters to them.</div>
+    </div></div>
+  </div>
+
+  <h3 id="f271-mismatches">Mismatches: Uploads vs. Excel</h3>
+  <table class="data-table mismatch">
+    <tr><th>#</th><th>Excel location</th><th>What Excel shows</th><th>What Uploads show</th><th>Type of mismatch</th></tr>
+    <tr><td>1</td><td>PIPE 2.0 &amp; COPPER_INSULATION_FORM</td><td>100% of liquid lines insulated</td><td>Scope notes: only "Subcooled" liquid lines should be insulated</td><td><span class="tag tag-mismatch">Confirmed, cross-tab</span> -- direction/magnitude unresolved without a subcooler schedule</td></tr>
+    <tr><td>2</td><td>N/A -- an Uploads-internal pattern</td><td>N/A</td><td>CO2/R-513A boilerplate across R-2.2, R-3.0, R-5.2, R-5.4, and spec 20 63 92 -- all "NOT USED"/inapplicable</td><td>Documentation hygiene risk, correctly not priced (see walkthrough)</td></tr>
+    <tr><td>3</td><td>N/A -- a drawing/spec citation error</td><td>N/A</td><td>R-2.0 cites "HEB SPECIFICATION SECTION 20 62 13"; the section's real number (per its own header/title) is 20 62 14 -- the drawing cites a typo in the spec's own closing line</td><td>Internal spec-numbering inconsistency</td></tr>
+    <tr><td>4</td><td>SUMMARY, IN-HOUSE GC/SUBLET table</td><td>"CLIMATE PROS" listed as its own sublet line at 15% margin</td><td>N/A</td><td>Unusual internal allocation, not seen on other folders</td></tr>
+    <tr><td>5</td><td>N/A -- a spec-internal mismatch</td><td>N/A</td><td>Spec 20 70 00 (Refrigerant Conversion) describes an in-place charge-conversion procedure; matches the retained existing condensing units (SIFF04/SIBW05/SIFF06/SIDA07, converted to R449A) but not RACK RA itself, which is full demo-and-replace</td><td>Partially applicable boilerplate, own page headers still read placeholder "XX XX XX"</td></tr>
+    <tr><td>6</td><td>N/A -- an Uploads-internal naming collision</td><td>N/A</td><td>DE-4.1 shows an existing electrical panel named "RA," coincidentally identical to "Refrigeration Rack RA" -- entirely separate equipment</td><td>Naming trap, same pattern as Walmart 5102-258's "LTA DX vs. LTA SCO2"</td></tr>
+  </table>
+
+  <h3 id="f271-mapping">Mapping table -- every traced source, in one place</h3>
+  <table class="data-table">
+    <tr><th>Price Sheet location</th><th>Value</th><th>Traced to</th></tr>
+    <tr><td>PIPE 2.0: circuits 1A, 2A, RADA04, etc.</td><td>$124,435.29 / 496 hrs</td><td><span class="tag tag-scope">Scope</span> exact pipe-size/length match to R-1.1's schedule</td></tr>
+    <tr><td>EQUIPMENT: Comp Rack (1) + Air Cooled Condenser (1)</td><td>$300 / 40 hrs / 900 lbs</td><td><span class="tag tag-scope">Scope</span> RACK RA + its MXF-10 condenser, per R-2.0</td></tr>
+    <tr><td>PARTS: heat tape + connector/splice kits</td><td>$951.10</td><td><span class="tag tag-scope">Scope</span> matches R-4.0's Chromalox SRF condensate heat-trace requirement</td></tr>
+    <tr><td>Rentals: Rapid Recovery</td><td>$4,500</td><td><span class="tag tag-scope">Scope</span> legacy R-22/R-404A/R-407A gas recovery per DR-1.1/DR-2.0</td></tr>
+    <tr><td>Refrigerant: 1,552.46 lbs R449A</td><td>$15,912.72</td><td><span class="tag tag-scope">Scope</span> matches R-2.0/R-2.2's confirmed R-449A-only equipment schedule</td></tr>
+  </table>
+
+  <h3 id="f271-unique">What's unique about this folder</h3>
+  <ul>
+    <li><strong>The largest folder analyzed by far</strong> -- 94 drawing sheets plus a 1,229-page spec book, dwarfing even Kroger DAL653's 823 combined pages.</li>
+    <li><strong>Climate Pros named directly in the Uploads</strong>, on two separate sheets (R-1.0 and M-0.1), as one of HEB's approved refrigeration installers for this store.</li>
+    <li><strong>A confirmed, multi-document "boilerplate refrigerant" pattern</strong> -- CO2/R-513A content surfaces on four independent documents (two drawing sheet types plus a dedicated 15-page spec section) despite the store running R-449A exclusively, with every CO2-specific construction detail explicitly marked "NOT USED."</li>
+    <li><strong>A real, cross-tab-confirmed insulation question</strong> -- 100% of liquid lines priced with 1" insulation despite the scope's own text distinguishing subcooled (insulated) from non-subcooled (not insulated) runs.</li>
+    <li><strong>The estimator's own company appears as a sublet line item</strong> -- "CLIMATE PROS" billed at a distinct 15% margin for exterior pipe jacketing, an internal-allocation pattern not seen on any other folder.</li>
+    <li><strong>The clearest structural tie-out yet</strong> -- RACK RA's exact weight (15,700 lbs) and its dedicated new concrete pad are independently confirmed on the structural sheets (S-1.0/S-1.1), not just the refrigeration set.</li>
+    <li><strong>The richest refrigerant-logistics documentation of any folder</strong> -- HEB's own Refrigerant Management Reclaim Program (named United Refrigeration Inc. contact, Verisae work-order process, cylinder part numbers) plus the "Three Fitting Test" QC mechanism, both from the Demolition spec section.</li>
+    <li><strong>A fourth consecutive job in the 81-82% overtime band</strong> -- 81.6% here, consistent with Walmart 3112-1009, Walmart 5102-258, and United #0510.</li>
+    <li><strong>A rental line item confirmed as a real named vendor</strong> -- spec 20 61 00 names "Rapid Recovery" (contact Chad Fancher) as HEB's designated R-22 recovery company, matching SUMMARY's $4,500 "Rapid Recovery" rental line word for word -- the first folder where a generic-sounding rental label is directly traceable to an actual named subcontractor in the spec.</li>
+    <li><strong>A second confirmed equipment/panel naming collision</strong> -- an existing electrical panel is also named "RA," coincidentally identical to "Refrigeration Rack RA," the same style of naming trap first flagged on Walmart 5102-258 ("LTA DX" vs. "LTA SCO2").</li>
+  </ul>
+</div>
+
+<!-- ================= FOLDER: WHOLE FOODS 10593 FRISCO ================= -->
+<div class="section" id="f10593">
+  <h2>Folder: Whole Foods 10593 -- Frisco, TX</h2>
+  <p style="color:#a8a8a0;">26.05.26 -- New Store Build-Out. The first folder in this document running a genuinely fully <strong>transcritical CO2 booster system</strong> (R744), rather than a cascade, secondary, or hybrid arrangement -- two racks, two adiabatic gas coolers, two heat reclaim tanks, all confirmed store-specific equipment against a 1,204-page spec book that turns out to spend most of its refrigeration-adjacent page count on sections that have nothing to do with the CO2 system at all.</p>
+
+  <div class="toc">
+    <ol>
+      <li><a href="#f10593-glossary">Terms this folder has</a></li>
+      <li><a href="#f10593-uploads">The Uploads (Bid Set + 1,204-page spec book + 2 annotated excerpts)</a></li>
+      <li><a href="#f10593-tab1">Tab 1 -- CP Est Pro 2.0 SUMMARY</a></li>
+      <li><a href="#f10593-tab2">Tab 2 -- EQUIPMENT</a></li>
+      <li><a href="#f10593-tab3">Tab 3 -- PIPE 2.0</a></li>
+      <li><a href="#f10593-tab4">Tab 4 -- PARTS</a></li>
+      <li><a href="#f10593-tab5">Tab 5 -- LABOR RATES</a></li>
+      <li><a href="#f10593-tab6">Tab 6 -- EQUIPMENT SALES BUYOUTS</a></li>
+      <li><a href="#f10593-tab7">Tab 7 -- COPPER_INSULATION_FORM</a></li>
+      <li><a href="#f10593-tab8">Tab 8 -- HVAC</a></li>
+      <li><a href="#f10593-tab9">Tab 9 -- TAX TABLE</a></li>
+      <li><a href="#f10593-tab10">Tab 10 -- BidCalc</a></li>
+      <li><a href="#f10593-walkthrough">Full walkthrough: three sections, one keyword, only one is real</a></li>
+      <li><a href="#f10593-mismatches">Mismatches: Uploads vs. Excel</a></li>
+      <li><a href="#f10593-mapping">Mapping table (every traced source)</a></li>
+      <li><a href="#f10593-unique">What's unique about this folder</a></li>
+    </ol>
+  </div>
+
+  <h3 id="f10593-glossary">Terms this folder has</h3>
+  <p style="color:#a8a8a0;font-style:italic;">Universal terms already covered in the <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a> tab. What's new here:</p>
+  <table class="data-table">
+    <tr><th>Term</th><th>Meaning</th></tr>
+    <tr><td>Rack DTA / Rack MTB ("Rack A" / "Rack B")</td><td>The two transcritical CO2 booster racks. DTA is dual-temp (SG1 at -22&deg;F serving freezers/blast chiller/ice flaker; SG2 at 25&deg;F serving dairy/produce/meat prep; 8 compressors). MTB is a single medium-temp group at ~18&deg;F (4 compressors). 12 CO2 compressors total.</td></tr>
+    <tr><td>Gas Cooler</td><td>The transcritical-system equivalent of a condenser -- rejects heat from the high side, but above the CO2 critical point (31.1&deg;C/88&deg;F) it cannot fully condense the refrigerant, so the plant relies on a downstream flash tank/valve instead. Two BAC TSDC2-CO2-202-12.4 adiabatic units here, one per rack, roof-mounted.</td></tr>
+    <tr><td>Charge Saver</td><td>Roof-mounted Mueller receiver vessel pair (one per rack), each on its own dedicated 25A/3P circuit on isolated-ground Panel CP -- reduces the refrigerant charge the rack itself has to hold.</td></tr>
+    <tr><td>High Side / Low Side (per spec &sect;239100)</td><td>Not a location, a pressure-class definition: High Side = components exposed to MT/parallel-compressor discharge pressure (rated 130 bar / 1,885 psi); Low Side = everything else (rated 45 bar / 653 psi).</td></tr>
+    <tr><td>XHP / 90 BAR / 120 BAR pipe</td><td>Mueller Extra High Performance (or Wieland K65) copper-iron tubing, the only pipe class permitted on CO2 high-side runs -- min. 90 bar rated for intermediate pressure, min. 120 bar for high pressure. Ordinary ACR tubing is explicitly disallowed.</td></tr>
+    <tr><td>Flash Tank</td><td>Pressure-reducing vessel sitting between the high-pressure zone (gas cooler discharge / transcritical operation) and the intermediate-pressure zone (down to the LT/booster compressor suction) -- mentioned once in the spec (valve pressure-class definition) but never given its own setpoint or sizing anywhere in the 56-page CO2 install spec, despite the section's title.</td></tr>
+  </table>
+
+  <h3 id="f10593-uploads">The Uploads -- Bid Set drawings, a 1,204-page spec book, and two annotated single-page excerpts</h3>
+  <p>Five documents. The 111-page <strong>Bid Set</strong> (refrigeration/electrical sheets only, pages 40-111 reviewed) confirms the two-rack, two-gas-cooler, two-heat-reclaim-tank system in full schedule detail. No CSI spec-section numbers are cited anywhere on the drawings -- the only cross-referencing possible is by content, not by citation.</p>
+  <table class="data-table">
+    <tr><th>Sheet / area</th><th>What's in it</th></tr>
+    <tr><td>R100/R200 -- Refrigeration Schedules</td><td>Rack DTA (SG1 -22&deg;F/141.9 MBH + SG2 25&deg;F/237.5 MBH, 8 comps) and Rack MTB (~18&deg;F/474.9 MBH, 4 comps); full Hussmann/Bohn-CO2/Hill Phoenix/Howe/Traulsen case-circuit schedule for both racks; two identical BAC gas coolers (~5,000 lbs each).</td></tr>
+    <tr><td>Electrical (Panels RP1/RP2/CP)</td><td>RP1 (400A, ~64.3 kVA, mostly refrigeration), RP2 (400A, lightly loaded), CP (100A isolated ground -- carries every controls/leak-detection/Charge Saver circuit). Racks on dedicated 480V feeders separate from the 208V case panels; refrigeration on generator-backed ATS-2.</td></tr>
+    <tr><td>Leak detection (two independent systems)</td><td>Parasense "Freeway" (16 zones, R744A/Safety Group A1, 1,250/3,750 ppm auto LLSV/EEPR isolation thresholds) and a Bacharach/Toxalert machine-room monitor (TLV-TWA low, 500 ppm high, full compressor/valve shutdown at high).</td></tr>
+    <tr><td>Referenced-but-missing sheets</td><td><strong>M302</strong> (mechanical sequence of ops for purge fan/dampers), <strong>EM200/EM220</strong> (Parasense leak-zone and energy-monitoring schedules), <strong>R-102</strong> (heat-tape coolers/freezers reference) -- confirmed genuinely absent from the 111-page set by a full-text cross-check: each name appears only as a callout on some other sheet ("REFER TO M302...", "SCHEDULE ON SHEET EM200"), never as its own title-block page.</td></tr>
+    <tr><td><code>PIPING SPEC-WF FRISCO.pdf</code> (2pp, image-only)</td><td>An estimator-annotated excerpt of spec &sect;239100 pages 10-11 -- the exact pressure-class/insulation/brazing paragraphs, red-circled by hand.</td></tr>
+    <tr><td><code>WF-R200 FRISCO.pdf</code> (1pp, image-only)</td><td>The same R200 schedule sheet, with a second red-annotated callout: a "CO2 Refrigeration Straight Pipe and Fitting Requirements" table giving exact design/max pressure by line type -- see the walkthrough.</td></tr>
+    <tr><td>Furniture Specification Package (12pp)</td><td>Confirmed irrelevant to refrigeration -- a store fixture floor plan showing Hill Phoenix case models/lengths by aisle, useful only as a case-count cross-check.</td></tr>
+  </table>
+  <p>The <strong>Specifications</strong> book (1,204 pages) required the most filtering of any folder yet -- see the walkthrough for how a whole-book keyword sweep for "refrigerant"/"CO2" surfaces over 20 CSI sections, only one of which (&sect;239100) is actually about this store's CO2 system:</p>
+  <table class="data-table">
+    <tr><th>Section</th><th>Title / pages</th><th>What it actually is</th></tr>
+    <tr><td>223530</td><td>Heat Reclaim Tanks (627-631)</td><td>The DHW-side storage tank (Lochinvar, 150-psig, copper U-tube exchanger) -- the counterpart to the CO2 rack's factory-installed heat-reclaim exchanger. Internally mis-titles its own cross-referenced piping section ("Refrigeration Piping" vs. the real "Refrigerant Piping").</td></tr>
+    <tr><td>232300</td><td>Refrigerant Piping (807-813)</td><td><span class="tag tag-mismatch">Unrelated</span> -- comfort-cooling split-system/RTU DX piping only (500 psi max, single-pass 35&deg;F-indicator evacuation). Zero technical overlap with the CO2 racks.</td></tr>
+    <tr><td>238126</td><td>Split System Air-Conditioners (897-904)</td><td><span class="tag tag-mismatch">Unrelated</span> -- HCFC-free/A2L flammable-refrigerant comfort-cooling equipment spec (ASHRAE 15, UL 60335-2-40). Sits immediately before &sect;239100 and was missed entirely on the first research pass -- see the walkthrough.</td></tr>
+    <tr><td>239100</td><td>WFM Trans-Critical CO2 Installation Specification, R744 (905-960)</td><td>The real one -- the sole technical home for pressure classes, evacuation/charging, warranty. See Tab breakdown below.</td></tr>
+    <tr><td>284600</td><td>Fire Detection and Alarm (1185-1204)</td><td>Standard fire-alarm scope; zero reference anywhere to Parasense/Bacharach/CO2/leak-detection, despite &sect;239100 requiring a fire-alarm tie-in verification at startup. Also carries leftover existing-building remodel boilerplate ("test the existing system," "maintain existing service") inappropriate to this ground-up new store.</td></tr>
+  </table>
+
+  <h3 id="f10593-tab1">Tab 1 -- CP Est Pro 2.0 SUMMARY</h3>
+
+  <h4>1.1 Header</h4>
+  <p>Project "Whole Foods 10593 - FRC New Store," Frisco, Texas. Estimator Jay Jarratt Jr, labor division "DALLAS, TX." <strong>New/Remodel = NEW</strong> -- Tax Type resolves to "Use Tax Mats Only," consistent with every other Texas New Construction folder. "Checked By" not required -- sell price under $1M.</p>
+
+  <h4>1.2 Job Scope Notes</h4>
+  <p>Row 197's narrative is the richest single cross-reference in the workbook, independently confirming every equipment-repurposing call made in Tab 2: 50 new cases, 2 new wide islands, 15 new coils, 1 new S/C case, <strong>"Receive &amp; Set New Racks (2) - (Mezzanine)"</strong>, "Receive &amp; Set New Gas Coolers (2) - (Rooftop)," main suction/liquid loops for RA &amp; RB, "Receive, Set &amp; Pipe Heat Reclaim Tanks (2)," case close-offs, pipe chases, PVC underground, exterior jacketing on piping ("Condensers" -- see Mismatches), R744 refrigerant, startup/commissioning per Whole Foods requirements, isolation valves by RC.</p>
+  <div class="callout callout-mismatch">
+    <div class="callout-title"><span class="tag tag-mismatch">Unresolved</span> Racks on the Mezzanine -- not independently confirmed on the drawings reviewed</div>
+    <div class="callout-body">The Excel scope text is specific that the two racks sit on a Mezzanine (distinct from the gas coolers, which it separately calls out as Rooftop). The Bid Set pages reviewed (40-111, the refrigeration/electrical-focused subset) confirm the gas coolers' rooftop mounting and the racks' electrical/schedule data, but don't independently verify a mezzanine platform for the racks themselves -- that would live on an architectural or structural sheet outside the range checked. Not a contradiction, just an unverified detail worth a second look if the mezzanine matters to scope.</div>
+  </div>
+
+  <h4>1.3 Display Cases &amp; Evaporators</h4>
+  <p>50 MD cases (25 at 8', 25 at 12'), 2 Wide Islands (12'), 15 Commercial coils, matching the Job Scope Notes exactly. Same rate-lookup mechanism described in <a href="#" onclick="showTab('pricing-ref');return false;">Pricing Logic Reference</a>.</p>
+
+  <h4>1.4 Refrigerant</h4>
+  <div class="calc-box">R744 CO2:  <span class="calc-source">2,779.06 lbs @ $6/lb = $16,674.36</span>
+R407F (default/balance):  <span class="calc-source">-0.0017 lbs (negligible)</span>
+                          <span class="calc-result">TOTAL LBS = 2,779.0583  |  TOTAL COST = $16,674.36</span></div>
+  <p>The same recurring template mechanic seen on other CO2 folders: the "default" refrigerant row (R407F) drifts slightly negative once a real quantity is typed into a different refrigerant type -- a floating-point rounding artifact, not a data error.</p>
+
+  <h4>1.5 Rentals</h4>
+  <table class="data-table">
+    <tr><th>Item</th><th>Cost</th></tr>
+    <tr><td>5K Forklift</td><td>$1,450</td></tr>
+    <tr><td>Crane (40/70/120 ton)</td><td>$9,500</td></tr>
+    <tr><td>Rapid Recovery</td><td>$0</td></tr>
+    <tr><td>Scissor Lifts</td><td>$13,475</td></tr>
+    <tr><td>Container Rental</td><td>$2,000</td></tr>
+    <tr><td><strong>TOTAL RENTALS</strong></td><td><strong>$26,425</strong></td></tr>
+  </table>
+  <p>Rapid Recovery -- the named R-22 reclaim vendor confirmed on HEB Corp #271 -- correctly shows $0 here: new construction, no existing charge to recover. No in-house GC or sublet lines used.</p>
+
+  <h4>1.6 Scheduling Data</h4>
+  <table class="data-table">
+    <tr><th>Field</th><th>Value</th></tr>
+    <tr><td># of Fitters</td><td>5</td></tr>
+    <tr><td>Duration</td><td>9.7 weeks</td></tr>
+    <tr><td>R Dispatch</td><td>2,383.755 ST / <strong>360 OT hrs (13.1% OT)</strong></td></tr>
+  </table>
+  <div class="callout callout-info">
+    <div class="callout-title">Breaks the four-job 81-82% overtime streak</div>
+    <div class="callout-body">Walmart 3112-1009 (81.5%), Walmart 5102-258 (81.6%), United #0510 (81.7%), and HEB Corp #271 (81.6%) had clustered tightly enough to read as a genuine dispatch pattern for large jobs. This job -- larger in dollar terms than several of those -- runs at only 13.1% OT, breaking the streak. Reads as evidence the pattern was never universal, just common on the specific remodel/upgrade jobs checked so far; a ground-up new store with a 9.7-week, 5-fitter schedule apparently doesn't trigger the same OT-heavy dispatch.</div>
+  </div>
+
+  <h4>1.7 Labor Blend &amp; Rate</h4>
+  <p>Region "TX," burden 2.0x, standard $40/$34/$22/$20 base wage row.</p>
+
+  <h4>1.8 Total Summary</h4>
+  <table class="data-table">
+    <tr><th>Category</th><th>Cost</th><th>Sell</th><th>Margin</th></tr>
+    <tr><td>Labor</td><td>$192,695.34</td><td>$256,927.12</td><td>25%</td></tr>
+    <tr><td>Materials</td><td>$261,841.98</td><td>$349,122.64</td><td>25%</td></tr>
+    <tr><td>Rentals</td><td>$26,425</td><td>$33,031.25</td><td>20%</td></tr>
+    <tr><td>Fixed 1% Warranty</td><td>$7,171.05</td><td>$7,171.05</td><td>--</td></tr>
+    <tr><td>Contingency Factor</td><td>$33,635.84</td><td>$42,044.80</td><td>5%</td></tr>
+    <tr><td>Use Tax (8.25%, Mats Only)</td><td>$28,802.62</td><td>$28,802.62</td><td>--</td></tr>
+    <tr><td><strong>TOTAL</strong></td><td><strong>$550,571.83</strong></td><td><strong>$717,100</strong></td><td>Gross Profit $166,528.17 (23.22%)</td></tr>
+  </table>
+
+  <h3 id="f10593-tab2">Tab 2 -- EQUIPMENT</h3>
+  <table class="data-table">
+    <tr><th>Item</th><th>Qty</th><th>Material</th><th>Labor</th><th>Refrigerant</th></tr>
+    <tr><td>Comp Rack</td><td>2</td><td>$400</td><td>48 hrs</td><td>$1,000</td></tr>
+    <tr><td>Air Cooled Condenser 12 Fan</td><td>2</td><td>$200</td><td>32 hrs</td><td>$800</td></tr>
+    <tr><td>R &amp; R Water/Cooled Condenser</td><td>2</td><td>$400</td><td>20 hrs</td><td>$0</td></tr>
+    <tr><td>Water Reclaim Tank</td><td>2</td><td>$200</td><td>16 hrs</td><td>$40</td></tr>
+    <tr><td>Change Rack Main Liquid Drier (4) RC 4864 HH</td><td>2</td><td>$260</td><td>4 hrs</td><td>$0</td></tr>
+    <tr><td>Change Rack Suction Filters (8) Cores</td><td>2</td><td>$800</td><td>10 hrs</td><td>$0</td></tr>
+    <tr><td><strong>TOTALS</strong></td><td></td><td><strong>$2,260</strong></td><td><strong>130 hrs</strong></td><td><strong>$1,840</strong></td></tr>
+  </table>
+  <p>No dedicated CO2-rack line exists in the standard ~24-item taxonomy, so this workbook stretches it the same way seen elsewhere: <strong>Comp Rack (qty 2)</strong> prices the two CO2 racks (Rack DTA + Rack MTB); <strong>Air Cooled Condenser 12 Fan (qty 2)</strong> is almost certainly standing in for the two gas coolers (no "adiabatic gas cooler" taxonomy exists); <strong>Water Reclaim Tank (qty 2)</strong> is a clean match for the two heat reclaim tanks. <strong>R &amp; R Water/Cooled Condenser (qty 2)</strong> is the ambiguous one -- most likely rack rigging/set labor for the mezzanine install, but flagged as inference rather than certainty. The liquid-drier/suction-filter "CHANGE" lines (qty 2, matching the rack count) are genuine new-rack consumables -- using a replacement-labeled line to price new components is a minor terminology drift, not an error.</p>
+
+  <h3 id="f10593-tab3">Tab 3 -- PIPE 2.0</h3>
+  <p>787 install labor hrs, 8,740 LF pipe w/waste (10% waste factor), 634.0583 lbs piping refrigerant, $187,816.21 total materials (Pipe $97,264 + Insulation $20,298.80 + Saddles $5,991.52 + HFG $64,261.89) -- all tie to SUMMARY exactly. Circuit data confirms both racks' main suction/liquid loops, both gas coolers' discharge/return runs (<code>RC-AD</code>/<code>RC-AR</code>, <code>RC-BD</code>/<code>RC-BR</code>, all 2-1/8"/1-5/8" XHP), and both heat reclaim tanks' supply/return (<code>HR T#1</code>/<code>HR T#2</code>, 1-5/8" XHP) -- a clean one-to-one match to the Job Scope Notes and R100/R200.</p>
+  <div class="callout callout-info">
+    <div class="callout-title">Two factors overridden from template defaults, both traceable to the CO2 scope</div>
+    <div class="callout-body"><strong>Installation Factor = 0.18</strong> -- doesn't match any of the five presets (.20 T-Bar ceiling / .15 Standard Remodel / .132 New Store 1.5" rubber / .12 New Store / .10 Underground); the closest preset for a "New Store" would be .12. A manual bump, plausibly justified by CO2 XHP-pipe/mezzanine/rooftop installation complexity, but undocumented as such anywhere in the workbook. <strong>HFG Factor = 55%</strong> -- well above a typical default, but this one <em>is</em> self-documented: the sheet's own note reads "HFG = Hanging Materials, Fittings and Welding Gas, Increase Factor when using XHP Pipe/Material." The clearest example yet of a factor override the workbook explains in its own words.</div>
+  </div>
+
+  <h3 id="f10593-tab4">Tab 4 -- PARTS</h3>
+  <p>Total <strong>$35,686.87</strong>. The standard TXV/EPR/oil-system/EMS catalog (rows 8-258) is almost entirely unused; the real buyout is <strong>121 genuine CO2-rated ball valves</strong> ($21,573.92): 113 units of "w/ Integral Pressure Relief" valves (3/8"-7/8") plus 8 units of <strong>Mueller 140-BAR-rated</strong> valves (1-5/8"/2-1/8") -- exceeding the spec's own 90-120 bar minimum. Also: 40 sticks of 15% Silphos silver-braze rod ($11,831.20, matching &sect;239100's brazing requirement directly), 200 ft of heat tape + connector/splice kits ($1,341.85), and 10 Roof Top Strut Blocks ($240, confirming the rooftop gas-cooler mounting independently of the drawings).</p>
+
+  <h3 id="f10593-tab5">Tab 5 -- LABOR RATES</h3>
+  <p>Standard TX row, clean pass-through into BidCalc (burdened rates = base &times; 2.0 reproduce BidCalc's loaded rates exactly). No override.</p>
+
+  <h3 id="f10593-tab6">Tab 6 -- EQUIPMENT SALES BUYOUTS</h3>
+  <p>Entirely zero -- all 24 rows are placeholder "XXXX," Total Sell = $0. Carries the same stray 8.5% tax default (vs. the 8.25% actually used elsewhere) confirmed as a fixed template value on multiple prior folders -- zero dollar impact since the sheet nets to $0.</p>
+
+  <h3 id="f10593-tab7">Tab 7 -- COPPER_INSULATION_FORM</h3>
+  <p>Order % factor 0.8 -- the same purchasing-buffer mechanism seen on Kroger DAL653 and Walmart 3112-1009. Type L copper populated across 5 sizes (6,020 LF total); Type M (condensate) at 520 LF; <strong>Type K entirely unused</strong>.</p>
+  <div class="callout callout-info">
+    <div class="callout-title">Two high-pressure copper categories exist on this form -- only one is used</div>
+    <div class="callout-body">The form offers both an <strong>XHP</strong> column and a dedicated <strong>90 BAR</strong> column for high-pressure CO2 tubing. XHP is populated (1-3/8"=240, 1-5/8"=300, 2-1/8"=160 LF); <strong>the 90 BAR column is entirely zero across every size.</strong> This job's transcritical piping is being tracked exclusively under the XHP designation. Unlike the recurring 3-job "template gap" pattern (insulation ordered with no matching copper, or vice versa), this isn't a gap -- the Black insulation figures at those same three sizes match the XHP footage exactly, foot for foot, confirming the insulation is correctly keyed to the pipe actually being used.</div>
+  </div>
+
+  <h3 id="f10593-tab8">Tab 8 -- HVAC</h3>
+  <p>Entirely zero -- 0 hours, $0. Same recurring header field-label misalignment confirmed again: "BID DATE:" shows "Frisco" (a city), "SCOPE:" shows "Texas" (a state), "DRAWINGS DATE:" shows "New Store - Tentant Build" (a scope description) -- values shifted one row from their labels, the same template artifact seen on every prior folder's HVAC tab.</p>
+
+  <h3 id="f10593-tab9">Tab 9 -- TAX TABLE</h3>
+  <p>Texas row, New Construction column: "Use Tax Mats Only." Cross-verified against BidCalc: Total Bid Tax ($28,802.62) &divide; 0.0825 = $349,122.64, an exact match to Construction Material Sell Value -- confirming the 8.25% is applied to materials-sell only, consistent with the New-Construction rule.</p>
+
+  <h3 id="f10593-tab10">Tab 10 -- BidCalc</h3>
+  <p>Total Bid = <strong>$717,099.48</strong>, matching SUMMARY's rounded $717,100. Job Scope narrative (identical to SUMMARY B197) independently confirms every equipment-repurposing call made in Tab 2. The usual #DIV/0! cells (zero-qty/zero-cost labor rows) are confirmed harmless again.</p>
+
+  <h3 id="f10593-walkthrough">Full walkthrough: three sections, one keyword, only one is real</h3>
+  <div class="step-flow">
+    <div class="step-item"><div class="step-badge">1</div><div class="step-body">
+      <div class="step-title">A whole-book keyword sweep for "refrigerant"/"CO2"/"trans-critical" returns 20+ hits</div><div class="step-sheet">Full 1,204-page text scan, by CSI section</div>
+      <div class="step-desc">Sections from 000110 (project narrative) through 271500 (low-voltage) all trip at least one of these keywords somewhere in their text -- far too broad a net to hand-read in full.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">2</div><div class="step-body">
+      <div class="step-title">Two of the largest hits turn out to be entirely unrelated comfort-cooling content</div><div class="step-sheet">&sect;232300 (807-813), &sect;238126 (897-904)</div>
+      <div class="step-desc">232300 "Refrigerant Piping" governs split-system/RTU DX piping (500 psi max, old-style single-pass evacuation) -- zero crossover with the CO2 racks. 238126 "Split System Air-Conditioners" is a generic HCFC-free/A2L flammable-refrigerant spec for comfort-cooling equipment. Both use the word "refrigerant" repeatedly; neither is about this store's food-refrigeration system.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">3</div><div class="step-body">
+      <div class="step-title">238126 sits immediately before the real CO2 spec -- and was missed on the first pass</div><div class="step-sheet">Page 897 vs. page 905</div>
+      <div class="step-desc">The first research pass, given a page-range hint of 905-962 for the CO2 installation spec, never opened pages 897-904 and had no reason to suspect an entire extra section was wedged in immediately before it. An automated section-boundary sweep run afterward mis-attributed pages 897-960 <em>entirely</em> to Section 238126, because &sect;239100's own title page buries its "SECTION 239100" header below a large decorative cover block, past the point a simple "does SECTION appear near the top of the page" heuristic was checking. Manually reading page 905's actual text was what caught it.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">4</div><div class="step-body">
+      <div class="step-title">Only one 56-page section is genuinely the CO2 system's spec</div><div class="step-sheet">&sect;239100, pages 905-960</div>
+      <div class="step-desc">Every pressure class, insulation requirement, brazing rule, evacuation/charging procedure, warranty term, and commissioning checklist for the actual transcritical CO2 racks lives here and nowhere else in the 1,204-page book.</div>
+    </div></div><div class="step-connector"></div>
+    <div class="step-item"><div class="step-badge">5</div><div class="step-body">
+      <div class="step-title">Net effect</div><div class="step-sheet">--</div>
+      <div class="step-desc">A reader keyword-searching this spec book for "refrigerant" or "CO2" -- rather than reading section titles -- would land on at least three unrelated sections before finding the 56 pages that matter, and could easily mistake 238126's A2L-refrigerant flammability language for something relevant to the CO2 racks. This is the inverse of HEB Corp #271's "boilerplate CO2 inside a non-CO2 store" trap: here the store genuinely is CO2, but the spec book still buries the real section inside several pages of unrelated comfort-cooling content using the same keywords.</div>
+    </div></div>
+  </div>
+
+  <h3 id="f10593-mismatches">Mismatches: Uploads vs. Excel</h3>
+  <table class="data-table mismatch">
+    <tr><th>#</th><th>Excel location</th><th>What Excel shows</th><th>What Uploads show</th><th>Type of mismatch</th></tr>
+    <tr><td>1</td><td>EQUIPMENT: "Air Cooled Condenser 12 Fan" (qty 2)</td><td>Rate-card line labeled "Condenser"</td><td>R100/R200 schedules: these are Gas Coolers, a distinct transcritical-specific device</td><td><span class="tag tag-mismatch">Terminology drift</span> -- same repurposed-taxonomy pattern seen on other CO2 folders, not a pricing error</td></tr>
+    <tr><td>2</td><td>SUMMARY Job Scope Notes: "Exterior Jacketing on New Piping (Condensers)"</td><td>Scope text says "Condensers"</td><td>This system has no condensers, only Gas Coolers</td><td><span class="tag tag-mismatch">Terminology drift</span>, consistent with #1</td></tr>
+    <tr><td>3</td><td>SUMMARY Job Scope Notes: "Receive &amp; Set New Racks (2) - (Mezzanine)"</td><td>Racks specified as Mezzanine-mounted</td><td>Not independently confirmed in the Bid Set pages reviewed (electrical/schedule sheets only)</td><td><span class="tag tag-mismatch">Unresolved</span>, not contradicted -- see Tab 1.2</td></tr>
+    <tr><td>4</td><td>PIPE 2.0: Installation Factor</td><td>0.18, no matching template preset</td><td>N/A</td><td>Undocumented manual override, plausibly CO2-complexity-driven</td></tr>
+    <tr><td>5</td><td>COPPER_INSULATION_FORM: 90 BAR column</td><td>Entirely zero despite being a dedicated pipe-class category</td><td>Spec &sect;239100 requires min. 90-120 bar rated tubing on high-side CO2 runs</td><td>Not a gap -- confirmed this job tracks the same pipe exclusively under the XHP column instead</td></tr>
+    <tr><td>6</td><td>N/A -- a spec-internal gap</td><td>N/A</td><td>&sect;239100 Attachment E requires field verification of a "fire alarm connection" for leak alarms; &sect;284600 (Fire Detection and Alarm) contains zero reference to refrigerant leak detection anywhere</td><td>One-directional documentation gap between two spec sections</td></tr>
+    <tr><td>7</td><td>N/A -- a spec-internal artifact</td><td>N/A</td><td>&sect;239100 Attachment C (Leak Detection Guide) contains a leftover line: "rubbing alcohol may be used in test in lieu of 404a" -- R404A has no relevance to this R744 job</td><td>Boilerplate leftover, not scrubbed for this refrigerant</td></tr>
+    <tr><td>8</td><td>N/A -- a spec-internal artifact</td><td>N/A</td><td>&sect;284600 carries retrofit/remodel boilerplate ("visit the existing Site," "maintain existing fire alarm service") in a ground-up new-store spec</td><td>Template-reuse artifact, same family as HEB Corp #271's leftover "H-E-B Edna" header</td></tr>
+  </table>
+
+  <h3 id="f10593-mapping">Mapping table -- every traced source, in one place</h3>
+  <table class="data-table">
+    <tr><th>Price Sheet location</th><th>Value</th><th>Traced to</th></tr>
+    <tr><td>EQUIPMENT: Comp Rack (2) + Air Cooled Condenser (2) + Water Reclaim Tank (2)</td><td>$800 / 96 hrs / $1,840</td><td><span class="tag tag-scope">Scope</span> Rack DTA + Rack MTB, 2 Gas Coolers, 2 Heat Reclaim Tanks per R100/R200</td></tr>
+    <tr><td>PIPE 2.0: RC-AD/AR, RC-BD/BR, HR T#1/T#2 circuits</td><td>$187,816.21 / 787 hrs</td><td><span class="tag tag-scope">Scope</span> gas-cooler and heat-reclaim-tank piping runs, both racks</td></tr>
+    <tr><td>PARTS: 121 CO2-rated ball valves (incl. 8 @ 140 BAR)</td><td>$21,573.92</td><td><span class="tag tag-scope">Scope</span> exceeds spec &sect;239100's 90-120 bar minimum rating</td></tr>
+    <tr><td>PARTS: 40 sticks 15% Silphos brazing rod</td><td>$11,831.20</td><td><span class="tag tag-scope">Scope</span> matches &sect;239100 &sect;2.6.A brazing requirement directly</td></tr>
+    <tr><td>PARTS: 10 Roof Top Strut Blocks</td><td>$240</td><td><span class="tag tag-scope">Scope</span> confirms rooftop gas-cooler mounting independently of the drawings</td></tr>
+    <tr><td>Refrigerant: 2,779.06 lbs R744</td><td>$16,674.36</td><td><span class="tag tag-scope">Scope</span> matches the job's exclusively R744/CO2 equipment schedule</td></tr>
+  </table>
+
+  <h3 id="f10593-unique">What's unique about this folder</h3>
+  <ul>
+    <li><strong>The first genuinely fully transcritical CO2 (R744) booster job</strong> in this document -- distinct from Kroger DAL653's secondary CO2, Walmart 5102-258's SCO2, Sam's Club 8250-1010's two standalone RCUs, and Joe V's #831's CO2 cascade split.</li>
+    <li><strong>Two racks totaling 12 compressors</strong>, both priced under a repurposed "Comp Rack" line since no dedicated CO2-rack taxonomy exists -- the same pattern now confirmed across every CO2 folder in this document.</li>
+    <li><strong>121 real CO2-rated ball valves purchased</strong>, including two sizes rated to 140 BAR -- exceeding the spec's own 90-120 bar minimum, the most explicit material-exceeds-spec confirmation seen on any folder.</li>
+    <li><strong>A self-documented factor override</strong> -- the PIPE 2.0 HFG Factor bumped to 55%, with the sheet's own note explaining why ("Increase Factor when using XHP Pipe/Material") -- the clearest example yet of a template override the workbook explains in its own words, alongside an undocumented Installation Factor override (0.18) that isn't.</li>
+    <li><strong>Confirmed genuinely-missing referenced sheets via full-text cross-check, not just visual scan</strong> -- M302, EM200, EM220, and R-102 each appear only as a callout on another sheet, never as their own page, across the entire 111-page Bid Set.</li>
+    <li><strong>A spec book that buries its own real section</strong> -- an automated section-boundary sweep mis-attributed 64 pages to the wrong CSI section number because the real section's header sits below a decorative cover page, catchable only by manually reading the actual page text (see walkthrough).</li>
+    <li><strong>Two entirely unrelated comfort-cooling spec sections</strong> (232300, 238126) share the exact keywords ("refrigerant") that a search for the CO2 content would use -- the inverse of HEB Corp #271's "boilerplate CO2 in a non-CO2 store" trap.</li>
+    <li><strong>A one-directional fire-alarm/leak-detection interlock gap</strong> -- the CO2 spec requires a fire-alarm tie-in at startup; the fire alarm spec itself never mentions refrigerant leak detection.</li>
+    <li><strong>A leftover R404A reference inside the R744 leak-detection attachment</strong>, and a new-store fire-alarm spec still carrying existing-building remodel boilerplate -- both template-reuse artifacts, the same family as HEB Corp #271's leftover "H-E-B Edna" header.</li>
+    <li><strong>Breaks the four-job 81-82% overtime streak</strong> -- 13.1% OT here, versus Walmart 3112-1009/5102-258/United #0510/HEB Corp #271 all clustering at 81.5-81.7%.</li>
+    <li><strong>Estimator's own hand-annotated excerpts among the Uploads</strong> -- two image-only single/double-page PDFs (a spec excerpt, a schedule sheet) each red-circled at exactly the pressure-class data that ended up justifying the 140-BAR valve purchase in PARTS.</li>
   </ul>
 </div>
 
